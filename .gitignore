@@ -1,0 +1,15 @@
+# Log files
+*.log
+*.log.*
+
+# Build files
+**/*build
+**/*CMake
+#**/*bin
+
+# IDE files
+.vscode
+.idea
+*.suo
+*.sln
+
