@@ -46,6 +46,7 @@ include_directories(
     external/glfw-3.3.4/include/
     external/PhysX/include/
     external/PxShared/include/
+    external/tclap/include
 )
 
 

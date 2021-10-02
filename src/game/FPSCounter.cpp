@@ -43,7 +43,7 @@ void FPSCounter::updateCounter()
 void FPSCounter::outputStats()
 {
 	double meanFrameTime = _totalFrameTime / _totalFrameCount;
-	LOG_SCOPE_F(INFO, "<----------------- FPS Counter %s ----------------->", _counterName);
+	LOG_SCOPE_F(INFO, "<----------------- FPS Counter %s ----------------->", _counterName.c_str());
 	LOG_S(INFO) << "Mean frame time:	" << meanFrameTime;
 	LOG_S(INFO) << "Min frame time:		" << _minFrameTime;
 	LOG_S(INFO) << "Max frame time:		" << _maxFrameTime;

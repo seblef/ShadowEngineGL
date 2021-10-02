@@ -51,11 +51,11 @@ void TestGLApp::createPlane(IVideoDevice *d)
 
 Light*     g_ShadowLight=0;
 
-void TestGLApp::run()
+void TestGLApp::run(const string& dataFolder)
 {
     initShadowCore();
 
-    FileSystemFactory::createFileSystem("std");
+    FileSystemFactory::createFileSystem("std", dataFolder);
     Config cfg("shadow.ini");
 
     string configFile("Game/config.txt");

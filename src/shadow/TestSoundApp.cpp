@@ -7,11 +7,11 @@
 
 
 
-void TestSoundApp::run()
+void TestSoundApp::run(const string& dataFolder)
 {
 	initShadowCore();
 
-    FileSystemFactory::createFileSystem("std");
+    FileSystemFactory::createFileSystem("std", dataFolder);
 
     IMedia *media = createGLMedia(800, 600, true, false, SINPUT_MOUSE | SINPUT_KEYBOARD);
 

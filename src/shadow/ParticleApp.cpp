@@ -5,11 +5,11 @@
 #include <time.h>
 #include <sstream>
 
-void ParticleApp::run()
+void ParticleApp::run(const string& dataFolder)
 {
 	initShadowCore();
 
-    FileSystemFactory::createFileSystem("std");
+    FileSystemFactory::createFileSystem("std", dataFolder);
 
     IMedia *media=createGLMedia(800,600,true,false,SINPUT_MOUSE | SINPUT_KEYBOARD);
 

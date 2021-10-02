@@ -13,3 +13,6 @@
 *.suo
 *.sln
 
+# PhysX debug files
+*.pvd
+**/*.pxd2

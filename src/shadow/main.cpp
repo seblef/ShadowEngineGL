@@ -6,35 +6,53 @@
 #include "TestGLApp.h"
 #include "../loguru.hpp"
 #include "../Version.h"
-#include <unistd.h>
+#include <tclap/CmdLine.h>
 
 
-// TODO: Use proper command line options partser
+#ifdef _DEBUG
+const int defaultVerbosityLevel = 2;
+#else
+const int defaultVerbosityLevel = 0;
+#endif
 
 
-void setDataFolder(const string& dataFolder)
+class Options
 {
-    chdir(dataFolder.c_str());
+public:
+    string dataFolder;
+    int verbosityLevel;
+
+    Options() : dataFolder("./"), verbosityLevel(defaultVerbosityLevel) {}
+};
+
+
+void parseCommandLine(int argc, char *argv[], Options& opt)
+{
+    TCLAP::CmdLine cmdLine("ShadowEngine", ' ', VERSION);
+    TCLAP::ValueArg<string> dataFolder("d", "data", "Path to data folder, can be relative or absolute.", false, "./", "string");
+    TCLAP::ValueArg<int> verbosity("v", "verbosity", "Verbosity level, can be from -3 to 9.", false, defaultVerbosityLevel, "int");
+
+    cmdLine.add(dataFolder);
+    cmdLine.add(verbosity);
+    cmdLine.parse(argc, argv);
+
+    opt.dataFolder = dataFolder.getValue();
+    opt.verbosityLevel = verbosity.getValue();
 }
 
 
 
 int main(int argc, char* argv[])
 {
+    Options opt;
+    parseCommandLine(argc, argv, opt);
+
     loguru::init(argc, argv);
-    loguru::add_file("shadow.log", loguru::Truncate, loguru::Verbosity_2);
+    loguru::add_file("shadow.log", loguru::Truncate, opt.verbosityLevel);
     loguru::g_stderr_verbosity = 2;
 
     LOG_S(INFO) << "Starting ShadowEngine v" << VERSION;
-
-    for(int i=0; i<argc; ++i)
-        LOG_S(INFO) << "Argument " << i << ": " << argv[i];
-
-    for(int i=0; i<argc; ++i)
-    {
-        if(strcmp(argv[i], "-d") == 0 && i < argc-1)
-            setDataFolder(string(argv[i+1]));
-    }
+    LOG_S(INFO) << "Data folder: " << opt.dataFolder;
 
 //	NavTest app;
     GameApp app;
@@ -42,7 +60,7 @@ int main(int argc, char* argv[])
 //	TestSoundApp app;
 //    TestGLApp app;
 
-    app.run();
+    app.run(opt.dataFolder);
 
     return 1;
 }

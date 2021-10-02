@@ -16,11 +16,11 @@
 
 
 
-void GameApp::run()
+void GameApp::run(const string& dataFolder)
 {
 	initShadowCore();
 
-    FileSystemFactory::createFileSystem("std");
+    FileSystemFactory::createFileSystem("std", dataFolder);
     Config cfg("shadow.ini");
 
     string configFile("Game/config.txt");

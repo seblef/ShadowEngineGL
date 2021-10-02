@@ -16,7 +16,7 @@ public:
 
 	ParticleApp()			{}
 
-    void					run();
+    void					run(const std::string& dataFolder);
 };
 
 #endif
