@@ -10,11 +10,11 @@
 #include <sstream>
 
 
-void NavTest::run()
+void NavTest::run(const string& dataFolder)
 {
 	initShadowCore();
 
-    FileSystemFactory::createFileSystem("std");
+    FileSystemFactory::createFileSystem("std", dataFolder);
 
 	Config cfg("Shadow.ini");
 

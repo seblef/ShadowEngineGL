@@ -1,0 +1,167 @@
+map new_map 50 50
+
+global_light
+	dir -0 -1 -0
+	color 1 1 1 1
+	end_global_light
+
+ambient_light 0 0 0 1
+
+start_position 1 1
+
+mesh FChurch12
+
+	geometry Buildings\Fallout\Church\FChurch12.geo
+	material FChurch12
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch11
+
+	geometry Buildings\Fallout\Church\FChurch11.geo
+	material FChurch11
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch14
+
+	geometry Buildings\Fallout\Church\FChurch14.geo
+	material FChurch14
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch09
+
+	geometry Buildings\Fallout\Church\FChurch09.geo
+	material FChurch09
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch06
+
+	geometry Buildings\Fallout\Church\FChurch06.geo
+	material FChurch06
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch08
+
+	geometry Buildings\Fallout\Church\FChurch08.geo
+	material FChurch08
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch05
+
+	geometry Buildings\Fallout\Church\FChurch05.geo
+	material FChurch05
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch01
+
+	geometry Buildings\Fallout\Church\FChurch01.geo
+	material FChurch01
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch04
+
+	geometry Buildings\Fallout\Church\FChurch04.geo
+	material FChurch04
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch15
+
+	geometry Buildings\Fallout\Church\FChurch15.geo
+	material FChurch15
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch02
+
+	geometry Buildings\Fallout\Church\FChurch02.geo
+	material FChuch02
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch03
+
+	geometry Buildings\Fallout\Church\FChurch03.geo
+	material FChurch03
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch07
+
+	geometry Buildings\Fallout\Church\FChurch07.geo
+	material FChurch07
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch13
+
+	geometry Buildings\Fallout\Church\FChurch13.geo
+	material FChurch13
+	physic_shape Mesh
+
+
+end_mesh
+
+mesh FChurch10
+
+	geometry Buildings\Fallout\Church\FChurch10.geo
+	material FChurch10
+	physic_shape Mesh
+
+
+end_mesh
+
+building Buildings\Fallout\Church\Church
+	mesh FChurch01
+	mesh FChurch02
+	mesh FChurch03
+	mesh FChurch04
+	mesh FChurch05
+	mesh FChurch06
+	mesh FChurch07
+	mesh FChurch08
+	mesh FChurch09
+	mesh FChurch10
+	mesh FChurch11
+	mesh FChurch12
+	mesh FChurch13
+	mesh FChurch14
+	mesh FChurch15
+end_building
+
+ground Maps/new_map.sgd
+
+end_map

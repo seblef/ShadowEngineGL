@@ -1,5 +1,4 @@
 
-#define _DEBUG
 #include "PhysicGeometry.h"
 
 PhysicGeometry::PhysicGeometry(const PhysicGeometryCreate_t& c, PxPhysics *p, PxCooking* cook) : _geo(0), _needPreTransform(false), _preTransform(Matrix4::Identity)

@@ -29,7 +29,7 @@ GLShader::GLShader(const string &shaderName) : IShader(shaderName)
         if(res==GL_FALSE)
         {
             GLchar error_msg[2048];
-            LOG_SCOPE_F(ERROR, "Failed linking shader program %s:", shaderName);
+            LOG_SCOPE_F(ERROR, "Failed linking shader program %s:", shaderName.c_str());
             glGetProgramInfoLog(_shaderID,2048,0,error_msg);
             LOG_S(ERROR) << error_msg;
 
@@ -131,7 +131,7 @@ bool GLShader::loadShader(const string &shader, GLuint& id, int st)
     glGetShaderiv(id,GL_COMPILE_STATUS,&res);
     if(res==GL_FALSE)
     {
-        LOG_SCOPE_F(ERROR, "Failed compiling %s shader %s:", stname, shader);
+        LOG_SCOPE_F(ERROR, "Failed compiling %s shader %s:", stname.c_str(), shader.c_str());
         glGetShaderInfoLog(id,2048,0,error_msg);
         LOG_S(ERROR) << error_msg;
         LOG_S(ERROR) << "Shader code: " << endl << code;

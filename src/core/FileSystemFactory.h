@@ -15,7 +15,7 @@ protected:
 
 public:
 
-	static void					createFileSystem(const string& fileSysName);
+	static void					createFileSystem(const string& fileSysName, const string& dataFolder);
 	static IFileSystem*			getFileSystem()									{ return _fileSys; }
 };
 

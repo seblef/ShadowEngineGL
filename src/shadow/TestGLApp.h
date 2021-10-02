@@ -13,7 +13,7 @@ public:
 
     TestGLApp()     {}
 
-    void            run();
+    void            run(const string& dataFolder);
 };
 
 #endif // TESTGLAPP_H

@@ -25,8 +25,9 @@ protected:
 
 public:
 
-	StdFileSystem()
+	StdFileSystem(const string& dataFolder)
 	{
+		changeWorkingDirectory(dataFolder);
 		getCurrentDir(_startDir);
 		_workingDir=_startDir;
 	}
