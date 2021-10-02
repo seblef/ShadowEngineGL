@@ -1,6 +1,4 @@
-
-#ifndef _SHADOWCORE_H_
-#define _SHADOWCORE_H_
+#pragma once
 
 #include "./core/BBox3.h"
 #include "./core/BBox2.h"
@@ -27,5 +25,3 @@
 #include "./core/Random.h"
 
 void initShadowCore();
-
-#endif

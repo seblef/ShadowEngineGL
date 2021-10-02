@@ -1,6 +1,4 @@
-
-#ifndef _R2D_LINERENDERER_H_
-#define _R2D_LINERENDERER_H_
+#pragma once
 
 #include "R2D_Renderer.h"
 
@@ -14,5 +12,3 @@ public:
 
 	R2D_LineRenderer(bool relativePos, ITexture* white, IVideoDevice* dev) : R2D_Renderer(R2D_Object::R2D_LINE,relativePos,white,dev)			{}
 };
-
-#endif

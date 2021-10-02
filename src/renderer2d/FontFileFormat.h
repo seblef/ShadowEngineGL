@@ -1,6 +1,4 @@
-
-#ifndef _FONTFILEFORMAT_H_
-#define _FONTFILEFORMAT_H_
+#pragma once
 
 namespace File
 {
@@ -14,5 +12,3 @@ struct FontFileHeader
 };
 
 };
-
-#endif

@@ -1,7 +1,3 @@
-
-#ifndef _AILIB_H_
-#define _AILIB_H_
+#pragma once
 
 #include "./ai/AISystem.h"
-
-#endif

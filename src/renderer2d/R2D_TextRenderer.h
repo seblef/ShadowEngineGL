@@ -1,6 +1,4 @@
-
-#ifndef _R2D_TEXTRENDERER_H_
-#define _R2D_TEXTRENDERER_H_
+#pragma once
 
 #include "R2D_Renderer.h"
 #include "R2D_Text.h"
@@ -35,5 +33,3 @@ public:
 		_scale.y=2.0f / _screenSize.y;
 	}
 };
-
-#endif

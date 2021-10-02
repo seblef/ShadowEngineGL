@@ -1,6 +1,4 @@
-
-#ifndef _R2D_FONTCHARAREA_H_
-#define _R2D_FONTCHARAREA_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -29,6 +27,3 @@ public:
 	void			setUVCoords(const BBox2& uv)		{ _uvCoords=uv; }
 	const BBox2&	getUVCoords() const					{ return _uvCoords; }
 };
-
-
-#endif

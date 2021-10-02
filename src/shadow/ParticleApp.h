@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEAPP_H_
-#define _PARTICLEAPP_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -18,5 +16,3 @@ public:
 
     void					run(const std::string& dataFolder);
 };
-
-#endif

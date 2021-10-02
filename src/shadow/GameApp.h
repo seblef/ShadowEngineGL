@@ -1,6 +1,4 @@
-
-#ifndef _GAMEAPP_H_
-#define _GAMEAPP_H_
+#pragma once
 
 #include <string>
 
@@ -12,5 +10,3 @@ public:
 	
     void				run(const std::string& dataFolder);
 };
-
-#endif

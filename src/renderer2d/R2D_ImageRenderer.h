@@ -1,6 +1,4 @@
-
-#ifndef _R2D_IMAGERENDERER_H_
-#define _R2D_IMAGERENDERER_H_
+#pragma once
 
 #include "R2D_Renderer.h"
 #include "R2D_Image.h"
@@ -25,5 +23,3 @@ public:
 
 	R2D_ImageRenderer(bool relativePos, ITexture* white, IVideoDevice* dev) : R2D_Renderer(R2D_Object::R2D_RECT,relativePos,white,dev)			{}
 };
-
-#endif

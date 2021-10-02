@@ -1,6 +1,4 @@
-
-#ifndef _R2D_FONT_H_
-#define _R2D_FONT_H_
+#pragma once
 
 #include "../MediaCommon.h"
 #include "R2D_FontCharArea.h"
@@ -31,5 +29,3 @@ class R2D_Font
 			return size;
 		}
 };
-
-#endif

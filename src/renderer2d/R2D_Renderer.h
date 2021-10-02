@@ -1,6 +1,4 @@
-
-#ifndef _R2D_RENDERER_H_
-#define _R2D_RENDERER_H_
+#pragma once
 
 #include "R2D_Object.h"
 
@@ -78,5 +76,3 @@ public:
 	void								addObject(const R2D_Object* obj)				{ _objects.push_back(obj); }
 	void								execute();
 };
-
-#endif

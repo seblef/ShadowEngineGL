@@ -1,8 +1,4 @@
-
-#ifndef _PHYSICLIB_H_
-#define _PHYSICLIB_H_
+#pragma once
 
 #include "./physic/Physic.h"
 #include "./physic/PhysicActorController.h"
-
-#endif

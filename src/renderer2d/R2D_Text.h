@@ -1,6 +1,4 @@
-
-#ifndef _R2D_TEXT_H_
-#define _R2D_TEXT_H_
+#pragma once
 
 #include "R2D_Object.h"
 #include "R2D_Font.h"
@@ -26,5 +24,3 @@ class R2D_Text : public R2D_Object
 		const string&			getText() const							{ return _text; }
 
 };
-
-#endif

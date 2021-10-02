@@ -1,6 +1,4 @@
-
-#ifndef _IR2D_FONTLOADER_H_
-#define _IR2D_FONTLOADER_H_
+#pragma once
 
 #include "R2D_Font.h"
 
@@ -13,5 +11,3 @@ public:
 
 	virtual R2D_Font*				loadFont(const string& fontFile, IVideoDevice* device)=0;
 };
-
-#endif
