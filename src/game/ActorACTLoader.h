@@ -1,6 +1,5 @@
 
-#ifndef _ACTORACTLOADER_H_
-#define _ACTORACTLOADER_H_
+#pragma once
 
 #include "IActorLoader.h"
 
@@ -13,5 +12,3 @@ public:
 
 	Actor*						loadActor(const string& actorFile, Material* mat, IVideoDevice* device);
 };
-
-#endif

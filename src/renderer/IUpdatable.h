@@ -1,6 +1,4 @@
-
-#ifndef _IUPDATABLE_H_
-#define _IUPDATABLE_H_
+#pragma once
 
 class IUpdatable
 {
@@ -22,5 +20,3 @@ public:
 
 	bool						isSleeping() const				{ return _sleeping; }
 };
-
-#endif

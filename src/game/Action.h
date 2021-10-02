@@ -1,6 +1,5 @@
 
-#ifndef _ACTION_H_
-#define _ACTION_H_
+#pragma once
 
 #include <string>
 
@@ -25,5 +24,3 @@ public:
 
 	virtual void		update(float time) = 0;
 };
-
-#endif

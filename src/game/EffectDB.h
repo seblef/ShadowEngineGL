@@ -1,6 +1,5 @@
 
-#ifndef _EFFECTDB_H_
-#define _EFFECTDB_H_
+#pragma once
 
 #include "Effect.h"
 #include "../Core.h"
@@ -15,5 +14,3 @@ public:
 
 	void			unloadEffects() const;
 };
-
-#endif

@@ -1,6 +1,5 @@
 
-#ifndef _MATRIX3_H_
-#define _MATRIX3_H_
+#pragma once
 
 #include "Matrix2.h"
 #include <memory.h>
@@ -160,5 +159,3 @@ inline ostream& operator << (ostream& os, const Matrix3& m)
 }
 
 }
-
-#endif

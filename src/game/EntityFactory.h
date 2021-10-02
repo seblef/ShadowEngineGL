@@ -1,6 +1,5 @@
 
-#ifndef _ENTITYFACTORY_H_
-#define _ENTITYFACTORY_H_
+#pragma once
 
 #include "EntityTemplate.h"
 
@@ -12,5 +11,3 @@ public:
 
 	static EntityTemplate*		loadEntity(const string& className, ScriptFile& sf);
 };
-
-#endif

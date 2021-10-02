@@ -1,6 +1,5 @@
 
-#ifndef _ACTORFILEFORMAT_H_
-#define _ACTORFILEFORMAT_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -46,5 +45,3 @@ struct ActorAnimFileHeader
 
 
 };
-
-#endif

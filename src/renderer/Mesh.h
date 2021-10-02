@@ -1,6 +1,4 @@
-
-#ifndef _MESH_H_
-#define _MESH_H_
+#pragma once
 
 #include "Material.h"
 #include "GeometryData.h"
@@ -22,5 +20,3 @@ public:
 	Material*			getMaterial() const				{ return _material; }
 	GeometryData*		getGeometry() const				{ return _geometry; }
 };
-
-#endif

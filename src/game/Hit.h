@@ -1,6 +1,5 @@
 
-#ifndef _HIT_H_
-#define _HIT_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -25,4 +24,3 @@ public:
         _damage(h._damage)		{}
 
 };
-#endif

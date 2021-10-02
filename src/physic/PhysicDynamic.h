@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICDYNAMIC_H_
-#define _PHYSICDYNAMIC_H_
+#pragma once
 
 #include "PhysicObject.h"
 #include "PhysicGeometry.h"
@@ -25,5 +23,3 @@ public:
 	void			addForce(const Vector3& force, const Vector3& pos, bool impulse = false);
 	void			addTorque(const Vector3& torque, bool impulse = false);
 };
-
-#endif

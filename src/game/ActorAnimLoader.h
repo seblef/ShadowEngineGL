@@ -1,6 +1,5 @@
 
-#ifndef _ACTORANIMLOADER_H_
-#define _ACTORANIMLOADER_H_
+#pragma once
 
 #include "../StdRenderer.h"
 
@@ -10,5 +9,3 @@ public:
 
 	static AnimPRSMultiTrack*			loadActorAnimation(const string& animFile);
 };
-
-#endif

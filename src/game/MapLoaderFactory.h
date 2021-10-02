@@ -1,6 +1,5 @@
 
-#ifndef _MAPLOADERFACTORY_H_
-#define _MAPLOADERFACTORY_H_
+#pragma once
 
 #include "IMapLoader.h"
 
@@ -12,5 +11,3 @@ public:
 
 	static IMapLoader*				createMapLoader(const string& loaderName);
 };
-
-#endif

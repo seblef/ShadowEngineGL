@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICTRIGGER_H_
-#define _PHYSICTRIGGER_H_
+#pragma once
 
 #include "PhysicObject.h"
 
@@ -20,5 +18,3 @@ public:
 	void				setWorldMatrix(const Matrix4& world);
 	const Matrix4&		getWorldMatrix()			{ return _world; }
 };
-
-#endif

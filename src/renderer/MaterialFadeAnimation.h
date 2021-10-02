@@ -1,6 +1,4 @@
-
-#ifndef _MATERIALFADEANIMATION_H_
-#define _MATERIALFADEANIMATION_H_
+#pragma once
 
 #include "MaterialAnimation.h"
 #include "MaterialCreate.h"
@@ -37,5 +35,3 @@ public:
 	void		setStartTime(float st)					{ _start=st; }
 	void		setEndTime(float et)					{ _end=et; }
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _ISOUNDSOURCE_H_
-#define _ISOUNDSOURCE_H_
+#pragma once
 
 #include "ISoundVirtualSource.h"
 #include "ISound.h"
@@ -17,5 +15,3 @@ public:
 
 	virtual bool			isPlaying()=0;
 };
-
-#endif

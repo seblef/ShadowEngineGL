@@ -1,6 +1,5 @@
 
-#ifndef _EFFECT_H_
-#define _EFFECT_H_
+#pragma once
 
 class Effect
 {
@@ -27,5 +26,3 @@ public:
 	virtual void			load()					{}
 	virtual void			unload()				{}
 };
-
-#endif

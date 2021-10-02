@@ -1,6 +1,5 @@
 
-#ifndef _TEMPLATEMESH_H_
-#define _TEMPLATEMESH_H_
+#pragma once
 
 #include "Geometry.h"
 #include "../StdRenderer.h"
@@ -34,5 +33,3 @@ public:
 
 	static TemplateMesh*		loadTemplate(const string& geoFile, const string& matFile, unsigned int flags, PhysicShape shape);
 };
-
-#endif

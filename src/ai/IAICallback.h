@@ -1,6 +1,5 @@
 
-#ifndef _IAICALLBACK_H_
-#define _IAICALLBACK_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -39,5 +38,3 @@ public:
 	const Vector3&					getAgentPosition() const		{ return _agentPos; }
 	const Vector3&					getAgentDirection() const		{ return _agentDir; }
 };
-
-#endif

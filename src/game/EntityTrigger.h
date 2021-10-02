@@ -1,6 +1,5 @@
 
-#ifndef _ENTITYTRIGGER_H_
-#define _ENTITYTRIGGER_H_
+#pragma once
 
 #include "EntityTemplate.h"
 #include "Trigger.h"
@@ -28,5 +27,3 @@ public:
 
 	GameEntity*			createInstance(const Matrix4& world);
 };
-
-#endif

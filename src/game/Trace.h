@@ -1,6 +1,5 @@
 
-#ifndef _TRACE_H_
-#define _TRACE_H_
+#pragma once
 
 #include "Action.h"
 #include "TraceTemplate.h"
@@ -20,4 +19,3 @@ public:
 
 	void					update(float time);
 };
-#endif

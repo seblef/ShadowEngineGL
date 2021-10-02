@@ -1,6 +1,5 @@
 
-#ifndef _AIEVENT_H_
-#define _AIEVENT_H_
+#pragma once
 
 enum AIEventType
 {
@@ -59,5 +58,3 @@ public:
 	void				setType(AIEventType type)		{ _name = type; }
 	void				setDeliveryTime(unsigned int t)	{ _deliveryTime = t; }
 };
-
-#endif

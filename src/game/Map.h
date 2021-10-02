@@ -1,6 +1,5 @@
 
-#ifndef _MAP_H_
-#define _MAP_H_
+#pragma once
 
 #include "Ground.h"
 #include "GameObjectSet.h"
@@ -38,5 +37,3 @@ public:
 
 	void				outputWakableInfo() const;
 };
-
-#endif

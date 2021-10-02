@@ -1,6 +1,4 @@
-
-#ifndef _MESHRENDERER_H_
-#define _MESHRENDERER_H_
+#pragma once
 
 #include "TRenderer.h"
 #include "MeshInstance.h"
@@ -19,5 +17,3 @@ public:
 	void					render(bool addPass);
 	void					renderShadows(const ViewFrustum& vf);
 };
-
-#endif

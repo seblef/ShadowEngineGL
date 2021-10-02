@@ -1,6 +1,5 @@
 
-#ifndef _ANIMTRACKS_H_
-#define _ANIMTRACKS_H_
+#pragma once
 
 #include "TAnimTrack.h"
 #include "TAnimMultiTrack.h"
@@ -109,5 +108,3 @@ typedef TAnimTrack<AnimPRSKeyVal,AnimPRSEvaluator>		AnimPRSTrack;
 typedef TAnimMultiTrack<AnimPRSKeyVal,AnimPRSEvaluator>	AnimPRSMultiTrack;
 
 };
-
-#endif

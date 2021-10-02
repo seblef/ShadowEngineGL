@@ -1,6 +1,5 @@
 
-#ifndef _IFILELIST_H_
-#define _IFILELIST_H_
+#pragma once
 
 #include <vector>
 #include <string>
@@ -45,5 +44,3 @@ class IFileList
 };
 
 }
-
-#endif

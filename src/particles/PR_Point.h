@@ -1,6 +1,4 @@
-
-#ifndef _PR_POINT_H_
-#define _PR_POINT_H_
+#pragma once
 
 #include "ParticleRenderer.h"
 
@@ -23,5 +21,3 @@ class PR_Point : public ParticleRenderer
 		void				renderParticles();
 
 };
-
-#endif

@@ -1,6 +1,5 @@
 
-#ifndef _TRIGGER_H_
-#define _TRIGGER_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -32,5 +31,3 @@ public:
 
 	static Trigger*				createTrigger(const string& className, ScriptFile& sf);
 };
-
-#endif

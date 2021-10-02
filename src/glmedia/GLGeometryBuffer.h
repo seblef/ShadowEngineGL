@@ -1,5 +1,4 @@
-#ifndef GLGEOMETRYBUFFER_H
-#define GLGEOMETRYBUFFER_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -24,5 +23,3 @@ public:
     void        fillVertices(const void *data, int count, int offset);
     void        fillIndices(const void* data, int count, int offset);
 };
-
-#endif // GLGEOMETRYBUFFER_H

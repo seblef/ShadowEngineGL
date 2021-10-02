@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEENGINE_H_
-#define _PARTICLEENGINE_H_
+#pragma once
 
 #include "../MediaCommon.h"
 #include "ParticleSystem.h"
@@ -46,5 +44,3 @@ class ParticleEngine : public TSingleton<ParticleEngine>
 
 		IVideoDevice*				getVideoDevice() const				{ return _device; }
 };
-
-#endif

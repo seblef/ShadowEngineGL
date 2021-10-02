@@ -1,6 +1,5 @@
 
-#ifndef _SRANDOM_H_
-#define _SRANDOM_H_
+#pragma once
 
 #include "Color.h"
 
@@ -56,5 +55,3 @@ inline float randomCounterScalar(float current,
 }
 
 };
-
-#endif

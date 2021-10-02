@@ -1,6 +1,5 @@
 
-#ifndef _FIELDHIT_H_
-#define _FIELDHIT_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -15,5 +14,3 @@ public:
 	static void			hitField(const Vector3& center, float innerRadius,
 		float outerRadius, float innerDamage);
 };
-
-#endif

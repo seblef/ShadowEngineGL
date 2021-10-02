@@ -1,6 +1,5 @@
 
-#ifndef _ACTIONCREATERANDOMCHARACTER_H_
-#define _ACTIONCREATERANDOMCHARACTER_H_
+#pragma once
 
 #include "Action.h"
 #include "../Core.h"
@@ -19,5 +18,3 @@ public:
 
 	void				update(float time);
 };
-
-#endif

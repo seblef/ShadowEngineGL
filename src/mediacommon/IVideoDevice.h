@@ -1,6 +1,4 @@
-
-#ifndef _IVIDEODEVICE_H_
-#define _IVIDEODEVICE_H_
+#pragma once
 
 #include "VideoDefs.h"
 #include "IConstantBuffer.h"
@@ -109,5 +107,3 @@ public:
 		int iStartIdxLocation, int iBaseVertLocation, int iStartInstLocation) const =0;
 	virtual void				renderFullscreenQuad()=0;
 };
-
-#endif

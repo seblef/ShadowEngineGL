@@ -1,6 +1,5 @@
 
-#ifndef _HUDACTOR_H_
-#define _HUDACTOR_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -29,5 +28,3 @@ public:
 	float			getCurrentLife() const						{ return _currentLife; }
 	float			getActorHeight() const						{ return _actorHeight; }
 };
-
-#endif

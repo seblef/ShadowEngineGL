@@ -1,6 +1,5 @@
 
-#ifndef _STDFILELIST_H_
-#define _STDFILELIST_H_
+#pragma once
 
 #include "IFileList.h"
 
@@ -25,5 +24,3 @@ class StdFileList : public IFileList
 };
 
 }
-
-#endif

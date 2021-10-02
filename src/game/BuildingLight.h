@@ -1,6 +1,5 @@
 
-#ifndef _BUILDINGLIGHT_H_
-#define _BUILDINGLIGHT_H_
+#pragma once
 
 #include "../StdRenderer.h"
 
@@ -26,5 +25,3 @@ public:
 	const LightCreate_t&	getLightDesc() const			{ return _light; }
 	unsigned int			getFlags() const				{ return _flags; }
 };
-
-#endif

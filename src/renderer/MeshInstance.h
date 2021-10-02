@@ -1,6 +1,4 @@
-
-#ifndef _MESHINSTANCE_H_
-#define _MESHINSTANCE_H_
+#pragma once
 
 #include "Mesh.h"
 #include "Renderable.h"
@@ -28,5 +26,3 @@ public:
 
 	void			enqueue();
 };
-
-#endif

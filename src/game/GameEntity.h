@@ -1,6 +1,5 @@
 
-#ifndef _GAMEENTITY_H_
-#define _GAMEENTITY_H_
+#pragma once
 
 #include "GameObject.h"
 #include "EntityTemplate.h"
@@ -45,5 +44,3 @@ public:
 	virtual void			update(float time)					{}
 	virtual void			onUpdateMatrix(const Matrix4& world);
 };
-
-#endif

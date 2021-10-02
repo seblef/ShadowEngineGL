@@ -1,5 +1,4 @@
-#ifndef IDEPTHTEXTURE_H
-#define IDEPTHTEXTURE_H
+#pragma once
 
 class IDepthTexture
 {
@@ -18,5 +17,3 @@ public:
 
     virtual void    set(int stage)=0;
 };
-
-#endif // IDEPTHTEXTURE_H

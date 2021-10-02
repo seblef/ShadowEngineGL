@@ -1,6 +1,4 @@
-
-#ifndef _NAVCASE_H_
-#define _NAVCASE_H_
+#pragma once
 
 class NavCase
 {
@@ -27,5 +25,3 @@ public:
 	void			setX(int x)								{ _x=x; }
 	void			setY(int y)								{ _y=y; }
 };
-
-#endif

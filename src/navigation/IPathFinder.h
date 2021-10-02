@@ -1,6 +1,4 @@
-
-#ifndef _IPATHFINDER_H_
-#define _IPATHFINDER_H_
+#pragma once
 
 #include "NavPath.h"
 
@@ -17,5 +15,3 @@ public:
 											 int targetX, int targetY,
 											 NavPath& p, const NavMap& m)=0;
 };
-
-#endif

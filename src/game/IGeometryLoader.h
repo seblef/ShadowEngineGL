@@ -1,6 +1,5 @@
 
-#ifndef _IGEOMETRYLOADER_H_
-#define _IGEOMETRYLOADER_H_
+#pragma once
 
 #include "Geometry.h"
 #include <string>
@@ -14,5 +13,3 @@ public:
 
 	virtual Geometry*						loadGeometry(const string& geoFileName)=0;
 };
-
-#endif

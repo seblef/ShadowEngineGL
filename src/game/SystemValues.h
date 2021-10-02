@@ -1,6 +1,5 @@
 
-#ifndef _SYSTEMVALUES_H_
-#define _SYSTEMVALUES_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -78,5 +77,3 @@ public:
 	float				getPlayerDamageFactor() const			{ return _playerDamageFactor; }
 	float				getDeadActorStayOnMapTime() const		{ return _deadActorStayOnMapTime; }
 };
-
-#endif

@@ -1,6 +1,5 @@
 
-#ifndef _PLANE_H_
-#define _PLANE_H_
+#pragma once
 
 #include "BBox3.h"
 
@@ -181,5 +180,3 @@ public:
 };
 
 }
-
-#endif

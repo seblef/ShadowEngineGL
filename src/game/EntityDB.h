@@ -1,6 +1,5 @@
 
-#ifndef _ENTITYDB_H_
-#define _ENTITYDB_H_
+#pragma once
 
 #include "EntityTemplate.h"
 
@@ -12,5 +11,3 @@ public:
 
 	void				unloadEntities();
 };
-
-#endif

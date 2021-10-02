@@ -1,6 +1,4 @@
-
-#ifndef _VIDEODEFS_H_
-#define _VIDEODEFS_H_
+#pragma once
 
 
 enum CullMode
@@ -279,5 +277,3 @@ inline PrimitiveType getPrimitiveTypeFromName(const string& p)
 
 	return PT_TRIANGLELIST;
 }
-
-#endif

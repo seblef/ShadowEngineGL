@@ -1,6 +1,5 @@
 
-#ifndef _WEAPONDB_H_
-#define _WEAPONDB_H_
+#pragma once
 
 #include "Weapon.h"
 
@@ -12,5 +11,3 @@ public:
 
 	void				unloadWeapons();
 };
-
-#endif

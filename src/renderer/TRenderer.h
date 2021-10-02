@@ -1,6 +1,4 @@
-
-#ifndef _TRENDERER_H_
-#define _TRENDERER_H_
+#pragma once
 
 #include "../MediaCommon.h"
 #include <algorithm>
@@ -99,7 +97,3 @@ public:
 	virtual void				renderShadows(const ViewFrustum& vf)=0;
 
 };
-
-
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _KEYBOARDKEYS_H_
-#define _KEYBOARDKEYS_H_
+#pragma once
 
 #define DIK_ESCAPE          0x01
 #define DIK_1               0x02
@@ -618,5 +616,3 @@ const char * const g_KeyboardKeyMajChars[]=
     "Mail",
     "MediaSelect"
 };
-
-#endif

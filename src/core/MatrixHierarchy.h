@@ -1,6 +1,5 @@
 
-#ifndef _MATRICEHIERARCHY_H_
-#define _MATRICEHIERARCHY_H_
+#pragma once
 
 #include "TTab.h"
 #include "Matrix4.h"
@@ -90,5 +89,3 @@ public:
 };
 
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _VISIBILITYQUAD_H_
-#define _VISIBILITYQUAD_H_
+#pragma once
 
 #include "IVisibilitySystem.h"
 #include "QuadTreeNode.h"
@@ -56,5 +54,3 @@ public:
 
 	void					onRenderableMoved(Renderable *r);
 };
-
-#endif

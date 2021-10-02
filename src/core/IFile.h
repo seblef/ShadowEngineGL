@@ -1,7 +1,4 @@
 
-#ifndef _IFILE_H_
-#define _IFILE_H_
-
 #include <string>
 
 using namespace std;
@@ -48,5 +45,3 @@ class IFile
 };
 
 }
-
-#endif

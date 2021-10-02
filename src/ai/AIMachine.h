@@ -1,6 +1,5 @@
 
-#ifndef _AIMACHINE_H_
-#define _AIMACHINE_H_
+#pragma once
 
 #include "AIMachineState.h"
 #include <map>
@@ -30,5 +29,3 @@ public:
 	virtual unsigned int		getStateID(const string& state) = 0;
 	virtual bool				onGlobalEvent(AIAgent* agent, const AIEvent& e)		{ return false;  };
 };
-
-#endif

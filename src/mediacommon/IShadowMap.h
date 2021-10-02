@@ -1,6 +1,4 @@
-
-#ifndef _ISHADOWMAP_H_
-#define _ISHADOWMAP_H_
+#pragma once
 
 
 class IShadowMap
@@ -22,6 +20,3 @@ public:
 	virtual void			set(int stage)=0;
 	virtual void			setAsRenderTarget()=0;
 };
-
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _MATERIALANIMATIONFACTORY_H_
-#define _MATERIALANIMATIONFACTORY_H_
+#pragma once
 
 #include "MaterialAnimation.h"
 
@@ -13,5 +11,3 @@ public:
 	static MaterialAnimation*			createAnimation(const string& animName, Material *m);
 	static MaterialAnimation*			copyAnimation(const MaterialAnimation* a);
 };
-
-#endif

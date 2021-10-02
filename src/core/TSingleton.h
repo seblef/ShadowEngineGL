@@ -1,6 +1,5 @@
 
-#ifndef _TSINGLETON_H_
-#define _TSINGLETON_H_
+#pragma once
 
 #include <assert.h>
 
@@ -65,6 +64,4 @@ template<typename T> T* TSingleton<T>::m_spSingleton=0;
 #ifdef WIN32
 #pragma warning(default:4311)
 #pragma warning(default:4312)
-#endif
-
 #endif

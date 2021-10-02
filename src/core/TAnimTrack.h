@@ -1,6 +1,5 @@
 
-#ifndef _TANIMTRACK_H_
-#define _TANIMTRACK_H_
+#pragma once
 
 #include "TAnimKey.h"
 #include "TTab.h"
@@ -70,5 +69,3 @@ public:
 };
 
 };
-
-#endif

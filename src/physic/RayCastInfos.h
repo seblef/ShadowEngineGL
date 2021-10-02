@@ -1,6 +1,4 @@
-
-#ifndef _RAYCASTINFOS_H_
-#define _RAYCASTINFOS_H_
+#pragma once
 
 #include "PhysicDefs.h"
 
@@ -20,5 +18,3 @@ public:
 	RayCastInfos() : _range(1e6f), _flags(RAYCAST_SOLID)			{}
 
 };
-
-#endif

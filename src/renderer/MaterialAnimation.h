@@ -1,6 +1,4 @@
-
-#ifndef _MATERIALANIMATION_H_
-#define _MATERIALANIMATION_H_
+#pragma once
 
 #include "Material.h"
 
@@ -19,5 +17,3 @@ public:
 
 	virtual void			set(float time)=0;
 };
-
-#endif

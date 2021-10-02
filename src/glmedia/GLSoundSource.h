@@ -1,5 +1,4 @@
-#ifndef GLSOUNDSOURCE_H
-#define GLSOUNDSOURCE_H
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -15,5 +14,3 @@ public:
 
     bool			isPlaying()                                                                 { return false; }
 };
-
-#endif // GLSOUNDSOURCE_H

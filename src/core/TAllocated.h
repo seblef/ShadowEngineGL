@@ -1,6 +1,5 @@
 
-#ifndef _TALLOCATED_H_
-#define _TALLOCATED_H_
+#pragma once
 
 #include "TVector.h"
 
@@ -58,5 +57,3 @@ template<typename T>
 vector<int> TAllocated<T>::_free;
 
 };
-
-#endif

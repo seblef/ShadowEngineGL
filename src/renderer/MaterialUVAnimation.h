@@ -1,6 +1,4 @@
-
-#ifndef _MATERIALUVANIMATION_H_
-#define _MATERIALUVANIMATION_H_
+#pragma once
 
 #include "MaterialAnimation.h"
 #include "MaterialCreate.h"
@@ -39,5 +37,3 @@ public:
 	void				setOffset(const Vector2& o)		{ _offsetPerSec=o; }
 	void				setRotation(float r)			{ _rotPerSec=r; }
 };
-
-#endif

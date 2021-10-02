@@ -1,5 +1,4 @@
-#ifndef GLSOUNDLISTENER_H
-#define GLSOUNDLISTENER_H
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -22,5 +21,3 @@ public:
     const Vector3&	getTopAxis() const                      { return Vector3::YAxisVector; }
     ISoundCone*		getCone() const                         { return 0; }
 };
-
-#endif // GLSOUNDLISTENER_H

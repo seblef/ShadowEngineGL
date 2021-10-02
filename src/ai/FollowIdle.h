@@ -1,6 +1,5 @@
 
-#ifndef _FOLLOWIDLE_H_
-#define _FOLLOWIDLE_H_
+#pragma once
 
 #include "AIMachineState.h"
 
@@ -15,5 +14,3 @@ public:
 	const char*					getStateName() const						{ return "idle"; }
 
 };
-
-#endif

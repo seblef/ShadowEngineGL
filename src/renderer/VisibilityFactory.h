@@ -1,6 +1,4 @@
-
-#ifndef _VISIBILITYFACTORY_H_
-#define _VISIBILITYFACTORY_H_
+#pragma once
 
 #include "IVisibilitySystem.h"
 
@@ -13,5 +11,3 @@ public:
 
 	static IVisibilitySystem*		createVisibilitySystem(const string& name);
 };
-
-#endif

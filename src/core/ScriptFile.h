@@ -1,6 +1,5 @@
 
-#ifndef _SCRIPTFILE_H_
-#define _SCRIPTFILE_H_
+#pragma once
 
 #include "Vector3.h"
 #include "Vector2.h"
@@ -38,5 +37,3 @@ class ScriptFile
 };
 
 }
-
-#endif

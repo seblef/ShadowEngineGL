@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEEMITTER_H_
-#define _PARTICLEEMITTER_H_
+#pragma once
 
 #include "ParticleEmitterTemplate.h"
 #include "ParticleRenderer.h"
@@ -77,5 +75,3 @@ public:
 	Particle*							getNextParticle();
 	void								initParticle(Particle& p) const;
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEEMITTERTEMPLATEFACTORY_H_
-#define _PARTICLEEMITTERTEMPLATEFACTORY_H_
+#pragma once
 
 #include "ParticleEmitterTemplate.h"
 
@@ -15,5 +13,3 @@ public:
 		ParticleMaterial* mat, const ParticleEmitterParams& p1, const ParticleEmitterParams& p2,
 		unsigned int maxParticles, const Vector3& gravity, float emissionRate);
 };
-
-#endif

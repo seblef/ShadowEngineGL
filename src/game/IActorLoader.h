@@ -1,6 +1,5 @@
 
-#ifndef _IACTORLOADER_H_
-#define _IACTORLOADER_H_
+#pragma once
 
 #include "../StdRenderer.h"
 
@@ -13,5 +12,3 @@ public:
 
 	virtual Actor*				loadActor(const string& actorFile, Material* mat, IVideoDevice *device)=0;
 };
-
-#endif

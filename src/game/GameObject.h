@@ -1,6 +1,5 @@
 
-#ifndef _GAMEOBJECT_H_
-#define _GAMEOBJECT_H_
+#pragma once
 
 #include "../Core.h"
 #include "ObjectFlags.h"
@@ -57,5 +56,3 @@ public:
 	virtual void			onRemFromScene()								{}
 	virtual void			onUpdateMatrix(const Matrix4& new_m)			{}
 };
-
-#endif

@@ -1,6 +1,5 @@
 
-#ifndef _GAMEOBJECTSET_H_
-#define _GAMEOBJECTSET_H_
+#pragma once
 
 #include "GameObject.h"
 
@@ -23,5 +22,3 @@ public:
 	void				remObject(GameObject *o)		{ o->onRemFromScene(); _tempObjects.getSet().erase(o); }
 
 };
-
-#endif

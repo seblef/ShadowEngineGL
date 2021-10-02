@@ -1,6 +1,5 @@
 
-#ifndef _BBOX3_H_
-#define _BBOX3_H_
+#pragma once
 
 #include "BSphere.h"
 #include "CoreCommon.h"
@@ -181,5 +180,3 @@ inline ostream& operator << (ostream& os, const BBox3& b)
 }
 
 };
-
-#endif

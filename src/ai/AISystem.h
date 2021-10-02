@@ -1,6 +1,5 @@
 
-#ifndef _AISYSTEM_H_
-#define _AISYSTEM_H_
+#pragma once
 
 #include "../Core.h"
 #include "AIAgent.h"
@@ -73,5 +72,3 @@ public:
 	const Vector3&			getPlayerPos() const		{ return _playerPos; }
 	const Vector3&			getPlayerDir() const		{ return _playerDir; }
 };
-
-#endif

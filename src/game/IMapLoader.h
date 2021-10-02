@@ -1,6 +1,5 @@
 
-#ifndef _IMAPLOADER_H_
-#define _IMAPLOADER_H_
+#pragma once
 
 #include "Map.h"
 #include <string>
@@ -15,5 +14,3 @@ public:
 
 	virtual Map*				loadMap(const string& mapName)=0;
 };
-
-#endif

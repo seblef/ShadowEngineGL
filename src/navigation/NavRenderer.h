@@ -1,6 +1,4 @@
-
-#ifndef _NAVRENDERER_H_
-#define _NAVRENDERER_H_
+#pragma once
 
 #include "../MediaCommon.h"
 #include "NavPath.h"
@@ -31,5 +29,3 @@ public:
 
 	void						enableFullMap(bool enable)			{ _mapEnable = enable; }
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _MATERIALSYSTEM_H_
-#define _MATERIALSYSTEM_H_
+#pragma once
 
 #include "Material.h"
 
@@ -23,5 +21,3 @@ public:
 
 	void				setBuffers() const;
 };
-
-#endif

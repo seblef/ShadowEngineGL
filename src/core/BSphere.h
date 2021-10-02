@@ -1,6 +1,5 @@
 
-#ifndef _BSPHERE_H_
-#define _BSPHERE_H_
+#pragma once
 
 #include "Vector3.h"
 
@@ -70,4 +69,3 @@ public:
 };
 
 }
-#endif

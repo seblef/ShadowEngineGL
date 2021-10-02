@@ -1,6 +1,5 @@
 
-#ifndef _CONFIG_H_
-#define _CONFIG_H_
+#pragma once
 
 #include "Vector3.h"
 #include "Color.h"
@@ -51,5 +50,3 @@ class Config
 };
 
 }
-
-#endif

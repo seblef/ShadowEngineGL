@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICEVENT_H_
-#define _PHYSICEVENT_H_
+#pragma once
 
 #include "IPhysicObject.h"
 
@@ -44,5 +42,3 @@ public:
 	IPhysicObject*			getActor() const				{ return _actor; }
 	IPhysicObject*			getTarget() const				{ return _target; }
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICGEOMETRY_H_
-#define _PHYSICGEOMETRY_H_
+#pragma once
 
 #include "PhysicDefs.h"
 #include <PxPhysicsAPI.h>
@@ -40,5 +38,3 @@ public:
 	bool						needPreTransform() const			{ return _needPreTransform; }
 	const Matrix4&				getPreTransform() const				{ return _preTransform; }
 };
-
-#endif

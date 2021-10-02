@@ -1,6 +1,5 @@
 
-#ifndef _GEOFILEFORMAT_H_
-#define _GEOFILEFORMAT_H_
+#pragma once
 
 namespace File
 {
@@ -15,5 +14,3 @@ struct GeoFileHeader
 };
 
 };
-
-#endif

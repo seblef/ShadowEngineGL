@@ -1,7 +1,4 @@
 
-#ifndef _OBJECTFLAGS_H_
-#define _OBJECTFLAGS_H_
+#pragma once
 
 #define OF_NOCOLLISION					1
-
-#endif

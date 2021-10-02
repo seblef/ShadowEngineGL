@@ -1,5 +1,4 @@
-#ifndef GLTEXTURE_H
-#define GLTEXTURE_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -41,5 +40,3 @@ public:
     static GLTexture*   getTextureFromDB(const string& texName);
     static void         clearDB();
 };
-
-#endif // GLTEXTURE_H

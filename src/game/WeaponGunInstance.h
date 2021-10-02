@@ -1,6 +1,5 @@
 
-#ifndef _WEAPONGUNINSTANCE_H_
-#define _WEAPONGUNINSTANCE_H_
+#pragma once
 
 #include "WeaponInstance.h"
 
@@ -16,5 +15,3 @@ public:
 
 	void					fire();
 };
-
-#endif

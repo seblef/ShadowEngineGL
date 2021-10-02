@@ -1,6 +1,5 @@
 
-#ifndef _FLASH_H_
-#define _FLASH_H_
+#pragma once
 
 #include "Action.h"
 #include "../StdRenderer.h"
@@ -28,5 +27,3 @@ public:
 
 	void			update(float time);
 };
-
-#endif

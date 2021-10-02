@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEEMITTERFACTORY_H_
-#define _PARTICLEEMITTERFACTORY_H_
+#pragma once
 
 #include "ParticleEmitter.h"
 
@@ -15,5 +13,3 @@ public:
 															   float emissionRate);
 	static ParticleEmitter*			createParticleEmitter(const ParticleEmitterTemplate& t);
 };
-
-#endif

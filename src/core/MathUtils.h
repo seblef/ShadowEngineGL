@@ -1,6 +1,5 @@
 
-#ifndef _MATHUTILS_H_
-#define _MATHUTILS_H_
+#pragma once
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -56,5 +55,3 @@ inline float FastInvSqrt( float fN )
 
 	return fTemp;
 }
-
-#endif

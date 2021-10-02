@@ -1,6 +1,5 @@
 
-#ifndef _FOLLOWTRACK_H_
-#define _FOLLOWTRACK_H_
+#pragma once
 
 #include "AIMachineState.h"
 
@@ -14,5 +13,3 @@ public:
 
 	const char*				getStateName() const	{ return "track"; }
 };
-
-#endif

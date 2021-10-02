@@ -1,6 +1,5 @@
 
-#ifndef _CHARACTER_H_
-#define _CHARACTER_H_
+#pragma once
 
 #include "../StdRenderer.h"
 #include "GameMaterial.h"
@@ -51,5 +50,3 @@ public:
 	void									load();
 	void									unload();
 };
-
-#endif

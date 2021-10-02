@@ -1,6 +1,5 @@
 
-#ifndef _ROCKET_H_
-#define _ROCKET_H_
+#pragma once
 
 #include "Ammo.h"
 #include "../StdRenderer.h"
@@ -44,5 +43,3 @@ public:
 
 	void					onContact(IPhysicObject* other);
 };
-
-#endif

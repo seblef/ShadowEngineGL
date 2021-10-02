@@ -1,6 +1,5 @@
 
-#ifndef _TEMPLATESOUND_H_
-#define _TEMPLATESOUND_H_
+#pragma once
 
 #include "../SoundLib.h"
 
@@ -26,5 +25,3 @@ public:
 	float				getRadiusAngle() const		{ return _radiusAngle; }
 	int					getPriority() const			{ return _priority; }
 };
-
-#endif

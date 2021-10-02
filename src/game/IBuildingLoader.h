@@ -1,6 +1,5 @@
 
-#ifndef _IBUILDINGLOADER_H_
-#define _IBUILDINGLOADER_H_
+#pragma once
 
 #include "BuildingTemplate.h"
 
@@ -15,5 +14,3 @@ public:
 
 	virtual BuildingTemplate*	loadBuilding(const string& buildingName, Map& m)=0;
 };
-
-#endif

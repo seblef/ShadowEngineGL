@@ -1,6 +1,5 @@
 
-#ifndef _BBOX2_H_
-#define _BBOX2_H_
+#pragma once
 
 #include "Vector2.h"
 #include "CoreCommon.h"
@@ -76,5 +75,3 @@ inline ostream& operator << (ostream& os, const BBox2& b)
 }
 
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _LIGHTOMNIRENDERER_H_
-#define _LIGHTOMNIRENDERER_H_
+#pragma once
 
 #include "LightRenderer.h"
 
@@ -29,5 +27,3 @@ public:
 	LightOmniRenderer(const LightRendererCreate_t& c);
 
 };
-
-#endif

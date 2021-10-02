@@ -1,6 +1,4 @@
-
-#ifndef _GROUNDTRI_H_
-#define _GROUNDTRI_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -73,5 +71,3 @@ public:
 		}
 	}
 };
-
-#endif

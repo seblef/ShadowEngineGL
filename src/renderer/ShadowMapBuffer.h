@@ -1,6 +1,4 @@
-
-#ifndef _SHADOWMAPBUFFER_H_
-#define _SHADOWMAPBUFFER_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -38,5 +36,3 @@ public:
 		_cBuffer->fill(this);
 	}
 };
-
-#endif

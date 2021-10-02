@@ -1,6 +1,5 @@
 
-#ifndef _GEOGEOLOADER_H_
-#define _GEOGEOLOADER_H_
+#pragma once
 
 #include "IGeometryLoader.h"
 
@@ -13,5 +12,3 @@ public:
 
 	Geometry*						loadGeometry(const string& geoFile);
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _QUADTREENODE_H_
-#define _QUADTREENODE_H_
+#pragma once
 
 #include "Renderable.h"
 #include <set>
@@ -47,5 +45,3 @@ public:
 
 	const set<Renderable*>&	getRenderables() const	{ return _renderables; }
 };
-
-#endif

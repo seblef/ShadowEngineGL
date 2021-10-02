@@ -1,6 +1,4 @@
-
-#ifndef _ACTORSKINNEDRENDERER_H_
-#define _ACTORSKINNEDRENDERER_H_
+#pragma once
 
 #include "TRenderer.h"
 #include "ActorInstance.h"
@@ -21,5 +19,3 @@ public:
 	void					render(bool addPass);
 	void					renderShadows(const ViewFrustum& vf);
 };
-
-#endif

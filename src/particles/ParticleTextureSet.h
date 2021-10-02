@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLETEXTURESET_H_
-#define _PARTICLETEXTURESET_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -26,5 +24,3 @@ class ParticleTextureSet
 		ITexture*						getTexture(const int n) const			{ return _textures[n]; }
 		ITexture*						operator[](size_t n) const				{ return getTexture((int)n); }
 };
-
-#endif

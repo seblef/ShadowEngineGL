@@ -1,6 +1,5 @@
 
-#ifndef _GEO3DSLOADER_H_
-#define _GEO3DSLOADER_H_
+#pragma once
 
 #include "IGeometryLoader.h"
 //#include <3dsftk.h>
@@ -18,5 +17,3 @@ public:
 
 	Geometry*						loadGeometry(const string& geoFileName);
 };
-
-#endif

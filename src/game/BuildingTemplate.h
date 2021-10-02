@@ -1,6 +1,5 @@
 
-#ifndef _BUILDINGTEMPLATE_H_
-#define _BUILDINGTEMPLATE_H_
+#pragma once
 
 #include "BuildingMesh.h"
 #include "BuildingLight.h"
@@ -30,5 +29,3 @@ public:
 	BuildingMesh*					getMesh(int n) const				{ return _meshes[n]; }
 	BuildingLight*					getLight(int n) const				{ return _lights[n]; }
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLES_H_
-#define _PARTICLES_H_
+#pragma once
 
 #include "../ParticleLib.h"
 #include "Renderable.h"
@@ -23,5 +21,3 @@ public:
 
 	ParticleSystem*				getParticleSystem() const					{ return _system; }
 };
-
-#endif

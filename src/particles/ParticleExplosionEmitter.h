@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEEXPLOSIONEMITTER_H_
-#define _PARTICLEEXPLOSIONEMITTER_H_
+#pragma once
 
 #include "ParticleEmitter.h"
 
@@ -12,5 +10,3 @@ public:
 
 	static void				emit(ParticleEmitter& e, float size, unsigned int count);
 };
-
-#endif

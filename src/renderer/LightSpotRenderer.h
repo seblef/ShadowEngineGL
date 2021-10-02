@@ -1,6 +1,4 @@
-
-#ifndef _LIGHTSPOTRENDERER_H_
-#define _LIGHTSPOTRENDERER_H_
+#pragma once
 
 #include "LightRenderer.h"
 #include "LightSpot.h"
@@ -41,5 +39,3 @@ public:
 	LightSpotRenderer(const LightRendererCreate_t& c);
 
 };
-
-#endif

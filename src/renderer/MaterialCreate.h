@@ -1,6 +1,4 @@
-
-#ifndef _MATERIALCREATE_H_
-#define _MATERIALCREATE_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -105,5 +103,3 @@ public:
 	{}
 	~MaterialCreate()			{}
 };
-
-#endif

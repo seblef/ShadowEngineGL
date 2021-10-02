@@ -1,6 +1,5 @@
 
-#ifndef _TSET_H_
-#define _TSET_H_
+#pragma once
 
 #include <set>
 
@@ -41,5 +40,3 @@ public:
 };
 
 };
-
-#endif

@@ -1,6 +1,5 @@
 
-#ifndef _TRACETEMPLATE_H_
-#define _TRACETEMPLATE_H_
+#pragma once
 
 #include "../ParticleLib.h"
 
@@ -21,5 +20,3 @@ public:
 	ParticleSystemTemplate*			getParticleSystem() const		{ return _particleSystem; }
 	float							getDensity() const				{ return _density;  }
 };
-
-#endif

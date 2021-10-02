@@ -1,6 +1,5 @@
 
-#ifndef _MAPTEXTLOADER_H_
-#define _MAPTEXTLOADER_H_
+#pragma once
 
 #include "IMapLoader.h"
 
@@ -45,5 +44,3 @@ public:
 
 	Map*					loadMap(const string& mapName);
 };
-
-#endif

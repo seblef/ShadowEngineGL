@@ -1,6 +1,4 @@
-
-#ifndef _ACTORINSTANCE_H_
-#define _ACTORINSTANCE_H_
+#pragma once
 
 #include "Actor.h"
 #include "Renderable.h"
@@ -63,5 +61,3 @@ public:
 		detachMeshToNullNode(_model->getNullNodeIndex(nullNodeName));
 	}
 };
-
-#endif

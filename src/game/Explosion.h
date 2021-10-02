@@ -1,6 +1,5 @@
 
-#ifndef _EXPLOSION_H_
-#define _EXPLOSION_H_
+#pragma once
 
 #include "Action.h"
 #include "ExplosionTemplate.h"
@@ -29,5 +28,3 @@ public:
 
 	void						update(float time);
 };
-
-#endif

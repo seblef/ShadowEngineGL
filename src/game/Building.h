@@ -1,6 +1,5 @@
 
-#ifndef _BUILDING_H_
-#define _BUILDING_H_
+#pragma once
 
 #include "GameObject.h"
 #include "BuildingTemplate.h"
@@ -23,5 +22,3 @@ public:
 	void							onAddToMap();
 	void							onRemFromMap();
 };
-
-#endif

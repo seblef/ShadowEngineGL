@@ -1,6 +1,5 @@
 
-#ifndef _TDYNAMICTAB_H_
-#define _TDYNAMICTAB_H_
+#pragma once
 
 #include <memory.h>
 
@@ -129,5 +128,3 @@ class TDynamicTab
 };
 
 }
-
-#endif

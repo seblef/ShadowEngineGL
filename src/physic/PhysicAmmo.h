@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICAMMO_H_
-#define _PHYSICAMMO_H_
+#pragma once
 
 #include "PhysicObject.h"
 
@@ -20,6 +18,3 @@ public:
 	void				setWorldMatrix(const Matrix4& world);
 	const Matrix4&		getWorldMatrix()							{ return _world; }
 };
-
-
-#endif

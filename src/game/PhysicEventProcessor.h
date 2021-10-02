@@ -1,6 +1,5 @@
 
-#ifndef _PHYSICEVENTPROCESSOR_H_
-#define _PHYSICEVENTPROCESSOR_H_
+#pragma once
 
 class PhysicEventProcessor
 {
@@ -10,5 +9,3 @@ public:
 
 	static void					processEvents();
 };
-
-#endif

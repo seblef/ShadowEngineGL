@@ -1,6 +1,5 @@
 
-#ifndef _WEAPONINSTANCE_H_
-#define _WEAPONINSTANCE_H_
+#pragma once
 
 #include "Weapon.h"
 #include "Hit.h"
@@ -32,5 +31,3 @@ public:
 
 	bool					canFire() const;
 };
-
-#endif

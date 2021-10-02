@@ -1,6 +1,4 @@
-
-#ifndef _GEOMETRYDATA_H_
-#define _GEOMETRYDATA_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -23,5 +21,3 @@ public:
 
 	void						set()							{ _vBuffer->set(); _iBuffer->set(); }
 };
-
-#endif

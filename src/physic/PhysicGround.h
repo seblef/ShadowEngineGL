@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICGROUND_H_
-#define _PHYSICGROUND_H_
+#pragma once
 
 #include "PhysicObject.h"
 
@@ -12,5 +10,3 @@ public:
 		int height, int width);
 	~PhysicGround();
 };
-
-#endif

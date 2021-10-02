@@ -1,6 +1,5 @@
 
-#ifndef _CHARACTERDB_H_
-#define _CHARACTERDB_H_
+#pragma once
 
 #include "Character.h"
 
@@ -12,5 +11,3 @@ public:
 
 	void				unloadCharacters();
 };
-
-#endif

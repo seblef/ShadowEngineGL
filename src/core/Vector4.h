@@ -1,6 +1,5 @@
 
-#ifndef _VECTOR4_H_
-#define _VECTOR4_H_
+#pragma once
 
 #include "Vector3.h"
 
@@ -132,5 +131,3 @@ inline ostream& operator << (ostream& os, const Vector4& v)
 }
 
 }
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _IVISIBILITYSYSTEM_H_
-#define _IVISIBILITYSYSTEM_H_
+#pragma once
 
 #include "Renderable.h"
 
@@ -21,5 +19,3 @@ public:
 
 	virtual void				visibility(const ViewFrustum& vf, const SRect& bounds)=0;
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _RENDERERSTATS_H_
-#define _RENDERERSTATS_H_
+#pragma once
 
 #ifdef _OUTPUTSTATS
 
@@ -31,7 +29,5 @@ public:
 		os << _time;
 	}
 };
-
-#endif
 
 #endif

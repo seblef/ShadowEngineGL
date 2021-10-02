@@ -1,6 +1,5 @@
 
-#ifndef _WEAPONROCKET_H_
-#define _WEAPONROCKET_H_
+#pragma once
 
 #include "Weapon.h"
 #include "TemplateMesh.h"
@@ -49,4 +48,3 @@ public:
 
 	WeaponInstance*			createInstance(GameCharacter* c);
 };
-#endif

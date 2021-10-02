@@ -1,6 +1,5 @@
 
-#ifndef _GROUNDFILEFORMAT_H_
-#define _GROUNDFILEFORMAT_H_
+#pragma once
 
 #define GROUND_HEADER			(('S' << 24) | ('G' << 16) | ('R' << 8) | ('D'))
 
@@ -31,5 +30,3 @@ struct GroundFileMaterial
 };
 
 };
-
-#endif

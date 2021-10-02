@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEMATERIAL_H_
-#define _PARTICLEMATERIAL_H_
+#pragma once
 
 #include "ParticleTextureSet.h"
 
@@ -35,5 +33,3 @@ public:
 	ITexture*				getTexture(float percent) const;
 	BlendState				getBlendState() const				{ return _blendState; }
 };
-
-#endif

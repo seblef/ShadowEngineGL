@@ -1,6 +1,5 @@
 
-#ifndef _TTAB_H_
-#define _TTAB_H_
+#pragma once
 
 namespace Core
 {
@@ -58,5 +57,3 @@ public:
 };
 
 };
-
-#endif

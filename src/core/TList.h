@@ -1,6 +1,5 @@
 
-#ifndef _TLIST_H_
-#define _TLIST_H_
+#pragma once
 
 #include <list>
 
@@ -41,5 +40,3 @@ public:
 };
 
 };
-
-#endif

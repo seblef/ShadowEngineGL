@@ -1,6 +1,4 @@
-
-#ifndef _GBUFFER_H_
-#define _GBUFFER_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -47,5 +45,3 @@ public:
 
     IDepthTexture*          getDepthBuffer() const          { return _depthRT; }
 };
-
-#endif

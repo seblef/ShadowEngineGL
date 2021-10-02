@@ -1,6 +1,5 @@
 
-#ifndef _TANIMKEY_H_
-#define _TANIMKEY_H_
+#pragma once
 
 namespace Core
 {
@@ -34,5 +33,3 @@ public:
 };
 
 };
-
-#endif

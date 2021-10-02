@@ -1,6 +1,5 @@
 
-#ifndef _ENTITYDYNAMIC_H_
-#define _ENTITYDYNAMIC_H_
+#pragma once
 
 #include "EntityTemplate.h"
 
@@ -24,5 +23,3 @@ public:
 
 	float					getDensity() const					{ return _density; }
 };
-
-#endif

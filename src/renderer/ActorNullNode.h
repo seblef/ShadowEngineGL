@@ -1,6 +1,4 @@
-
-#ifndef _ACTORNULLNODE_H_
-#define _ACTORNULLNODE_H_
+#pragma once
 
 #include <string>
 
@@ -25,5 +23,3 @@ public:
 	int					getID() const									{ return _id; }
 	const string&		getName() const									{ return _name; }
 };
-
-#endif

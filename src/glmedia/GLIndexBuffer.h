@@ -1,5 +1,4 @@
-#ifndef GLINDEXBUFFER_H
-#define GLINDEXBUFFER_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -21,5 +20,3 @@ public:
     void            fill(const void* data, int count, int offset);
 
 };
-
-#endif // GLINDEXBUFFER_H

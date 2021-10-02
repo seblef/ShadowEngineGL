@@ -1,6 +1,5 @@
 
-#ifndef _GAMESYSTEM_H_
-#define _GAMESYSTEM_H_
+#pragma once
 
 #include "CharacterDB.h"
 #include "WeaponDB.h"
@@ -52,5 +51,3 @@ public:
 
 	bool							update();
 };
-
-#endif

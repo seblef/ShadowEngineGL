@@ -1,6 +1,5 @@
 
-#ifndef _TEMPLATEPARTICLESYSTEM_H_
-#define _TEMPLATEPARTICLESYSTEM_H_
+#pragma once
 
 #include "../ParticleLib.h"
 
@@ -20,5 +19,3 @@ public:
 
 	ParticleSystemTemplate*			getTemplate() const					{ return _template; }
 };
-
-#endif

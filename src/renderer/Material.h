@@ -1,6 +1,4 @@
-
-#ifndef _MATERIAL_H_
-#define _MATERIAL_H_
+#pragma once
 
 #include "MaterialCreate.h"
 #include "MaterialStdBuffer.h"
@@ -58,6 +56,3 @@ public:
 
 	void						updateStdBuffer();
 };
-
-
-#endif

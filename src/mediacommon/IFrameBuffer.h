@@ -1,5 +1,4 @@
-#ifndef IFRAMEBUFFER_H
-#define IFRAMEBUFFER_H
+#pragma once
 
 #include "ITexture.h"
 
@@ -18,5 +17,3 @@ public:
 
     virtual void    set()=0;
 };
-
-#endif // IFRAMEBUFFER_H

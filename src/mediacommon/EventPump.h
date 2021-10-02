@@ -1,6 +1,4 @@
-
-#ifndef _EVENTPUMP_H_
-#define _EVENTPUMP_H_
+#pragma once
 
 #include "Event.h"
 #include "../Core.h"
@@ -35,6 +33,3 @@ public:
 		return _events.size();
 	}
 };
-
-
-#endif
