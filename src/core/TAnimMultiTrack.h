@@ -1,6 +1,5 @@
 
-#ifndef _TANIMMULTITRACK_H_
-#define _TANIMMULTITRACK_H_
+#pragma once
 
 #include <memory.h>
 
@@ -88,5 +87,3 @@ public:
 };
 
 };
-
-#endif

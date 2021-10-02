@@ -1,6 +1,4 @@
-
-#ifndef _NAVMAP_H_
-#define _NAVMAP_H_
+#pragma once
 
 #include "NavDefs.h"
 #include "IPathFinder.h"
@@ -45,5 +43,3 @@ public:
 
 	bool				findBestPlace(int x, int y, float dx, float dy, int& rx, int& ry, bool reverse=false) const;
 };
-
-#endif

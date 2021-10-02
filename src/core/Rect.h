@@ -1,6 +1,5 @@
 
-#ifndef _SRECT_H_
-#define _SRECT_H_
+#pragma once
 
 #include <ostream>
 
@@ -36,5 +35,3 @@ inline ostream& operator << (ostream& os, const SRect& b)
 
 
 };
-
-#endif

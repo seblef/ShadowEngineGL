@@ -1,6 +1,5 @@
 
-#ifndef _GAMELIGHT_H_
-#define _GAMELIGHT_H_
+#pragma once
 
 #include "GameObject.h"
 #include "../StdRenderer.h"
@@ -40,5 +39,3 @@ public:
 	void					onRemFromScene()				{ Renderer::getSingletonRef().remRenderable(_rLight); }
 	void					onUpdateMatrix()				{ _rLight->setWorldMatrix(_world); }
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLESYSTEM_H_
-#define _PARTICLESYSTEM_H_
+#pragma once
 
 #include "ParticleEmitter.h"
 #include "ParticleSystemTemplate.h"
@@ -36,5 +34,3 @@ public:
 
 	void					countParticles();
 };
-
-#endif

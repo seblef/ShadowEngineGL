@@ -1,6 +1,5 @@
 
-#ifndef _ENTITYEXPLOSIVE_H_
-#define _ENTITYEXPLOSIVE_H_
+#pragma once
 
 #include "EntityDynamic.h"
 
@@ -27,5 +26,3 @@ public:
 	ExplosionTemplate*	getExplosion() const						{ return _explosionTemplate; }
 	float				getDamageThreshold() const					{ return _damageThreshold; }
 };
-
-#endif

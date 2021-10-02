@@ -1,6 +1,4 @@
-
-#ifndef _IFILE_H_
-#define _IFILE_H_
+#pragma once
 
 #include <string>
 
@@ -48,5 +46,3 @@ class IFile
 };
 
 }
-
-#endif

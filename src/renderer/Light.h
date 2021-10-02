@@ -1,6 +1,4 @@
-
-#ifndef _LIGHT_H_
-#define _LIGHT_H_
+#pragma once
 
 #include "../MediaCommon.h"
 #include "Renderable.h"
@@ -100,5 +98,3 @@ public:
 	IShadowMap*				getShadowMap() const						{ return _shadowMap; }
 	const Matrix4&			getShadowViewProjMatrix() const				{ return _shadowViewProj; }
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _MATERIALSTDBUFFER_H_
-#define _MATERIALSTDBUFFER_H_
+#pragma once
 
 #include "MaterialCreate.h"
 
@@ -63,6 +61,3 @@ public:
 
 	operator const float*()	const									{ return (const float*)this; }
 };
-
-
-#endif

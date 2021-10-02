@@ -1,6 +1,5 @@
 
-#ifndef _AIAGENT_H_
-#define _AIAGENT_H_
+#pragma once
 
 #include "AIMachine.h"
 #include "IAICallback.h"
@@ -45,5 +44,3 @@ public:
 
 	IAICallback*				getCallback() const					{ return _callback; }
 };
-
-#endif

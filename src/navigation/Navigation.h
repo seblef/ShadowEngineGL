@@ -1,6 +1,4 @@
-
-#ifndef _NAVIGATION_H_
-#define _NAVIGATION_H_
+#pragma once
 
 #include "../Core.h"
 #include "NavMap.h"
@@ -37,5 +35,3 @@ public:
 		return _map->getPathFinder()->findPath(startX,startY,targetX,targetY,p,*_map);
 	}
 };
-
-#endif

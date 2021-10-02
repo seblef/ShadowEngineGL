@@ -1,6 +1,4 @@
-
-#ifndef _LIGHTSYSTEM_H_
-#define _LIGHTSYSTEM_H_
+#pragma once
 
 #include "GlobalLight.h"
 #include "Light.h"
@@ -39,5 +37,3 @@ public:
 
 	void				applyLights(const Vector3& eyePos, GBuffer& gbuf);
 };
-
-#endif

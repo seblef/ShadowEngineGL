@@ -1,6 +1,5 @@
 
-#ifndef _HUD_H_
-#define _HUD_H_
+#pragma once
 
 #include "../R2D.h"
 
@@ -37,5 +36,3 @@ public:
 
 	void					updateHUD(GameCamera& gc);
 };
-
-#endif

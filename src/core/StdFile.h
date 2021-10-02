@@ -1,6 +1,5 @@
 
-#ifndef _STDFILE_H_
-#define _STDFILE_H_
+#pragma once
 
 #include "IFile.h"
 #include <fstream>
@@ -30,5 +29,3 @@ public:
 };
 
 }
-
-#endif

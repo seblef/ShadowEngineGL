@@ -1,6 +1,4 @@
-
-#ifndef _RENDERER_H_
-#define _RENDERER_H_
+#pragma once
 
 #include "../MediaCommon.h"
 #include "GroundData.h"
@@ -59,5 +57,3 @@ public:
 	IVisibilitySystem*	getVisibilitySystem() const										{ return _vis; }
 	const SRect&		getVisibilityBounds() const										{ return _visBounds; }
 };
-
-#endif

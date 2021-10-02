@@ -1,6 +1,4 @@
-
-#ifndef _IMEDIA_H_
-#define _IMEDIA_H_
+#pragma once
 
 #include "IVideoDevice.h"
 #include "ISoundDevice.h"
@@ -32,5 +30,3 @@ public:
 
 	virtual void			update()=0;
 };
-
-#endif

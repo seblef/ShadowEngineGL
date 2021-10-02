@@ -1,6 +1,5 @@
 
-#ifndef _VECTOR2_H_
-#define _VECTOR2_H_
+#pragma once
 
 #include "Matrix2.h"
 
@@ -72,5 +71,3 @@ inline ostream& operator << (ostream& os, const Vector2& v)
 }
 
 }
-
-#endif

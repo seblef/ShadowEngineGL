@@ -1,5 +1,4 @@
-#ifndef GLSHADER_H
-#define GLSHADER_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -36,5 +35,3 @@ public:
     static GLShader*			getShaderFromDB(const string& name);
     static void					clearDB();
 };
-
-#endif // GLSHADER_H

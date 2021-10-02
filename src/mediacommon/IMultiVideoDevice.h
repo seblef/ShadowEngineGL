@@ -1,6 +1,4 @@
-
-#ifndef _IMULTIVIDEODEVICE_H_
-#define _IMULTIVIDEODEVICE_H_
+#pragma once
 
 #include "IVideoDevice.h"
 #include "IView.h"
@@ -17,5 +15,3 @@ public:
 	virtual void				resizeView(IView* v, int w, int h)=0;
 	virtual void				destroyView(IView *v)=0;
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _GROUNDRENDERER_H_
-#define _GROUNDRENDERER_H_
+#pragma once
 
 #include "GroundData.h"
 #include "../MediaCommon.h"
@@ -33,5 +31,3 @@ public:
 	void				renderGround(const GroundData& data, bool addPass);
 	void				renderFlag(unsigned int f, const unsigned int* flagMap, int w);
 };
-
-#endif

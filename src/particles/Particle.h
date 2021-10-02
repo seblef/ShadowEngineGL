@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLE_H_
-#define _PARTICLE_H_
+#pragma once
 
 #include "../Core.h"
 #include "ParticleMaterial.h"
@@ -28,6 +26,3 @@ class Particle
 		ParticleMaterial*	_material;
 		ParticleRenderer*	_renderer;
 };
-
-
-#endif

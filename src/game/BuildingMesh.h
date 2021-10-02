@@ -1,6 +1,5 @@
 
-#ifndef _BUILDINGMESH_H_
-#define _BUILDINGMESH_H_
+#pragma once
 
 #include <string>
 
@@ -23,5 +22,3 @@ public:
 	const string&	getMeshName() const				{ return _meshName; }
 	unsigned int	getFlags() const				{ return _flags; }
 };
-
-#endif

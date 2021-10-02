@@ -1,6 +1,5 @@
 
-#ifndef _GAMECHARACTER_H_
-#define _GAMECHARACTER_H_
+#pragma once
 
 #include "Character.h"
 #include "GameMesh.h"
@@ -109,5 +108,3 @@ public:
 		return _weapon->getTemplate()->getRange();
 	}
 };
-
-#endif

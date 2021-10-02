@@ -1,6 +1,4 @@
-
-#ifndef _ICONSTANTBUFFER_H_
-#define _ICONSTANTBUFFER_H_
+#pragma once
 
 #include "VideoDefs.h"
 
@@ -23,5 +21,3 @@ public:
     virtual void	set()=0;
 	virtual void	fill(const void* data)=0;
 };
-
-#endif

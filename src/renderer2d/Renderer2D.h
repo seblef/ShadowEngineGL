@@ -1,6 +1,4 @@
-
-#ifndef _RENDERER2D_H_
-#define _RENDERER2D_H_
+#pragma once
 
 #include "R2D_Frame.h"
 #include "R2D_Renderer.h"
@@ -49,5 +47,3 @@ public:
 
 	void							render();
 };
-
-#endif

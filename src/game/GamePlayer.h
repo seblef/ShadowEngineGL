@@ -1,6 +1,5 @@
 
-#ifndef _GAMEPLAYER_H_
-#define _GAMEPLAYER_H_
+#pragma once
 
 #include "GameCharacter.h"
 
@@ -38,5 +37,3 @@ public:
 
 	void						dies()											{}
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _SCENEINFOSBUFFER_H_
-#define _SCENEINFOSBUFFER_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -37,5 +35,3 @@ public:
 
 	void				setTime(float time)						{ _time=time; }
 };
-
-#endif

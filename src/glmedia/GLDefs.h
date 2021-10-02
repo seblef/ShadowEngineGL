@@ -1,6 +1,3 @@
-#ifndef GLDEFS_H
-#define GLDEFS_H
+#pragma once
 
 // #define SGL_TRACE_ALL
-
-#endif // GLDEFS_H

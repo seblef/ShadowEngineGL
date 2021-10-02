@@ -1,6 +1,4 @@
-
-#ifndef _GLOBALLIGHT_H_
-#define _GLOBALLIGHT_H_
+#pragma once
 
 #include "ShadowMapBuffer.h"
 
@@ -52,5 +50,3 @@ public:
 	void					setShadowMap(IShadowMap* m)			{ _shadowMap=m; }
 	void					setShadowViewProjMatrix(const Matrix4& vp)	{ _shadowViewProj=vp; }
 };
-
-#endif

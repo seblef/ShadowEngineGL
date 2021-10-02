@@ -1,6 +1,4 @@
-
-#ifndef _LIGHTSPOT_H_
-#define _LIGHTSPOT_H_
+#pragma once
 
 #include "Light.h"
 
@@ -25,5 +23,3 @@ public:
 	void				setFarAngle(float a)				{ _farAngle=a; }
 	void				setNearZ(float z)					{ _nearZ=z; }
 };
-
-#endif

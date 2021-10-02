@@ -1,6 +1,5 @@
 
-#ifndef _FILESYSTEMFACTORY_H_
-#define _FILESYSTEMFACTORY_H_
+#pragma once
 
 #include "IFileSystem.h"
 
@@ -22,5 +21,3 @@ public:
 }
 
 #define g_FileSystem			Core::FileSystemFactory::getFileSystem()
-
-#endif

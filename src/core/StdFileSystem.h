@@ -1,6 +1,5 @@
 
-#ifndef _STDFILESYSTEM_H_
-#define _STDFILESYSTEM_H_
+#pragma once
 
 #include "IFileSystem.h"
 #include "StdFile.h"
@@ -60,5 +59,3 @@ public:
 };
 
 }
-
-#endif

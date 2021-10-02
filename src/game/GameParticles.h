@@ -1,6 +1,5 @@
 
-#ifndef _GAMEPARTICLES_H_
-#define _GAMEPARTICLES_H_
+#pragma once
 
 #include "TemplateParticleSystem.h"
 #include "GameObject.h"
@@ -21,5 +20,3 @@ public:
 	void						onRemFromScene();
 	void						onUpdateMatrix(const Matrix4& new_m)	{}
 };
-
-#endif

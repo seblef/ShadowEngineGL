@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEEMITTERPARAMS_H_
-#define _PARTICLEEMITTERPARAMS_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -61,5 +59,3 @@ class ParticleEmitterParams
 		Vector3&			getStartSize()						{ return _startSize; }
 		Vector3&			getEndSize() 						{ return _endSize; }
 };
-
-#endif

@@ -1,6 +1,5 @@
 
-#ifndef _TEXTPARSER_H_
-#define _TEXTPARSER_H_
+#pragma once
 
 #include "../StdRenderer.h"
 #include "TemplateMesh.h"
@@ -26,5 +25,3 @@ public:
 	static TemplateParticleSystem*	parseParticles(ScriptFile& sf, string* particleName=0);
 	static void						parseLight(ScriptFile& sf, LightCreate_t& lc, Light::LightType& t);
 };
-
-#endif

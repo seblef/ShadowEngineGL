@@ -1,5 +1,4 @@
-#ifndef IGEOMETRYBUFFER_H
-#define IGEOMETRYBUFFER_H
+#pragma once
 
 #include "VideoDefs.h"
 #include "../Core.h"
@@ -35,5 +34,3 @@ public:
     IndexType		getIndexType() const                { return _idxType; }
 
 };
-
-#endif // IGEOMETRYBUFFER_H

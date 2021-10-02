@@ -1,6 +1,4 @@
-
-#ifndef _LIGHTRENDERER_H_
-#define _LIGHTRENDERER_H_
+#pragma once
 
 #include "Light.h"
 #include "ShadowMapBuffer.h"
@@ -66,5 +64,3 @@ public:
 	void							enqueueLight(Light *l)					{ _lights.push_back(l); }
 	void							applyLights(const Vector3& eyePos);
 };
-
-#endif

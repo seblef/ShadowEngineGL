@@ -1,5 +1,4 @@
-#ifndef TESTGLAPP_H
-#define TESTGLAPP_H
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -15,5 +14,3 @@ public:
 
     void            run(const string& dataFolder);
 };
-
-#endif // TESTGLAPP_H

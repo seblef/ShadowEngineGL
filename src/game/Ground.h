@@ -1,6 +1,5 @@
 
-#ifndef _GROUND_H_
-#define _GROUND_H_
+#pragma once
 
 #include "../StdRenderer.h"
 #include "GameMaterial.h"
@@ -62,5 +61,3 @@ public:
 		return _gameMaterials[((_ground[x + y*_width]) & GGAMEMATERIAL_MASK) >> 8];
 	}
 };
-
-#endif

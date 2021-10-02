@@ -1,6 +1,5 @@
 
-#ifndef _VECTOR3_H_
-#define _VECTOR3_H_
+#pragma once
 
 #include "Matrix4.h"
 
@@ -148,5 +147,3 @@ inline ostream& operator << (ostream& os, const Vector3& v)
 }
 
 }
-
-#endif

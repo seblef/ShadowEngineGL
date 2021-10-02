@@ -1,6 +1,5 @@
 
-#ifndef _ACTIONSERVER_H_
-#define _ACTIONSERVER_H_
+#pragma once
 
 #include "Action.h"
 #include "../Core.h"
@@ -30,5 +29,3 @@ public:
 	void					addDelayedAction(Action *a, float delay);
 	void					update(float time);
 };
-
-#endif

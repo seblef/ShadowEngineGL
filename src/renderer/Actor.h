@@ -1,6 +1,4 @@
-
-#ifndef _ACTOR_H_
-#define _ACTOR_H_
+#pragma once
 
 #include "ActorSub.h"
 #include "ActorNullNode.h"
@@ -108,5 +106,3 @@ public:
 	void						addAnimation(const string& animName, AnimPRSMultiTrack* anim)			{ _animations[animName]=anim; }
 	const AnimPRSMultiTrack*	getAnimation(const string& animName)									{ return _animations[animName]; }
 };
-
-#endif

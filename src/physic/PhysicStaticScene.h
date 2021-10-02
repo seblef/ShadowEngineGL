@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICSTATICSCENE_H_
-#define _PHYSICSTATICSCENE_H_
+#pragma once
 
 #include "PhysicObject.h"
 #include "PhysicGeometry.h"
@@ -14,5 +12,3 @@ public:
 		PxPhysics* p, PxScene* s);
 	~PhysicStaticScene();
 };
-
-#endif

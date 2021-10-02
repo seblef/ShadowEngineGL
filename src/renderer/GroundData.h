@@ -1,6 +1,4 @@
-
-#ifndef _GROUNDDATA_H_
-#define _GROUNDDATA_H_
+#pragma once
 
 #include "Material.h"
 #include "GroundTri.h"
@@ -26,5 +24,3 @@ public:
 	const GroundTri&	getTriangle(int x, int y, int side) const		{ return _triangles[(x+y*_width)*2 + side]; }
 	const GroundTri*	getTriangles() const							{ return _triangles; }
 };
-
-#endif

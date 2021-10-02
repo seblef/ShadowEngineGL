@@ -1,6 +1,5 @@
 
-#ifndef _NAVIGATOR_H_
-#define _NAVIGATOR_H_
+#pragma once
 
 #include "../NavigationLib.h"
 #include "../PhysicLib.h"
@@ -82,5 +81,3 @@ public:
 	bool					isMoving() const						{ return _currentPathStep > 0 || _desireOrientation; }
 	bool					update(float time);
 };
-
-#endif

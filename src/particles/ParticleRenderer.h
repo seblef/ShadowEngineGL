@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLERENDERER_H_
-#define _PARTICLERENDERER_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -24,5 +22,3 @@ class ParticleRenderer
 		virtual void			addParticle(Particle& p, const Camera& c)=0;
 		virtual void			renderParticles()=0;
 };
-
-#endif

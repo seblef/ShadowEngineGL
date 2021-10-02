@@ -1,6 +1,4 @@
-
-#ifndef _STDRENDERER_H_
-#define _STDRENDERER_H_
+#pragma once
 
 #include "./renderer/Renderer.h"
 #include "./renderer/MaterialSystem.h"
@@ -15,5 +13,3 @@
 #include "./renderer/LightOmni.h"
 #include "./renderer/LightSpot.h"
 #include "./renderer/Particles.h"
-
-#endif

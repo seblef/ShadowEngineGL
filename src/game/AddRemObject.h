@@ -1,6 +1,5 @@
 
-#ifndef _ADDREMOBJECT_H_
-#define _ADDREMOBJECT_H_
+#pragma once
 
 #include "Action.h"
 #include "GameObject.h"
@@ -24,5 +23,3 @@ public:
 
 	void				update(float time);
 };
-
-#endif

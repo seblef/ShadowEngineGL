@@ -1,6 +1,5 @@
 
-#ifndef _EXPLOSIONTEMPLATE_H_
-#define _EXPLOSIONTEMPLATE_H_
+#pragma once
 
 #include "Effect.h"
 #include "TemplateMesh.h"
@@ -83,5 +82,3 @@ public:
 	float							getOuterRadius() const				{ return _outerRadius; }
 	float							getInnerDamage() const				{ return _innerDamage; }
 };
-
-#endif

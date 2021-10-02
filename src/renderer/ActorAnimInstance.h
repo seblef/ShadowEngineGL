@@ -1,6 +1,4 @@
-
-#ifndef _ACTORANIMINSTANCE_H_
-#define _ACTORANIMINSTANCE_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -40,5 +38,3 @@ public:
 
 	void					update(float time, MatrixTab& pose);
 };
-
-#endif

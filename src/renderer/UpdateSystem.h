@@ -1,6 +1,4 @@
-
-#ifndef _UPDATESYSTEM_H_
-#define _UPDATESYSTEM_H_
+#pragma once
 
 #include "IUpdatable.h"
 #include "../Core.h"
@@ -28,6 +26,3 @@ public:
 			(*u)->update(time);
 	}
 };
-
-
-#endif

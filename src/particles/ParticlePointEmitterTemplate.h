@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEPOINTEMITTERTEMPLATE_H_
-#define _PARTICLEPOINTEMITTERTEMPLATE_H_
+#pragma once
 
 #include "ParticleEmitterTemplate.h"
 
@@ -19,5 +17,3 @@ public:
 		mat, p1, p2, maxParticles, gravity, emissionRate)		{}
 
 };
-
-#endif

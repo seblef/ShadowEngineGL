@@ -1,6 +1,4 @@
-
-#ifndef _ISOUNDDEVICE_H_
-#define _ISOUNDDEVICE_H_
+#pragma once
 
 #include "ISoundSource.h"
 #include "ISoundVirtualSource.h"
@@ -33,5 +31,3 @@ public:
 		const Vector3& topAxis = Vector3::YAxisVector,
 		float dopplerScale = 1.0f) const = 0;
 };
-
-#endif

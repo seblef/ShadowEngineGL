@@ -1,6 +1,5 @@
 
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
+#pragma once
 
 #include "BBox3.h"
 #include "Vector2.h"
@@ -79,5 +78,3 @@ public:
 };
 
 }
-
-#endif

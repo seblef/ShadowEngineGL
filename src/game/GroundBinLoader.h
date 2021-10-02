@@ -1,6 +1,5 @@
 
-#ifndef _GROUNDBINLOADER_H_
-#define _GROUNDBINLOADER_H_
+#pragma once
 
 #include "Ground.h"
 #include "Map.h"
@@ -13,5 +12,3 @@ public:
 
 	void							loadGround(Ground& g, const string& groundFile, Map& mp) const;
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _AS_CELLITEM_H_
-#define _AS_CELLITEM_H_
+#pragma once
 
 class AS_CellItem
 {
@@ -24,5 +22,3 @@ public:
 	int					getParentY() const		{ return _parentY; }
 	int					getGCost() const		{ return _GCost; }
 };
-
-#endif

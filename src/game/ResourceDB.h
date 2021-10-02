@@ -1,6 +1,5 @@
 
-#ifndef _RESOURCEDB_H_
-#define _RESOURCEDB_H_
+#pragma once
 
 #include "Geometry.h"
 #include "GameMaterial.h"
@@ -51,5 +50,3 @@ public:
 	ParticleDB&							getParticleDB()			{ return _particles; }
 	BuildingDB&							getBuildingDB()			{ return _building; }
 };
-
-#endif

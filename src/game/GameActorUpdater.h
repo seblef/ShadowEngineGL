@@ -1,6 +1,5 @@
 
-#ifndef _GAMEACTORUPDATER_H_
-#define _GAMEACTORUPDATER_H_
+#pragma once
 
 #include "GameCharacter.h"
 
@@ -26,5 +25,3 @@ public:
 			(*a)->update(time);
 	}
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef GLSOUND_H
-#define GLSOUND_H
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -10,5 +9,3 @@ public:
     GLSound(const string& soundName) : ISound(soundName)        {}
     ~GLSound()                                                  {}
 };
-
-#endif // GLSOUND_H

@@ -1,6 +1,5 @@
 
-#ifndef _GAMEENTITYDYNAMIC_H_
-#define _GAMEENTITYDYNAMIC_H_
+#pragma once
 
 #include "GameEntity.h"
 #include "EntityDynamic.h"
@@ -15,5 +14,3 @@ public:
 	void				update(float time);
 	virtual void		onHit(const Hit& hit);
 };
-
-#endif

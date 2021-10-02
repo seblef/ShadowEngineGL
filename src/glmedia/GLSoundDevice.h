@@ -1,5 +1,4 @@
-#ifndef GLSOUNDDEVICE_H
-#define GLSOUNDDEVICE_H
+#pragma once
 
 #include "GLSoundListener.h"
 #include "GLSoundSource.h"
@@ -39,5 +38,3 @@ public:
         const Vector3& topAxis = Vector3::YAxisVector,
         float dopplerScale = 1.0f) const                            { return new GLSoundVirtualSource; }
 };
-
-#endif // GLSOUNDDEVICE_H

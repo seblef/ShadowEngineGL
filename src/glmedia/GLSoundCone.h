@@ -1,5 +1,4 @@
-#ifndef GLSOUNDCONE_H
-#define GLSOUNDCONE_H
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -29,5 +28,3 @@ public:
     float			getOuterLPF()                       { return 1.0f; }
 
 };
-
-#endif // GLSOUNDCONE_H

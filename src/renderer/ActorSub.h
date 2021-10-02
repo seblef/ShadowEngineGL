@@ -1,6 +1,4 @@
-
-#ifndef _ACTORSUB_H_
-#define _ACTORSUB_H_
+#pragma once
 
 #include <string>
 
@@ -28,5 +26,3 @@ public:
 	int				getTriOffset() const							{ return _triOffset; }
 	const string&	getName() const									{ return _name; }
 };
-
-#endif

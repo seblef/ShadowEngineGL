@@ -1,6 +1,4 @@
-
-#ifndef _HDR_H_
-#define _HDR_H_
+#pragma once
 
 #include "../MediaCommon.h"
 #include "GBuffer.h"
@@ -85,5 +83,3 @@ public:
 
     void				onResize(int w, int h, IDepthTexture* depthBuffer);
 };
-
-#endif

@@ -1,6 +1,5 @@
 
-#ifndef _GAMEMATERIAL_H_
-#define _GAMEMATERIAL_H_
+#pragma once
 
 #include "Geometry.h"
 
@@ -21,5 +20,3 @@ public:
 
 	static GameMaterial*		loadMaterial(const string& matFile);
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _R2D_OBJECT_H_
-#define _R2D_OBJECT_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -46,5 +44,3 @@ class R2D_Object
 		const Color&			getColor() const				{ return _color; }
 		void					setColor(const Color& cCol)		{ _color=cCol; }
 };
-
-#endif

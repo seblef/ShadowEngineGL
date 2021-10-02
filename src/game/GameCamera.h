@@ -1,6 +1,5 @@
 
-#ifndef _GAMECAMERA_H_
-#define _GAMECAMERA_H_
+#pragma once
 
 #include "GameCharacter.h"
 
@@ -30,5 +29,3 @@ public:
 
 	void					update(float elapsed);
 };
-
-#endif

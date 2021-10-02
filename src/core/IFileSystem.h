@@ -1,6 +1,5 @@
 
-#ifndef _IFILESYSTEM_H_
-#define _IFILESYSTEM_H_
+#pragma once
 
 #include "IFile.h"
 #include "IFileList.h"
@@ -41,5 +40,3 @@ class IFileSystem
 };
 
 }
-
-#endif

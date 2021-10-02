@@ -1,6 +1,5 @@
 
-#ifndef _TVECTOR_H_
-#define _TVECTOR_H_
+#pragma once
 
 #include <vector>
 
@@ -41,5 +40,3 @@ public:
 };
 
 };
-
-#endif

@@ -1,6 +1,5 @@
 
-#ifndef _QUATERNION_H_
-#define _QUATERNION_H_
+#pragma once
 
 #include "Vector3.h"
 #include "MathUtils.h"
@@ -163,5 +162,3 @@ inline Vector3 operator*(const Vector3& v, const Quaternion& q)
 }
 
 }
-
-#endif

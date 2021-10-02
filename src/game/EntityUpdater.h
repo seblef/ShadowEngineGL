@@ -1,6 +1,5 @@
 
-#ifndef _ENTITYUPDATER_H_
-#define _ENTITYUPDATER_H_
+#pragma once
 
 #include "GameEntity.h"
 
@@ -22,5 +21,3 @@ public:
 
 	void						clear()								{ _entities.clear(); }
 };
-
-#endif

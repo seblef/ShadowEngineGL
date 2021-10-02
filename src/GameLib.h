@@ -1,7 +1,3 @@
-
-#ifndef _GAMELIB_H_
-#define _GAMELIB_H_
+#pragma once
 
 #include "./game/GameSystem.h"
-
-#endif

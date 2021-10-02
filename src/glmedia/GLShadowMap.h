@@ -1,5 +1,4 @@
-#ifndef GLSHADOWMAP_H
-#define GLSHADOWMAP_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -20,5 +19,3 @@ public:
     void            setAsRenderTarget();
     void            set(int stage);
 };
-
-#endif // GLSHADOWMAP_H

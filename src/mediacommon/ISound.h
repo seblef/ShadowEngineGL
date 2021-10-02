@@ -1,6 +1,4 @@
-
-#ifndef _ISOUND_H_
-#define _ISOUND_H_
+#pragma once
 
 #include <string>
 
@@ -24,5 +22,3 @@ public:
 
 	const string&		getSoundName() const	{ return _soundName; }
 };
-
-#endif

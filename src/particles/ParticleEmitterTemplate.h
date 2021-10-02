@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEEMITTERTEMPLATE_H_
-#define _PARTICLEEMITTERTEMPLATE_H_
+#pragma once
 
 #include "ParticleEmitterParams.h"
 #include "ParticleMaterial.h"
@@ -52,5 +50,3 @@ public:
 
 	float								getEmissionRate() const			{ return _emissionRate; }
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICACTORCONTROLLER_H_
-#define _PHYSICACTORCONTROLLER_H_
+#pragma once
 
 #include "PhysicObject.h"
 
@@ -36,5 +34,3 @@ public:
 
 	float						getDistanceFromPoint(const Vector3& p, Vector3& hitPoint);
 };
-
-#endif

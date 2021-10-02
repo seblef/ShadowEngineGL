@@ -1,6 +1,5 @@
 
-#ifndef _GAMEENTITYEXPLOSIVE_H_
-#define _GAMEENTITYEXPLOSIVE_H_
+#pragma once
 
 #include "GameEntityDynamic.h"
 #include "EntityExplosive.h"
@@ -18,5 +17,3 @@ public:
 
 	void				onHit(const Hit& h);
 };
-
-#endif

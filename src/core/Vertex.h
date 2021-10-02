@@ -1,6 +1,5 @@
 
-#ifndef _VERTEX_H_
-#define _VERTEX_H_
+#pragma once
 
 #include "Vector2.h"
 #include "Vector4.h"
@@ -133,6 +132,3 @@ inline ostream& operator << (ostream& os, Vx3DSkin& v)
 }
 
 }
-
-
-#endif

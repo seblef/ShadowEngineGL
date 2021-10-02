@@ -1,6 +1,4 @@
-
-#ifndef _PR_QUAD_H_
-#define _PR_QUAD_H_
+#pragma once
 
 #include "ParticleRenderer.h"
 
@@ -23,5 +21,3 @@ class PR_Quad : public ParticleRenderer
 		void				addParticle(Particle& p, const Camera& c);
 		void				renderParticles();
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICMATERIAL_H_
-#define _PHYSICMATERIAL_H_
+#pragma once
 
 #include <PxPhysicsAPI.h>
 
@@ -26,5 +24,3 @@ public:
 
 	PxMaterial*			getMaterial() const				{ return _material; }
 };
-
-#endif

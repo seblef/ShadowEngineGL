@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLESYSTEMTEMPLATE_H_
-#define _PARTICLESYSTEMTEMPLATE_H_
+#pragma once
 
 #include "ParticleEmitterTemplate.h"
 
@@ -23,5 +21,3 @@ public:
 	unsigned int				getEmitterCount() const				{ return _emitters.size(); }
 	ParticleEmitterTemplate*	getEmitter(int n) const				{ return _emitters[n]; }
 };
-
-#endif

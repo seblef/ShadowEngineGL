@@ -1,6 +1,5 @@
 
-#ifndef _GAMESOUND_H_
-#define _GAMESOUND_H_
+#pragma once
 
 #include "TemplateSound.h"
 #include "GameObject.h"
@@ -26,5 +25,3 @@ public:
 
 	void						onUpdateMatrix(const Matrix4& world);
 };
-
-#endif

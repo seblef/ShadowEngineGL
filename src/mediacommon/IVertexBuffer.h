@@ -1,6 +1,4 @@
-
-#ifndef _IVERTEXBUFFER_H_
-#define _IVERTEXBUFFER_H_
+#pragma once
 
 #include "../Core.h"
 #include "VideoDefs.h"
@@ -29,5 +27,3 @@ public:
 	virtual void	set()=0;
 	virtual void	fill(const void* data, int count=0, int offset=0)=0;
 };
-
-#endif

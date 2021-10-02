@@ -1,5 +1,4 @@
-#ifndef _FOLLOWMACHINE_H_
-#define _FOLLOWMACHINE_H_
+#pragma once
 
 #include "AIMachine.h"
 #include "Ids.h"
@@ -24,5 +23,3 @@ public:
 			return 0xffffffff;
 	}
 };
-
-#endif

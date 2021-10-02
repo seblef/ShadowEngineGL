@@ -1,6 +1,4 @@
-
-#ifndef _PHYSIC_H_
-#define _PHYSIC_H_
+#pragma once
 
 #include "PhysicObject.h"
 #include "PhysicDynamic.h"
@@ -74,5 +72,3 @@ public:
 	void							postEvent(const PhysicEvent& e)					{ _events.add(e); }
 
 };
-
-#endif

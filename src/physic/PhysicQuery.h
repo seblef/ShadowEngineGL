@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICQUERY_H_
-#define _PHYSICQUERY_H_
+#pragma once
 
 #include "IPhysicObject.h"
 
@@ -23,5 +21,3 @@ public:
 		const Vector3& center, const Vector3& size) : _groupMask(groupMask),
 		_shape(shape), _center(center), _size(size), _objectCount(0)			{}
 };
-
-#endif

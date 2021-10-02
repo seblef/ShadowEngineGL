@@ -1,6 +1,4 @@
-
-#ifndef _ISOUNDCONE_H_
-#define _ISOUNDCONE_H_
+#pragma once
 
 class ISoundCone
 {
@@ -27,5 +25,3 @@ public:
 	virtual float			getInnerLPF() = 0;
 	virtual float			getOuterLPF() = 0;
 };
-
-#endif

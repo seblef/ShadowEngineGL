@@ -1,6 +1,5 @@
 
-#ifndef _BBOXTORECT_H_
-#define _BBOXTORECT_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -29,4 +28,3 @@ inline void computeRect(const BBox2& b, SRect& r, const Vector2& offset)
 	r.x1=(int)(floorf(b.getMin().x + offset.x));			r.x2=(int)(ceilf(b.getMax().x + offset.x));
 	r.y1=(int)(floorf(b.getMin().y + offset.y));			r.y2=(int)(ceilf(b.getMax().y + offset.y));
 }
-#endif

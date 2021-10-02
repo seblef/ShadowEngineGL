@@ -1,6 +1,4 @@
-
-#ifndef _IR2D_FRAMELOADER_H_
-#define _IR2D_FRAMELOADER_H_
+#pragma once
 
 #include "R2D_Frame.h"
 
@@ -13,5 +11,3 @@ public:
 
 	virtual R2D_Frame*				loadFrame(const string& frameFile, IVideoDevice* device)=0;
 };
-
-#endif

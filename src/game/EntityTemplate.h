@@ -1,6 +1,5 @@
 
-#ifndef _ENTITYTEMPLATE_H_
-#define _ENTITYTEMPLATE_H_
+#pragma once
 
 #include "../StdRenderer.h"
 #include "../PhysicLib.h"
@@ -43,5 +42,3 @@ public:
 
 	virtual GameEntity*		createInstance(const Matrix4& world) = 0;
 };
-
-#endif

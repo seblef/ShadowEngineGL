@@ -1,6 +1,5 @@
 
-#ifndef _DEBRIS_H_
-#define _DEBRIS_H_
+#pragma once
 
 #include "Action.h"
 #include "TemplateMesh.h"
@@ -36,5 +35,3 @@ public:
 
 	void				update(float time);
 };
-
-#endif

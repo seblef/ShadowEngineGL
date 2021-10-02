@@ -1,6 +1,5 @@
 
-#ifndef _HUDACTORVIEW_H_
-#define _HUDACTORVIEW_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -25,5 +24,3 @@ public:
 
 	void				renderHUD(Camera& c, const set<HUDActor*>& actors);
 };
-
-#endif

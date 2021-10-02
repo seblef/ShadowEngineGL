@@ -1,6 +1,5 @@
 
-#ifndef _VIEWFRUSTUM_H_
-#define _VIEWFRUSTUM_H_
+#pragma once
 
 #include "Plane.h"
 #include <assert.h>
@@ -143,5 +142,3 @@ class ViewFrustum
 };
 
 }
-
-#endif

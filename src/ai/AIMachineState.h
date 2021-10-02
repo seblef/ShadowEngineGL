@@ -1,6 +1,5 @@
 
-#ifndef _AIMACHINESTATE_H_
-#define _AIMACHINESTATE_H_
+#pragma once
 
 #include "AIEvent.h"
 
@@ -23,5 +22,3 @@ public:
 	virtual bool			onEvent(AIAgent *agent, const AIEvent& event) = 0;
 	virtual const char*		getStateName() const = 0;
 };
-
-#endif

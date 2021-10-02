@@ -1,6 +1,4 @@
-
-#ifndef _NAVPATH_H_
-#define _NAVPATH_H_
+#pragma once
 
 #include "NavCase.h"
 #include "../Core.h"
@@ -30,5 +28,3 @@ public:
 
 	void						outputPath(ofstream& ofs) const;
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _IVIEW_H_
-#define _IVIEW_H_
+#pragma once
 
 class IView
 {
@@ -21,5 +19,3 @@ public:
 	virtual void			setDepthBufferAsTexture(int slot)=0;
 
 };
-
-#endif

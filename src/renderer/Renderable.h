@@ -1,6 +1,4 @@
-
-#ifndef _RENDERABLE_H_
-#define _RENDERABLE_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -44,5 +42,3 @@ public:
 
 	virtual void			enqueue()=0;
 };
-
-#endif

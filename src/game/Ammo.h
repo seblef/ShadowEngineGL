@@ -1,6 +1,5 @@
 
-#ifndef _AMMO_H_
-#define _AMMO_H_
+#pragma once
 
 #include "Action.h"
 
@@ -15,5 +14,3 @@ public:
 
 	virtual void	onContact(IPhysicObject* other)			{}
 };
-
-#endif

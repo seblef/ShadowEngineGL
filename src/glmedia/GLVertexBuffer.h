@@ -1,5 +1,4 @@
-#ifndef GLVERTEXBUFFER_H
-#define GLVERTEXBUFFER_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -21,5 +20,3 @@ public:
     void	fill(const void* data, int count=0, int offset=0);
 
 };
-
-#endif // GLVERTEXBUFFER_H

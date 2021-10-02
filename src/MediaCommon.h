@@ -1,6 +1,4 @@
-
-#ifndef _MEDIACOMMON_H_
-#define _MEDIACOMMON_H_
+#pragma once
 
 #define SINPUT_NONE				0
 #define SINPUT_MOUSE			1
@@ -15,5 +13,3 @@
 #include "./mediacommon/ISoundSource.h"
 #include "./mediacommon/ISoundListener.h"
 #include "./mediacommon/ISoundDevice.h"
-
-#endif

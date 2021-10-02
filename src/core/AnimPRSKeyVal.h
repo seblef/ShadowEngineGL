@@ -1,6 +1,5 @@
 
-#ifndef _ANIMPRSKEYVAL_H_
-#define _ANIMPRSKEYVAL_H_
+#pragma once
 
 #include "Vector3.h"
 
@@ -52,5 +51,3 @@ public:
 };
 
 };
-
-#endif

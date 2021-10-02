@@ -1,6 +1,4 @@
-
-#ifndef _HDAO_H_
-#define _HDAO_H_
+#pragma once
 
 #include "GBuffer.h"
 
@@ -49,5 +47,3 @@ public:
 	float&				getRejectRadius()						{ return _hBuffer._rejectRadius; }
 	float&				getIntensity()							{ return _hBuffer._intensity; }
 };
-
-#endif

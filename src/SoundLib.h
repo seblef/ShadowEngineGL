@@ -1,7 +1,3 @@
-
-#ifndef _SOUNDLIB_H_
-#define _SOUNDLIB_H_
+#pragma once
 
 #include "./sound/SoundSystem.h"
-
-#endif

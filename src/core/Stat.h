@@ -1,6 +1,5 @@
 
-#ifndef _STAT_H_
-#define _STAT_H_
+#pragma once
 
 #include <ostream>
 #include <string>
@@ -48,5 +47,3 @@ inline ostream& operator << (ostream& os, const Stat<T>& s)
 }
 
 }
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _ISHADER_H_
-#define _ISHADER_H_
+#pragma once
 
 #include <string>
 
@@ -29,5 +27,3 @@ public:
 	virtual int			remRef() = 0;
 	int					getRefCount() const			{ return _refCount; }
 };
-
-#endif

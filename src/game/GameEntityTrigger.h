@@ -1,6 +1,5 @@
 
-#ifndef _GAMEENTITYTRIGGER_H_
-#define _GAMEENTITYTRIGGER_H_
+#pragma once
 
 #include "GameEntity.h"
 #include "EntityTrigger.h"
@@ -18,5 +17,3 @@ public:
 	void				update(float time);
 	void				onTrigger(GameCharacter* actor);
 };
-
-#endif

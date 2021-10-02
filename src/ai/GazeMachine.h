@@ -1,6 +1,5 @@
 
-#ifndef _GAZEMACHINE_H_
-#define _GAZEMACHINE_H_
+#pragma once
 
 #include "AIMachine.h"
 #include "Ids.h"
@@ -23,5 +22,3 @@ public:
 			return 0xffffffff;
 	}
 };
-
-#endif

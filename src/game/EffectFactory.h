@@ -1,6 +1,5 @@
 
-#ifndef _EFFECTFACTORY_H_
-#define _EFFECTFACTORY_H_
+#pragma once
 
 #include "Effect.h"
 #include "../Core.h"
@@ -15,5 +14,3 @@ public:
 
 	static Effect*					createEffect(const string& effectName, ScriptFile& sf);
 };
-
-#endif

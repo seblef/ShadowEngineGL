@@ -1,5 +1,4 @@
-#ifndef GLCONSTANTBUFFER_H
-#define GLCONSTANTBUFFER_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include "GLDefs.h"
@@ -20,5 +19,3 @@ public:
     void            set();
     void            fill(const void *data);
 };
-
-#endif // GLCONSTANTBUFFER_H

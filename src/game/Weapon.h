@@ -1,6 +1,5 @@
 
-#ifndef _WEAPON_H_
-#define _WEAPON_H_
+#pragma once
 
 #include "../StdRenderer.h"
 #include "../PhysicLib.h"
@@ -67,5 +66,3 @@ public:
 	void					emitDebris(GameMaterial* mat, const Vector3& position,
 		const Vector3& normal);
 };
-
-#endif

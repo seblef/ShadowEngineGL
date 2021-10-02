@@ -1,6 +1,4 @@
-
-#ifndef _PARTICLEPOINTEMITTER_H_
-#define _PARTICLEPOINTEMITTER_H_
+#pragma once
 
 #include "ParticleEmitter.h"
 #include "ParticlePointEmitterTemplate.h"
@@ -28,5 +26,3 @@ public:
 
 	const char*			getEmitterName() const								{ return "point"; }
 };
-
-#endif

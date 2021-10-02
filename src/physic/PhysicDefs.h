@@ -1,6 +1,4 @@
-
-#ifndef _PHYSICDEFS_H_
-#define _PHYSICDEFS_H_
+#pragma once
 
 #include "../Core.h"
 
@@ -84,6 +82,3 @@ struct PhysicActorCtrlCreate_t
 
 #define RAYCAST_ALL					(RAYCAST_SCENE | RAYCAST_ACTOR | RAYCAST_TRIGGER | RAYCAST_TRIGGER | RAYCAST_AMMO)
 #define RAYCAST_SOLID				(RAYCAST_SCENE | RAYCAST_ACTOR | RAYCAST_DYNAMIC)
-
-
-#endif

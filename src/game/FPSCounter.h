@@ -1,6 +1,5 @@
 
-#ifndef _FPSCOUNTER_H_
-#define _FPSCOUNTER_H_
+#pragma once
 
 #include "../R2D.h"
 
@@ -30,5 +29,3 @@ public:
 	void			updateCounter();
 	void			outputStats();
 };
-
-#endif

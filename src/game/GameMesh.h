@@ -1,6 +1,5 @@
 
-#ifndef _GAMEMESH_H_
-#define _GAMEMESH_H_
+#pragma once
 
 #include "TemplateMesh.h"
 #include "GameObject.h"
@@ -24,5 +23,3 @@ public:
 
 	const TemplateMesh*			getTemplate() const					{ return _template; }
 };
-
-#endif

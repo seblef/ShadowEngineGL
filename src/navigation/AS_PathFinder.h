@@ -1,6 +1,4 @@
-
-#ifndef _AS_PATHFINDER_H_
-#define _AS_PATHFINDER_H_
+#pragma once
 
 #include "AS_CellItem.h"
 #include "IPathFinder.h"
@@ -30,5 +28,3 @@ public:
 								 int targetX, int targetY,
 								 NavPath& p, const NavMap& m);
 };
-
-#endif

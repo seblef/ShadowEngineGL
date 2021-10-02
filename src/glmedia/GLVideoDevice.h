@@ -1,5 +1,4 @@
-#ifndef GLVIDEODEVICE_H
-#define GLVIDEODEVICE_H
+#pragma once
 
 #include "GLStates.h"
 
@@ -107,5 +106,3 @@ public:
         int iStartIdxLocation, int iBaseVertLocation, int iStartInstLocation) const;
     void				renderFullscreenQuad();
 };
-
-#endif // GLVIDEODEVICE_H

@@ -1,6 +1,4 @@
-
-#ifndef _LIGHTAREARENDERER_H_
-#define _LIGHTAREARENDERER_H_
+#pragma once
 
 #include "LightRenderer.h"
 #include "LightArea.h"
@@ -23,5 +21,3 @@ public:
 	LightAreaRenderer(const LightRendererCreate_t& c);
 
 };
-
-#endif

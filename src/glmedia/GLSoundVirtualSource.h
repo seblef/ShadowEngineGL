@@ -1,5 +1,4 @@
-#ifndef GLSOUNDVIRTUALSOURCE_H
-#define GLSOUNDVIRTUALSOURCE_H
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -32,5 +31,3 @@ public:
     bool				isRelative() const              { return false; }
     float				getVolume() const               { return 1.0f; }
 };
-
-#endif // GLSOUNDVIRTUALSOURCE_H

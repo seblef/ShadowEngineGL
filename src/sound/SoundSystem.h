@@ -1,6 +1,4 @@
-
-#ifndef _SOUNDSYSTEM_H_
-#define _SOUNDSYSTEM_H_
+#pragma once
 
 #include "SoundVirtualSource.h"
 //#include "SoundPlayingSource.h"
@@ -53,6 +51,3 @@ class SoundSystem : public TSingleton<SoundSystem>
 
 		ISoundDevice*			getAudio() const									{ return _device;  }
 };
-
-
-#endif

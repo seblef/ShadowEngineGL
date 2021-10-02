@@ -1,5 +1,4 @@
-#ifndef GLFRAMEBUFFER_H
-#define GLFRAMEBUFFER_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -19,5 +18,3 @@ public:
 
     void            set();
 };
-
-#endif // GLFRAMEBUFFER_H

@@ -1,6 +1,4 @@
-
-#ifndef _VISIBILITYALL_H_
-#define _VISIBILITYALL_H_
+#pragma once
 
 #include "IVisibilitySystem.h"
 #include <set>
@@ -27,5 +25,3 @@ public:
 
 	void							visibility(const ViewFrustum& vf, const SRect& bounds);
 };
-
-#endif

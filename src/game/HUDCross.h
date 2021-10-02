@@ -1,6 +1,5 @@
 
-#ifndef _HUDCROSS_H_
-#define _HUDCROSS_H_
+#pragma once
 
 #include "../R2D.h"
 
@@ -17,5 +16,3 @@ public:
 
 	void				updateCross();
 };
-
-#endif

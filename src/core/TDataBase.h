@@ -1,6 +1,5 @@
 
-#ifndef _TDATABASE_H_
-#define _TDATABASE_H_
+#pragma once
 
 #include <string>
 
@@ -59,5 +58,3 @@ public:
 };
 
 };
-
-#endif

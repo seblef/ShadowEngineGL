@@ -1,6 +1,5 @@
 
-#ifndef _ATTACKTRACK_H_
-#define _ATTACKTRACK_H_
+#pragma once
 
 #include "AIMachineState.h"
 #include "../Core.h"
@@ -22,5 +21,3 @@ public:
 
 	const char*				getStateName() const	{ return "track"; }
 };
-
-#endif

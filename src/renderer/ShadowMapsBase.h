@@ -1,6 +1,4 @@
-
-#ifndef _SHADOWMAPSBASE_H_
-#define _SHADOWMAPSBASE_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -54,5 +52,3 @@ public:
 	IShadowMap*				getShadowMap(int size);
 	IShadowMap*				getShadowMap(MapSize size, int n) const				{ return _maps[size][n]; }
 };
-
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef _SHADOWSYSTEM_H_
-#define _SHADOWSYSTEM_H_
+#pragma once
 
 #include "../Core.h"
 #include "Light.h"
@@ -45,5 +43,3 @@ public:
 
     void						getGlobalLightCamera(Camera& c) const;
 };
-
-#endif

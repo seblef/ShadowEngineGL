@@ -1,6 +1,4 @@
-
-#ifndef _SOUNDVIRTUALSOURCE_H_
-#define _SOUNDVIRTUALSOURCE_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -48,5 +46,3 @@ class SoundVirtualSource
 			_distance = (_source->getPosition() - listener).getSquareLength();
 		}
 };
-
-#endif

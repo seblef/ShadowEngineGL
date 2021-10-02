@@ -1,6 +1,4 @@
-
-#ifndef _LIGHTAREA_H_
-#define _LIGHTAREA_H_
+#pragma once
 
 #include "Light.h"
 
@@ -33,5 +31,3 @@ public:
 	void				setAreaHeight(float h)				{ _areaHeight=h; }
 	void				setNearZ(float z)					{ _nearZ=z; }
 };
-
-#endif

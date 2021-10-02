@@ -1,6 +1,4 @@
-
-#ifndef _IPHYSICOBJECT_H_
-#define _IPHYSICOBJECT_H_
+#pragma once
 
 #include "PhysicDefs.h"
 
@@ -34,5 +32,3 @@ public:
 
 	virtual float			getDistanceFromPoint(const Vector3& p, Vector3& hitPoint) = 0;
 };
-
-#endif

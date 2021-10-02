@@ -1,6 +1,4 @@
-
-#ifndef _ITEXTURE_H_
-#define _ITEXTURE_H_
+#pragma once
 
 #include "VideoDefs.h"
 #include <string>
@@ -52,5 +50,3 @@ public:
 	virtual int				remRef() = 0;
 	int						getRefCount() const			{ return _refCount; }
 };
-
-#endif

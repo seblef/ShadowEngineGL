@@ -1,5 +1,4 @@
-#ifndef GLSTATES_H
-#define GLSTATES_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -202,5 +201,3 @@ inline unsigned int GLSamplerKey(FilterMode fm, AddressMode ua, AddressMode va, 
 {
     return OFF32(fm,0) | OFF32(ua,2) | OFF32(va,6) | OFF32(wa,10);
 }
-
-#endif // GLSTATES_H

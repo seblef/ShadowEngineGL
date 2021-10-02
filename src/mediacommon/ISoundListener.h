@@ -1,6 +1,4 @@
-
-#ifndef _ISOUNDLISTENER_H_
-#define _ISOUNDLISTENER_H_
+#pragma once
 
 #include "ISoundCone.h"
 #include "../Core.h"
@@ -26,5 +24,3 @@ public:
 	virtual const Vector3&	getTopAxis() const = 0;
 	virtual ISoundCone*		getCone() const = 0;
 };
-
-#endif

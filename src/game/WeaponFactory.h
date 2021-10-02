@@ -1,6 +1,5 @@
 
-#ifndef _WEAPONFACTORY_H_
-#define _WEAPONFACTORY_H_
+#pragma once
 
 #include "Weapon.h"
 
@@ -12,5 +11,3 @@ public:
 
 	static Weapon*				loadWeapon(const string& className, ScriptFile& sf);
 };
-
-#endif

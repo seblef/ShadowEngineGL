@@ -1,6 +1,4 @@
-
-#ifndef _IINDEXBUFFER_H_
-#define _IINDEXBUFFER_H_
+#pragma once
 
 #include "VideoDefs.h"
 
@@ -26,6 +24,3 @@ public:
 	virtual void		set()=0;
 	virtual void		fill(const void* data, int count=0, int offset=0)=0;
 };
-
-
-#endif

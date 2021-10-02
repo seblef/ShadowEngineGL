@@ -1,6 +1,4 @@
-
-#ifndef _ISOUNDVIRTUALSOURCE_H_
-#define _ISOUNDVIRTUALSOURCE_H_
+#pragma once
 
 #include "ISoundCone.h"
 #include "../Core.h"
@@ -36,5 +34,3 @@ public:
 	virtual bool				isRelative() const = 0;
 	virtual float				getVolume() const = 0;
 };
-
-#endif

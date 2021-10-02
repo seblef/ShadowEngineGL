@@ -1,6 +1,5 @@
 
-#ifndef _WEAPONGUN_H_
-#define _WEAPONGUN_H_
+#pragma once
 
 #include "Weapon.h"
 #include "WeaponGunInstance.h"
@@ -21,5 +20,3 @@ public:
 
 	WeaponInstance*			createInstance(GameCharacter* c)	{ return new WeaponGunInstance(this,c); }
 };
-
-#endif

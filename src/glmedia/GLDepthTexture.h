@@ -1,5 +1,4 @@
-#ifndef GLDEPTHTEXTURE_H
-#define GLDEPTHTEXTURE_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -22,5 +21,3 @@ public:
     GLuint          getId() const                   { return _id; }
     bool            hasStencil() const              { return _stencil; }
 };
-
-#endif // GLDEPTHTEXTURE_H

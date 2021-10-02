@@ -1,6 +1,5 @@
 
-#ifndef _TRIGGERWEAPON_H_
-#define _TRIGGERWEAPON_H_
+#pragma once
 
 #include "Trigger.h"
 
@@ -17,5 +16,3 @@ public:
 
 	void				apply(GameCharacter* actor, GameEntityTrigger* entity);
 };
-
-#endif

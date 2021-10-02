@@ -1,6 +1,4 @@
-
-#ifndef _MATERIALTEXTUREANIMATION_H_
-#define _MATERIALTEXTUREANIMATION_H_
+#pragma once
 
 #include "MaterialAnimation.h"
 #include "MaterialCreate.h"
@@ -43,5 +41,3 @@ public:
 	void			setTileCount(int tc)				{ _tileCount=tc; }
 	void			setAnimTime(float at)				{ _animTime=at; }
 };
-
-#endif

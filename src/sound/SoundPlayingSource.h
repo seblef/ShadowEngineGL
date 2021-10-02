@@ -1,6 +1,4 @@
-
-#ifndef _SOUNDPLAYINGSOURCE_H_
-#define _SOUNDPLAYINGSOURCE_H_
+#pragma once
 
 #include "../MediaCommon.h"
 
@@ -27,5 +25,3 @@ public:
 	ISoundSource*			getActualSource() const								{ return _actualSource; }
 	bool					isStopped() const									{ return _stopped; }
 };	
-
-#endif

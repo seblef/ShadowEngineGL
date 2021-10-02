@@ -1,6 +1,4 @@
-
-#ifndef _R2D_IMAGE_H_
-#define _R2D_IMAGE_H_
+#pragma once
 
 #include "R2D_Object.h"
 
@@ -35,6 +33,3 @@ class R2D_Image : public R2D_Object
 		const Vector2&			getUVStart() const						{ return _uvStart; }
 		const Vector2&			getUVSize() const						{ return _uvSize; }
 };
-
-
-#endif

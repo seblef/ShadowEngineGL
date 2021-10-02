@@ -1,5 +1,4 @@
-#ifndef MEDIA_H
-#define MEDIA_H
+#pragma once
 
 #include "../MediaCommon.h"
 #include <GL/glew.h>
@@ -31,5 +30,3 @@ public:
     void                update();
 
 };
-
-#endif // MEDIA_H

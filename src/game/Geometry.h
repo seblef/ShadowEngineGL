@@ -1,6 +1,5 @@
 
-#ifndef _GEOMETRY_H_
-#define _GEOMETRY_H_
+#pragma once
 
 #include "../StdRenderer.h"
 
@@ -56,5 +55,3 @@ public:
 	void				outputVertices() const;
 	void				outputTriangles() const;
 };
-
-#endif
