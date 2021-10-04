@@ -45,7 +45,8 @@ deadActorStayOnMap		1.0
 
 //			Rendering			//
 
-HDR_exposure				0.5
+HDR_exposure				1.2
+HDR_gamma                   0.5
 HDR_brightness_threshold	0.5
 
 HDAO_enable					false

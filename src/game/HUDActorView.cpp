@@ -24,7 +24,7 @@ HUDActorView::HUDActorView(IVideoDevice *device) : _device(device),
 		BU_DYNAMIC);
 	_blendState = device->createBlendState(true, BLEND_SRCALPHA, BLEND_INVSRCALPHA);
 	_renderState = device->createRenderState(CULL_NONE);
-	_dsState = device->createDepthStencilState(true, false, COMP_LESSEQUAL);
+	_dsState = device->createDepthStencilState(false, false, COMP_LESSEQUAL);
 }
 
 HUDActorView::~HUDActorView()

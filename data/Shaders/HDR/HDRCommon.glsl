@@ -6,12 +6,9 @@
 
 layout(std140, binding=4)	uniform		BrightInfos
 {
-	vec2		invBloomTex;
-	vec2		greyScaleUV;
-	float		brightThreshold;
-	float		exposure;
-	float		gaussianScalar;
-	float		brightBack;
+	float gamma;
+	float exposure;
+	vec2 f2pack;
 };
 
 
