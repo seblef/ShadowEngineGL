@@ -10,7 +10,6 @@ out	vec2		v_uv;
 void main(void)
 {
 	gl_Position=viewProj * vec4(pos,1);
-	gl_Position.y=1.0f-gl_Position.y;
 	v_uv=uv;
 	v_color=color;
 }

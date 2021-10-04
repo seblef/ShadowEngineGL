@@ -60,6 +60,6 @@ void main(void)
 	lspec=lfact * specVal + cspec;
 
 	cfinal=((ldiffuse + ambientLight.rgb) * color.rgb) * occlusion;
-	f_color=vec4(cfinal,1);
+	f_color = vec4(cfinal, 1);
 }
 

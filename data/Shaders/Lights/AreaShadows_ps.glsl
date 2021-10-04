@@ -1,4 +1,7 @@
 #version 420 core
+
+layout(origin_upper_left) in vec4 gl_FragCoord;
+
 #include "SceneInfos.glsl"
 #include "Lights/LightCommon.glsl"
 #include "Lights/LightInfos.glsl"
@@ -16,6 +19,7 @@ void main(void)
 	vec4 f_pos, normalFull, posInLightSpace, areaFact;
 
 	uv_coord=(gl_FragCoord.xy - vec2(0.5f,0.5f)) * invScreenSize;
+	uv_coord.y = 1.0f - uv_coord.y;
 	depth=texture( tDepth, uv_coord ).r;
 
 	getWorldPosition(vec3(uv_coord,depth),f_pos);

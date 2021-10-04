@@ -12,7 +12,7 @@
 ShadowSystem::ShadowSystem(IVideoDevice* device) : _device(device), _base(device), _global(0)
 {
 	_dsState=device->createDepthStencilState(true,true,COMP_LESSEQUAL);
-	_renderState=device->createRenderState(CULL_FRONT);
+	_renderState=device->createRenderState(CULL_BACK);
 	_blendState=device->createBlendState(false,BLEND_ONE,BLEND_ONE);
 }
 
@@ -82,9 +82,8 @@ void ShadowSystem::render(IShadowMap* m, Camera& c) const
 void ShadowSystem::getGlobalLightCamera(Camera& c) const
 {
     const SRect& r(Renderer::getSingletonRef().getVisibilityBounds());
-//    SRect r(-5,-5,5,5);
 
-    Matrix4 w;
+    Matrix4 w(Matrix4::Identity);
     Light::computeMatrix(((const Vector3&)_global->getDirection()),w);
 
 	c.setCameraType(CT_ORTHO);

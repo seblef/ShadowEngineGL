@@ -82,4 +82,7 @@ public:
     void				process(GBuffer* gbuf);
 
     void				onResize(int w, int h, IDepthTexture* depthBuffer);
+
+	const ITexture*		getLuminanceTex(const unsigned int idx) const { return _luminanceTex[idx]; }
+	const ITexture*		getPostProcessTex(const unsigned int idx) const { return _postTex[idx]; }
 };

@@ -57,7 +57,13 @@ void LightAreaRenderer::fillBufferAndGetMatrix(LightBuffer_t& b, const Light* l,
 	world*=mw;
 	world=pos;
 
-	Camera cam(pos,pos + l->getDirection(),dist,range,Vector2(s->getAreaWidth()*0.5f,s->getAreaHeight()*0.5f),s->getFarAngle());
+	Camera cam(
+		pos,
+		pos + l->getDirection(),
+		dist, range,
+		Vector2(s->getAreaWidth()*0.5f,s->getAreaHeight()*0.5f),
+		s->getFarAngle(),
+		false);
 	cam.setUpVector(up);
 	cam.buildMatrices();
 	b._areaViewProj=cam.getViewProjMatrix();

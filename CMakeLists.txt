@@ -126,6 +126,7 @@ set(RENDERER_SOURCES
     src/renderer/ActorInstance.cpp
     src/renderer/ActorRenderer.cpp
     src/renderer/ActorSkinnedRenderer.cpp
+    src/renderer/BufferView.cpp
     src/renderer/GBuffer.cpp
     src/renderer/GeometryData.cpp
     src/renderer/GroundData.cpp

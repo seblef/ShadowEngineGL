@@ -6,7 +6,7 @@ out	vec2		v_uv;
 
 void main(void)
 {
-	v_uv=uv;
+	v_uv = uv;
 	gl_Position=vec4(pos,1);
 }
 

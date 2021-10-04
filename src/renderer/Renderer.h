@@ -5,10 +5,21 @@
 #include "SceneInfosBuffer.h"
 #include "GBuffer.h"
 #include "IVisibilitySystem.h"
+#include "BufferView.h"
 
 class Renderer : public TSingleton<Renderer>
 {
 protected:
+
+	enum BufferViewFlag {
+		BVF_NONE = 0,
+		BVF_GBUFFER = 1,
+		BVF_ACCUMULATION = 2,
+		BVF_GLOBALSHADOWMAP = 4,
+		BVF_LOCALSHADOWMAP = 8,
+		BVF_HDR = 16,
+		BVF_HDAO = 32
+	};
 
 	IVideoDevice*		_device;
 	IConstantBuffer*	_sceneInfosCS;
@@ -19,6 +30,8 @@ protected:
 
 	SceneInfosBuffer	_sceneInfos;
 	GBuffer				_GBuffer;
+	BufferView			_bufferView;
+	int					_bvFlags;
 
 	GroundData*			_g_data;
 
@@ -31,6 +44,8 @@ protected:
 	void				computeVisBounds(const ViewFrustum& vf, int w, int h);
 	void				visibility(const Camera& c);
 	void				renderPass(bool add);
+	void 				parseBufferViewFlags(Config& cfg);
+	void				renderBufferViews();
 
 public:
 
@@ -50,6 +65,7 @@ public:
 	Camera				*getCurrentCamera() const										{ return _currentCamera; }
 
 	void				setObjectTransformation(const Matrix4& trans) const				{ _objectInfosCS->fill((const void*)&trans); }
+	void				setSceneInfos() const;
 
 	void				addRenderable(Renderable* r);
 	void				remRenderable(Renderable* r);

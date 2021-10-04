@@ -44,4 +44,6 @@ public:
 	void					onResize(int w, int h);
 
     IDepthTexture*          getDepthBuffer() const          { return _depthRT; }
+	ITexture*				getDiffuseTex() const { return _diffuseRT; }
+	ITexture*				getNormalTex() const { return _normalRT; }
 };

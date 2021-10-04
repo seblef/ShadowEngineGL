@@ -19,6 +19,8 @@ class Camera
 {
 protected:
 
+	bool _isLH;
+
 	Vector3				_pos;
 	Vector3				_target;
 	Vector2				_center;
@@ -42,7 +44,14 @@ protected:
 public:
 
 	Camera();
-	Camera(const Vector3& pos, const Vector3& target, float zmin, float zmax, const Vector2& center, float fov);
+	Camera(
+		const Vector3& pos,
+		const Vector3& target,
+		float zmin, float zmax,
+		const Vector2& center,
+		float fov,
+		bool isLH=true
+	);
 
 	void				center(const BBox3& bBox);
 
