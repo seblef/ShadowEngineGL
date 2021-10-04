@@ -2,8 +2,16 @@
 #include "R2D_Renderer.h"
 
 
-R2D_Renderer::R2D_Renderer(R2D_Object::Type type, bool relativePos, ITexture* white, IVideoDevice* device) :
-	_whiteTexture(white), _device(device), _scale(2,2)
+R2D_Renderer::R2D_Renderer(
+	R2D_Object::Type type,
+	bool relativePos,
+	ITexture* white,
+	IVideoDevice* device
+) :
+	_whiteTexture(white),
+	_device(device),
+	_scale(2,2),
+	_relativePosition(relativePos)
 {
 	_whiteTexture->addRef();
 	if(!_relativePosition)

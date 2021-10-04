@@ -20,7 +20,12 @@
 
 extern Light*   g_ShadowLight;
 
-Renderer::Renderer(IVideoDevice *device, Config& cfg) : _device(device), _GBuffer(device), _currentCamera(0)
+Renderer::Renderer(IVideoDevice *device, Config& cfg) :
+	_device(device),
+	_GBuffer(device),
+	_bufferView(device, 6),
+	_currentCamera(0),
+	_bvFlags(BVF_NONE)
 {
 	new UpdateSystem;
 	new GroundRenderer(device);
@@ -47,6 +52,8 @@ Renderer::Renderer(IVideoDevice *device, Config& cfg) : _device(device), _GBuffe
 	_dsSolidAdd = device->createDepthStencilState(true, false, COMP_EQUAL2);
 
 	_bsAdd = device->createBlendState(true, BLEND_ONE, BLEND_ONE);
+
+	parseBufferViewFlags(cfg);
 }
 
 Renderer::~Renderer()
@@ -195,10 +202,11 @@ void Renderer::update(float time, Camera *c)
 
 //    _GBuffer.copyTexture(HDR::getSingletonRef().getAccumulationBuffer());
     _device->resetRenderTargets();
-//    _GBuffer.copyNormal();
+ 	// _GBuffer.copyDiffuse();
 //    if(g_ShadowLight && g_ShadowLight->getShadowMap())
 //        _GBuffer.copyShadowMap(g_ShadowLight->getShadowMap());
 
+	renderBufferViews();
     ShadowSystem::getSingletonRef().endRender();
 }
 
@@ -293,6 +301,11 @@ void Renderer::computeVisBounds(const ViewFrustum& vf, int w, int h)
 	_visBounds.y2=smin(((int)ceilf(_ymax))+1,h-1);
 }
 
+void Renderer::setSceneInfos() const
+{
+	_sceneInfosCS->set();
+}
+
 void Renderer::addRenderable(Renderable* r)
 {
 	if(r->isAlwaysVisible())
@@ -320,4 +333,61 @@ void Renderer::onResize(int w, int h)
 	_GBuffer.onResize(w, h);
 	HDAO::getSingletonRef().onResize(w, h);
     HDR::getSingletonRef().onResize(w, h, _GBuffer.getDepthBuffer());
+}
+
+void Renderer::parseBufferViewFlags(Config& cfg)
+{
+	const map<string, Renderer::BufferViewFlag> flagsMap = {
+		{"gbuffer", BVF_GBUFFER},
+		{"accumulation", BVF_ACCUMULATION},
+		{"gshadow", BVF_GLOBALSHADOWMAP},
+		{"lshadow", BVF_LOCALSHADOWMAP},
+		{"hdr", BVF_HDR},
+		{"hdao", BVF_HDAO}
+	};
+
+	string views;
+	cfg.getVar("buffer_views", views);
+
+	for(auto const& flag : flagsMap)
+	{
+		if(views.find(flag.first) != string::npos)
+			_bvFlags |= flag.second;
+	}
+}
+
+void Renderer::renderBufferViews()
+{
+	if(_bvFlags == BVF_NONE)
+		return;
+
+	if(_bvFlags & BVF_GBUFFER)
+	{
+		_bufferView.addTexture(_GBuffer.getDiffuseTex());
+		_bufferView.addTexture(_GBuffer.getNormalTex());
+		_bufferView.addDepth(_GBuffer.getDepthBuffer());
+	}
+
+	if(_bvFlags & BVF_ACCUMULATION)
+		_bufferView.addTexture(HDR::getSingletonRef().getAccumulationBuffer());
+	
+	if(_bvFlags & BVF_GLOBALSHADOWMAP)
+		_bufferView.addShadow(ShadowSystem::getSingletonRef().getGlobalLight()->getShadowMap());
+
+	if(_bvFlags & BVF_LOCALSHADOWMAP)
+	{
+		for(int i=0;i<ShadowSystem::getSingletonRef().getNumLights();++i)
+			_bufferView.addShadow(ShadowSystem::getSingletonRef().getLight(i)->getShadowMap());
+	}
+
+	if(_bvFlags & BVF_HDR)
+	{
+		for(unsigned int i=0; i<HDR::HDRT_COUNT; ++i)
+			_bufferView.addTexture(HDR::getSingletonRef().getPostProcessTex(i));
+
+		for(unsigned int i=0;i < LUMINANCE_COUNT;++i)
+			_bufferView.addTexture(HDR::getSingletonRef().getLuminanceTex(i));
+	}
+
+	_bufferView.render();
 }

@@ -160,8 +160,8 @@ public:
 
 const GLenum    g_GLCullConvers[CULL_COUNT]={
     0,
-    GL_BACK,
-    GL_FRONT
+    GL_FRONT,
+    GL_BACK
 };
 
 const GLenum    g_GLFillConvers[FILL_COUNT]={

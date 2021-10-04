@@ -43,15 +43,16 @@ void HUDCross::updateCross()
 
 	if (pos2D.z > 0)
 	{
-		crossPos.x = (pos2D.x + 1.0f) * cam.getCenter().x;
-		crossPos.y = (1.0f - pos2D.y) * cam.getCenter().y;
+		crossPos.x = (pos2D.x + 1.0f) * 0.5f;
+		crossPos.y = (1.0f - pos2D.y) * 0.5f;
 	}
 	else
 	{
 		crossPos.x = crossPos.y = -100.0f;
 	}
 
-	crossSize.x = crossSize.y = SystemValues::getSingletonRef().getCrossSize();
+	crossSize.x = SystemValues::getSingletonRef().getCrossSize() / cam.getCenter().x;
+	crossSize.y = SystemValues::getSingletonRef().getCrossSize() / cam.getCenter().y;
 	crossPos -= crossSize*0.5f;
 
 	_cross->setPosition(crossPos);

@@ -1,12 +1,13 @@
 
 #include "HUDActorView.h"
 #include "HUDActor.h"
+#include "../StdRenderer.h"
 
 #define HUDACTORVIEW_MAX_VERTICES				384
 
 static const float		HUDActorPositionOffset = 0.25f;
-static const float		HUDActorLifeRectWidth = 0.25f;
-static const float		HUDActorLifeRectHeight = 0.05f;
+static const float		HUDActorLifeRectWidth = 0.5f;
+static const float		HUDActorLifeRectHeight = 0.1f;
 static const float		HUDActorLifeRectAlpha = 0.6f;
 
 static const Color		HUDActorYellowColor = Color(0.0f, 1.0f, 1.0f, HUDActorLifeRectAlpha);
@@ -38,6 +39,11 @@ HUDActorView::~HUDActorView()
 
 void HUDActorView::renderHUD(Camera& c, const set<HUDActor*>& actors)
 {
+	if(actors.empty())
+		return;
+
+	Renderer::getSingletonRef().setSceneInfos();
+
 	Vector3 xAxis(c.getXAxis());
 	Vector3 yAxis(c.getYAxis());
 
@@ -50,11 +56,8 @@ void HUDActorView::renderHUD(Camera& c, const set<HUDActor*>& actors)
 	Vector3 xsize;
 	float lifeRatio;
 
-	set<HUDActor*>::const_iterator a(actors.begin());
-	const HUDActor* actor;
-	for (; a != actors.end(); ++a)
+	for (auto const& actor: actors)
 	{
-		actor = *a;
 		lifeRatio = actor->getCurrentLife() / actor->getMaxLife();
 		pos = actor->getPosition();
 		pos.y += actor->getActorHeight() + HUDActorPositionOffset;

@@ -7,5 +7,3 @@ void main(void)
 {
 	gl_Position=viewProj * (worldMat * vec4(pos,1));
 }
-
-

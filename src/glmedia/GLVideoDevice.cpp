@@ -35,12 +35,13 @@ GLVideoDevice::GLVideoDevice(int width, int height, bool windowed, GLFWwindow* w
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
+    glFrontFace(GL_CW);
 
     Vx2D v[4]={
-        Vx2D(Vector3(-1.0f,-1.0f,0.5f),	Color::White, Vector2(0.0f,1.0f)),
-        Vx2D(Vector3( 1.0f,-1.0f,0.5f), Color::White, Vector2(1.0f,1.0f)),
-        Vx2D(Vector3( 1.0f, 1.0f,0.5f), Color::White, Vector2(1.0f,0.0f)),
-        Vx2D(Vector3(-1.0f, 1.0f,0.5f), Color::White, Vector2(0.0f,0.0f)) };
+        Vx2D(Vector3(-1.0f,-1.0f,0.5f),	Color::White, Vector2(0.0f,0.0f)),
+        Vx2D(Vector3( 1.0f,-1.0f,0.5f), Color::White, Vector2(1.0f,0.0f)),
+        Vx2D(Vector3( 1.0f, 1.0f,0.5f), Color::White, Vector2(1.0f,1.0f)),
+        Vx2D(Vector3(-1.0f, 1.0f,0.5f), Color::White, Vector2(0.0f,1.0f)) };
     unsigned short ind[6]={0, 1, 2, 0, 2, 3};
 
     _FSGeo=createGeometryBuffer(4,VX_2D,v,6,IDX_16BITS,ind,BU_IMMUTABLE);

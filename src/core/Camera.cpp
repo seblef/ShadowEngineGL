@@ -4,14 +4,28 @@
 using namespace Core;
 
 Camera::Camera() : _pos(Vector3::NullVector), _target(Vector3::ZAxisVector), _center(Vector2::NullVector), _up(Vector3::YAxisVector),
-    _ZMin(1.0f), _ZMax(1000.0f), _fov(45.0f), _type(CT_PERSPECTIVE), _zoom(1.0f)
+    _ZMin(1.0f), _ZMax(1000.0f), _fov(45.0f), _type(CT_PERSPECTIVE), _zoom(1.0f), _isLH(true)
 
 {
 }
 
-Camera::Camera(const Vector3& vPos, const Vector3& vTarget, float fZMin, float fZMax, const Vector2& vCenter, float fFOV) :
-    _pos(vPos), _target(vTarget), _center(vCenter), _up(Vector3::YAxisVector), _ZMin(fZMin), _ZMax(fZMax), _fov(fFOV),
-                    _type(CT_PERSPECTIVE), _zoom(1.0f)
+Camera::Camera(
+	const Vector3& vPos,
+	const Vector3& vTarget,
+	float fZMin, float fZMax,
+	const Vector2& vCenter,
+	float fFOV,
+	bool isLH
+) :
+    _pos(vPos),
+	_target(vTarget),
+	_center(vCenter),
+	_up(Vector3::YAxisVector),
+	_ZMin(fZMin), _ZMax(fZMax),
+	_fov(fFOV),
+	_isLH(isLH),
+	_type(CT_PERSPECTIVE),
+	_zoom(1.0f)
 {
 }
 
@@ -30,11 +44,19 @@ void Camera::center(const BBox3& bBox)
 
 void Camera::buildMatrices()
 {
-    _viewMatrix.lookAtLH(_pos,_target,_up);
+	if(_isLH)
+	    _viewMatrix.lookAtLH(_pos,_target,_up);
+	else
+    	_viewMatrix.lookAtRH(_pos,_target,_up);
 	_viewMatrix.inverse(_invViewMatrix);
 
 	if(_type==CT_PERSPECTIVE)
-        _projMatrix.perspectiveFOVLH(_fov*M_PI/180.0f,_center.x / _center.y,_ZMin,_ZMax);
+	{
+		if(_isLH)
+        	_projMatrix.perspectiveFOVLH(_fov*M_PI/180.0f,_center.x / _center.y,_ZMin,_ZMax);
+		else
+        	_projMatrix.perspectiveFOVRH(_fov*M_PI/180.0f,_center.x / _center.y,_ZMin,_ZMax);
+	}
 	else
 	{
 		float h=2.0f * _center.y / _zoom;

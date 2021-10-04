@@ -33,11 +33,13 @@ public:
 	~ShadowSystem();
 
 	void						setGlobalLight(LightGlobal* g)	{ _global=g; }
+	LightGlobal*				getGlobalLight() const { return _global; }
 
 	void						enqueueLight(Light *l)			{ _lights.push_back(l); }
 	void						renderShadowMaps();
 	void						endRender();
 
+	unsigned int 				getNumLights() const											{ return _lights.size(); }
 	Light*						getLight(int n)													{ return _lights[n]; }
 	IShadowMap*					getShadowMap(ShadowMapsBase::MapSize size, int num) const		{ return _base.getShadowMap(size,num); }
 

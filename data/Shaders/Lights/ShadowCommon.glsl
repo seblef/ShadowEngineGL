@@ -45,7 +45,7 @@ void	getShadowFactPoisson(in vec4 point, out float s)
 {
 	float bias=0.005f;
 	vec4 lightRefPos=lightViewProj * point;
-//	lightRefPos.z-=bias;
+	lightRefPos.z-=bias;
 	lightRefPos/=lightRefPos.w;
 
 	vec2 shadowUV=0.5f * lightRefPos.xy + vec2(0.5f,0.5f);
