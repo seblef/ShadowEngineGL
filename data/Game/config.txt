@@ -10,7 +10,7 @@ resHeight				1080
 
 multithread				true
 
-//buffer_views            gbuffer:accumulation:lshadow:gshadow
+buffer_views            gbuffer
 //buffer_views            hdr
 
 map					Maps/SciFy.txt
