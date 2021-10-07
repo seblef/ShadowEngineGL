@@ -11,7 +11,7 @@ resHeight				1080
 multithread				true
 
 //buffer_views            gbuffer:accumulation:lshadow:gshadow
-buffer_views            hdr
+//buffer_views            hdr
 
 map					Maps/SciFy.txt
 player					player
@@ -48,6 +48,8 @@ deadActorStayOnMap		1.0
 HDR_exposure				1.2
 HDR_gamma                   0.5
 HDR_brightness_threshold	0.5
+HDR_bloom_radius            1.0
+HDR_bloom_strength          0.8
 
 HDAO_enable					false
 HDR_enable					true

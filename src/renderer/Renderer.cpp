@@ -373,14 +373,11 @@ void Renderer::renderBufferViews()
 			_bufferView.addShadow(ShadowSystem::getSingletonRef().getLight(i)->getShadowMap());
 	}
 
-	// if(_bvFlags & BVF_HDR)
-	// {
-	// 	for(unsigned int i=0; i<HDR::HDRT_COUNT; ++i)
-	// 		_bufferView.addTexture(HDR::getSingletonRef().getPostProcessTex(i));
-
-	// 	for(unsigned int i=0;i < LUMINANCE_COUNT;++i)
-	// 		_bufferView.addTexture(HDR::getSingletonRef().getLuminanceTex(i));
-	// }
+	if(_bvFlags & BVF_HDR)
+	{
+		for(unsigned int i=0;i<BLOOM_NUM_MIPS;++i)
+			_bufferView.addTexture(HDR::getSingletonRef().getBloomDownScale(i));
+	}
 
 	_bufferView.render();
 }

@@ -4,15 +4,22 @@
 #include "GBuffer.h"
 
 
+#define BLOOM_NUM_MIPS			5
+
+
 class HDR : public TSingleton<HDR>
 {
 protected:
 
 	struct HDRBuffer
 	{
+		Vector2 invScreenSize;
 		float gamma;
 		float exposure;
-		Vector2 f2pack;
+		float brightnessThreshold;
+		float radius;
+		float strength;
+		float fpack;
 	};
 
 	bool				_enable;
@@ -27,13 +34,22 @@ protected:
 	ITexture*			_HDRBackBuffer;
     IFrameBuffer*       _HDRBackFB;
 
+	ITexture*			_bloomSamples[BLOOM_NUM_MIPS];
+	IFrameBuffer*		_bloomSamplesFB[BLOOM_NUM_MIPS];
+	IShader* _bloomBright;
+	IShader* _bloomDS;
+	IShader* _bloomUS;
+
 	IConstantBuffer*	_cBuffer;
 	SamplerState		_pointSampler;
 	SamplerState		_linearSampler;
 	DepthStencilState	_depthState;
 	BlendState			_blendState;
+	BlendState _addBlendState;
 
 	HDRBuffer			_hdrBuffer;
+
+	void bloomPass();
 
 public:
 
@@ -47,4 +63,6 @@ public:
     void				process(GBuffer* gbuf);
 
     void				onResize(int w, int h, IDepthTexture* depthBuffer);
+
+	const ITexture* getBloomDownScale(unsigned int idx) const { return _bloomSamples[idx]; }
 };
