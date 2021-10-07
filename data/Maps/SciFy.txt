@@ -121,7 +121,7 @@ material Floor std
 	spec_intens 4
 
 	tex diffuse Textures/SciFy/FloorD.dds
-	tex normal Textures/SciFy/FloorN.dds
+	tex normal Textures/SciFy/FloorN.bmp
 
 	tex environment Textures/SciFy/Environment.dds
 

@@ -23,13 +23,7 @@ void main(void)
 	shine=(tex.a * 255.0f + matShininess.x) * 0.5f;
 	
 	normal=normalize((texture( tNormal, v_texBase).rgb - 0.5f) * 2.0f);
-	normal=vec3(0,0,1);
-/*	normal-=1.0f;
-	normal*=100.0f;*/
-	
-
-	normal= v_tangent * normal;
-//	normal=v_normal;
+	normal= normalize(v_tangent * normal);
 
 	f_color[0]=vec4(col.rgb, shine / 255.0f);
 	f_color[1]=vec4(normal* 0.5f + 0.5f, matShininess.y * 0.1f);
