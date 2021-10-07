@@ -186,8 +186,6 @@ void Renderer::update(float time, Camera *c)
 	ActorRenderer::getSingletonRef().endRender();
 	ActorSkinnedRenderer::getSingletonRef().endRender();
 
-//    _device->resetRenderTargets();
-    HDR::getSingletonRef().setBackBuffer();
 #ifdef RENDERER_DEBUG
     LOG_S(2) << "- Renderer::rendering particles...";
 #endif
@@ -199,12 +197,7 @@ void Renderer::update(float time, Camera *c)
 #endif
 
     HDR::getSingletonRef().process(&_GBuffer);
-
-//    _GBuffer.copyTexture(HDR::getSingletonRef().getAccumulationBuffer());
     _device->resetRenderTargets();
- 	// _GBuffer.copyDiffuse();
-//    if(g_ShadowLight && g_ShadowLight->getShadowMap())
-//        _GBuffer.copyShadowMap(g_ShadowLight->getShadowMap());
 
 	renderBufferViews();
     ShadowSystem::getSingletonRef().endRender();
@@ -382,11 +375,8 @@ void Renderer::renderBufferViews()
 
 	if(_bvFlags & BVF_HDR)
 	{
-		for(unsigned int i=0; i<HDR::HDRT_COUNT; ++i)
-			_bufferView.addTexture(HDR::getSingletonRef().getPostProcessTex(i));
-
-		for(unsigned int i=0;i < LUMINANCE_COUNT;++i)
-			_bufferView.addTexture(HDR::getSingletonRef().getLuminanceTex(i));
+		for(unsigned int i=0;i<BLOOM_NUM_MIPS;++i)
+			_bufferView.addTexture(HDR::getSingletonRef().getBloomDownScale(i));
 	}
 
 	_bufferView.render();

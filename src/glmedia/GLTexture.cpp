@@ -13,7 +13,8 @@ GLint   g_TexInternalFormat[TEXF_COUNT]={
     GL_RG32F,
     GL_RG16F,
     GL_RGBA16F,
-    GL_RGBA32F
+    GL_RGBA32F,
+    GL_R11F_G11F_B10F
 };
 
 GLint   g_TexFormat[TEXF_COUNT]={
@@ -24,7 +25,8 @@ GLint   g_TexFormat[TEXF_COUNT]={
     GL_RG,
     GL_RG,
     GL_RGBA,
-    GL_RGBA
+    GL_RGBA,
+    GL_RGB
 };
 
 GLenum  g_TexType[TEXF_COUNT]={
@@ -35,7 +37,8 @@ GLenum  g_TexType[TEXF_COUNT]={
     GL_FLOAT,
     GL_HALF_FLOAT,
     GL_HALF_FLOAT,
-    GL_FLOAT
+    GL_FLOAT,
+    GL_HALF_FLOAT
 };
 
 const int g_TexelBytes[TEXF_COUNT]={
@@ -45,7 +48,8 @@ const int g_TexelBytes[TEXF_COUNT]={
     8,
     4,
     8,
-    16
+    16,
+    4
 };
 
 GLTexture::TextureDB GLTexture::_db;
