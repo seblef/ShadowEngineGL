@@ -23,6 +23,6 @@ void main(void)
 	r=reflect(I,normal);
 
 	env=texture( tEnvironment, r.xy);
-	f_color=emissive + env * matShininess.z;
+	f_color=emissive + env * matReflectivity;
 }
 

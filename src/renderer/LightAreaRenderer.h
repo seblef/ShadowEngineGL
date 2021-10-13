@@ -7,13 +7,7 @@ class LightAreaRenderer : public LightRenderer
 {
 protected:
 
-	bool				isCameraInVolume(const Vector3& c, const Vector3& p, const Light *l) const
-	{
-		float d=(p-c).getSquareLength();
-		float r=l->getRange();
-		return d < r*r*5.0f;
-	}
-
+	bool				isCameraInVolume(const Vector3& eyePos, float minZ, const Vector3& p, const Light *l) const;
 	void				fillBufferAndGetMatrix(LightBuffer_t& b, const Light* l, Matrix4& world) const;
 
 public:

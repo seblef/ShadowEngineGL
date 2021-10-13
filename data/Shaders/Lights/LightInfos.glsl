@@ -14,10 +14,10 @@ layout(std140, binding=2)	uniform		LightInfos
 	mat4		areaViewProj;
 };
 
-void	getRangeFact(in float dist, out float r)
+float getRangeAttenuation(float dist)
 {
-	r=max (lightRange - dist, 0.0f) * invRange;
-	r= r * r * (3.0f - 2.0f * r);
+	float r = max(lightRange - dist, 0.0f) * invRange;
+	return r * r * (3.0f - 2.0f * r);
 }
 
 #endif

@@ -143,6 +143,7 @@ set(RENDERER_SOURCES
     src/renderer/LightSystem.cpp
     src/renderer/Material.cpp
     src/renderer/MaterialAnimationFactory.cpp
+    src/renderer/MaterialStdBuffer.cpp
     src/renderer/MaterialSystem.cpp
     src/renderer/MaterialTextureAnimation.cpp
     src/renderer/MeshInstance.cpp

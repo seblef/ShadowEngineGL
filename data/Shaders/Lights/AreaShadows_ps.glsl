@@ -1,7 +1,5 @@
 #version 420 core
 
-layout(origin_upper_left) in vec4 gl_FragCoord;
-
 #include "SceneInfos.glsl"
 #include "Lights/LightCommon.glsl"
 #include "Lights/LightInfos.glsl"
@@ -11,56 +9,56 @@ out	vec4	f_color;
 
 void main(void)
 {
-	float depth, dist, dotDirPointToLight, diffuseFact, shadowFact;
-	float spec, specInt, atten, specVal, specLum;
-	float finalFact=1.0f;
-	vec2 uv_coord;
-	vec3 pointToLight, f_norm, diffuse;
-	vec4 f_pos, normalFull, posInLightSpace, areaFact;
+	vec2 uv = (gl_FragCoord.xy - vec2(0.5f,0.5f)) * invScreenSize;
+	float depth = texture(tDepth, uv).r;
 
-	uv_coord=(gl_FragCoord.xy - vec2(0.5f,0.5f)) * invScreenSize;
-	uv_coord.y = 1.0f - uv_coord.y;
-	depth=texture( tDepth, uv_coord ).r;
-
-	getWorldPosition(vec3(uv_coord,depth),f_pos);
-
-	pointToLight=lightPos.xyz - f_pos.xyz;
-	dist=length(pointToLight);
+	vec4 point = getWorldPosition(vec3(uv, depth));
+	vec3 pointToLight = lightPos.xyz - point.xyz;
+	float dist = length(pointToLight);
 	pointToLight/=dist;
 
-	posInLightSpace=areaViewProj * f_pos;
-	posInLightSpace.xyz/=posInLightSpace.w;
+	vec4 posInLightSpace = areaViewProj * point;
+	posInLightSpace.xyz /= posInLightSpace.w;
 
+	// If point is out of projected light, exit
 	if(posInLightSpace.x < -1.0f || posInLightSpace.x > 1.0f ||
 		posInLightSpace.y < -1.0f || posInLightSpace.y > 1.0f || 
 		posInLightSpace.z < 0.0f || posInLightSpace.z > 1.0f)
 		discard;
 
-	// x=left border; y=bottom border;	z=right border;	w=top border
-	areaFact.xy=posInLightSpace.xy + 1.0f;
-	areaFact.zw=1.0f - posInLightSpace.xy;
-	areaFact=clamp(areaFact * nearAngle, 0.0f, 1.0f);
-	finalFact=areaFact.x * areaFact.y * areaFact.z * areaFact.w;
+	vec4 normalData = texture(tNormal, uv);
+	vec3 normal = normalData.xyz * 2.0f - 1.0f;
 
-	normalFull=texture( tNormal, uv_coord);
-	f_norm=normalFull.xyz * 2.0f - 1.0f;
-
-	diffuseFact=dot(f_norm,pointToLight);
-	if(diffuseFact < 0.0f)
+	// Early exit if point isn't facing the light
+	float NdotL = dot(normal, pointToLight);
+	if(NdotL < 0.0f)
 		discard;
 
-	getShadowFactPoisson(f_pos, shadowFact);
-	finalFact*=shadowFact;	
+	float shadowAttenuation = getShadowFactPoisson(point);
+	// Early exit if point is completely in the shadows
+	if(shadowAttenuation < 0.001)
+		discard;
 
-	specInt=normalFull.a * 10.0f;
-	spec=normalFull.a * 255.0f;
+	// Compute attenuation at projector's borders
+	// x=left border; y=bottom border;	z=right border;	w=top border
+	vec4 area;
+	area.xy = posInLightSpace.xy + 1.0f;
+	area.zw = 1.0f - posInLightSpace.xy;
+	area = clamp(area * nearAngle, 0.0f, 1.0f);
+	float projectorAttenuation = area.x * area.y * area.z * area.w;
 
-	getRangeFact(dist,atten);
-	atten*=finalFact;
-	getSpecularFact(f_norm, pointToLight, f_pos.xyz, specInt, spec, specVal);
+	vec3 lightIntensity =
+		projectorAttenuation *
+		shadowAttenuation *
+		getRangeAttenuation(dist) *
+		lightColor.rgb *
+		lightColor.a;
 
-	diffuse=lightColor.rgb * diffuseFact * atten * lightColor.a;
-	getLuminance(lightColor.rgb * specVal * lightColor.a * finalFact, specLum);
+	vec3 diffuse = lightIntensity * NdotL;
 
-	f_color=vec4(diffuse, specLum);
+	float shininess = normalData.a * 255.f;
+	vec3 specular = getSpecularFact(normal, pointToLight, point.xyz, 1.f, shininess) * lightIntensity;
+	float specLuminance = dot(luminanceVector, specular);
+
+	f_color = vec4(diffuse, specLuminance);
 }

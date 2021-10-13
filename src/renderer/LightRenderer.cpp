@@ -21,10 +21,13 @@ LightRenderer::~LightRenderer()
 	_shadowShader->remRef();
 }
 
-void LightRenderer::applyLights(const Vector3& eyePos)
+void LightRenderer::applyLights(const Camera& camera)
 {
 	if(_lights.empty())
 		return;
+
+	const Vector3& eyePos(camera.getPosition());
+	float minZ = camera.getZMin();
 
 	sort(_lights.begin(),_lights.end(),lightSort);
 
@@ -42,7 +45,7 @@ void LightRenderer::applyLights(const Vector3& eyePos)
 
 		while(i!=_lights.end() && ((*i)->getShadowMap()!=0)==shadows)
 		{
-			renderLight(*i,eyePos);
+			renderLight(*i, eyePos, minZ);
 			++i;
 		}
 	}
@@ -50,7 +53,7 @@ void LightRenderer::applyLights(const Vector3& eyePos)
 	_lights.clear();
 }
 
-void LightRenderer::renderLight(const Light* l, const Vector3& eyePos)
+void LightRenderer::renderLight(const Light* l, const Vector3& eyePos, float minZ)
 {
 	LightBuffer_t lb;
 	Matrix4 world;
@@ -67,7 +70,7 @@ void LightRenderer::renderLight(const Light* l, const Vector3& eyePos)
 	lb._invRange=1.0f / lb._range;
 	_cBuffer->fill(&lb);
 
-	if(isCameraInVolume(eyePos,pos,l))
+	if(isCameraInVolume(eyePos, minZ, pos, l))
 	{
 		_device->setDepthStencilState(_dsIn);
 		_device->setRenderState(_rsIn);

@@ -164,7 +164,7 @@ void Renderer::update(float time, Camera *c)
     LOG_S(2) << "- Renderer::lighting pass...";
 #endif
 
-    LightSystem::getSingletonRef().applyLights(c->getPosition(),_GBuffer);
+    LightSystem::getSingletonRef().applyLights(*c,_GBuffer);
 
 #ifdef RENDERER_DEBUG
     LOG_S(2) << "- Renderer::add material pass...";
@@ -377,6 +377,11 @@ void Renderer::renderBufferViews()
 	{
 		for(unsigned int i=0;i<BLOOM_NUM_MIPS;++i)
 			_bufferView.addTexture(HDR::getSingletonRef().getBloomDownScale(i));
+	}
+
+	if(_bvFlags & BVF_HDAO)
+	{
+		_bufferView.addTexture(HDAO::getSingletonRef().getHDAOTexture());
 	}
 
 	_bufferView.render();

@@ -7,12 +7,17 @@ layout(std140, binding=2)	uniform		MaterialInfos
 	vec4		matAmbient;
 	vec4		matDiffuse;
 	vec4		matSpecular;
-	vec4		matShininess;
 
 	vec2		matUVOffset;
 	vec2		matUVScale;
 	vec2		matUVRotX;
 	vec2		matUVRotY;
+
+	float		matShininess;
+	float		matSpecularIntensity;
+	float		matReflectivity;
+
+	float		fPack;
 };
 
 layout(binding=0)	uniform sampler2D	tDiffuse;

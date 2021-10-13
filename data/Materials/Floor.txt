@@ -7,7 +7,7 @@ renderer
 	specular 0 0 0 1
 
 	shine 200
-	spec_intens 4
+	spec_intens 0.4
 
 	tex diffuse Textures/SciFy/FloorD.dds
 //	tex normal Textures/SciFy/FloorN.dds

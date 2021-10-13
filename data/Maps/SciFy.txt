@@ -2,10 +2,10 @@ map SciFy 70 70
 
 global_light 
 	dir -0.576376 -0.576376 -0.576376
-	color 1 1 1 1
+	color 0.8 0.8 0.8 1
 end_global_light 
 
-ambient_light 0.501961 0.145098 0 1
+ambient_light 0.0 0.145098 0.2 1
 
 start_position 38.1428 32.5747
 
@@ -23,8 +23,8 @@ material Wall2_1 std
 	diffuse 1 1 1 1
 	specular 0 0 0 1
 
-	shine 0
-	spec_intens 0
+	shine 10
+	spec_intens 0.7
 
 	tex diffuse Textures/SciFy/Wall2_1.dds
 
@@ -42,8 +42,8 @@ material Wall3_1 std
 	diffuse 1 1 1 1
 	specular 0 0 0 1
 
-	shine 0
-	spec_intens 0
+	shine 10
+	spec_intens 0.7
 
 	tex diffuse Textures/SciFy/Wall3_1.dds
 
@@ -61,8 +61,8 @@ material default std
 	diffuse 1 1 1 1
 	specular 0 0 0 1
 
-	shine 0
-	spec_intens 0
+	shine 10
+	spec_intens 0.7
 
 	tex diffuse Textures/Test.dds
 	tex normal Textures/normal.bmp
@@ -79,8 +79,8 @@ material Wall3_2 std
 	diffuse 1 1 1 1
 	specular 0 0 0 1
 
-	shine 0
-	spec_intens 0
+	shine 10
+	spec_intens 0.7
 
 	tex diffuse Textures/SciFy/Wall3_2.dds
 
@@ -98,8 +98,8 @@ material Wall1_1 std
 	diffuse 1 1 1 1
 	specular 0 0 0 1
 
-	shine 0
-	spec_intens 0
+	shine 10
+	spec_intens 0.7
 
 	tex diffuse Textures/SciFy/Wall1_1.dds
 
@@ -117,8 +117,8 @@ material Floor std
 	diffuse 1 1 1 1
 	specular 0 0 0 1
 
-	shine 200
-	spec_intens 4
+	shine 10
+	spec_intens 8
 
 	tex diffuse Textures/SciFy/FloorD.dds
 	tex normal Textures/SciFy/FloorN.bmp
@@ -139,8 +139,8 @@ material Wall2_2 std
 	diffuse 1 1 1 1
 	specular 0 0 0 1
 
-	shine 0
-	spec_intens 0
+	shine 10
+	spec_intens 0.7
 
 	tex diffuse Textures/SciFy/Wall2_2.dds
 
@@ -158,8 +158,8 @@ material Desk std
 	diffuse 1 1 1 1
 	specular 0 0 0 1
 
-	shine 0
-	spec_intens 0
+	shine 10
+	spec_intens 0.7
 
 	tex diffuse Textures/SciFy/Desk.dds
 
@@ -255,7 +255,7 @@ end_mesh
 ground Maps/SciFy.sgd
 
 light area
-	color 1 0 0 10
+	color 1 0 0 5
 	range 10
 	position 25 1.92323 33
 	shadowmap_size 256
@@ -269,21 +269,7 @@ light area
 end_light
 
 light area
-	color 0 1 1 10
-	range 10
-	position 24 5.85765 23
-	shadowmap_size 256
-	shadowmap_filter 12
-	direction 0 -1 -4.37114e-008
-	far_angle 120
-	near_angle 60
-	near_z 0.1
-	area_width 3.6
-	area_height 1.8
-end_light
-
-light area
-	color 1 0 0 10
+	color 1 0 0 5
 	range 10
 	position 40.9376 1.92323 32.1593
 	shadowmap_size 256
@@ -297,7 +283,21 @@ light area
 end_light
 
 light area
-	color 0 1 1 10
+	color 0 1 1 2
+	range 10
+	position 24 5.85765 23
+	shadowmap_size 256
+	shadowmap_filter 12
+	direction 0 -1 -4.37114e-008
+	far_angle 120
+	near_angle 60
+	near_z 0.1
+	area_width 3.6
+	area_height 1.8
+end_light
+
+light area
+	color 0 1 1 2
 	range 10
 	position 24 5.85765 42
 	shadowmap_size 256
@@ -318,7 +318,7 @@ light omni
 end_light
 
 light area
-	color 0 1 1 10
+	color 0 1 1 2
 	range 10
 	position 41 5.85765 43
 	shadowmap_size 256
@@ -332,7 +332,7 @@ light area
 end_light
 
 light area
-	color 0 1 1 10
+	color 0 1 1 2
 	range 10
 	position 41 5.85765 24
 	shadowmap_size 256

@@ -12,20 +12,16 @@ out	vec4	f_color[2];
 
 void main(void)
 {
-	vec4 col, spec, tex;
-	vec3 normal;
-	float shine;
+	vec3 color = texture(tDiffuse, v_texBase).rgb * matDiffuse.rgb;
+	vec2 specular = texture(tSpecular, v_texBase).rg;
+	vec3 normal = texture(tNormal, v_texBase).xyz;
 
-	col=texture( tDiffuse, v_texBase) * matDiffuse;
-	tex=texture( tSpecular, v_texBase);
-	spec.rgb=matSpecular.rgb * tex.rgb;
-
-	shine=(tex.a * 255.0f + matShininess.x) * 0.5f;
+	normal = normalize(2.f * (normal - 0.5f));
+	normal = normalize(v_tangent * normal) * 0.5f + 0.5f;
 	
-	normal=normalize((texture( tNormal, v_texBase).rgb - 0.5f) * 2.0f);
-	normal= normalize(v_tangent * normal);
-
-	f_color[0]=vec4(col.rgb, shine / 255.0f);
-	f_color[1]=vec4(normal* 0.5f + 0.5f, matShininess.y * 0.1f);
+	float shininess = matShininess / 255.f;
+	
+	f_color[0]=vec4(color, matSpecularIntensity);
+	f_color[1]=vec4(normal, shininess);
 }
 

@@ -12,24 +12,23 @@ out	mat3	v_tangent;
 
 void main(void)
 {
-	vec4 localPos;
-	vec3 t,b;
-	mat3 rot=mat3(worldMat);
+	mat3 rot = mat3(worldMat);
 
-	getLocalPosition(localPos);
+	vec4 localPos = getLocalPosition();
 
-	v_worldPos=viewProj * localPos;
+	v_worldPos = viewProj * localPos;
 
-	getLocalNormalBinormalTangent(norm,rot,v_normal);
-	getLocalNormalBinormalTangent(tangent,rot,t);
-	getLocalNormalBinormalTangent(binormal,rot,b);
+	v_normal = getLocalNormalBinormalTangent(norm,rot);
+	vec3 t = getLocalNormalBinormalTangent(tangent,rot);
+	t = normalize(t - dot(t, v_normal) * v_normal);
+	vec3 b = cross(v_normal, t);
 	
-	v_texBase=vec2(dot(matUVRotX,uv), dot(matUVRotY,uv));
-	v_texBase*=matUVScale;
-	v_texBase+=matUVOffset;
+	v_texBase = vec2(dot(matUVRotX,uv), dot(matUVRotY,uv));
+	v_texBase *= matUVScale;
+	v_texBase += matUVOffset;
 
-	v_tangent=mat3(t,b,v_normal);
+	v_tangent = mat3(t,b,v_normal);
 
-	gl_Position=v_worldPos;
+	gl_Position = v_worldPos;
 }
 

@@ -12,23 +12,20 @@ out	mat3	v_tangent;
 
 void main(void)
 {
-	vec3 t,b;
 	mat3 rot=mat3(worldMat);
 
-	v_worldPos=viewProj * (worldMat * vec4(pos,1));
-	v_normal=normalize(rot * norm);
+	v_worldPos = viewProj * (worldMat * vec4(pos,1));
+	v_normal = normalize(rot * norm);
 	
-	v_texBase=vec2(dot(matUVRotX,uv), dot(matUVRotY,uv));
-	v_texBase*=matUVScale;
-	v_texBase+=matUVOffset;
+	v_texBase = vec2(dot(matUVRotX,uv), dot(matUVRotY,uv));
+	v_texBase *= matUVScale;
+	v_texBase += matUVOffset;
 
-	t=normalize(rot * tangent);
-	b=normalize(rot * binormal);
+	vec3 t = normalize(rot * tangent);
+	t = normalize(t - dot(t, v_normal) * v_normal);
+	vec3 b = cross(v_normal, t);
 
-	v_tangent[0]=vec3(t.x, b.x, v_normal.x);
-	v_tangent[1]=vec3(t.y, b.y, v_normal.y);
-	v_tangent[2]=vec3(t.z, b.z, v_normal.z);
-
-	gl_Position=v_worldPos;
+	v_tangent = mat3(t,b,v_normal);
+	gl_Position = v_worldPos;
 }
 

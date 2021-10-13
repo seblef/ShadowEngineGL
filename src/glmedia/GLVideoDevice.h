@@ -45,8 +45,15 @@ public:
                                              int idxCount, IndexType idxType, const void *idxData,
                                              BufferUsage bu) const;
     IShader*			createShader(const string& shaderName) const;
-    ITexture*			createTexture(const string& name, int width=0, int height=0, TextureFormat format=TEXF_A8R8G8B8, BufferUsage bu =BU_DEFAULT,
-        bool renderTarget=false, bool cubeTexture=false) const;
+    ITexture*			createTexture(
+        const string& name,
+        int width=0, int height=0,
+        TextureFormat format=TEXF_A8R8G8B8,
+        BufferUsage bu =BU_DEFAULT,
+        bool renderTarget=false,
+        bool cubeTexture=false,
+        const void* data=0
+    ) const;
     IDepthTexture*      createDepthTexture(int width, int height, int bpp, bool stencil);
     IFrameBuffer*       createFrameBuffer(int width, int height, int frameCount, ITexture** frames, IDepthTexture *depth);
     IConstantBuffer*	createConstantBuffer(int size, int slot) const;

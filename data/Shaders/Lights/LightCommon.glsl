@@ -10,24 +10,29 @@ layout(binding=4)	uniform sampler2D	tAccumulation;
 layout(binding=5)	uniform sampler2D	tHDAO;
 
 
-void	getSpecularFact(in vec3 normal, in vec3 pointToLight, in vec3 point, in float specInt, in float shine, out float spec)
+float getSpecularFact(
+	vec3 normal,
+	vec3 pointToLight,
+	vec3 point,
+	float specularIntensity,
+	float shininess
+)
 {
-	vec3 r=( normal * (2.0f * dot( normal, pointToLight) ) ) - pointToLight;
-	vec3 v=normalize( eyePos.xyz - point );
+	vec3 r = reflect(pointToLight, normal);
+	vec3 v = normalize( eyePos.xyz - point );
 
-	spec=pow( max( dot(r,v), 0), shine) * specInt;
+	return pow(max(dot(r, v), 0), shininess) * specularIntensity;
 }
 
-void	getLuminance(in vec3 rgb, out float lum)
-{
-	lum= 0.2126f * rgb.r + 0.7152f * rgb.g + 0.0722f * rgb.b;
-}
 
-void	getSpecularColor(in vec3 rgb, in float lum, out vec3 spec)
+const vec3 luminanceVector = vec3(0.2126f, 0.7152f, 0.0722f);
+
+
+vec3 getSpecularColor(vec3 rgb, float lum)
 {
-	float rgblum;
-	getLuminance(rgb, rgblum);
-	spec=rgb * lum / (rgblum + 1e-6f);
+	return rgb * lum;
+	// float rgblum = dot(rgb, luminanceVector);
+	// return rgb * lum / (rgblum + 1e-6f);
 }
 
 #endif

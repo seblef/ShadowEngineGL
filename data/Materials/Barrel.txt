@@ -8,7 +8,7 @@ material Barrel std
 	specular 0 0 0 1
 
 	shine 200
-	spec_intens 4
+	spec_intens 0.4
 
 	tex diffuse Textures/box.dds
 	tex normal Textures/normal.bmp

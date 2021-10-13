@@ -51,9 +51,9 @@ protected:
 		return (l1->getShadowMap() && l2->getShadowMap()==0) || (l1->getShadowMap()==0 && l2->getShadowMap());
 	}
 
-	void							renderLight(const Light* l, const Vector3& eyePos);
+	void							renderLight(const Light* l, const Vector3& eyePos, float minZ);
 
-	virtual bool					isCameraInVolume(const Vector3& eyePos, const Vector3& pos, const Light* l) const=0;
+	virtual bool					isCameraInVolume(const Vector3& eyePos, float minZ, const Vector3& pos, const Light* l) const=0;
 	virtual void					fillBufferAndGetMatrix(LightBuffer_t& b, const Light* l, Matrix4& world) const=0;
 
 public:
@@ -62,5 +62,5 @@ public:
 	virtual ~LightRenderer();
 
 	void							enqueueLight(Light *l)					{ _lights.push_back(l); }
-	void							applyLights(const Vector3& eyePos);
+	void							applyLights(const Camera& eyePos);
 };

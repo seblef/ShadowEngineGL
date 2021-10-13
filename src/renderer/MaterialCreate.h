@@ -96,7 +96,7 @@ public:
 	MC_FadeAnim		_fadeAnim;
 
 	MaterialCreate() : _ambient(Color::Black), _diffuse(Color::White), _specular(Color::Black),
-		_shininess(0), _specularIntensity(0), _reflectivity(0),
+		_shininess(200.f), _specularIntensity(0.2), _reflectivity(0),
 		_uvOffset(Vector2::NullVector), _uvScale(Vector2::UnitVector), _uvRot(0),
 		_cull(CULL_BACK), _blendEnable(false), _srcBlend(BLEND_ONE), _destBlend(BLEND_ZERO),
 		_flags(0), _animations(0)

@@ -17,49 +17,62 @@ out	vec4		f_color;
 
 void main(void)
 {
-	vec4	normalFull, color=vec4(0,0,0,0);
-	vec3	normal, diffuse=vec3(0,0,0);
-	float 	diff, specVal=0, shadowFact=1;
-	float 	occlusion;
-	vec3	lfact, ldiffuse, lspec, cfinal, cspec;
-	vec4	acc;
-	float 	depth, spec, specInt;
-	vec4 	pos;
+	// Extract base data
+	vec4 normalData = texture(tNormal, v_uv);
+	vec3 normal = normalData.xyz * 2.f - 1.f;
 
-	normalFull=texture( tNormal, v_uv);
-	normal=normalFull.xyz * 2.0f - 1.0f;
+	vec4 colorData = texture(tAldebo, v_uv);
+	vec3 aldebo = colorData.rgb;
 
-	diff=-dot(normal, lightDir.xyz);
-	
-	color=texture( tAldebo, v_uv);
+	vec4 accumulationData = texture(tAccumulation, v_uv);
+	vec3 accumulatedDiffuse = accumulationData.rgb;
 
-	if(diff > 0.0f)
+	// Occlusion
+	float occlusion = texture(tHDAO, v_uv).r;
+
+	// Compute ambient ambient light
+	vec3 final = aldebo * ambientLight.rgb;
+	// Add accumulated diffuse
+	final += accumulationData.rgb * aldebo;
+	final *= occlusion;
+	// Add accumulated specular
+	final += getSpecularColor(accumulationData.rgb, accumulationData.a);
+
+	// If surface isn't facing the light, exit
+	float NdotL = -dot(normal, lightDir.xyz);
+	if(NdotL < 0.0f)
 	{
-		depth=texture( tDepth, v_uv).r;
-		spec=normalFull.a * 255.0f;
-		specInt=normalFull.a * 10.0f;
-
-		getWorldPosition(vec3(v_uv,depth),pos);
-
-		getSpecularFact(normal,-lightDir.xyz,pos.xyz,specInt,spec,specVal);
-		getShadowFactPoisson(pos,shadowFact);
-
-//		f_color=vec4(shadowFact,0,0,1);
-//		return;
+		f_color = vec4(final,1);
+		return;
 	}
-	else
-		diff=0.0f;
 
-	occlusion=texture(tHDAO, v_uv).r;
-	lfact=lightColor.rgb * lightColor.a * shadowFact;
+	// Compute shadow attenuation
+	float depth = texture( tDepth, v_uv).r;
+	vec4 worldPos = getWorldPosition(vec3(v_uv, depth));
 
-	acc=texture(tAccumulation, v_uv);
-	ldiffuse=acc.rgb + lfact * diff;
+	float shadows = getShadowFactPoisson(worldPos);
+	// If surface is completely in the shadows, exit
+	if(shadows < 0.001)
+	{
+		f_color = vec4(final,1);
+		return;
+	}
 
-	getSpecularColor(acc.rgb, acc.a,cspec);
-	lspec=lfact * specVal + cspec;
+	// Light color
+	vec3 lightIntensity = lightColor.rgb * lightColor.a * shadows;
 
-	cfinal=((ldiffuse + ambientLight.rgb) * color.rgb) * occlusion;
-	f_color = vec4(cfinal, 1);
+	// Add diffuse component
+	final += lightIntensity * aldebo * NdotL * occlusion;
+
+	// Extract specular info from gbuffer
+	float shininess = normalData.a * 255.f;
+	float specularIntensity = colorData.a;
+
+	// Add specular component
+	final += lightIntensity * getSpecularFact(
+		normal, lightDir.xyz, worldPos.xyz, specularIntensity, shininess
+	);
+
+	f_color = vec4(final, 1);
 }
 

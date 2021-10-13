@@ -11,13 +11,10 @@ out	vec2	oZ;
 
 void main(void)
 {
-	vec4 localPos,wp;
-	getLocalPosition(localPos);
+	vec4 localPos = getLocalPosition();
+	vec4 wp = viewProj * localPos;
+	oUV = uv;
+	oZ = wp.zw;
 
-	wp=viewProj * localPos;
-	oUV=uv;
-	oZ=wp.zw;
-
-	gl_Position=wp;
+	gl_Position = wp;
 }
-
