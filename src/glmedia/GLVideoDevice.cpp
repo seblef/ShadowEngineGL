@@ -116,14 +116,21 @@ IShader*			GLVideoDevice::createShader(const string& shaderName) const
         return new GLShader(shaderName);
 }
 
-ITexture*			GLVideoDevice::createTexture(const string& name, int width, int height, TextureFormat format, BufferUsage bu,
-    bool renderTarget, bool cubeTexture) const
+ITexture* GLVideoDevice::createTexture(
+    const string& name,
+    int width, int height,
+    TextureFormat format,
+    BufferUsage bu,
+    bool renderTarget,
+    bool cubeTexture,
+    const void* data
+) const
 {
 #ifdef SGL_TRACE_ALL
     LOG_S(2) << "- [GLVideoDevice::createTexture] (" << name << "," << (renderTarget ? "true" : "false") << width << "," << height << ")...";
 #endif
 
-    return new GLTexture(name,width,height,format,bu,renderTarget,cubeTexture);
+    return new GLTexture(name,width,height,format,bu,renderTarget,cubeTexture, data);
 }
 
 IDepthTexture*      GLVideoDevice::createDepthTexture(int width, int height, int bpp, bool stencil)

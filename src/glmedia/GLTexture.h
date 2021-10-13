@@ -18,11 +18,20 @@ protected:
     void                        load(GLenum target);
     void						createRenderTarget(GLenum target);
     void						createEmpty(GLenum target);
+    void                        create(GLenum target, const void* data);
 
 
 public:
 
-    GLTexture(const string& name, int width, int height, TextureFormat format, BufferUsage bu, bool renderTarget, bool cubeTexture);
+    GLTexture(
+        const string& name,
+        int width, int height,
+        TextureFormat format,
+        BufferUsage bu,
+        bool renderTarget,
+        bool cubeTexture,
+        const void* data
+    );
     ~GLTexture();
 
     void			set(int stage);

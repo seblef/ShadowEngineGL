@@ -2,6 +2,10 @@
 
 #include "GBuffer.h"
 
+
+#define HDAO_MAX_KERNEL_SIZE			64
+
+
 class HDAO : public TSingleton<HDAO>
 {
 protected:
@@ -10,15 +14,13 @@ protected:
 
 	struct HDAOBufffer_t
 	{
-		Vector2			_renderTargetSize;
-		float			_acceptAngle;
-		float			_q;
-		float			_qTimesNear;
-		float			_normalScale;
-		float			_acceptRadius;
-		float			_rejectRadius;
-		float			_intensity;
-		Vector3			_pack;
+		Vector4 kernel[HDAO_MAX_KERNEL_SIZE];
+		Vector2 noiseScale;
+		float q;
+		float qTimesNear;
+		float radius;
+		int kernelSize;
+		Vector2 f2pack;
 	};
 
 	HDAOBufffer_t		_hBuffer;
@@ -27,23 +29,24 @@ protected:
 	IShader*			_shader;
 	ITexture*			_HDAOTexture;
     IFrameBuffer*       _HDAOFrameBuffer;
+	ITexture* _noiseTexture;
 	IConstantBuffer*	_HDAOBuffer;
 	BlendState			_blendState;
-	SamplerState		_samplerState;
+	SamplerState		_gbufferSampler;
+	SamplerState		_noiseSampler;
+	int 				_bufferScale;
+	Vector2				_bufferSize;
 
 public:
 
 	HDAO(IVideoDevice *d, const Config& cfg);
 	~HDAO();
 
+	bool				isEnabled() const { return _enable; }
+
 	void				process(GBuffer& gbuf, Camera& cam);
 	void				onResize(int w, int h);
 
 	ITexture*			getHDAOTexture() const					{ return _HDAOTexture; }
-
-	float&				getAcceptAngle()						{ return _hBuffer._acceptAngle; }
-	float&				getNormalScale()						{ return _hBuffer._normalScale; }
-	float&				getAcceptRadius()						{ return _hBuffer._acceptRadius; }
-	float&				getRejectRadius()						{ return _hBuffer._rejectRadius; }
-	float&				getIntensity()							{ return _hBuffer._intensity; }
+	ITexture*			getNoiseTexture() const					{ return _noiseTexture; }
 };

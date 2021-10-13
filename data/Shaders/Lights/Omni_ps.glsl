@@ -8,37 +8,31 @@ out	vec4	f_color;
 
 void main(void)
 {
-	vec2 uv_coord=(gl_FragCoord.xy - vec2(0.5f,0.5f)) * invScreenSize;
-	float depth=texture( tDepth, uv_coord ).r;
+	vec2 uv = (gl_FragCoord.xy - vec2(0.5f,0.5f)) * invScreenSize;
+	float depth = texture(tDepth, uv).r;
 
-	vec4 f_pos;
-	getWorldPosition(vec3(uv_coord,depth),f_pos);
+	vec4 point = getWorldPosition(vec3(uv, depth));
 
-	vec3 pointToLight=lightPos.xyz - f_pos.xyz;
-	float dist=length(pointToLight);
+	vec3 pointToLight = lightPos.xyz - point.xyz;
+	float dist = length(pointToLight);
 
-	pointToLight/=dist;
+	pointToLight /= dist;
 	if(dist > lightRange)
 		discard;
 
-	vec4 normalFull=texture( tNormal, uv_coord);
-	vec3 f_normal=normalFull.xyz * 2.0f - 1.0f;
+	vec4 normalData = texture( tNormal, uv);
+	vec3 normal = normalData.xyz * 2.0f - 1.0f;
 
-	float diffuseFact=dot(f_normal, pointToLight);
-	if(diffuseFact < 0.0f)
+	float NdotL = dot(normal, pointToLight);
+	if(NdotL < 0.0f)
 		discard;
 
-	float specInt=normalFull.a * 10.0f;
-	float spec=normalFull.a * 255.0f;
-	
-	float atten, specVal;
-	getRangeFact(dist,atten);
+	vec3 lightIntensity = getRangeAttenuation(dist) * lightColor.rgb * lightColor.a;
+	vec3 diffuse = lightIntensity * NdotL;
 
-	getSpecularFact(f_normal,pointToLight,f_pos.xyz,specInt,spec,specVal);
+	float shininess = normalData.a * 255.f;
+	vec3 specular = getSpecularFact(normal, pointToLight, point.xyz, 1.f, shininess) * lightIntensity;
+	float specLuminance = dot(luminanceVector, specular);
 
-	vec3 diffuse=lightColor.rgb * diffuseFact * atten * lightColor.a;
-	float specLuminance;
-	getLuminance(lightColor.rgb * specVal * lightColor.a, specLuminance);
-
-	f_color=vec4(diffuse, specLuminance);
+	f_color = vec4(diffuse, specLuminance);
 }

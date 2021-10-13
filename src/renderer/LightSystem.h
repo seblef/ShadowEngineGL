@@ -35,5 +35,5 @@ public:
 
 	void				enqueueLight(Light* l);
 
-	void				applyLights(const Vector3& eyePos, GBuffer& gbuf);
+	void				applyLights(const Camera& camera, GBuffer& gbuf);
 };

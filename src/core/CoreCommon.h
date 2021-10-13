@@ -21,6 +21,12 @@ inline void sclamp(T& t, T cmin, T cmax)
 }
 
 template<typename T>
+inline void lerp(const T& a, const T& b, float f, T& out)
+{
+	out = a + (b - a) * f;
+}
+
+template<typename T>
 inline void sminmax(T t1, T t2, T& _min, T& _max)
 {
 	_min=smin(t1,t2);

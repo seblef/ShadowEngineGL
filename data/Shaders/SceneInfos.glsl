@@ -20,11 +20,18 @@ layout(std140, binding=1)	uniform		ObjectInfos
 	mat4				worldMat;
 };
 
-void	getWorldPosition(in vec3 screenPos, out vec4 world_pos)
+vec4 getWorldPosition(vec3 screenPos)
 {
 	vec4 H=vec4(screenPos*2.0f - 1.0f, 1.0f);
-	world_pos= invViewProj * H;
-	world_pos/=world_pos.w;
+	vec4 world_pos = invViewProj * H;
+	return world_pos / world_pos.w;
+}
+
+vec4 getViewPosition(vec3 screenPos)
+{
+	vec4 H=vec4(screenPos*2.0f - 1.0f, 1.0f);
+	vec4 view_pos = invProj * H;
+	return view_pos / view_pos.w;
 }
 
 #endif

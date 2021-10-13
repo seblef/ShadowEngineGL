@@ -8,45 +8,40 @@ out	vec4	f_color;
 
 void main(void)
 {
-	float depth, dist, dotDirPointToLight, diffuseFact;
-	float spec, specInt, atten, specVal, specLum;
-	float finalFact=1.0f;
-	vec2 uv_coord;
-	vec3 pointToLight, f_norm, diffuse;
-	vec4 f_pos, normalFull;
+	vec2 uv = (gl_FragCoord.xy - vec2(0.5f,0.5f)) * invScreenSize;
+	float depth = texture(tDepth, uv).r;
+
+	vec4 point = getWorldPosition(vec3(uv, depth));
+	vec3 pointToLight = lightPos.xyz - point.xyz;
+	float dist = length(pointToLight);
+	pointToLight /= dist;
 	
-	uv_coord=(gl_FragCoord.xy - vec2(0.5f,0.5f)) * invScreenSize;
-	depth=texture( tDepth, uv_coord ).r;
-
-	getWorldPosition(vec3(uv_coord,depth),f_pos);
-
-	pointToLight=lightPos.xyz - f_pos.xyz;
-	dist=length(pointToLight);
-	pointToLight/=dist;
-	
-
-	dotDirPointToLight=-dot(lightDir.xyz,pointToLight);
-	if(dotDirPointToLight < farAngle || dist > lightRange)
+	// Early exit if point is out of projector
+	float DdotL = -dot(lightDir.xyz, pointToLight);
+	if(DdotL < farAngle || dist > lightRange)
 		discard;
 
-	finalFact=clamp(( dotDirPointToLight - farAngle) / (nearAngle - farAngle),0.0f,1.0f);
+	vec4 normalData = texture(tNormal, uv);
+	vec3 normal = normalData.xyz * 2.0f - 1.0f;
 
-	normalFull=texture( tNormal, uv_coord);
-	f_norm=normalFull.xyz * 2.0f - 1.0f;
-
-	diffuseFact=dot(f_norm,pointToLight);
-	if(diffuseFact < 0.0f)
+	float NdotL = dot(normal, pointToLight);
+	// Early exit if point isn't facing the light
+	if(NdotL < 0.0f)
 		discard;
 
-	specInt=normalFull.a * 10.0f;
-	spec=normalFull.a * 255.0f;
+	// Projector attenuation
+	float attenuation = clamp((DdotL - farAngle) / (nearAngle - farAngle),0.0f,1.0f);
+	// Add range attenuation
+	attenuation *= getRangeAttenuation(dist);
 
-	getRangeFact(dist,atten);
-	atten*=finalFact;
-	getSpecularFact(f_norm, pointToLight, f_pos.xyz, specInt, spec, specVal);
+	vec3 lightIntensity = attenuation * lightColor.rgb * lightColor.a;
 
-	diffuse=lightColor.rgb * diffuseFact * atten * lightColor.a;
-	getLuminance(lightColor.rgb * specVal * lightColor.a * finalFact, specLum);
+	vec3 diffuse = lightIntensity * NdotL;
 
-	f_color=vec4(diffuse, specLum);
+	float shininess = normalData.a * 255.f;
+	vec3 specular = getSpecularFact(normal, pointToLight, point.xyz, 1.f, shininess) * lightIntensity;
+	float specLuminance = dot(luminanceVector, specular);
+
+	f_color = vec4(diffuse, specLuminance);
 }
+

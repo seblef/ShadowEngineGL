@@ -54,8 +54,15 @@ const int g_TexelBytes[TEXF_COUNT]={
 
 GLTexture::TextureDB GLTexture::_db;
 
-GLTexture::GLTexture(const string& name, int width, int height, TextureFormat format, BufferUsage bu,
-                 bool renderTarget, bool cubeTexture) : ITexture(name,TF_NONE,width,height,format,bu)
+GLTexture::GLTexture(
+    const string& name,
+    int width, int height,
+    TextureFormat format,
+    BufferUsage bu,
+    bool renderTarget,
+    bool cubeTexture,
+    const void* data
+) : ITexture(name,TF_NONE,width,height,format,bu)
 {
 #ifdef SGL_TRACE_ALL
     LOG_S(2) << "- [GLTexture::GLTexture " << this << "] (" << name << "," << width << "," << height << ")...";
@@ -69,6 +76,7 @@ GLTexture::GLTexture(const string& name, int width, int height, TextureFormat fo
     glBindTexture(target,_texId);
 
     if(width==0)				load(target);
+    else if(data)               create(target, data);
     else						createEmpty(target);
 
 #ifdef SGL_TRACE_ALL
@@ -298,6 +306,18 @@ void GLTexture::createEmpty(GLenum target)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     _flags=TF_GOOD | TF_RENDERTARGET;
+}
+
+void GLTexture::create(GLenum target, const void* data)
+{
+    glTexImage2D(
+        target, 0,
+        g_TexInternalFormat[_format],
+        _width, _height, 0,
+        g_TexFormat[_format],
+        g_TexType[_format],
+        data
+    );
 }
 
 void GLTexture::set(int stage)

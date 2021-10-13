@@ -68,3 +68,15 @@ void LightAreaRenderer::fillBufferAndGetMatrix(LightBuffer_t& b, const Light* l,
 	cam.buildMatrices();
 	b._areaViewProj=cam.getViewProjMatrix();
 }
+
+bool LightAreaRenderer::isCameraInVolume(
+	const Vector3& eyePos,
+	float minZ,
+	const Vector3& pos,
+	const Light *l
+) const
+{
+	float d = (pos - eyePos).getSquareLength();
+	float r = l->getRange() + minZ;
+	return d < r * r * 5.0f;
+}

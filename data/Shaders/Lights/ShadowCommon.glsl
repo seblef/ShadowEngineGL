@@ -41,7 +41,7 @@ float random(vec3 seed, int i)
 	return fract(sin(dot_product) * 43758.5453);
 }
 
-void	getShadowFactPoisson(in vec4 point, out float s)
+float getShadowFactPoisson(vec4 point)
 {
 	float bias=0.005f;
 	vec4 lightRefPos=lightViewProj * point;
@@ -50,7 +50,7 @@ void	getShadowFactPoisson(in vec4 point, out float s)
 
 	vec2 shadowUV=0.5f * lightRefPos.xy + vec2(0.5f,0.5f);
 
-	s=1.0f;
+	float s=1.0f;
 
 	// Sample the shadow map 4 times
 	for (int i=0;i<int(shadowFilter);i++)
@@ -70,26 +70,28 @@ void	getShadowFactPoisson(in vec4 point, out float s)
 		// 0.2 potentially remain, which is quite dark.
 		s -= invShadowFilter*(1.0-texture( tShadow, vec3(shadowUV + poissonDisk[index]/1000.0f , lightRefPos.z*0.5f + 0.5f)).r);
 	}
+
+	return s;
 }
 
-void	getShadowFactBase(in vec4 point, out float s)
+float getShadowFactBase(vec4 point)
 {
 	float bias=0.005f;
 	vec4 lightRefPos=lightViewProj * point;
-//	lightRefPos.z-=bias;
+	lightRefPos.z-=bias;
 
 	lightRefPos/=lightRefPos.w;
 
 	vec2 shadowUV=0.5f * lightRefPos.xy + vec2(0.5f,0.5f);
-	s=texture(tShadow,vec3(shadowUV,lightRefPos.z*0.5f + 0.5f)).r;
+	return texture(tShadow,vec3(shadowUV,lightRefPos.z*0.5f + 0.5f)).r;
 }
 
-void	getShadowUV(in vec4 point, out vec2 suv)
+vec2 getShadowUV(vec4 point)
 {
 	vec4 lightRefPos=lightViewProj * point;
 	lightRefPos/=lightRefPos.w;
 
-	suv=(0.5f * lightRefPos.xy) + vec2(0.5f,0.5f);
+	return (0.5f * lightRefPos.xy) + vec2(0.5f,0.5f);
 }
 
 #endif

@@ -31,3 +31,24 @@ LightOmniRenderer::LightOmniRenderer(const LightRendererCreate_t& c) :
     _geo=_device->createGeometryBuffer(8,VX_BASE,sOmniVertices,36,IDX_16BITS,swOmniIndices,BU_IMMUTABLE);
 	_indicesCount=36;
 }
+
+bool LightOmniRenderer::isCameraInVolume(
+	const Vector3& eyePos,
+	float minZ,
+	const Vector3& pos,
+	const Light *l
+) const
+{
+	float r = l->getRange() + minZ;
+	return eyePos.x > pos.x - r && eyePos.x < pos.x + r &&
+		   eyePos.y > pos.y - r && eyePos.y < pos.y + r &&
+		   eyePos.z > pos.z - r && eyePos.z < pos.z + r;
+}
+
+void LightOmniRenderer::fillBufferAndGetMatrix(LightBuffer_t& b, const Light* l, Matrix4& world) const
+{
+	float r=l->getRange();
+	world.createScale(r,r,r);
+	for(int i=0;i<3;++i)
+		world(3,i)=l->getWorldMatrix()(3,i);
+}

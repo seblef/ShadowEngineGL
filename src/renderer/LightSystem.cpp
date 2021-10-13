@@ -11,17 +11,14 @@ LightSystem::LightSystem(IVideoDevice* device) : _device(device), _global(device
 {
     _cLightBuffer=device->createConstantBuffer(8,2);
 
-/*	_dsIn=device->createDepthStencilStateEx(true,false,COMP_GREATEREQUAL,
+	_dsIn=device->createDepthStencilStateEx(true,false,COMP_GREATEREQUAL,
 		true, 0xff, 0xff,
 		COMP_EQUAL2,STENCIL_KEEP, STENCIL_KEEP, STENCIL_KEEP,
 		COMP_EQUAL2, STENCIL_KEEP, STENCIL_KEEP, STENCIL_KEEP);
 	_dsOut=device->createDepthStencilStateEx(true,false,COMP_LESSEQUAL,
 		true, 0xff, 0xff,
 		COMP_EQUAL2, STENCIL_KEEP, STENCIL_KEEP, STENCIL_KEEP,
-        COMP_EQUAL2, STENCIL_KEEP, STENCIL_KEEP, STENCIL_KEEP);*/
-
-    _dsIn=device->createDepthStencilState(true,false,COMP_GREATEREQUAL);
-    _dsOut=device->createDepthStencilState(true,false,COMP_LESSEQUAL);
+        COMP_EQUAL2, STENCIL_KEEP, STENCIL_KEEP, STENCIL_KEEP);
 
     _rsIn=device->createRenderState(CULL_FRONT);
 	_rsOut=device->createRenderState(CULL_BACK);
@@ -72,7 +69,7 @@ void LightSystem::enqueueLight(Light *l)
 		ShadowSystem::getSingletonRef().enqueueLight(l);
 }
 
-void LightSystem::applyLights(const Vector3& eyePos, GBuffer& gbuf)
+void LightSystem::applyLights(const Camera& camera, GBuffer& gbuf)
 {
 	_shadowBuffer.set();
     HDR::getSingletonRef().getAccumulationFrameBuffer()->set();
@@ -89,7 +86,7 @@ void LightSystem::applyLights(const Vector3& eyePos, GBuffer& gbuf)
     _cLightBuffer->set();
 
 	for (int i = 0; i<Light::LT_COUNT; ++i)
-		_renderers[i]->applyLights(eyePos);
+		_renderers[i]->applyLights(camera);
 
 	HDR::getSingletonRef().setBackBuffer();
 	gbuf.setAsTextures();
