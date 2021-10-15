@@ -124,9 +124,11 @@ void MapTextLoader::parseSound(ScriptFile& sf)
 	string name(sf.getToken());
 	string file;
 	string t(sf.getToken());
-	ISoundCone* cone = 0;
-	float radius = 10.0f, radiusAngle = 0.0f;
+	float maxDist = 10.f, refDist = 2.f;
+	float gain = 1.f;
+	float inAngle = .0f, outAngle = .0f;
 	int priority = 1;
+	bool autoPlay = true;
 
     while (sf.good() && t != "end_sound")
 	{
@@ -134,49 +136,32 @@ void MapTextLoader::parseSound(ScriptFile& sf)
 			file = sf.getToken();
 		else if (t == "priority")
 			priority = stoi(sf.getToken());
-		else if (t == "radius")
-			radius = stof(sf.getToken());
-		else if (t == "radius_angle")
-			radiusAngle = stof(sf.getToken());
-		else if (t == "cone")
-			cone = parseSoundCone(sf);
+		else if (t == "reference_distance")
+			refDist = stof(sf.getToken());
+		else if(t == "max_distance")
+			maxDist = stof(sf.getToken());
+		else if(t == "gain")
+			gain = stof(sf.getToken());
+		else if(t == "inner_angle")
+			inAngle = stof(sf.getToken());
+		else if(t == "outer_angle")
+			outAngle = stof(sf.getToken());
+		else if(t == "no_auto_play")
+			autoPlay = false;
 
 		t = sf.getToken();
 	}
 
 	ISound* snd = SoundSystem::getSingletonRef().loadSound(file);
-	TemplateSound* tsnd = new TemplateSound(snd, radius, radiusAngle, priority, cone);
+	TemplateSound* tsnd = new TemplateSound(
+		snd,
+		maxDist, refDist,
+		gain,
+		inAngle, outAngle,
+		priority, autoPlay
+	);
 
 	ResourceDB::getSingletonRef().getSoundDB().registerData(name, tsnd);
-}
-
-ISoundCone* MapTextLoader::parseSoundCone(ScriptFile& sf)
-{
-	float iAngle = 0.0f;
-	float oAngle = 0.0f;
-	float iVol = 1.0f;
-	float oVol = 0.0f;
-	float iLPF = 0.0f;
-	float oLPF = 0.0f;
-	float iRev = 0.0f;
-	float oRev = 0.0f;
-	string token(sf.getToken());
-
-	while (sf.good() && token != "end_cone")
-	{
-		if (token == "in_angle")			iAngle = stof(sf.getToken());
-		else if (token == "out_angle")		oAngle = stof(sf.getToken());
-		else if (token == "in_volume")		iVol = stof(sf.getToken());
-		else if (token == "out_volume")		oVol = stof(sf.getToken());
-		else if (token == "in_lpf")			iLPF = stof(sf.getToken());
-		else if (token == "out_lpf")		oLPF = stof(sf.getToken());
-		else if (token == "in_reverb")		iRev = stof(sf.getToken());
-		else if (token == "out_reverb")		oRev = stof(sf.getToken());
-
-		token = sf.getToken();
-	}
-
-	return SoundSystem::getSingletonRef().getAudio()->createCone(iAngle, oAngle, iVol, oVol, iLPF, oLPF, iRev,oRev);
 }
 
 void MapTextLoader::parseObject(ScriptFile& sf, Map& m)

@@ -9,7 +9,6 @@
 #include "./mediacommon/KeyboardKeys.h"
 #include "./mediacommon/IMultiVideoDevice.h"
 #include "./mediacommon/IMedia.h"
-#include "./mediacommon/ISoundCone.h"
 #include "./mediacommon/ISoundSource.h"
 #include "./mediacommon/ISoundListener.h"
 #include "./mediacommon/ISoundDevice.h"

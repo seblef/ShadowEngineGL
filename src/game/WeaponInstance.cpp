@@ -51,10 +51,12 @@ void WeaponInstance::fire(const Vector3& origin) const
 {
 	if (_template->getFireSound())
 	{
-		SoundVirtualSource* src = SoundSystem::getSingletonRef().play(_template->getFireSound(), 1, true);
-		ISoundVirtualSource* s = src->getSource();
-		s->setPosition(origin);
-		s->setInRadius(50.0f);
+		SoundVirtualSource* src = SoundSystem::getSingletonRef().play(
+			_template->getFireSound(), 1, 1.f,
+			origin,
+			Vector3::NullVector,
+			Vector3::ZAxisVector,
+			40.f, 50.f, 1.f, 0.f, 360.f, true);
 	}
 
 	if (_template->isFlashEnable())

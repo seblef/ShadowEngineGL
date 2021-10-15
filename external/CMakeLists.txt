@@ -49,11 +49,3 @@ target_link_libraries(GLEW_220
 	${OPENGL_LIBRARY}
 	${EXTRA_LIBS}
 )
-
-### OpenAL ###
-
-add_subdirectory(openal-soft-1.21.1)
-
-include_directories(
-    openal-soft-1.21.1/include/
-)

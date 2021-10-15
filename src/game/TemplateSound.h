@@ -8,20 +8,32 @@ class TemplateSound
 protected:
 
 	ISound*				_sound;
-	ISoundCone*			_cone;
-	float				_radius;
-	float				_radiusAngle;
+	float				_maxDistance;
+	float				_referenceDistance;
+	float				_gain;
+	float 				_inAngle;
+	float				_outAngle;
 	int					_priority;
+	bool				_autoPlay;
 
 public:
 
-	TemplateSound(ISound *snd, float radius, float radiusAngle, int priority, ISoundCone* cone) :
-		_sound(snd), _cone(cone), _radius(radius), _radiusAngle(radiusAngle), _priority(priority)			{}
+	TemplateSound(
+		ISound *snd,
+		float maxDist, float refDist,
+		float gain,
+		float inAngle, float outAngle,
+		int priority,
+		bool autoPlay
+	);
 	~TemplateSound();
 
 	ISound*				getSound() const			{ return _sound; }
-	ISoundCone*			getCone() const				{ return _cone; }
-	float				getRadius() const			{ return _radius; }
-	float				getRadiusAngle() const		{ return _radiusAngle; }
+	float				getMaxDistance() const		{ return _maxDistance; }
+	float				getReferenceDistance() const { return _referenceDistance; }
+	float				getGain() const				{ return _gain; }
+	float				getInnerAngle() const		{ return _inAngle; }
+	float				getOuterAngle() const		{ return _outAngle; }
 	int					getPriority() const			{ return _priority; }
+	bool				getAutoPlay() const			{ return _autoPlay; }
 };

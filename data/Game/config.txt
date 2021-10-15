@@ -1,12 +1,12 @@
 
 
-//windowed				true
-//resWidth				1024
-//resHeight				768
+windowed				true
+resWidth				1024
+resHeight				768
 
-windowed				false
-resWidth				1920
-resHeight				1080
+//windowed				false
+//resWidth				1920
+//resHeight				1080
 
 multithread				true
 

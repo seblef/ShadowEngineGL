@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 //	NavTest app;
     GameApp app;
 //    ParticleApp app;
-//	TestSoundApp app;
+	// TestSoundApp app;
 //    TestGLApp app;
 
     app.run(opt.dataFolder);

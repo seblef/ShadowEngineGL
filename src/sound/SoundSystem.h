@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SoundVirtualSource.h"
-//#include "SoundPlayingSource.h"
 
 
 class SoundSystem : public TSingleton<SoundSystem>
@@ -42,7 +41,20 @@ class SoundSystem : public TSingleton<SoundSystem>
 		ISound*					loadSound(const string& soundFile);
 		void					releaseSound(ISound* buffer);
 
-		SoundVirtualSource*		play(ISound* buffer, int priority, float volume, bool managed=true, bool loop=false);
+		SoundVirtualSource*		play(
+			ISound* buffer,
+			int priority,
+			float gain,
+			const Vector3& position,
+			const Vector3& velocity,
+			const Vector3& direction,
+			float refDist, float maxDist,
+			float rollOff,
+			float inAngle,
+			float outAngle,
+			bool managed=false,
+			bool loop=false
+		);
 		void					play(SoundVirtualSource* src, ISound* buffer);
 		void					stopSound(SoundVirtualSource *virtualSource);
 

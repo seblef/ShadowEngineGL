@@ -81,9 +81,16 @@ void Explosion::explode()
 	if (_template->getExplosionSound())
 	{
 		ISoundVirtualSource *src = SoundSystem::getSingletonRef().play(
-			_template->getExplosionSound(), 1, 10.0f)->getSource();
+			_template->getExplosionSound(),
+			1, 10.f,
+			_position,
+			Vector3::NullVector,
+			Vector3::ZAxisVector,
+			10.f, 50.f,
+			1.f, 0.f, 360.f
+		)->getSource();
 		src->setPosition(_position);
-		src->setInRadius(50.0f);
+		src->setMaxDistance(50.0f);
 	}
 
 	if (_template->getHitEnvironment())
