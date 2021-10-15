@@ -6,11 +6,8 @@
 #include <algorithm>
 
 
+// #define _DEBUG_SOUND
 
-static char *checkString(char *x)
-{
-	return (char *)(x ? x : "null");
-}
 
 SoundSystem::SoundSystem(ISoundDevice* d) : _totalTime(0.0f), _device(d)
 {
@@ -27,10 +24,10 @@ SoundSystem::~SoundSystem()
 
 bool SoundSystem::update(float time)
 {
-	_totalTime+=time;
+	_totalTime += time;
 	if(_totalTime >= 0.2f)
 	{
-		_totalTime=0.0f;
+		_totalTime = 0.0f;
 		updateSources();
 	}
 
@@ -134,30 +131,29 @@ void SoundSystem::updateVirtualSources()
 	Vector3 pos(_device->getListener()->getPosition());
 	int totalSources = _totalSources.size();
 
-	VirtualSourceVec::iterator i(_playingSources.begin());
-	for (int j = 0; i != _playingSources.end(); ++i, ++j)
+	int j=0;
+	for(auto & source : _playingSources)
 	{
-		if (j < totalSources && (*i)->getPlayingSource() && !(*i)->getPlayingSource()->isPlaying())
-			(*i)->setStopped();
+		if (j < totalSources && source->getPlayingSource() && !source->getPlayingSource()->isPlaying())
+			source->setStopped();
 
-		(*i)->updateDistance(pos);
+		source->updateDistance(pos);
+		++j;
 	}
 }
 
 void SoundSystem::clearManagedSources()
 {
-	VirtualSourceSet::iterator vs(_managedSources.begin());
-	for (; vs != _managedSources.end(); ++vs)
+	for(auto & source : _managedSources)
 	{
-		if ((*vs)->isStopped())
-			_release.push_back(*vs);
+		if (source->isStopped())
+			_release.push_back(source);
 	}
 
-	VirtualSourceVec::iterator vv(_release.begin());
-	for (; vv != _release.end(); ++vv)
+	for(auto & source : _release)
 	{
-		_managedSources.erase(*vv);
-		delete *vv;
+		_managedSources.erase(source);
+		delete source;
 	}
 
 	_release.clear();
@@ -187,9 +183,33 @@ void SoundSystem::releaseSound(ISound* buffer)
 	}
 }
 
-SoundVirtualSource *SoundSystem::play(ISound* buffer, int priority, float volume, bool managed, bool loop)
+SoundVirtualSource *SoundSystem::play(
+	ISound* buffer,
+	int priority,
+	float gain,
+	const Vector3& position,
+	const Vector3& velocity,
+	const Vector3& direction,
+	float refDist, float maxDist,
+	float rollOff,
+	float inAngle, float outAngle,
+	bool managed,
+	bool loop
+)
 {
-	SoundVirtualSource *src = new SoundVirtualSource(_device, priority, volume, loop, managed);
+	SoundVirtualSource *src = new SoundVirtualSource(
+		_device,
+		priority,
+		gain,
+		loop,
+		position,
+		velocity,
+		direction,
+		refDist, maxDist,
+		rollOff,
+		inAngle, outAngle,
+		managed
+	);
 	play(src, buffer);
 	return src;
 }
@@ -213,9 +233,7 @@ void SoundSystem::stopSound(SoundVirtualSource *virtualSource)
 
 void SoundSystem::reset()
 {
-	VirtualSourceVec::iterator src(_playingSources.begin());
-	for (; src != _playingSources.end(); ++src)
-		(*src)->setStopped();
-
+	for(auto & source : _playingSources)
+		source->setStopped();
 	updateSources();
 }

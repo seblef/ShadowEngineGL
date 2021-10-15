@@ -38,6 +38,8 @@ set(ALL_LIBS
     ${PHYSX_LIBS}
 	GLEW_220
     glfw
+    -lopenal
+    -lalut
 )
 
 
@@ -102,6 +104,11 @@ set(OPENGL_SOURCES
     src/glmedia/SOIL/image_helper.c
     src/glmedia/SOIL/SOIL.c
     src/glmedia/SOIL/stb_image_aug.c
+    src/glmedia/ALSound.cpp
+    src/glmedia/ALSoundDevice.cpp
+    src/glmedia/ALSoundListener.cpp
+    src/glmedia/ALSoundSource.cpp
+    src/glmedia/ALSoundVirtualSource.cpp
     src/glmedia/GLConstantBuffer.cpp
     src/glmedia/GLDepthTexture.cpp
     src/glmedia/GLFrameBuffer.cpp

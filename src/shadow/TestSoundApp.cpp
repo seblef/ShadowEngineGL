@@ -16,7 +16,13 @@ void TestSoundApp::run(const string& dataFolder)
     IMedia *media = createGLMedia(800, 600, true, false, SINPUT_MOUSE | SINPUT_KEYBOARD);
 
 	ISound *snd = media->getAudio()->loadSound("Sounds/Test.wav");
-	media->getAudio()->getSource(0)->play(0, snd, true);
+	ISoundVirtualSource* virt_src = media->getAudio()->createVirtualSource(
+		Vector3::ZAxisVector,
+		Vector3::NullVector,
+		-Vector3::ZAxisVector,
+		5.f, 10.f, 1.f, 0.f, 180.f
+	);
+	media->getAudio()->getSource(0)->play(virt_src, snd, true);
 
 	clock_t lastTime = clock();
 	float total_time = 0;

@@ -7,11 +7,27 @@
 #include "../loguru.hpp"
 
 
-Rocket::Rocket(WeaponRocket* weapon, GameCharacter* owner,
-	const Matrix4& originalWorld, const Vector3& direction) : _weapon(weapon),
-	_owner(owner), _world(originalWorld), _rocketMesh(0), _rocketLight(0),
-	_rocketPhysic(0), _rocketSmoke(0),
-	_rocketSource(SoundSystem::getSingletonRef().getAudio(),1,1.0f,true)
+Rocket::Rocket(
+	WeaponRocket* weapon,
+	GameCharacter* owner,
+	const Matrix4& originalWorld,
+	const Vector3& direction
+) : 
+	_weapon(weapon),
+	_owner(owner),
+	_world(originalWorld),
+	_rocketMesh(0),
+	_rocketLight(0),
+	_rocketPhysic(0),
+	_rocketSmoke(0),
+	_rocketSource(
+		SoundSystem::getSingletonRef().getAudio(),
+		1,1.0f,true,
+		Vector3::NullVector,
+		Vector3::NullVector,
+		Vector3::ZAxisVector,
+		2.f, 20.f, 1.f, 0.f, 360.f
+	)
 {
 	_life = weapon->getRocketLife();
 	_velocity = direction * weapon->getRocketVelocity();
@@ -55,6 +71,9 @@ Rocket::Rocket(WeaponRocket* weapon, GameCharacter* owner,
 	{
 		_rocketSource.getSource()->setPosition(smokePos);
 		_rocketSource.getSource()->setVelocity(_velocity);
+		Vector3 dir(-_velocity);
+		dir.normalize();
+		_rocketSource.getSource()->setDirection(dir);
 		SoundSystem::getSingletonRef().play(&_rocketSource, weapon->getRocketSound());
 	}
 }

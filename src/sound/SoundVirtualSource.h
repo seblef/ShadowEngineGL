@@ -15,14 +15,26 @@ class SoundVirtualSource
 		ISound*					_sound;
 
 		float					_distance;
-		float					_volume;
+		float					_gain;
 		bool					_loop;
 		bool					_stopped;
 		bool					_managed;
 
 	public:
 
-		SoundVirtualSource(ISoundDevice *d, int priority, float volume, bool loop, bool managed=false);
+		SoundVirtualSource(
+			ISoundDevice *device,
+			int priority,
+			float gain,
+			bool loop,
+			const Vector3& position,
+			const Vector3& velocity,
+			const Vector3& direction,
+			float refDist, float maxDist,
+			float rollOff,
+			float inAngle, float outAngle,
+			bool managed=false
+		);
 		~SoundVirtualSource()
 		{
 			delete _source;

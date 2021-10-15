@@ -3,11 +3,35 @@
 #include "SoundPlayingSource.h"
 
 
-SoundVirtualSource::SoundVirtualSource(ISoundDevice *d, int priority, float volume, bool loop, bool managed) :
-	_playingSource(0), _priority(priority), _loop(loop), _managed(managed), _sound(0), _stopped(false),
-	_volume(volume)
+SoundVirtualSource::SoundVirtualSource(
+	ISoundDevice *device,
+	int priority,
+	float gain,
+	bool loop,
+	const Vector3& position,
+	const Vector3& velocity,
+	const Vector3& direction,
+	float refDist, float maxDist,
+	float rollOff,
+	float inAngle, float outAngle,
+	bool managed
+) :
+	_playingSource(0),
+	_priority(priority),
+	_loop(loop),
+	_managed(managed),
+	_sound(0),
+	_stopped(false),
+	_gain(gain)
 {
-	_source = d->createVirtualSource();
-	_source->setVolume(volume);
+	_source = device->createVirtualSource(
+		position,
+		velocity,
+		direction,
+		refDist, maxDist,
+		rollOff,
+		inAngle, outAngle
+	);
+	_source->setGain(gain);
 }
 

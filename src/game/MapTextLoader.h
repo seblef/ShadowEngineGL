@@ -21,7 +21,6 @@ protected:
 	void					parseBuilding(ScriptFile& sf);
 	void					parseBuildingObject(ScriptFile& sf, Map& m);
 
-	ISoundCone*				parseSoundCone(ScriptFile& sf);
 	void					buildMatrix(const Vector3& rot, float x, float y, float height, Matrix4& world) const
 	{
 		Matrix4 rot_x, rot_y, rot_z;

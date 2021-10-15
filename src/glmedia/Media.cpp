@@ -1,7 +1,7 @@
 
 #include "Media.h"
 #include "GLVideoDevice.h"
-#include "GLSoundDevice.h"
+#include "ALSoundDevice.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "../loguru.hpp"
@@ -192,7 +192,7 @@ Media::Media(int width, int height, bool windowed, unsigned int input_flags) : _
     glfwSetScrollCallback(_win, scrollCallback);
 
     _video=new GLVideoDevice(width,height,windowed,_win);
-    _audio=new GLSoundDevice;
+    _audio=new ALSoundDevice;
 }
 
 Media::~Media()
