@@ -40,6 +40,7 @@ set(ALL_LIBS
     glfw
     -lopenal
     -lalut
+    -lyaml-cpp
 )
 
 

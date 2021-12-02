@@ -42,7 +42,7 @@ void GameApp::run(const string& dataFolder)
 	new Renderer(media->getVideo(),cfg);
 	new Renderer2D(media->getVideo());
 
-	CharacterDB *cdb=new CharacterDB("Game/Characters.txt");
+	CharacterDB *cdb=new CharacterDB("Game/characters.yaml");
 	WeaponDB *wdb=new WeaponDB("Game/Weapons.txt");
 	EntityDB* edb = new EntityDB("Game/Entities.txt");
 	EffectDB* efdb = new EffectDB("Game/Effects.txt");
