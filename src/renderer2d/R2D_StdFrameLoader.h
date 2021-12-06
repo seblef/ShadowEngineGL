@@ -2,17 +2,22 @@
 
 #include "IR2D_FrameLoader.h"
 
+namespace YAML
+{
+    class Node;
+}
+
 class R2D_StdFrameLoader : IR2D_FrameLoader
 {
 protected:
 
-	void									parseTexture(ScriptFile& sf, IVideoDevice* d) const;
-	void									parseFont(ScriptFile& sf, IVideoDevice* d) const;
-	void									parseLayer(ScriptFile& sf, R2D_Frame& f, IVideoDevice* d) const;
-	void									parseLine(ScriptFile& sf, R2D_Layer& l) const;
-	void									parseRect(ScriptFile& sf, R2D_Layer& l) const;
-	void									parseImage(ScriptFile& sf, R2D_Layer& l) const;
-	void									parseText(ScriptFile& sf, R2D_Layer& l) const;
+	void									parseTextures(const YAML::Node& node, IVideoDevice* d) const;
+	void									parseFonts(const YAML::Node& node, IVideoDevice* d) const;
+	void									parseLayers(const YAML::Node& node, R2D_Frame& f, IVideoDevice* d) const;
+	void									parseLine(const YAML::Node& node, R2D_Layer& l) const;
+	void									parseRect(const YAML::Node& node, R2D_Layer& l) const;
+	void									parseImage(const YAML::Node& node, R2D_Layer& l) const;
+	void									parseText(const YAML::Node& node, R2D_Layer& l) const;
 
 public:
 

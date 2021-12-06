@@ -4,6 +4,11 @@
 #include "GBuffer.h"
 
 
+namespace YAML
+{
+	class Node;
+}
+
 #define BLOOM_NUM_MIPS			5
 
 
@@ -53,7 +58,7 @@ protected:
 
 public:
 
-    HDR(IVideoDevice* d, const Config& cfg, IDepthTexture* depthBuffer);
+    HDR(IVideoDevice* d, const YAML::Node& cfg, IDepthTexture* depthBuffer);
 	~HDR();
 
 	ITexture*			getAccumulationBuffer()	const				{ return _accumulationBuffer; }

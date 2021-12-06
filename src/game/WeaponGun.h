@@ -13,7 +13,7 @@ protected:
 
 public:
 
-	WeaponGun(ScriptFile& sf);
+	WeaponGun(const YAML::Node& node);
 	~WeaponGun();
 
 	TraceTemplate*			getTrace() const					{ return _trace; }

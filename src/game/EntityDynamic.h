@@ -9,12 +9,9 @@ protected:
 
 	float					_density;
 
-	virtual void			parseToken(const string& token, ScriptFile& sf);
-
 public:
 
-	EntityDynamic();
-	EntityDynamic(ScriptFile& sf);
+	EntityDynamic(const YAML::Node& node);
 
 	virtual void			load();
 	virtual void			unload();

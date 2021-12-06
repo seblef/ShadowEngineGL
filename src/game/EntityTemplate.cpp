@@ -1,6 +1,8 @@
 
 #include "EntityTemplate.h"
 #include "GeometryLoader.h"
+#include "../core/YAMLCore.h"
+
 
 const char* const g_PhysicShapes[PSHAPE_COUNT] =
 {
@@ -11,9 +13,22 @@ const char* const g_PhysicShapes[PSHAPE_COUNT] =
 	"chull"
 };
 
-EntityTemplate::EntityTemplate(bool isTrigger) : _rMaterial(0), _rMesh(0), _pGeometry(0), _geometry(0), _pShape(PSHAPE_SPHERE),
-	_isTrigger(isTrigger)
+EntityTemplate::EntityTemplate(bool isTrigger, const YAML::Node& node) :
+	_rMaterial(0),
+	_rMesh(0),
+	_pGeometry(0),
+	_geometry(0),
+	_pShape(PSHAPE_SPHERE),
+	_isTrigger(isTrigger),
+	_meshName(node["mesh"].as<string>("")),
+	_materialName(node["material"].as<string>(""))
 {
+	const string& s(node["shape"].as<string>(""));
+	for (int i = 0; i < PSHAPE_COUNT; ++i)
+	{
+		if (s == g_PhysicShapes[i])
+			_pShape = (PhysicShape)i;
+	}
 }
 
 void EntityTemplate::load()
@@ -52,19 +67,4 @@ void EntityTemplate::unload()
 	_rMesh = 0;
 	_geometry = 0;
 	_pGeometry = 0;
-}
-
-void EntityTemplate::parseToken(const string& t, ScriptFile& sf)
-{
-	if (t == "geometry")			_meshName = sf.getToken();
-	else if (t == "material")		_materialName = sf.getToken();
-	else if (t == "shape")
-	{
-		const string& s = sf.getToken();
-		for (int i = 0; i < PSHAPE_COUNT; ++i)
-		{
-			if (s == g_PhysicShapes[i])
-				_pShape = (PhysicShape)i;
-		}
-	}
 }

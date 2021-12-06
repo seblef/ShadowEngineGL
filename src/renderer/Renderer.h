@@ -7,6 +7,12 @@
 #include "IVisibilitySystem.h"
 #include "BufferView.h"
 
+
+namespace YAML
+{
+	class Node;
+}
+
 class Renderer : public TSingleton<Renderer>
 {
 protected:
@@ -44,12 +50,12 @@ protected:
 	void				computeVisBounds(const ViewFrustum& vf, int w, int h);
 	void				visibility(const Camera& c);
 	void				renderPass(bool add);
-	void 				parseBufferViewFlags(Config& cfg);
+	void 				parseBufferViewFlags(const YAML::Node& node);
 	void				renderBufferViews();
 
 public:
 
-	Renderer(IVideoDevice *device, Config& cfg);
+	Renderer(IVideoDevice *device, const YAML::Node& node);
 	~Renderer();
 
 	IVideoDevice*		getVideoDevice() const											{ return _device; }

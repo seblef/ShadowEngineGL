@@ -1,32 +1,32 @@
 
 #include "EntityDB.h"
 #include "EntityFactory.h"
+#include "../core/YAMLCore.h"
+#include "../loguru.hpp"
+
 
 EntityDB::EntityDB(const string& entityFile)
 {
-	EntityTemplate* e;
-	string className, entityName;
-
-	ScriptFile sf(entityFile);
-	assert(sf.good());
-
-	while (sf.good())
+	YAML::Node root;
+	try
 	{
-		if (sf.getToken() == "entity")
-		{
-			className = sf.getToken();
-			entityName = sf.getToken();
-
-			e = EntityFactory::loadEntity(className, sf);
-			assert(e);
-			registerData(entityName, e);
-		}
+		root = YAML::LoadFile(entityFile);
 	}
+	catch(const std::exception& e)
+	{
+		LOG_S(ERROR) << e.what();
+		return;
+	}
+
+	for(YAML::const_iterator e=root.begin(); e!=root.end(); ++e)
+		registerData(
+			e->first.as<string>(),
+			EntityFactory::loadEntity(e->second["class"].as<string>(), e->second)
+		);
 }
 
 void EntityDB::unloadEntities()
 {
-	map<string, EntityTemplate*>::iterator t(_data.begin());
-	for (; t != _data.end(); ++t)
-		t->second->unload();
+	for(auto const& e : _data)
+		e.second->unload();
 }

@@ -8,6 +8,11 @@ using namespace Core;
 class GameEntityTrigger;
 class GameCharacter;
 
+namespace YAML
+{
+	class Node;
+}
+
 #define TRIGGER_REBIRTH_DELAY				5.0f
 
 class Trigger
@@ -29,5 +34,5 @@ public:
 
 	TriggerFactory()			{}
 
-	static Trigger*				createTrigger(const string& className, ScriptFile& sf);
+	static Trigger*				createTrigger(const string& className, const YAML::Node& node);
 };

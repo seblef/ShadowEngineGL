@@ -1,11 +1,12 @@
 
 #include "HDR.h"
+#include "../core/YAMLCore.h"
 #include "../loguru.hpp"
 
 
 HDR::HDR(
 	IVideoDevice* d,
-	const Config& cfg,
+	const YAML::Node& cfg,
 	IDepthTexture* depthBuffer
 ) :
 	_enable(true),
@@ -27,12 +28,12 @@ HDR::HDR(
 	_hdrBuffer.exposure = 0.7f;
 	_hdrBuffer.gamma = 2.2f;
 
-	cfg.getVar("HDR_enable", _enable);
-	cfg.getVar("HDR_brightness_threshold", _hdrBuffer.brightnessThreshold);
-	cfg.getVar("HDR_bloom_radius", _hdrBuffer.radius);
-	cfg.getVar("HDR_bloom_strength", _hdrBuffer.strength);
-	cfg.getVar("HDR_exposure", _hdrBuffer.exposure);
-	cfg.getVar("HDR_gamma", _hdrBuffer.gamma);
+	_enable = cfg["enable"].as<bool>(true);
+	_hdrBuffer.brightnessThreshold = cfg["brightness_threshold"].as<float>(_hdrBuffer.brightnessThreshold);
+	_hdrBuffer.radius = cfg["bloom_radius"].as<float>(_hdrBuffer.radius);
+	_hdrBuffer.strength = cfg["bloom_strength"].as<float>(_hdrBuffer.strength);
+	_hdrBuffer.exposure = cfg["exposure"].as<float>(_hdrBuffer.exposure);
+	_hdrBuffer.gamma = cfg["gamma"].as<float>(_hdrBuffer.gamma);
 
 	for(unsigned int i=0;i<BLOOM_NUM_MIPS;++i)
 	{

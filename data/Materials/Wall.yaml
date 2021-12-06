@@ -1,0 +1,4 @@
+material:
+  renderer:
+    textures:
+      diffuse: Textures/SkinTest.jpg

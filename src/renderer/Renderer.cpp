@@ -14,19 +14,23 @@
 #include "HDR.h"
 #include "../loguru.hpp"
 #include "../ParticleLib.h"
+#include "../core/YAMLCore.h"
 
 // #define RENDERER_DEBUG
 
 
 extern Light*   g_ShadowLight;
 
-Renderer::Renderer(IVideoDevice *device, Config& cfg) :
+Renderer::Renderer(IVideoDevice *device, const YAML::Node& cfg) :
 	_device(device),
 	_GBuffer(device),
 	_bufferView(device, 6),
 	_currentCamera(0),
 	_bvFlags(BVF_NONE)
 {
+    YAML::Node hdr_cfg = cfg["hdr"];
+    YAML::Node hdao_cfg = cfg["hdao"];
+
 	new UpdateSystem;
 	new GroundRenderer(device);
 	new MaterialSystem(device);
@@ -36,8 +40,8 @@ Renderer::Renderer(IVideoDevice *device, Config& cfg) :
 	new ActorSkinnedRenderer(device);
 	new ShadowSystem(device);
 	new ParticleEngine(10000, device);
-	new HDAO(device, cfg);
-    new HDR(device, cfg, _GBuffer.getDepthBuffer());
+	new HDAO(device, hdao_cfg);
+    new HDR(device, hdr_cfg, _GBuffer.getDepthBuffer());
 
 	_sceneInfosCS=device->createConstantBuffer(sizeof(SceneInfosBuffer) / (4*sizeof(float)),0);
 	_objectInfosCS=device->createConstantBuffer(4,1);
@@ -328,7 +332,7 @@ void Renderer::onResize(int w, int h)
     HDR::getSingletonRef().onResize(w, h, _GBuffer.getDepthBuffer());
 }
 
-void Renderer::parseBufferViewFlags(Config& cfg)
+void Renderer::parseBufferViewFlags(const YAML::Node& cfg)
 {
 	const map<string, Renderer::BufferViewFlag> flagsMap = {
 		{"gbuffer", BVF_GBUFFER},
@@ -339,9 +343,7 @@ void Renderer::parseBufferViewFlags(Config& cfg)
 		{"hdao", BVF_HDAO}
 	};
 
-	string views;
-	cfg.getVar("buffer_views", views);
-
+	const string& views(cfg["buffer_views"].as<string>(""));
 	for(auto const& flag : flagsMap)
 	{
 		if(views.find(flag.first) != string::npos)

@@ -12,16 +12,15 @@ protected:
 	static TextureSlot				getTextureSlot(const string& s);
 	static BlendMode				getBlendMode(const string& bm);
 	static CullMode					getCullMode(const string& c);
-	static void						parseVector2(ScriptFile& sf, Vector2& v);
-	static void						parseMaterialAnimation(MaterialCreate& mc, ScriptFile& sf);
+	static void						parseMaterialAnimation(MaterialCreate& mc, const YAML::Node& node);
 
 public:
 
 	TextParser()			{}
 	~TextParser()			{}
 
-	static GameMaterial*			parseMaterial(ScriptFile& sf, string* matName=0);
-	static TemplateMesh*			parseMesh(ScriptFile& sf, string* meshName = 0, const string* geoDir = 0);
-	static TemplateParticleSystem*	parseParticles(ScriptFile& sf, string* particleName=0);
-	static void						parseLight(ScriptFile& sf, LightCreate_t& lc, Light::LightType& t);
+	static GameMaterial*			parseMaterial(const YAML::Node& node, const string& name);
+	static TemplateMesh*			parseMesh(const YAML::Node& node, const string& name, const string* geoDir = 0);
+	static TemplateParticleSystem*	parseParticles(const YAML::Node& node, const string& name);
+	static void						parseLight(const YAML::Node& node, LightCreate_t& lc, Light::LightType& t);
 };

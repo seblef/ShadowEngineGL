@@ -1,5 +1,6 @@
 
 #include "ParticleEmitterTemplate.h"
+#include "../core/YAMLCore.h"
 
 using namespace std;
 
@@ -8,80 +9,63 @@ ParticleEmitterTemplate::~ParticleEmitterTemplate()
 	if (_material)		delete _material;
 }
 
-void ParticleEmitterTemplate::parseCommon(ScriptFile& sf)
+ParticleEmitterTemplate::ParticleEmitterTemplate(const char* emitterName, const YAML::Node& node) :
+	_emitterName(emitterName),
+	_material(0),
+	_maxParticles(10),
+    _gravity(Vector3::NullVector),
+	_emissionRate(0)
 {
-	string token(sf.getToken());
-	while (sf.good() && token != "end_common")
+	if(node["life"])
 	{
-		if (token == "life")
-		{
-			_params1.setLife(stof(sf.getToken()));
-			_params2.setLife(stof(sf.getToken()));
-		}
-		else if (token == "mass")
-		{
-			_params1.setMass(stof(sf.getToken()));
-			_params2.setMass(stof(sf.getToken()));
-		}
-		else if (token == "friction")
-		{
-			_params1.setFriction(stof(sf.getToken()));
-			_params2.setFriction(stof(sf.getToken()));
-		}
-		else if (token == "velocity")
-		{
-			Vector3 v;
-			sf.parseVector(v);
-			_params1.setVelocity(v);
-			sf.parseVector(v);
-			_params2.setVelocity(v);
-		}
-		else if (token == "start_color")
-		{
-			Color c;
-			sf.parseColor(c);
-			_params1.setStartColor(c);
-			sf.parseColor(c);
-			_params2.setStartColor(c);
-		}
-		else if (token == "end_color")
-		{
-			Color c;
-			sf.parseColor(c);
-			_params1.setEndColor(c);
-			sf.parseColor(c);
-			_params2.setEndColor(c);
-		}
-		else if (token == "start_size")
-		{
-			Vector3 s;
-			sf.parseVector(s);
-			_params1.setStartSize(s);
-			sf.parseVector(s);
-			_params2.setStartSize(s);
-		}
-		else if (token == "end_size")
-		{
-			Vector3 s;
-			sf.parseVector(s);
-			_params1.setEndSize(s);
-			sf.parseVector(s);
-			_params2.setEndSize(s);
-		}
-		else if (token == "material")
-		{
-			if (_material)		delete _material;
-			_material = new ParticleMaterial(sf);
-		}
-		else if (token == "renderer")
-			_renderer = sf.getToken();
-		else if (token == "max_particles")
-			_maxParticles = stoi(sf.getToken());
-		else if (token == "gravity")
-			sf.parseVector(_gravity);
-		else if (token == "emission_rate")
-			_emissionRate = stof(sf.getToken());
-
-		token = sf.getToken();
+		_params1.setLife(node["life"][0].as<float>());
+		_params2.setLife(node["life"][1].as<float>());
 	}
+	if(node["mass"])
+	{
+		_params1.setMass(node["mass"][0].as<float>());
+		_params2.setMass(node["mass"][1].as<float>());
+	}
+	if(node["friction"])
+	{
+		_params1.setFriction(node["friction"][0].as<float>());
+		_params2.setFriction(node["friction"][1].as<float>());
+	}
+	if(node["velocity"])
+	{
+		_params1.setVelocity(node["velocity"][0].as<Core::Vector3>());
+		_params2.setVelocity(node["velocity"][1].as<Core::Vector3>());
+	}
+	if(node["start_color"])
+	{
+		_params1.setStartColor(node["start_color"][0].as<Core::Color>());
+		_params2.setStartColor(node["start_color"][1].as<Core::Color>());
+	}
+	if(node["end_color"])
+	{
+		_params1.setEndColor(node["end_color"][0].as<Color>());
+		_params2.setEndColor(node["end_color"][1].as<Color>());
+	}
+	if(node["start_size"])
+	{
+		_params1.setStartSize(node["start_size"][0].as<Core::Vector3>());
+		_params2.setStartSize(node["start_size"][1].as<Core::Vector3>());
+	}
+	if(node["end_size"])
+	{
+		_params1.setEndSize(node["end_size"][0].as<Core::Vector3>());
+		_params2.setEndSize(node["end_size"][1].as<Core::Vector3>());
+	}
+    YAML::Node material = node["material"];
+	if(material)
+	{
+		if(_material)
+			delete _material;
+		_material = new ParticleMaterial(material);
+	}
+
+	_renderer = node["renderer"].as<string>();
+	_maxParticles = node["max_particles"].as<int>(10);
+	_gravity = node["gravity"].as<Vector3>(Vector3::NullVector);
+	_emissionRate = node["emission_rate"].as<float>(0.f);
 }

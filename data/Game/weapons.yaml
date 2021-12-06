@@ -1,0 +1,73 @@
+Gun1:
+  class: gun
+
+  mesh: Geometry/Gun1.geo
+  material: Materials/Gun1
+
+  range: 20.0
+
+  fire_sound: Sounds/bhit.wav
+  fire_point: [-0.018, 0.128, 0.62]
+
+  trace:
+    density: 20.0
+    particle_system:
+      emitters:
+        - type: linear
+          life: [0.5, 0.6]
+          mass: [0.5, 0.5]
+          friction: [0.0, 0.0]
+          velocity: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+          start_color: [[0.8, 0.8, 0.8, 1], [1, 1, 1, 1]]
+          end_color: [[0.4, 0.4, 0.4, 0], [0.5, 0.5, 0.5, 0]]
+          start_size: [[0.01, 0.01, 0.01], [0.02, 0.02, 0.02]]
+          end_size: [[0.001, 0.001, 0.001], [0.005, 0.005, 0.005]]
+          gravity: [0, 0, 0]
+          renderer: quad
+          max_particles: 1000
+          emission_rate: 0
+          material:
+            texture: Particles/Textures/smoke.tga
+            blend:
+              src: src_color
+              dest: inv_src_color
+
+
+Rocket1:
+  class: rocket
+
+  mesh: Geometry/Gun1.geo
+  material: Materials/Gun1
+
+  range: 20.0
+
+  fire_sound: Sounds/bhit.wav
+  fire_point: [-0.018, 0.128, 0.62]
+
+  rocket:
+    mesh: Geometry/rocket.geo
+    material: Materials/Barrel
+    life: 2.5
+    velocity: 20.0
+    explosion: barrel01
+    sound: Sounds/tracer.wav
+    smoke:
+      emitters:
+        - type: point
+          life: [2.4, 3]
+          mass: [0.5, 0.5]
+          friction: [0, 0]
+          velocity: [[-1, 0.8, -1], [1, 1, 1]]
+          start_color: [[0.8, 0.8, 0.8, 1], [1, 1, 1, 1]]
+          end_color: [[0, 0, 0, 0], [0, 0, 0, 0]]
+          start_size: [[0.05, 0.05, 0.05], [0.1, 0.1, 0.1]]
+          end_size: [[0.15, 0.15, 0.15], [0.25, 0.25, 0.25]]
+          gravity: [0, 0, 0]
+          renderer: quad
+          max_particles: 1000
+          emission_rate: 100
+          material:
+            texture: Particles/Textures/smoke.tga
+            blend:
+              src: src_color
+              dest: inv_src_color

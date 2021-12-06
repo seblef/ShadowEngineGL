@@ -12,7 +12,7 @@ protected:
 
 public:
 
-	TriggerWeapon(ScriptFile& sf);
+	TriggerWeapon(const YAML::Node& node);
 
 	void				apply(GameCharacter* actor, GameEntityTrigger* entity);
 };

@@ -15,7 +15,7 @@ protected:
 
 public:
 
-	EntityTrigger(ScriptFile& sf);
+	EntityTrigger(const YAML::Node& node);
 	~EntityTrigger();
 
 	void				load();

@@ -3,8 +3,6 @@
 #include "./core/BBox3.h"
 #include "./core/BBox2.h"
 #include "./core/Quaternion.h"
-#include "./core/Config.h"
-#include "./core/ScriptFile.h"
 #include "./core/Vertex.h"
 #include "./core/ViewFrustum.h"
 #include "./core/TDynamicTab.h"

@@ -9,5 +9,5 @@ public:
 
 	EntityFactory()				{}
 
-	static EntityTemplate*		loadEntity(const string& className, ScriptFile& sf);
+	static EntityTemplate*		loadEntity(const string& className, const YAML::Node& node);
 };

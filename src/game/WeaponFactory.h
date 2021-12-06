@@ -9,5 +9,5 @@ public:
 
 	WeaponFactory()				{}
 
-	static Weapon*				loadWeapon(const string& className, ScriptFile& sf);
+	static Weapon*				loadWeapon(const string& className, const YAML::Node& node);
 };

@@ -3,35 +3,37 @@
 #include "ActorLoader.h"
 #include "ActorAnimLoader.h"
 
-Character::Character(ScriptFile& fl) : _forwardSpeed(1), _backwardSpeed(0.8f), _lateralSpeed(0.5f), _rotationSpeed(60.0f),
-    _actor("Test"), _rActor(0), _rMat(0), _aiMachine("Default"), _fov((float)M_PI / 2.0f), _visDistance(30.0f),
-	_lifePoints(100.0f)
+Character::Character(
+	const string& name,
+	const string& actor,
+	const string& material,
+	float forwardSpeed,
+	float backwardSpeed,
+	float lateralSpeed,
+	float rotationSpeed,
+	const string& weapon,
+	const string& aiMachine,
+	const string& aiState,
+	float fov,
+	float visDistance,
+	float life,
+	const AnimMap& anims
+) :
+	_name(name),
+	_actor(actor),
+	_material(material),
+	_forwardSpeed(forwardSpeed),
+	_backwardSpeed(backwardSpeed),
+	_lateralSpeed(lateralSpeed),
+	_rotationSpeed(rotationSpeed),
+	_weapon(weapon),
+	_aiMachine(aiMachine),
+	_aiState(aiState),
+	_fov(fov * (float)M_PI / 180.0f),
+	_visDistance(visDistance),
+	_lifePoints(life),
+	_animations(anims)
 {
-	_name=fl.getToken();
-
-	string t(fl.getToken());
-    while(fl.good() && t!="end_character")
-	{
-        if(t=="actor")					_actor=fl.getToken();
-        else if(t=="material")			_material=fl.getToken();
-        else if(t=="forward_speed")		_forwardSpeed=stof(fl.getToken());
-        else if(t=="backward_speed")	_backwardSpeed=stof(fl.getToken());
-        else if(t=="lateral_speed")		_lateralSpeed=stof(fl.getToken());
-        else if(t=="rotation_speed")	_rotationSpeed=stof(fl.getToken());
-        else if(t=="weapon")			_weapon=fl.getToken();
-		else if (t == "ai_machine")			_aiMachine = fl.getToken();
-		else if (t == "ai_state")			_aiState = fl.getToken();
-		else if (t == "fov")				_fov = stof(fl.getToken()) * (float)M_PI / 180.0f;
-		else if (t == "visibility_dist")	_visDistance = stof(fl.getToken());
-		else if (t == "life")				_lifePoints = stof(fl.getToken());
-        else if(t=="animation")
-		{
-			_animNames.push_back(fl.getToken());
-			_animFiles.push_back(fl.getToken());
-		}
-
-		t=fl.getToken();
-	}
 }
 
 void Character::load()
@@ -41,8 +43,8 @@ void Character::load()
 		_rMat=GameMaterial::loadMaterial(_material);
 		_rActor=ActorLoader::loadActor(_actor,_rMat->getRMaterial(),Renderer::getSingletonRef().getVideoDevice());
 
-		for(unsigned int i=0;i<_animFiles.size();++i)
-			_rActor->addAnimation(_animNames[i],ActorAnimLoader::loadActorAnimation(_animFiles[i]));
+		for(auto const& anim : _animations)
+			_rActor->addAnimation(anim.first, ActorAnimLoader::loadActorAnimation(anim.second));
 	}
 }
 

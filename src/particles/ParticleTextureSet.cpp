@@ -1,16 +1,14 @@
 
 #include "ParticleTextureSet.h"
+#include <yaml-cpp/yaml.h>
 #include <algorithm>
 
-ParticleTextureSet::ParticleTextureSet(ScriptFile& sf, IVideoDevice* d) : _device(d)
-{
-	string token(sf.getToken());
 
-	while(token!="end_texture_set")
-	{
-		addTexture(token);
-		token=sf.getToken();
-	}
+ParticleTextureSet::ParticleTextureSet(const YAML::Node& node, IVideoDevice* d)
+	: _device(d)
+{
+	for(YAML::const_iterator tex=node.begin(); tex!= node.end(); ++tex)
+		addTexture(tex->as<string>());
 }
 
 ParticleTextureSet::ParticleTextureSet(const ParticleTextureSet& s) : _device(s._device)
@@ -45,9 +43,8 @@ ParticleTextureSet::ParticleTextureSet(const string& dir, IVideoDevice* d) : _de
 
 ParticleTextureSet::~ParticleTextureSet()
 {
-	TexVector::iterator t(_textures.begin());
-	for(;t!=_textures.end();++t)
-		(*t)->remRef();
+	for(auto& t : _textures)
+		t->remRef();
 }
 
 void ParticleTextureSet::addTexture(const string& texFile)

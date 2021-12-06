@@ -16,7 +16,7 @@ protected:
 	
 public:
 
-	EntityExplosive(ScriptFile& sf);
+	EntityExplosive(const YAML::Node& node);
 	~EntityExplosive();
 
 	void				load();

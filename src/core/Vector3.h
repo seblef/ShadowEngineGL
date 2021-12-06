@@ -2,6 +2,7 @@
 #pragma once
 
 #include "Matrix4.h"
+#include <fstream>
 
 namespace Core
 {

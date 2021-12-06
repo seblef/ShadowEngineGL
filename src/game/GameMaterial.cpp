@@ -1,6 +1,9 @@
 
 #include "GameMaterial.h"
 #include "TextParser.h"
+#include "../core/YAMLCore.h"
+#include "../loguru.hpp"
+
 
 GameMaterial::GameMaterial(Material *m, Geometry *d) : _rMat(m), _rDebris(0)
 {
@@ -17,9 +20,17 @@ GameMaterial::~GameMaterial()
 
 GameMaterial* GameMaterial::loadMaterial(const string& matFile)
 {
-	ScriptFile sf(matFile + ".txt");
-	assert(sf.good());
+	YAML::Node root;
 
-	sf.getToken();		// material keyword
-	return TextParser::parseMaterial(sf);
+	try
+	{
+		root = YAML::LoadFile(matFile + ".yaml");
+	}
+	catch(const std::exception& e)
+	{
+		LOG_S(ERROR) << e.what();
+		return 0;
+	}
+    YAML::Node material = root["material"];
+	return TextParser::parseMaterial(material, matFile);
 }

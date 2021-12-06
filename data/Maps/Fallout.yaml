@@ -1,0 +1,300 @@
+map:
+  width: 256
+  height: 1024
+  start_position: [110.4, 1.16]
+  ambient_light: [0.305882, 0.305882, 0.305882, 1]
+  ground: Maps/Fallout.sgd
+
+global_light:
+  direction: [0.187827, -0.939133, 0.281741]
+  color: [0.996078, 0.996078, 0.580392, 1]
+
+resources:
+  geometries:
+    - Geometry/Fallout/OldHouse.GEO
+    - Buildings/Fallout/Church/FChurch01.geo
+    - Buildings/Fallout/Church/FChurch02.geo
+    - Buildings/Fallout/Church/FChurch03.geo
+    - Buildings/Fallout/Church/FChurch04.geo
+    - Buildings/Fallout/Church/FChurch05.geo
+    - Buildings/Fallout/Church/FChurch06.geo
+    - Buildings/Fallout/Church/FChurch07.geo
+    - Buildings/Fallout/Church/FChurch08.geo
+    - Buildings/Fallout/Church/FChurch09.geo
+    - Buildings/Fallout/Church/FChurch10.geo
+    - Buildings/Fallout/Church/FChurch11.geo
+    - Buildings/Fallout/Church/FChurch12.geo
+    - Buildings/Fallout/Church/FChurch13.geo
+    - Buildings/Fallout/Church/FChurch14.geo
+    - Buildings/Fallout/Church/FChurch15.geo
+  materials:
+    DirtyRoad:
+      renderer:
+        textures:
+          diffuse: Textures/Fallout/Ground/RoadsDirt0035_5_S.dds
+        uv:
+          scale: [0.12, 0.12]
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 0
+        specular_intensity: 0
+    default:
+      renderer:
+        textures:
+          diffuse: Textures/Test.dds
+          normal: Textures/normal.bmp
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 0
+        specular_intensity: 0
+    OldHouse:
+      renderer:
+        textures:
+          diffuse: Textures/Fallout/Archi/OldHouse.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    Desert05:
+      renderer:
+        textures:
+          diffuse: Textures/Fallout/Ground/Desert05.dds
+          normal: Textures/Fallout/Ground/Desert05_N2.dds
+        uv:
+          scale: [0.2, 0.2]
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch02:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/a2baa7a2.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch01:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/09c58359.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch03:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/7a6d78f5.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch04:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/0f64bc70.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch05:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/4c36a9fb.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch06:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/723323b8.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch07:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/a5e39c65.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch08:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/9d476543.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch09:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/298cc8ae.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch10:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/d7ca50cb.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch11:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/d4dde499.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch12:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/23b9807c.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch13:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/1e8599fb.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch14:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/6fe78a94.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+    FChurch15:
+      renderer:
+        textures:
+          diffuse: Buildings/Fallout/Church/329ade7f.dds
+        ambient_color: [1, 1, 1, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0.9, 0.9, 0.9, 1]
+        shininess: 0.1
+        specular_intensity: 1
+  meshes:
+    OldHouse:
+      geometry: Geometry/Fallout/OldHouse.GEO
+      material: OldHouse
+      physic_shape: Mesh
+    FChurch01:
+      geometry: Buildings/Fallout/Church/FChurch01.geo
+      material: FChurch01
+      physic_shape: mesh
+    FChurch02:
+      geometry: Buildings/Fallout/Church/FChurch02.geo
+      material: FChurch02
+      physic_shape: mesh
+    FChurch03:
+      geometry: Buildings/Fallout/Church/FChurch03.geo
+      material: FChurch03
+      physic_shape: mesh
+    FChurch04:
+      geometry: Buildings/Fallout/Church/FChurch04.geo
+      material: FChurch04
+      physic_shape: mesh
+    FChurch05:
+      geometry: Buildings/Fallout/Church/FChurch05.geo
+      material: FChurch05
+      physic_shape: mesh
+    FChurch06:
+      geometry: Buildings/Fallout/Church/FChurch06.geo
+      material: FChurch06
+      physic_shape: mesh
+    FChurch07:
+      geometry: Buildings/Fallout/Church/FChurch07.geo
+      material: FChurch07
+      physic_shape: mesh
+    FChurch08:
+      geometry: Buildings/Fallout/Church/FChurch08.geo
+      material: FChurch08
+      physic_shape: mesh
+    FChurch09:
+      geometry: Buildings/Fallout/Church/FChurch09.geo
+      material: FChurch09
+      physic_shape: mesh
+    FChurch10:
+      geometry: Buildings/Fallout/Church/FChurch10.geo
+      material: FChurch10
+      physic_shape: mesh
+    FChurch11:
+      geometry: Buildings/Fallout/Church/FChurch11.geo
+      material: FChurch11
+      physic_shape: mesh
+    FChurch12:
+      geometry: Buildings/Fallout/Church/FChurch12.geo
+      material: FChurch12
+      physic_shape: mesh
+    FChurch13:
+      geometry: Buildings/Fallout/Church/FChurch13.geo
+      material: FChurch13
+      physic_shape: mesh
+    FChurch14:
+      geometry: Buildings/Fallout/Church/FChurch14.geo
+      material: FChurch14
+      physic_shape: mesh
+    FChurch15:
+      geometry: Buildings/Fallout/Church/FChurch15.geo
+      material: FChurch15
+      physic_shape: mesh
+  buildings:
+    Church:
+      meshes:
+        - FChurch01
+        - FChurch02
+        - FChurch03
+        - FChurch04
+        - FChurch05
+        - FChurch06
+        - FChurch07
+        - FChurch08
+        - FChurch09
+        - FChurch10
+        - FChurch11
+        - FChurch12
+        - FChurch13
+        - FChurch14
+        - FChurch15
+
+objects:
+  - class: mesh
+    template: OldHouse
+    position: [88.7517, 7.66688]
+    rotation: [0, -270, 0]
+    height: -0.025133
+  - class: building
+    template: Church
+    position: [88.7517, 40.66688]

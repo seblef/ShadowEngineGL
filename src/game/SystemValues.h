@@ -5,6 +5,11 @@
 
 using namespace Core;
 
+namespace YAML
+{
+	class Node;
+}
+
 class SystemValues : public TSingleton<SystemValues>
 {
 protected:
@@ -53,7 +58,7 @@ public:
 		{}
 	~SystemValues()		{}
 
-	void				parseConfig(Config& cfg);
+	void				parseConfig(const YAML::Node& node);
 
 	bool				getDemoMode() const						{ return _demoMode; }
 	bool				getShowFPS() const						{ return _showFPS; }

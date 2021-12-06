@@ -6,6 +6,10 @@
 
 class Character
 {
+public:
+
+	typedef std::map<std::string, std::string> AnimMap;
+
 protected:
 
 	string				_name;
@@ -21,15 +25,29 @@ protected:
 	float				_lateralSpeed;
 	float				_rotationSpeed;
 	float				_lifePoints;
-	StringVector		_animNames;
-	StringVector		_animFiles;
+	AnimMap				_animations;
 
 	GameMaterial*		_rMat;
 	Actor*				_rActor;
 
 public:
 
-	Character(ScriptFile& fl);
+	Character(
+		const string& name,
+		const string& actor,
+		const string& material,
+		float forwardSpeed,
+		float backwardSpeed,
+		float lateralSpeed,
+		float rotationSpeed,
+		const string& weapon,
+		const string& aiMachine,
+		const string& aiState,
+		float fov,
+		float visDistance,
+		float life,
+		const AnimMap& anims
+	);
 	~Character()							{ unload(); }
 
 	const string&							getName() const							{ return _name; }

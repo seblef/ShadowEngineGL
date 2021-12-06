@@ -1,19 +1,20 @@
 
 #include "EntityTrigger.h"
 #include "GameEntityTrigger.h"
+#include "../core/YAMLCore.h"
 
-EntityTrigger::EntityTrigger(ScriptFile& sf) : EntityTemplate(true), _trigger(0), _animated(false)
+
+EntityTrigger::EntityTrigger(const YAML::Node& node) :
+	EntityTemplate(true, node),
+	_trigger(0),
+	_animated(node["animated"].as<bool>(false))
 {
-	string t(sf.getToken());
-	while (sf.good() && t != "end_entity")
-	{
-		if (t == "trigger")			_trigger = TriggerFactory::createTrigger(sf.getToken(), sf);
-		else if (t == "animated")	_animated = true;
-		else
-			parseToken(t, sf);
-
-		t = sf.getToken();
-	}
+    YAML::Node trigger = node["trigger"];
+	if(trigger)
+		_trigger = TriggerFactory::createTrigger(
+			trigger["class"].as<string>(),
+			trigger
+		);
 }
 
 EntityTrigger::~EntityTrigger()

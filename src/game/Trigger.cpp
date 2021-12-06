@@ -2,10 +2,10 @@
 #include "Trigger.h"
 #include "TriggerWeapon.h"
 
-Trigger* TriggerFactory::createTrigger(const string& className, ScriptFile& sf)
+Trigger* TriggerFactory::createTrigger(const string& className, const YAML::Node& node)
 {
 	if (className == "weapon")
-		return new TriggerWeapon(sf);
+		return new TriggerWeapon(node);
 	else
 		return 0;
 }

@@ -1,5 +1,6 @@
 
 #include "HDAO.h"
+#include "../core/YAMLCore.h"
 #include <random>
 #include <memory>
 
@@ -62,7 +63,7 @@ void generateKernel(Vector4 *kernel, unsigned int kernelSize)
 }
 
 
-HDAO::HDAO(IVideoDevice* d, const Config& cfg) :
+HDAO::HDAO(IVideoDevice* d, const YAML::Node& cfg) :
 	_enable(true),
 	_device(d),
     _shader(0),
@@ -81,9 +82,9 @@ HDAO::HDAO(IVideoDevice* d, const Config& cfg) :
 	_hBuffer.kernelSize = 64;
 	_hBuffer.radius = 0.5f;
 
-	cfg.getVar("HDAO_enable", _enable);
-	cfg.getVar("HDAO_radius", _hBuffer.radius);
-	cfg.getVar("HDAO_kernel_size", _hBuffer.kernelSize);
+	_enable = cfg["enable"].as<bool>(true);
+	_hBuffer.radius = cfg["radius"].as<float>(_hBuffer.radius);
+	_hBuffer.kernelSize = cfg["kernel_size"].as<float>(_hBuffer.kernelSize);
 
 	if (_enable)
 	{

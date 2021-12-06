@@ -40,6 +40,7 @@ set(ALL_LIBS
     glfw
     -lopenal
     -lalut
+    -lyaml-cpp
 )
 
 
@@ -58,13 +59,11 @@ set(CORE_SOURCES
     src/core/BBox.cpp
     src/core/Camera.cpp
     src/core/CharUtil.cpp
-    src/core/Config.cpp
     src/core/core.cpp
     src/core/FileSystemFactory.cpp
     src/core/IFileSystem.cpp
     src/core/Matrix.cpp
     src/core/Quaternion.cpp
-    src/core/ScriptFile.cpp
     src/core/StdFile.cpp
     src/core/StdFileList.cpp
     src/core/Vector.cpp
@@ -175,7 +174,6 @@ set(PARTICLES_SOURCES
     src/particles/ParticleLinearEmitter.cpp
     src/particles/ParticleMaterial.cpp
     src/particles/ParticlePointEmitter.cpp
-    src/particles/ParticlePointEmitterTemplate.cpp
     src/particles/ParticleRenderer.cpp
     src/particles/ParticleSystem.cpp
     src/particles/ParticleSystemTemplate.cpp

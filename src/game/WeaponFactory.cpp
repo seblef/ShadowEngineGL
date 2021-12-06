@@ -4,13 +4,13 @@
 #include "WeaponRocket.h"
 
 
-Weapon* WeaponFactory::loadWeapon(const string& className, ScriptFile& sf)
+Weapon* WeaponFactory::loadWeapon(const string& className, const YAML::Node& node)
 {
 	Weapon* w=0;
 	if (className == "gun")
-		w = new WeaponGun(sf);
+		w = new WeaponGun(node);
 	else if (className == "rocket")
-		w = new WeaponRocket(sf);
+		w = new WeaponRocket(node);
 
 	return w;
 }

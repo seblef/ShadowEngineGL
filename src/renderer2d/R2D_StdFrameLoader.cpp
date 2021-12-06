@@ -6,155 +6,128 @@
 #include "R2D_Rect.h"
 #include "R2D_Text.h"
 #include "Renderer2D.h"
+#include "../core/YAMLCore.h"
+#include "../loguru.hpp"
 
 
 R2D_Frame* R2D_StdFrameLoader::loadFrame(const string& frameFile, IVideoDevice* d)
 {
-	ScriptFile sf(frameFile);
-	if(!sf.good())
-		return 0;
+    YAML::Node root;
+    try
+    {
+        root = YAML::LoadFile(frameFile);
+    }
+    catch(const std::exception& e)
+    {
+        LOG_S(ERROR) << e.what();
+    }
 
-    if(sf.getToken()!="frame")
-		return 0;
-
-	string frame_name(sf.getToken());
 	R2D_Frame* f=new R2D_Frame;
 
-	string t(sf.getToken());
-    while(sf.good() && t!="end_frame")
-	{
-        if(t=="texture")			parseTexture(sf,d);
-        else if(t=="font")			parseFont(sf,d);
-        else if(t=="layer")			parseLayer(sf,*f,d);
+    YAML::Node textures = root["textures"];
+    if(textures)
+        parseTextures(textures, d);
+    
+    YAML::Node fonts = root["fonts"];
+    if(fonts)
+        parseFonts(fonts, d);
 
-		t=sf.getToken();
-	}
+    YAML::Node layers = root["layers"];
+    parseLayers(layers, *f, d);
 
 	return f;
 }
 
-void R2D_StdFrameLoader::parseTexture(ScriptFile& sf, IVideoDevice* d) const
+void R2D_StdFrameLoader::parseTextures(const YAML::Node& node, IVideoDevice* d) const
 {
-	string texName(sf.getToken());
+    for(YAML::const_iterator t=node.begin(); t!=node.end(); ++t)
+    {
+        const string& texName(t->first.as<string>());
+        const string& fileName(t->second.as<string>());
 
-	if(Renderer2D::getSingletonRef().getTextureDB().getData(texName))
-		sf.getToken();		// texture filename
-	else
-	{
-		ITexture* t=d->createTexture(sf.getToken());
-		Renderer2D::getSingletonRef().getTextureDB().registerData(texName,t);
-	}
+        if(!Renderer2D::getSingletonRef().getTextureDB().getData(texName))
+        {
+            ITexture* t=d->createTexture(fileName);
+            Renderer2D::getSingletonRef().getTextureDB().registerData(texName,t);
+        }
+    }
 }
 
-void R2D_StdFrameLoader::parseFont(ScriptFile& sf, IVideoDevice* d) const
+void R2D_StdFrameLoader::parseFonts(const YAML::Node& node, IVideoDevice* d) const
 {
-	string fontName(sf.getToken());
+    for(YAML::const_iterator f=node.begin(); f!=node.end(); ++f)
+    {
+        const string& fontName(f->first.as<string>());
+        const string& fileName(f->second.as<string>());
 
-	if(Renderer2D::getSingletonRef().getTextureDB().getData(fontName))
-		sf.getToken();		// font filename
-	else
-	{
-		R2D_Font* f=R2D_FontLoader::loadFont(sf.getToken(),d);
-		Renderer2D::getSingletonRef().getFontDB().registerData(fontName,f);
-	}
+        if(!Renderer2D::getSingletonRef().getTextureDB().getData(fontName))
+        {
+            R2D_Font* f=R2D_FontLoader::loadFont(fileName, d);
+            Renderer2D::getSingletonRef().getFontDB().registerData(fontName, f);
+        }
+    }
 }
 
-void R2D_StdFrameLoader::parseLayer(ScriptFile& sf, R2D_Frame& f, IVideoDevice* d) const
+void R2D_StdFrameLoader::parseLayers(const YAML::Node& node, R2D_Frame& f, IVideoDevice* d) const
 {
-	R2D_Layer *l=new R2D_Layer;
-	f.getVector().push_back(l);
+    for(YAML::const_iterator l=node.begin(); l!=node.end(); ++l)
+    {
+        R2D_Layer *layer=new R2D_Layer;
+        f.getVector().push_back(layer);
 
-	string t(sf.getToken());
-    while(sf.good() && t!="end_layer")
-	{
-        if(t=="line")			parseLine(sf,*l);
-        else if(t=="rect")		parseRect(sf,*l);
-        else if(t=="image")		parseImage(sf,*l);
-        else if(t=="text")		parseText(sf,*l);
-		t=sf.getToken();
-	}
+        for(YAML::const_iterator obj=l->begin(); obj!=l->end(); ++obj)
+        {
+            YAML::Node object = *obj;
+            const string& obj_class(object["class"].as<string>());
+
+            if(obj_class == "line")
+                parseLine(object, *layer);
+            else if(obj_class == "rect")
+                parseRect(object, *layer);
+            else if(obj_class == "image")
+                parseImage(object, *layer);
+            else if(obj_class == "text")
+                parseText(object, *layer);
+        }
+    }
 }
 
-void R2D_StdFrameLoader::parseLine(ScriptFile& sf, R2D_Layer& l) const
+void R2D_StdFrameLoader::parseLine(const YAML::Node& node, R2D_Layer& l) const
 {
-	Vector2 p(Vector2::NullVector);
-	Vector2 s(Vector2::UnitVector);
-	Color c(Color::White);
-
-	string t(sf.getToken());
-    while(sf.good() && t!="end_line")
-	{
-        if(t=="position")			sf.parseVector(p);
-        else if(t=="size")          sf.parseVector(s);
-        else if(t=="color")			sf.parseColor(c);
-
-		t=sf.getToken();
-	}
-
+	Vector2 p = node["position"].as<Vector2>(Vector2::NullVector);
+	Vector2 s = node["size"].as<Vector2>(Vector2::UnitVector);
+	Color c = node["color"].as<Color>(Color::White);
 	l.getSet().insert(new R2D_Line(p,s,c));
 }
 
-void R2D_StdFrameLoader::parseRect(ScriptFile& sf, R2D_Layer& l) const
+void R2D_StdFrameLoader::parseRect(const YAML::Node& node, R2D_Layer& l) const
 {
-	Vector2 p(Vector2::NullVector);
-	Vector2 s(Vector2::UnitVector);
-	Color c(Color::White);
-
-	string t(sf.getToken());
-    while(sf.good() && t!="end_rect")
-	{
-        if(t=="position")			sf.parseVector(p);
-        else if(t=="size")			sf.parseVector(s);
-        else if(t=="color")			sf.parseColor(c);
-
-		t=sf.getToken();
-	}
-
+	Vector2 p = node["position"].as<Vector2>(Vector2::NullVector);
+	Vector2 s = node["size"].as<Vector2>(Vector2::UnitVector);
+	Color c = node["color"].as<Color>(Color::White);
 	l.getSet().insert(new R2D_Rect(p,s,c));
 }
 
-void R2D_StdFrameLoader::parseImage(ScriptFile& sf, R2D_Layer& l) const
+void R2D_StdFrameLoader::parseImage(const YAML::Node& node, R2D_Layer& l) const
 {
-	Vector2 p(Vector2::NullVector);
-	Vector2 s(Vector2::UnitVector);
-	Vector2 uv_start(Vector2::NullVector);
-	Vector2 uv_end(Vector2::NullVector);
-	Color c(Color::White);
-	ITexture* tex=0;
-
-	string t(sf.getToken());
-    while(sf.good() && t!="end_image")
-	{
-        if(t=="position")			sf.parseVector(p);
-        else if(t=="size")			sf.parseVector(s);
-        else if(t=="color")			sf.parseColor(c);
-        else if(t=="uv_start")		sf.parseVector(uv_start);
-        else if(t=="uv_end")		sf.parseVector(uv_end);
-        else if(t=="texture")		tex=Renderer2D::getSingletonRef().getTextureDB().getData(sf.getToken());
-
-		t=sf.getToken();
-	}
-
+	Vector2 p = node["position"].as<Vector2>(Vector2::NullVector);
+	Vector2 s = node["size"].as<Vector2>(Vector2::UnitVector);
+	Color c = node["color"].as<Color>(Color::White);
+	Vector2 uv_start = node["uv_start"].as<Vector2>(Vector2::NullVector);
+	Vector2 uv_end = node["uv_end"].as<Vector2>(Vector2::NullVector);
+	ITexture* tex = Renderer2D::getSingletonRef().getTextureDB().getData(
+        node["texture"].as<string>("")
+    );
 	l.getSet().insert(new R2D_Image(p,s,c,uv_start,uv_end-uv_start,tex,false));
 }
 
-void R2D_StdFrameLoader::parseText(ScriptFile& sf, R2D_Layer& l) const
+void R2D_StdFrameLoader::parseText(const YAML::Node& node, R2D_Layer& l) const
 {
-	Vector2 p(Vector2::NullVector);
-	Color c(Color::White);
-	R2D_Font* f=0;
-	string text;
-
-	string t(sf.getToken());
-    while(sf.good() && t!="end_text")
-	{
-        if(t=="position")			sf.parseVector(p);
-        else if(t=="color")			sf.parseColor(c);
-        else if(t=="font")			f=Renderer2D::getSingletonRef().getFontDB().getData(sf.getToken());
-        else if(t=="text")			text=sf.getToken();
-
-		t=sf.getToken();
-	}
-
-	l.getSet().insert(new R2D_Text(f,text,p,Vector2::UnitVector,c));
+	Vector2 p = node["position"].as<Vector2>(Vector2::NullVector);
+	Color c = node["color"].as<Color>(Color::White);
+    const string& text = node["text"].as<string>("");
+	R2D_Font* f = Renderer2D::getSingletonRef().getFontDB().getData(
+        node["font"].as<string>()
+    );
+	l.getSet().insert(new R2D_Text(f, text, p, Vector2::UnitVector, c));
 }

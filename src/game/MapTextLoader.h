@@ -7,19 +7,22 @@ class MapTextLoader : public IMapLoader
 {
 protected:
 
-	void					parseToken(const string& token, ScriptFile& sf, Map& m);
-	void					parseGlobalLight(ScriptFile& sf);
-	void					parseSound(ScriptFile& sf);
-	void					parseObject(ScriptFile& sf, Map& m);
-	void					parseMeshObject(ScriptFile& sf, Map& m);
-	void					parseParticlesObject(ScriptFile& sf, Map& m);
-	void					parseSoundObject(ScriptFile& sf, Map& m);
-	void					parseLight(ScriptFile& sf, Map& m);
-	void					parseActor(ScriptFile& sf, Map& m);
-	void					parseEntity(ScriptFile& sf, Map& m);
-	void					parseGround(ScriptFile& sf, Map& m) const;
-	void					parseBuilding(ScriptFile& sf);
-	void					parseBuildingObject(ScriptFile& sf, Map& m);
+	void parseMaterials(const YAML::Node& node);
+	void parseGeometries(const YAML::Node& node);
+	void parseGlobalLight(const YAML::Node& node);
+	void parseMeshes(const YAML::Node& node);
+	void parseParticles(const YAML::Node& node);
+	void parseSounds(const YAML::Node& node);
+	void parseBuildings(const YAML::Node& node);
+	void parseObjects(const YAML::Node& node, Map& m);
+
+	void parseMeshObject(const YAML::Node& node, Map& m);
+	void parseParticlesObject(const YAML::Node& node, Map& m);
+	void parseSoundObject(const YAML::Node& node, Map& m);
+	void parseLight(const YAML::Node& node, Map& m);
+	void parseActor(const YAML::Node& node, Map& m);
+	void parseEntity(const YAML::Node& node, Map& m);
+	void parseBuildingObject(const YAML::Node& node, Map& m);
 
 	void					buildMatrix(const Vector3& rot, float x, float y, float height, Matrix4& world) const
 	{

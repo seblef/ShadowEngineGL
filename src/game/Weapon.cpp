@@ -5,13 +5,27 @@
 #include "ActionServer.h"
 #include "SystemValues.h"
 #include "../SoundLib.h"
+#include "../core/YAMLCore.h"
 
 
 
-Weapon::Weapon() : _rMaterial(0), _rMesh(0), _fireTime(0.5f), _fireSound(0),
-	_debrisFactor(1), _sparkFactor(1), _firePoint(Vector3::NullVector),
-	_range(10.0f), _damage(10.0f), _geometry(0),
-	_flashEnable(true), _flashColor(Color::White), _flashRange(5.0f)
+Weapon::Weapon(const YAML::Node& node) :
+	_rMaterial(0),
+	_rMesh(0),
+	_fireSound(0),
+	_geometry(0),
+	_meshName(node["mesh"].as<string>()),
+	_materialName(node["material"].as<string>()),
+	_fireTime(node["fire_time"].as<float>(0.5f)),
+	_fireSoundName(node["fire_sound"].as<string>("")),
+	_debrisFactor(node["debris_factor"].as<float>(1.f)),
+	_sparkFactor(node["spark_factor"].as<float>(1.f)),
+	_firePoint(node["fire_point"].as<Vector3>(Vector3::NullVector)),
+	_range(node["range"].as<float>(10.0f)),
+	_damage(node["damage"].as<float>(10.0f)),
+	_flashEnable(node["flash_enable"].as<bool>(true)),
+	_flashColor(node["flash_color"].as<Color>(Color::White)),
+	_flashRange(node["flash_range"].as<float>(5.0f))
 {
 }
 
@@ -40,26 +54,10 @@ void Weapon::unload()
 	if (_fireSound)				SoundSystem::getSingletonRef().releaseSound(_fireSound);
 	if (_geometry)				delete _geometry;
 
-	_rMaterial=0;
-	_rMesh=0;
+	_rMaterial = 0;
+	_rMesh = 0;
 	_fireSound = 0;
 	_geometry = 0;
-}
-
-void Weapon::parseToken(const string& t, ScriptFile& sf)
-{
-	if (t == "geometry")				_meshName = sf.getToken();
-	else if (t == "material")			_materialName = sf.getToken();
-	else if (t == "fire_time")			_fireTime = stof(sf.getToken());
-	else if (t == "fire_sound")			_fireSoundName = sf.getToken();
-	else if (t == "debris_factor")		_debrisFactor = stof(sf.getToken());
-	else if (t == "spark_factor")		_sparkFactor = stof(sf.getToken());
-	else if (t == "fire_point")			sf.parseVector(_firePoint);
-	else if (t == "range")				_range = stof(sf.getToken());
-	else if (t == "damage")				_damage = stof(sf.getToken());
-	else if (t == "no_flash")			_flashEnable = false;
-	else if (t == "flash_color")		sf.parseColor(_flashColor);
-	else if (t == "flash_range")		_flashRange = stof(sf.getToken());
 }
 
 void Weapon::emitDebris(GameMaterial* mat, const Vector3& pos, const Vector3& normal)
