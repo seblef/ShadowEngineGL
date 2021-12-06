@@ -3,9 +3,9 @@
 #include "ParticlePointEmitterTemplate.h"
 
 
-ParticleEmitterTemplate* ParticleEmitterTemplateFactory::createTemplate(const string& name, ScriptFile& sf)
+ParticleEmitterTemplate* ParticleEmitterTemplateFactory::createTemplate(const string& name, const YAML::Node& node)
 {
-	return new ParticlePointEmitterTemplate(sf);
+	return new ParticlePointEmitterTemplate(node);
 }
 
 ParticleEmitterTemplate* ParticleEmitterTemplateFactory::createTemplate(const string& tName, const string& renderer,

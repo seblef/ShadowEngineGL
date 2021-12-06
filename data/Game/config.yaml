@@ -1,0 +1,42 @@
+
+system:
+  windowed: true
+  width: 1024
+  height: 768
+
+map:
+  map: Maps/SciFy.yaml
+  # map: Maps/Fallout.yaml
+  player: player
+
+renderer:
+  buffer_views: none
+  hdr:
+    enable: true
+    exposure: 1.2
+    gamma: 0.5
+    brightness_threshold: 0.5
+    bloom_radius: 1.0
+    bloom_strength: 0.8
+  hdao:
+    enable: false
+    radius: 2.0
+  
+game:
+  show_fps: true
+  hud_font: 2D/Font.sfn
+  cross_texture: Textures/HUD/cross.tga
+  cross_size: 10.0
+  camera_base_distance: 15.0
+  gravity: [0.0, -9.81, 0.0]
+  base_debris:
+    count: 5
+    min_velocity: 1.0
+    max_velocity: 10.0
+    angle: 45.0
+    angle_speed: 180.0
+    size: 0.01
+  ai_damage_factor: 1.2
+  player_damage_factor: 0.8
+  damage_to_force: 0.1
+  dead_actor_stay_on_map: 1.0

@@ -19,12 +19,9 @@ protected:
 	Vector3								_gravity;
 	float								_emissionRate;
 
-	void								parseCommon(ScriptFile& sf);
-
 public:
 
-    ParticleEmitterTemplate(const char *emitterName) : _emitterName(emitterName), _material(0), _maxParticles(10),
-        _gravity(Vector3::NullVector), _emissionRate(0)  {}
+    ParticleEmitterTemplate(const char *emitterName, const YAML::Node& node);
 	ParticleEmitterTemplate(const char *emitterName, const string& renderer,
 		ParticleMaterial* mat,
 		const ParticleEmitterParams& p1,

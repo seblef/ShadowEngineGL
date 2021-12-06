@@ -1,3 +1,4 @@
+#include "Color.h"
 #include "Matrix4.h"
 
 using namespace Core;

@@ -1,17 +1,29 @@
 
 #include "ParticleSystemTemplate.h"
 #include "ParticleEmitterTemplateFactory.h"
+#include "../core/YAMLCore.h"
+#include "../loguru.hpp"
 
-ParticleSystemTemplate::ParticleSystemTemplate(ScriptFile& sf)
+
+ParticleSystemTemplate::ParticleSystemTemplate(const YAML::Node& node)
 {
-	parse(sf);
+	parse(node);
 }
 
 ParticleSystemTemplate::ParticleSystemTemplate(const string& psFile)
 {
-	ScriptFile sf(psFile);
-	if (sf.good())
-		parse(sf);
+	YAML::Node node;
+
+	try
+	{
+		node = YAML::LoadFile(psFile);
+	}
+	catch(const std::exception& e)
+	{
+		LOG_S(ERROR) <<  e.what();
+		return;
+	}
+	parse(node);
 }
 
 ParticleSystemTemplate::ParticleSystemTemplate(int emitterCount, ParticleEmitterTemplate** emitters)
@@ -22,21 +34,13 @@ ParticleSystemTemplate::ParticleSystemTemplate(int emitterCount, ParticleEmitter
 
 ParticleSystemTemplate::~ParticleSystemTemplate()
 {
-	EmitterVector::iterator e(_emitters.begin());
-	for (; e != _emitters.end(); ++e)
-		delete *e;
+	for(auto& e : _emitters)
+		delete e;
 }
 
-void ParticleSystemTemplate::parse(ScriptFile& sf)
+void ParticleSystemTemplate::parse(const YAML::Node& node)
 {
-	string token(sf.getToken());
-	while (sf.good() && token != "end_system")
-	{
-		if (token == "emitter")
-		{
-			_emitters.push_back(ParticleEmitterTemplateFactory::createTemplate(
-				sf.getToken(), sf));
-		}
-		token = sf.getToken();
-	}
+	YAML::Node emitters = node["emitters"];
+	for(YAML::const_iterator e=emitters.begin(); e!= emitters.end(); ++e)
+		_emitters.push_back(ParticleEmitterTemplateFactory::createTemplate((*e)["type"].as<std::string>(), *e));
 }

@@ -1,0 +1,5 @@
+material:
+  renderer:
+    textures:
+      diffuse: Textures/SciFy/Gun1_D.dds
+      normal: Textures/SciFy/Gun1_N.dds

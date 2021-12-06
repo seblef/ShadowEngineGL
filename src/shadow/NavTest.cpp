@@ -6,6 +6,8 @@
 #include "../GLMedia.h"
 #include "../game/GamePlayer.h"
 #include "../game/GameCamera.h"
+#include "../core/YAMLCore.h"
+#include "../loguru.hpp"
 #include <time.h>
 #include <sstream>
 
@@ -16,23 +18,25 @@ void NavTest::run(const string& dataFolder)
 
     FileSystemFactory::createFileSystem("std", dataFolder);
 
-	Config cfg("Shadow.ini");
+	YAML::Node cfg;
+	try
+	{
+		cfg = YAML::LoadFile("Game/config.yaml");
+	}
+	catch(const std::exception& e)
+	{
+		LOG_S(ERROR) << e.what();
+		return;
+	}
 
-	string configFile;
-	cfg.getVar("configFile", configFile);
-	cfg.parseFile(configFile);
+	YAML::Node sys_cfg(cfg["system"]);
+	int width = sys_cfg["width"].as<int>(1024);
+	int height = sys_cfg["height"].as<int>(768);
+	bool windowed = sys_cfg["windowed"].as<bool>(true);
 
-	int w = 800;
-	int h = 600;
-	bool windowed = true;
-
-	cfg.getVar("resWidth", w);
-	cfg.getVar("resHeight", h);
-	cfg.getVar("windowed", windowed);
-
-    IMedia *media = createGLMedia(w, h, windowed, false, SINPUT_MOUSE | SINPUT_KEYBOARD);
-	Renderer *r = new Renderer(media->getVideo(),cfg);
-	Renderer2D *r2d=new Renderer2D(media->getVideo());
+    IMedia *media = createGLMedia(width, height, windowed, false, SINPUT_MOUSE | SINPUT_KEYBOARD);
+	new Renderer(media->getVideo(),cfg["renderer"]);
+	Renderer2D *r2d = new Renderer2D(media->getVideo());
 
 	R2D_Frame* r2d_frame=new R2D_Frame;
 	R2D_Layer* r2d_layer=new R2D_Layer;
@@ -42,11 +46,15 @@ void NavTest::run(const string& dataFolder)
     r2d->getFrameDB().registerData("fps",r2d_frame);
 	r2d->setCurrentFrame(r2d_frame);
 
-    CharacterDB cdb("Game/Characters.txt");
-    WeaponDB wdb("Game/Weapons.txt");
-	EntityDB edb("Game/Entities.txt");
-	EffectDB efdb("Games/Effects.txt");
-    new GameSystem(media,"Maps/SciFy.txt","test",cfg,cdb,wdb,edb,efdb);
+    CharacterDB cdb("Game/characters.yaml");
+    WeaponDB wdb("Game/weapons.yaml");
+	EntityDB edb("Game/entities.yaml");
+	EffectDB efdb("Games/effects.yaml");
+
+	YAML::Node map_cfg(cfg["map"]);
+	string mapName(map_cfg["map"].as<string>());
+	string playerName(map_cfg["player"].as<string>());
+    new GameSystem(media, mapName, playerName,cfg,cdb,wdb,edb,efdb);
 
 	new NavRenderer(media->getVideo());
 	NavPath *np=NavPath::New();

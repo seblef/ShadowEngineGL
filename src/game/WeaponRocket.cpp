@@ -3,28 +3,32 @@
 #include "WeaponRocketInstance.h"
 #include "GameSystem.h"
 #include "../SoundLib.h"
+#include "../core/YAMLCore.h"
 
 
-
-WeaponRocket::WeaponRocket(ScriptFile& sf) : _rocketLife(2.0f), _rocketVelocity(10.0f),
-	_rocketMesh(0), _rocketExplosion(0), _rocketSmoke(0),  _loaded(false),
-	_rocketSmokePoint(Vector3::NullVector), _rocketSound(0)
+WeaponRocket::WeaponRocket(const YAML::Node& node) :
+	Weapon(node),
+	_rocketLife(2.0f),
+	_rocketVelocity(10.0f),
+	_rocketSmokePoint(Vector3::NullVector),
+	_rocketMesh(0),
+	_rocketExplosion(0),
+	_rocketSmoke(0), 
+	_loaded(false),
+	_rocketSound(0)
 {
-	string t(sf.getToken());
-	while (sf.good() && t != "end_weapon")
-	{
-		if (t == "rocket_mesh")				_rocketMeshFile = sf.getToken();
-		else if (t == "rocket_material")	_rocketMaterialFile = sf.getToken();
-		else if (t == "rocket_life")		_rocketLife = stof(sf.getToken());
-		else if (t == "rocket_velocity")	_rocketVelocity = stof(sf.getToken());
-		else if (t == "rocket_explosion")	_rocketExplosionName = sf.getToken();
-		else if (t == "rocket_smoke")		_rocketSmoke = new ParticleSystemTemplate(sf);
-		else if (t == "rocket_smoke_point")	sf.parseVector(_rocketSmokePoint);
-		else if (t == "rocket_sound")		_rocketSoundFile = sf.getToken();
-		else								parseToken(t, sf);
+	YAML::Node rock(node["rocket"]);
+	_rocketMeshFile = rock["mesh"].as<string>();
+	_rocketMaterialFile = rock["material"].as<string>();
+	_rocketLife = rock["life"].as<float>(2.f);
+	_rocketVelocity = rock["velocity"].as<float>(10.f);
+	_rocketExplosionName = rock["explosion"].as<string>("");
+	_rocketSmokePoint = rock["smoke_point"].as<Vector3>(Vector3::NullVector);
+	_rocketSoundFile = rock["sound"].as<string>("");
 
-		t = sf.getToken();
-	}
+    YAML::Node smoke = rock["smoke"];
+	if(smoke)
+		_rocketSmoke = new ParticleSystemTemplate(smoke);
 }
 
 WeaponRocket::~WeaponRocket()

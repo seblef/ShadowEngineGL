@@ -1,18 +1,13 @@
 
 #include "TraceTemplate.h"
+#include "../core/YAMLCore.h"
 
-TraceTemplate::TraceTemplate(ScriptFile& sf)
+
+TraceTemplate::TraceTemplate(const YAML::Node& node)
 {
-	string token(sf.getToken());
-	while (sf.good() && token != "end_trace")
-	{
-		if (token == "particle_system")
-			_particleSystem = new ParticleSystemTemplate(sf);
-		else if (token == "density")
-			_density = stof(sf.getToken());
-
-		token = sf.getToken();
-	}
+	_density = node["density"].as<float>();
+    YAML::Node particles = node["particle_system"];
+	_particleSystem = new ParticleSystemTemplate(particles);
 }
 
 TraceTemplate::~TraceTemplate()

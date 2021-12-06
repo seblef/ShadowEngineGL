@@ -5,17 +5,13 @@
 #include "Map.h"
 #include "ActionServer.h"
 #include "AddRemObject.h"
+#include "../core/YAMLCore.h"
 
-TriggerWeapon::TriggerWeapon(ScriptFile& sf) : _noRebirth(false)
+
+TriggerWeapon::TriggerWeapon(const YAML::Node& node) :
+	_noRebirth(node["no_rebirth"].as<bool>(false)),
+	_weapon(node["weapon"].as<string>())
 {
-	string t(sf.getToken());
-	while (sf.good() && t != "end_trigger")
-	{
-		if (t == "weapon")				_weapon = sf.getToken();
-		else if (t == "no_rebirth")		_noRebirth = true;
-
-		t = sf.getToken();
-	}
 }
 
 void TriggerWeapon::apply(GameCharacter* actor, GameEntityTrigger* entity)

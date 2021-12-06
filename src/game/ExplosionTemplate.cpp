@@ -2,6 +2,7 @@
 #include "ExplosionTemplate.h"
 #include "ObjectFlags.h"
 #include "../SoundLib.h"
+#include "../core/YAMLCore.h"
 
 
 const float ExplosionMinMass = 0.2f;
@@ -30,42 +31,54 @@ const float ExplosionSmokeEmissionRate = 50.0f;
 const int ExplosionSmokeMaxParticles = 200;
 
 
-ExplosionTemplate::ExplosionTemplate(ScriptFile& sf) : Effect(EXPLOSION), _size(1), _life(1), _smokeDensity(1), _smokeLife(0.5f), _color(Color::White),
-	_explosionColorBlend(false), _debrisSize(0.01f), _debrisMinVelocity(1.0f), _debrisMaxVelocity(10.0f), _debrisMaxAngle((float)M_PI_4),
-	_debrisMaxAngleSpeed((float)M_PI), _debrisCount(5),
-	_particles(0), _debrisMesh(0), _loaded(false), 
-	_explosionEmitter(-1), _smokeEmitter(-1), _smokeColorBlend(false), _particleCount(5),
-	_explosionSound(0), _hitEnvironment(true),
-	_innerRadius(1.0f), _outerRadius(2.0f), _innerDamage(50.0f)
+ExplosionTemplate::ExplosionTemplate(const YAML::Node& node) :
+	Effect(EXPLOSION),
+	_size(node["size"].as<float>(1.f)),
+	_life(node["life"].as<float>(1.f)),
+	_color(node["color"].as<Core::Color>(Color::White)),
+	_explosionColorBlend(node["color_blend"].as<bool>(false)),
+	_explosionSoundFile(node["sound"].as<string>("")),
+	_particleCount(node["particle_count"].as<int>(5)),
+	_innerRadius(node["inner_radius"].as<float>(1.f)),
+	_outerRadius(node["outer_radius"].as<float>(2.f)),
+	_innerDamage(node["damage"].as<float>(50.f)),
+	_hitEnvironment(node["hit_environment"].as<bool>(true)),
+	_explosionTextureDir(node["texture_folder"].as<string>("")),
+	_debrisSize(.01f),
+	_debrisMinVelocity(1.f),
+	_debrisMaxVelocity(10.f),
+	_debrisMaxAngle((float)M_PI_4),
+	_debrisMaxAngleSpeed((float)M_PI),
+	_debrisCount(5),
+	_debrisMesh(0),
+	_smokeColorBlend(false),
+	_smokeDensity(1.f),
+	_smokeLife(.5f),
+	_particles(0),
+	_loaded(false), 
+	_explosionEmitter(-1),
+	_smokeEmitter(-1),
+	_explosionSound(0)
 {
-	string t(sf.getToken());
-	while (t != "end_explosion")
+    YAML::Node smoke = node["smoke"];
+	if(smoke)
 	{
-		if (t == "size")						_size = stof(sf.getToken());
-		else if (t == "life")					_life = stof(sf.getToken());
-		else if (t == "color")					sf.parseColor(_color);
-		else if (t == "particle_count")			_particleCount = stoi(sf.getToken());
-		else if (t == "smoke_density")			_smokeDensity = stof(sf.getToken());
-		else if (t == "smoke_life")				_smokeLife = stof(sf.getToken());
-		else if (t == "texture_dir")			_explosionTextureDir=sf.getToken();
-		else if (t == "smoke_texture")			_smokeTexture = sf.getToken();
-		else if (t == "debris_mesh")			_debrisMeshFile = sf.getToken();
-		else if (t == "debris_material")		_debrisMaterial = sf.getToken();
-		else if (t == "debris_size")			_debrisSize = stof(sf.getToken());
-		else if (t == "debris_min_vel")			_debrisMinVelocity = stof(sf.getToken());
-		else if (t == "debris_max_vel")			_debrisMaxVelocity = stof(sf.getToken());
-		else if (t == "debris_max_angle")		_debrisMaxAngle = stof(sf.getToken());
-		else if (t == "debris_max_angle_speed")	_debrisMaxAngleSpeed = stof(sf.getToken());
-		else if (t == "debris_count")			_debrisCount = stoi(sf.getToken());
-		else if (t == "explosion_color_blend")	_explosionColorBlend = true;
-		else if (t == "smoke_color_blend")		_smokeColorBlend = true;
-		else if (t == "explosion_sound")		_explosionSoundFile = sf.getToken();
-		else if (t == "inner_radius")			_innerRadius = stof(sf.getToken());
-		else if (t == "outer_radius")			_outerRadius = stof(sf.getToken());
-		else if (t == "inner_damage")			_innerDamage = stof(sf.getToken());
-		else if (t == "no_hit")					_hitEnvironment = false;
-
-		t = sf.getToken();
+        _smokeTexture = smoke["texture"].as<string>();
+		_smokeDensity = smoke["density"].as<float>(1.f);
+		_smokeLife = smoke["life"].as<float>(.5f);
+		_smokeColorBlend = smoke["color_blend"].as<bool>(false);
+	}
+    YAML::Node debris = node["debris"];
+	if(debris)
+	{
+		_debrisSize = debris["size"].as<float>(.01f);
+		_debrisMinVelocity = debris["min_velocity"].as<float>(1.f);
+		_debrisMaxVelocity = debris["max_velocity"].as<float>(10.f);
+		_debrisMaxAngle = debris["max_angle"].as<float>((float)M_PI_4);
+		_debrisMaxAngleSpeed = debris["max_angle_speed"].as<float>((float)M_PI);
+		_debrisCount = debris["count"].as<int>(5);
+		_debrisMeshFile = debris["mesh"].as<string>("");
+		_debrisMaterial = debris["material"].as<string>("");
 	}
 }
 

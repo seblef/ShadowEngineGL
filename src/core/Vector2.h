@@ -2,6 +2,7 @@
 #pragma once
 
 #include "Matrix2.h"
+#include <fstream>
 
 namespace Core
 {

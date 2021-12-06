@@ -31,7 +31,7 @@ protected:
 
 public:
 
-	WeaponRocket(ScriptFile& sf);
+	WeaponRocket(const YAML::Node& node);
 	~WeaponRocket();
 
 	void					load();

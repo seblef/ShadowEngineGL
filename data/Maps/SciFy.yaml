@@ -1,0 +1,602 @@
+map:
+  width: 70
+  height: 70
+  start_position: [38.1428, 32.5747]
+  ambient_light: [0, 0.145, 0.2, 1]
+  ground: Maps/SciFy.sgd
+
+global_light:
+  direction: [-0.576376, -0.576376, -0.576376]
+  color: [0.8, 0.8, 0.8, 1]
+
+resources:
+  geometries:
+    - Geometry/Sphere.GEO
+    - Geometry/Desk.GEO
+    - Geometry/Wall2.GEO
+    - Geometry/Wall3.GEO
+    - Geometry/Wall_Corner.GEO
+  materials:
+    default:
+      renderer:
+        textures:
+          diffuse: Textures/Test.dds
+          normal: Textures/normal.bmp
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 0.7
+    Wall2_1:
+      debris: Geometry/Sphere.GEO
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/Wall2_1.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 0.7
+    Wall3_1:
+      debris: Geometry/Sphere.GEO
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/Wall3_1.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 0.7
+    Wall3_2:
+      debris: Geometry/Sphere.GEO
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/Wall3_2.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 0.7
+    Wall1_1:
+      debris: Geometry/Sphere.GEO
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/Wall1_1.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 0.7
+    Floor:
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/FloorD.dds
+          normal: Textures/SciFy/FloorN.bmp
+          environment: Textures/SciFy/Environment.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 8.0
+        reflectivity: 0.25
+    Wall2_2:
+      debris: Geometry/Sphere.GEO
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/Wall2_2.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 0.7
+    Desk:
+      debris: Geometry/Sphere.GEO
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/Desk.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 0.7
+    Floor3:
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/Floor3.dds
+          environment: Textures/SciFy/Environment.dds
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 4.0
+        reflectivity: 0.25
+    Floor2:
+      renderer:
+        textures:
+          diffuse: Textures/SciFy/Floor2.dds
+          environment: Textures/SciFy/Environment.dds
+        uv:
+          scale: [2.0, 2.0]
+          rotation: 90
+        ambient_color: [0, 0, 0, 1]
+        diffuse_color: [1, 1, 1, 1]
+        specular_color: [0, 0, 0, 1]
+        shininess: 10.0
+        specular_intensity: 4.0
+        reflectivity: 0.25
+  meshes:
+    Desk:
+      geometry: Geometry/Desk.GEO
+      material: Desk
+      physic_shape: Box
+    Wall2_2:
+      geometry: Geometry/Wall2.GEO
+      material: Wall2_2
+      physic_shape: Box
+    Wall3_1:
+      geometry: Geometry/Wall3.GEO
+      material: Wall3_1
+      physic_shape: Box
+    Wall1_1:
+      geometry: Geometry/Wall_Corner.GEO
+      material: Wall1_1
+      physic_shape: Box
+    Wall2_1:
+      geometry: Geometry/Wall2.GEO
+      material: Wall2_1
+      physic_shape: Box
+    Wall3_2:
+      geometry: Geometry/Wall3.GEO
+      material: Wall3_2
+      physic_shape: Box
+
+objects:
+  - class: light
+    type: area
+    color: [1, 0, 0, 5]
+    range: 10.0
+    position: [25, 1.92323, 33]
+    direction: [1, 0, 0]
+    shadowmap_size: 256
+    shadowmap_filter: 4
+    far_angle: 81
+    near_angle: 30
+    near_z: 0.1
+    area_width: 3.6
+    area_height: 1.8
+  - class: light
+    type: area
+    color: [1, 0, 0, 5]
+    range: 10.0
+    position: [40.9376, 1.92323, 32.1593]
+    direction: [-1, 0, 0]
+    shadowmap_size: 256
+    shadowmap_filter: 4
+    far_angle: 81
+    near_angle: 30
+    near_z: 0.1
+    area_width: 3.6
+    area_height: 1.8
+  - class: light
+    type: area
+    color: [0, 1, 1, 2]
+    range: 10.0
+    position: [24, 5.85765, 23]
+    direction: [0, -1, 0]
+    shadowmap_size: 256
+    shadowmap_filter: 4
+    far_angle: 120
+    near_angle: 60
+    near_z: 0.1
+    area_width: 3.6
+    area_height: 1.8
+  - class: light
+    type: area
+    color: [0, 1, 1, 2]
+    range: 10.0
+    position: [24, 5.85765, 42]
+    direction: [0, -1, 0]
+    shadowmap_size: 256
+    shadowmap_filter: 4
+    far_angle: 120
+    near_angle: 60
+    near_z: 0.1
+    area_width: 3.6
+    area_height: 1.8
+  - class: light
+    type: area
+    color: [0, 1, 1, 2]
+    range: 10.0
+    position: [41, 5.85765, 43]
+    direction: [0, -1, 0]
+    shadowmap_size: 256
+    shadowmap_filter: 4
+    far_angle: 120
+    near_angle: 60
+    near_z: 0.1
+    area_width: 3.6
+    area_height: 1.8
+  - class: light
+    type: area
+    color: [0, 1, 1, 2]
+    range: 10.0
+    position: [41, 5.85765, 24]
+    direction: [0, -1, 0]
+    shadowmap_size: 256
+    shadowmap_filter: 4
+    far_angle: 120
+    near_angle: 60
+    near_z: 0.1
+    area_width: 3.6
+    area_height: 1.8
+  - class: light
+    type: omni
+    color: [1, 0, 0.5, 0, 1.1]
+    range: 6.5
+    position: [34, 2.42853, 33]
+    cast_no_shadows: true
+  - class: mesh
+    template: Wall3_1
+    position: [41, 27]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [31, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [31, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [48, 23]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [17, 43]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [25, 27]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [48, 30]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [18, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [41, 30]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [17, 38]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [23, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [24, 36]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall1_1
+    position: [24, 26]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [24, 33]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall1_1
+    position: [48, 45]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [43, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [23, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [48, 25]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall1_1
+    position: [17, 45]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [38, 40]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [17, 30]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [43, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [38, 20]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [21, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [38, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [17, 33]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [36, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [48, 38]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [48, 43]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [24, 27]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [41, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [48, 40]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [38, 27]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [17, 40]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [26, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [17, 23]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [48, 35]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [41, 36]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [21, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [28, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [38, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [28, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [24, 30]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [17, 25]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [46, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall1_1
+    position: [24, 39]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall1_1
+    position: [41, 39]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [28, 27]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [25, 40]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Desk
+    position: [33.2474, 32.6823]
+    rotation: [0, 0, 0]
+    height: 0.0101744
+  - class: mesh
+    template: Wall3_2
+    position: [17, 35]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [33, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [17, 28]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [36, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [48, 28]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [35, 40]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_1
+    position: [48, 33]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [28, 40]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [41, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [17, 20]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_2
+    position: [35, 27]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [26, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [33, 20]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall2_2
+    position: [46, 47]
+    rotation: [0, 90, 0]
+  - class: mesh
+    template: Wall1_1
+    position: [41, 26]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [41, 33]
+    rotation: [0, 0, 0]
+  - class: mesh
+    template: Wall3_1
+    position: [18, 47]
+    rotation: [0, 90, 0]
+  - class: entity
+    template: barrel
+    position: [39.8858, 0.5, 34.5206]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [26.686, 0.5, 30.8499]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [28.9598, 0.5, 28.0136]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [39.1119, 0.5, 37.234]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [26.9497, 0.5, 29.2376]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [27.6043, 0.5, 28.1491]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [26.7377, 0.5, 32.2244]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [36.2422, 0.5, 38.5958]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [39.7433, 0.5, 32.7336]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [34.5492, 0.5, 38.014]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [30.3514, 0.5, 28.0778]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [39.4594, 0.5, 31.1469]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [27.3896, 0.5, 33.4177]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [37.7191, 0.5, 38.1299]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [31.744, 0.5, 36.376]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [39.451, 0.5, 35.9803]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [30.2961, 0.5, 35.5011]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [28.7588, 0.5, 34.5001]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: barrel
+    position: [33.1852, 0.5, 37.492]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: bonus_assault
+    position: [44.3228, 1.0017, 22.8949]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: bonus_assault
+    position: [21.6086, 0.946281, 43.3906]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: bonus_rocket
+    position: [21.1737, 0.714068, 23.7336]
+    rotation: [0, 0, 0]
+  - class: entity
+    template: bonus_rocket
+    position: [44.3034, 0.983381, 43.1372]
+    rotation: [0, 0, 0]
+  - class: actor
+    template: test
+    position: [21.981, 23.6497]
+    rotation: 0

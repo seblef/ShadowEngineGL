@@ -3,6 +3,11 @@
 #include "../MediaCommon.h"
 
 
+namespace YAML
+{
+class Node; 
+};
+
 class ParticleTextureSet
 {
 	protected:
@@ -15,7 +20,7 @@ class ParticleTextureSet
 
 		ParticleTextureSet(IVideoDevice* d) : _device(d)			{}
 		ParticleTextureSet(const ParticleTextureSet& s);
-		ParticleTextureSet(ScriptFile& sf, IVideoDevice* d);
+		ParticleTextureSet(const YAML::Node& node, IVideoDevice* d);
 		ParticleTextureSet(const string& dir, IVideoDevice* d);
 		~ParticleTextureSet();
 

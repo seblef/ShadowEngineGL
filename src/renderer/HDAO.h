@@ -5,6 +5,11 @@
 
 #define HDAO_MAX_KERNEL_SIZE			64
 
+namespace YAML
+{
+	class Node;
+}
+
 
 class HDAO : public TSingleton<HDAO>
 {
@@ -39,7 +44,7 @@ protected:
 
 public:
 
-	HDAO(IVideoDevice *d, const Config& cfg);
+	HDAO(IVideoDevice *d, const YAML::Node& cfg);
 	~HDAO();
 
 	bool				isEnabled() const { return _enable; }

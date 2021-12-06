@@ -1,19 +1,13 @@
 
 #include "WeaponGun.h"
+#include "../core/YAMLCore.h"
 
-WeaponGun::WeaponGun(ScriptFile& sf) : _trace(0)
+
+WeaponGun::WeaponGun(const YAML::Node& node) : Weapon(node), _trace(0)
 {
-	string t(sf.getToken());
-    while (sf.good() && t != "end_weapon")
-	{
-        if (t == "trace")
-			_trace = new TraceTemplate(sf);
-		else
-			parseToken(t, sf);
-
-		t = sf.getToken();
-	}
-
+    YAML::Node trace = node["trace"];
+	if(trace)
+		_trace = new TraceTemplate(trace);
 }
 
 WeaponGun::~WeaponGun()

@@ -10,6 +10,11 @@ class GamePlayer;
 class Map;
 class GameCamera;
 
+namespace YAML
+{
+	class Node;
+}
+
 class GameSystem : public TSingleton<GameSystem>
 {
 protected:
@@ -30,7 +35,7 @@ protected:
 public:
 
 	GameSystem(IMedia *media, const string& mapFile, const string& playerName,
-		Config& cfg, CharacterDB& cdb, WeaponDB& wdb, EntityDB& edb, EffectDB& efdb);
+		const YAML::Node& cfg, CharacterDB& cdb, WeaponDB& wdb, EntityDB& edb, EffectDB& efdb);
 	~GameSystem();
 
 	Map&							getMap()								{ return *_map; }

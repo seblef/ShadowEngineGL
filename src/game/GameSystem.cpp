@@ -17,9 +17,23 @@
 #include <ctime>
 
 
-GameSystem::GameSystem(IMedia *media, const string& mapName, const string& playerName, Config& cfg,
-	CharacterDB& cdb, WeaponDB& wdb, EntityDB& edb, EffectDB& efdb) : _media(media),
-	_characters(&cdb), _weapons(&wdb), _entities(&edb), _effects(&efdb), _gameTime(0), _refreshTime(0)
+GameSystem::GameSystem(
+	IMedia *media,
+	const string& mapName,
+	const string& playerName,
+	const YAML::Node& cfg,
+	CharacterDB& cdb,
+	WeaponDB& wdb,
+	EntityDB& edb,
+	EffectDB& efdb
+) :
+	_media(media),
+	_characters(&cdb),
+	_weapons(&wdb),
+	_entities(&edb),
+	_effects(&efdb),
+	_gameTime(0),
+	_refreshTime(0)
 {
 	new ResourceDB;
 	new ActionServer;

@@ -4,6 +4,7 @@
 #include "../SoundLib.h"
 #include "../GLMedia.h"
 #include "../R2D.h"
+#include "../core/YAMLCore.h"
 #include "../loguru.hpp"
 #include <time.h>
 #include <sstream>
@@ -21,39 +22,40 @@ void GameApp::run(const string& dataFolder)
 	initShadowCore();
 
     FileSystemFactory::createFileSystem("std", dataFolder);
-    Config cfg("shadow.ini");
 
-    string configFile("Game/config.txt");
-	cfg.getVar("configFile", configFile);
-	cfg.parseFile(configFile);
+	YAML::Node cfg;
+	try
+	{
+		cfg = YAML::LoadFile("Game/config.yaml");
+	}
+	catch(const std::exception& e)
+	{
+		LOG_S(ERROR) << e.what();
+		return;
+	}
 
-    int w = 1024;
-    int h = 768;
-	bool windowed = true;
-    bool multithread = false;
+	YAML::Node sys_cfg(cfg["system"]);
+	int width = sys_cfg["width"].as<int>(1024);
+	int height = sys_cfg["height"].as<int>(768);
+	bool windowed = sys_cfg["windowed"].as<bool>(true);
 
-	cfg.getVar("resWidth", w);
-	cfg.getVar("resHeight", h);
-	cfg.getVar("windowed", windowed);
-    // cfg.getVar("multithread", multithread);
-
-    IMedia *media=createGLMedia(w,h,windowed,multithread,SINPUT_MOUSE | SINPUT_KEYBOARD);
+    IMedia *media = createGLMedia(width, height, windowed, false, SINPUT_MOUSE | SINPUT_KEYBOARD);
 	new SoundSystem(media->getAudio());
-	new Renderer(media->getVideo(),cfg);
+	new Renderer(media->getVideo(),cfg["renderer"]);
 	new Renderer2D(media->getVideo());
 
 	CharacterDB *cdb=new CharacterDB("Game/characters.yaml");
-	WeaponDB *wdb=new WeaponDB("Game/Weapons.txt");
-	EntityDB* edb = new EntityDB("Game/Entities.txt");
-	EffectDB* efdb = new EffectDB("Game/Effects.txt");
+	WeaponDB *wdb=new WeaponDB("Game/weapons.yaml");
+	EntityDB* edb = new EntityDB("Game/entities.yaml");
+	EffectDB* efdb = new EffectDB("Game/effects.yaml");
 
-    string mapName("Maps/Fallout.txt");
-	string playerName("player");
-	cfg.getVar("map", mapName);
-	cfg.getVar("player", playerName);
+	YAML::Node map_cfg(cfg["map"]);
+	string mapName(map_cfg["map"].as<string>());
+	string playerName(map_cfg["player"].as<string>());
 
     LOG_S(INFO) << "Creating game system";
-	new GameSystem(media,mapName,playerName,cfg,*cdb,*wdb,*edb,*efdb);
+    YAML::Node game_cfg = cfg["game"];
+	new GameSystem(media, mapName, playerName, game_cfg, *cdb, *wdb, *edb, *efdb);
 
 #ifdef HDAO_TUNING
 	R2D_Layer* hdao_layer = new R2D_Layer;

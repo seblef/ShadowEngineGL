@@ -1,6 +1,7 @@
 
 #include "ParticleMaterial.h"
 #include "ParticleEngine.h"
+#include <yaml-cpp/yaml.h>
 
 const char * const g_ParticleBlendNames[]=
 {
@@ -40,34 +41,32 @@ ParticleMaterial::ParticleMaterial(const ParticleMaterial& m) : _device(m._devic
 	_blendState = ParticleEngine::getSingletonRef().getVideoDevice()->createBlendState(blend, src, dest);
 }
 
-ParticleMaterial::ParticleMaterial(ScriptFile& sf) :  _texture(0), _textureSet(0), _blendState(0)
+ParticleMaterial::ParticleMaterial(const YAML::Node& node) :
+	_texture(0),
+	_textureSet(0),
+	_blendState(0)
 {
 	_device = ParticleEngine::getSingletonRef().getVideoDevice();
 
-	string token(sf.getToken());
-	while(sf.good() && token!="end_material")
+	if(node["texture"])
+		_texture = _device->createTexture(node["texture"].as<string>());
+	else if(node["texture_set"])
+    {
+        YAML::Node tex_set = node["texture_set"];
+		_textureSet = new ParticleTextureSet(tex_set, _device);
+    }
+	else if(node["texture_dir"])
+		_textureSet = new ParticleTextureSet(node["texture_dir"].as<string>(), _device);
+
+    YAML::Node blend = node["blend"];
+	if(blend)
 	{
-		if(token=="texture")
-			_texture=_device->createTexture(sf.getToken());
-		else if (token == "texture_set")
-			_textureSet = new ParticleTextureSet(sf, _device);
-		else if (token == "texture_dir")
-			_textureSet = new ParticleTextureSet(sf.getToken(), _device);
-		else if(token=="blend")
-		{
-			BlendMode src,dest;
-			src=getBlendMode(sf.getToken());
-			dest=getBlendMode(sf.getToken());
-			_blendState = _device->createBlendState(true, src, dest);
-		}
-
-		token=sf.getToken();
+		BlendMode src, dest;
+		src = getBlendMode(blend["src"].as<string>());
+		dest = getBlendMode(blend["dest"].as<string>());
+		_blendState = _device->createBlendState(true, src, dest);
 	}
-
-//	if((!_texture || !_texture->isGood()) && !_textureSet)
-//		_texture=ParticleTextureStore::getSingletonRef().getTexture("Textures/Default/Diffuse.bmp");
-
-	if(!_blendState)
+	else
 		_blendState=_device->createBlendState(true,BLEND_SRCALPHA,BLEND_INVSRCALPHA);
 }
 

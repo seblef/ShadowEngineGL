@@ -1,0 +1,5 @@
+material:
+  renderer:
+    textures:
+      diffuse: Textures/Test.dds
+      normal: Textures/normal.bmp

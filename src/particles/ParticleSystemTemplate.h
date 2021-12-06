@@ -9,11 +9,11 @@ protected:
 	typedef vector<ParticleEmitterTemplate*> EmitterVector;
 	EmitterVector				_emitters;
 
-	void						parse(ScriptFile& sf);
+	void						parse(const YAML::Node& node);
 
 public:
 
-	ParticleSystemTemplate(ScriptFile& sf);
+	ParticleSystemTemplate(const YAML::Node& node);
 	ParticleSystemTemplate(const string& psFile);
 	ParticleSystemTemplate(int emitterCount, ParticleEmitterTemplate** emitters);
 	~ParticleSystemTemplate();

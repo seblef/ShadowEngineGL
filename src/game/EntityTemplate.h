@@ -8,6 +8,11 @@
 
 class GameEntity;
 
+namespace YAML
+{
+	class Node;
+}
+
 class EntityTemplate
 {
 protected:
@@ -23,11 +28,9 @@ protected:
 
 	bool					_isTrigger;
 
-	virtual void			parseToken(const string& token, ScriptFile& sf);
-
 public:
 
-	EntityTemplate(bool isTrigger);
+	EntityTemplate(bool isTrigger, const YAML::Node& node);
 	virtual ~EntityTemplate()		 { unload(); }
 
 	bool					isTrigger() const					{ return _isTrigger; }

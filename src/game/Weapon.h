@@ -9,6 +9,11 @@ class GameCharacter;
 class GameObject;
 class WeaponInstance;
 
+namespace YAML
+{
+	class Node;
+}
+
 class Weapon
 {
 protected:
@@ -34,11 +39,9 @@ protected:
 	Color					_flashColor;
 	float					_flashRange;
 
-	void					parseToken(const string& token, ScriptFile& sf);
-
 public:
 
-	Weapon();
+	Weapon(const YAML::Node& node);
 	virtual ~Weapon()		 { unload(); }
 
 	virtual void			load();

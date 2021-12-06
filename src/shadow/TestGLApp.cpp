@@ -9,6 +9,7 @@
 #include "../game/ActorLoader.h"
 #include "../game/ActorAnimLoader.h"
 #include "../renderer/ShadowSystem.h"
+#include "../core/YAMLCore.h"
 #include "../loguru.hpp"
 #include <time.h>
 #include <sstream>
@@ -56,26 +57,26 @@ void TestGLApp::run(const string& dataFolder)
     initShadowCore();
 
     FileSystemFactory::createFileSystem("std", dataFolder);
-    Config cfg("shadow.ini");
+	YAML::Node cfg;
+	try
+	{
+		cfg = YAML::LoadFile("Game/config.yaml");
+	}
+	catch(const std::exception& e)
+	{
+		LOG_S(ERROR) << e.what();
+		return;
+	}
 
-    string configFile("Game/config.txt");
-    cfg.getVar("configFile", configFile);
-    cfg.parseFile(configFile);
+	YAML::Node sys_cfg(cfg["system"]);
+	int width = sys_cfg["width"].as<int>(1024);
+	int height = sys_cfg["height"].as<int>(768);
+	bool windowed = sys_cfg["windowed"].as<bool>(true);
 
-    int w = 1024;
-    int h = 768;
-    bool windowed = true;
-    bool multithread = false;
-
-/*	cfg.getVar("resWidth", w);
-    cfg.getVar("resHeight", h);
-    cfg.getVar("windowed", windowed);
-    cfg.getVar("multithread", multithread);*/
-
-    IMedia *media=createGLMedia(w,h,windowed,multithread,SINPUT_MOUSE | SINPUT_KEYBOARD);
-    new SoundSystem(media->getAudio());
-    new Renderer(media->getVideo(),cfg);
-    new Renderer2D(media->getVideo());
+    IMedia *media = createGLMedia(width, height, windowed, false, SINPUT_MOUSE | SINPUT_KEYBOARD);
+	new SoundSystem(media->getAudio());
+	new Renderer(media->getVideo(),cfg["renderer"]);
+	new Renderer2D(media->getVideo());
 
     Vector2 camRot(Vector2::NullVector);
 

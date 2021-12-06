@@ -1,0 +1,27 @@
+barrel:
+  class: explosive
+  mesh: Geometry/Barrel.geo
+  material: Materials/Barrel
+  shape: chull
+  density: 1.0
+  explosion: barrel01
+
+bonus_rocket:
+  class: trigger
+  mesh: Geometry/BonusBox.geo
+  material: Materials/Bonus/rocket
+  shape: sphere
+  animated: true
+  trigger:
+    class: weapon
+    weapon: Rocket1
+
+bonus_assault:
+  class: trigger
+  mesh: Geometry/BonusBox.geo
+  material: Materials/Bonus/assault
+  shape: sphere
+  animated: true
+  trigger:
+    class: weapon
+    weapon: Gun1

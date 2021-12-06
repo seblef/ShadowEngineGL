@@ -2,6 +2,7 @@
 #pragma once
 
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -26,9 +27,8 @@ public:
 	{
 		if(_autoDelete)
 		{
-            typename map<string,T*>::iterator i(_data.begin());
-            for(;i!=_data.end();++i)
-				delete i->second;
+			for(auto const& i : _data)
+				delete i.second;
 		}
 
 		_data.clear();

@@ -1,0 +1,16 @@
+barrel01:
+  class: explosion
+  size: 2.0
+  life: 1.0
+  texture_folder: Textures/Explosions/fiery
+  color_blend: true
+  sound: Sounds/explosion.wav
+  inner_radius: 2.5
+  outer_radius: 5.0
+  debris:
+    size: 0.05
+    mesh: Geometry/Sphere.GEO
+    material: Materials/Floor
+  smoke:
+    texture: Particles/Textures/smoke.tga
+    color_blend: true

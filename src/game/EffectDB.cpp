@@ -1,33 +1,32 @@
 
 #include "EffectDB.h"
 #include "EffectFactory.h"
+#include "../core/YAMLCore.h"
+#include "../loguru.hpp"
 
 
 EffectDB::EffectDB(const string& effectsFile)
 {
-	ScriptFile sf(effectsFile);
-	assert(sf.good());
-
-	string t(sf.getToken());
-	string className;
-	string effectName;
-
-	while (sf.good())
+	YAML::Node root;
+	try
 	{
-		if (t == "effect")
-		{
-			className = sf.getToken();
-			effectName = sf.getToken();
-
-			registerData(effectName, EffectFactory::createEffect(className, sf));
-		}
-		t = sf.getToken();
+		root = YAML::LoadFile(effectsFile);
 	}
+	catch(const std::exception& e)
+	{
+		LOG_S(ERROR) << e.what();
+		return;
+	}
+
+	for(YAML::const_iterator e=root.begin(); e!=root.end(); ++e)
+		registerData(
+			e->first.as<string>(),
+			EffectFactory::createEffect(e->second["class"].as<string>(), e->second)
+		);
 }
 
 void EffectDB::unloadEffects() const
 {
-	map<string, Effect*>::const_iterator e(_data.begin());
-	for (; e != _data.end(); ++e)
-		e->second->unload();
+	for(auto const& e : _data)
+		e.second->unload();
 }

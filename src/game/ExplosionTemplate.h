@@ -7,6 +7,11 @@
 
 using namespace Core;
 
+namespace YAML
+{
+	class Node;
+}
+
 class ExplosionTemplate : public Effect
 {
 protected:
@@ -51,7 +56,7 @@ protected:
 
 public:
 
-	ExplosionTemplate(ScriptFile& sf);
+	ExplosionTemplate(const YAML::Node& node);
 	~ExplosionTemplate();
 
 	void							load();

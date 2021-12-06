@@ -1,6 +1,0 @@
-
-material Police std
-
-	tex diffuse Textures/Police.dds
-
-end_material

@@ -3,15 +3,15 @@
 #include "EntityExplosive.h"
 #include "EntityTrigger.h"
 
-EntityTemplate* EntityFactory::loadEntity(const string& className, ScriptFile& sf)
+EntityTemplate* EntityFactory::loadEntity(const string& className, const YAML::Node& node)
 {
 	EntityTemplate* et = 0;
 	if (className == "dynamic")
-		et = new EntityDynamic(sf);
+		et = new EntityDynamic(node);
 	else if (className == "explosive")
-		et = new EntityExplosive(sf);
+		et = new EntityExplosive(node);
 	else if (className == "trigger")
-		et = new EntityTrigger(sf);
+		et = new EntityTrigger(node);
 
 	return et;
 }

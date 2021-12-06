@@ -3,6 +3,12 @@
 
 #include "../ParticleLib.h"
 
+
+namespace YAML
+{
+	class Node;
+}
+
 class TraceTemplate
 {
 protected:
@@ -12,7 +18,7 @@ protected:
 
 public:
 
-	TraceTemplate(ScriptFile& sf);
+	TraceTemplate(const YAML::Node& node);
 	TraceTemplate(ParticleSystemTemplate* ps, float density) :
 		_particleSystem(ps), _density(density)						{}
 	~TraceTemplate();

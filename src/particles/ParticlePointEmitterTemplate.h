@@ -6,7 +6,7 @@ class ParticlePointEmitterTemplate : public ParticleEmitterTemplate
 {
 public:
 
-	ParticlePointEmitterTemplate(ScriptFile& sf);
+	ParticlePointEmitterTemplate(const YAML::Node& node) : ParticleEmitterTemplate("point", node) {}
 	ParticlePointEmitterTemplate(const string& renderer,
 		ParticleMaterial* mat,
 		const ParticleEmitterParams& p1,

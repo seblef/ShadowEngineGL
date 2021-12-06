@@ -3,21 +3,14 @@
 #include "ExplosionTemplate.h"
 #include "GameEntityExplosive.h"
 #include "GameSystem.h"
+#include "../core/YAMLCore.h"
 
-EntityExplosive::EntityExplosive(ScriptFile& sf) : _damageThreshold(20.0f)
+
+EntityExplosive::EntityExplosive(const YAML::Node& node) :
+	EntityDynamic(node),
+	_damageThreshold(node["damage_threshold"].as<float>(20.f)),
+	_explosionName(node["explosion"].as<string>(""))
 {
-	string t(sf.getToken());
-	while (sf.good() && t != "end_entity")
-	{
-		if (t == "explosion")
-			_explosionName = sf.getToken();
-		else if (t == "damage_threshold")
-			_damageThreshold = stof(sf.getToken());
-		else
-			EntityDynamic::parseToken(t, sf);
-
-		t = sf.getToken();
-	}
 }
 
 EntityExplosive::~EntityExplosive()

@@ -13,7 +13,7 @@ CharacterDB::CharacterDB(const string& playersFile)
 	}
 	catch(const char *msg)
 	{
-		LOG_S(ERROR) << "Failed parsing " << playersFile << " character file: " << msg << endl;
+		LOG_S(ERROR) << "Failed parsing " << playersFile << " character file: " << msg;
 		return;
 	}
 
@@ -22,12 +22,13 @@ CharacterDB::CharacterDB(const string& playersFile)
 	for(YAML::const_iterator it=root.begin(); it!=root.end(); ++it)
 	{
 		const string& name(it->first.as<std::string>());
-		YAML::Node props = it->second;
+		YAML::Node props(it->second);
 
 		Character::AnimMap anims;
-		if(props["animations"])
+        YAML::Node yanims = props["animations"];
+		if(yanims)
 		{
-			for(YAML::const_iterator anim=props["animations"].begin(); anim!=props["animations"].end(); ++anim)
+			for(YAML::const_iterator anim=yanims.begin(); anim!=yanims.end(); ++anim)
 				anims[anim->first.as<string>()] = anim->second.as<string>();
 		}
 

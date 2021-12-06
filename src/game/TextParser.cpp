@@ -3,6 +3,7 @@
 #include "ObjectFlags.h"
 #include "GeometryLoader.h"
 #include "ResourceDB.h"
+#include "../core/YAMLCore.h"
 
 
 
@@ -85,209 +86,139 @@ CullMode TextParser::getCullMode(const string& c)
 	return cm;
 }
 
-void TextParser::parseVector2(ScriptFile& fl, Vector2& v)
+void TextParser::parseMaterialAnimation(MaterialCreate& mc, const YAML::Node& node)
 {
-	v.x = stof(fl.getToken());
-	v.y = stof(fl.getToken());
-}
-
-void TextParser::parseMaterialAnimation(MaterialCreate& mc, ScriptFile& sf)
-{
-	string aname(sf.getToken());
-	if (aname == "uv")
+    YAML::Node uv = node["uv"];
+	if(uv)
 	{
 		mc._animations |= MA_UV;
-
-		string token(sf.getToken());
-		while (sf.good() && token != "end_anim")
-		{
-			if (token == "rotation")
-				mc._uvAnim._rotPerSec = stof(sf.getToken());
-			else if (token == "offset")
-				parseVector2(sf, mc._uvAnim._offsetPerSec);
-
-			token = sf.getToken();
-		}
+		mc._uvAnim._rotPerSec = uv["rotation"].as<float>(mc._uvAnim._rotPerSec);
+		mc._uvAnim._offsetPerSec = uv["offset"].as<Vector2>(mc._uvAnim._offsetPerSec);
 	}
-	else if (aname == "texture")
+    YAML::Node tex = node["texture"];
+	if(tex)
 	{
 		mc._animations |= MA_TEXTURE;
-		mc._textureAnim._animTime = stof(sf.getToken());
-		mc._textureAnim._tileCount = stoi(sf.getToken());
-		mc._textureAnim._tilePerRow = stoi(sf.getToken());
-		mc._textureAnim._tilePerColumn = stoi(sf.getToken());
+		mc._textureAnim._animTime = tex["time"].as<float>(mc._textureAnim._animTime);
+		mc._textureAnim._tileCount = tex["tile_count"].as<int>(mc._textureAnim._tileCount);
+		mc._textureAnim._tilePerRow = tex["tiles_per_row"].as<int>(mc._textureAnim._tilePerRow);
+		mc._textureAnim._tilePerColumn = tex["tiles_per_col"].as<int>(mc._textureAnim._tilePerColumn);
 	}
-	else if (aname == "fade")
+    YAML::Node fade = node["fade"];
+	if(fade)
 	{
 		mc._animations |= MA_FADE;
-		mc._fadeAnim._startTime = stof(sf.getToken());
-		mc._fadeAnim._endTime = stof(sf.getToken());
+		mc._fadeAnim._startTime = fade["start_time"].as<float>(mc._fadeAnim._startTime);
+		mc._fadeAnim._endTime = fade["end_time"].as<float>(mc._fadeAnim._endTime);
 	}
 }
 
-GameMaterial* TextParser::parseMaterial(ScriptFile& sf, string* matName)
+GameMaterial* TextParser::parseMaterial(const YAML::Node& node, const string& name)
 {
-	string name(sf.getToken());
 	MaterialCreate mc;
 	Geometry *debris = 0;
 
-	string token(sf.getToken());
-	while (sf.good() && token != "end_material")
-	{
-		if (token == "debris")
-			debris = ResourceDB::getSingletonRef().getGeometryDB().getData(sf.getToken());
-		else if (token == "renderer")
-		{
-			token = sf.getToken();
-			while (sf.good() && token != "end_renderer" && token != "end_material")
-			{
-				if (token =="tex")
-				{
-					TextureSlot stage = getTextureSlot(sf.getToken());
-					mc._textures[stage] = sf.getToken();
-				}
-				else if (token == "ambient")
-					sf.parseColor(mc._ambient);
-				else if (token == "diffuse")
-					sf.parseColor(mc._diffuse);
-				else if (token == "specular")
-					sf.parseColor(mc._specular);
-				else if (token == "shine")
-					mc._shininess = stof(sf.getToken());
-				else if (token == "spec_intens")
-					mc._specularIntensity = stof(sf.getToken());
-				else if (token == "blend")
-				{
-					mc._blendEnable = true;
-					mc._srcBlend = getBlendMode(sf.getToken());
-					mc._destBlend = getBlendMode(sf.getToken());
-				}
-				else if (token == "alpha_material")
-					mc._flags |= MF_ALPHA;
-				else if (token == "animation")
-					parseMaterialAnimation(mc, sf);
-				else if (token == "cull")
-					mc._cull = getCullMode(sf.getToken());
-				else if (token == "uv_offset")
-					parseVector2(sf, mc._uvOffset);
-				else if (token == "uv_scale")
-					parseVector2(sf, mc._uvScale);
-				else if (token == "uv_rotation")
-					mc._uvRot = stof(sf.getToken());
-				else if (token == "cast_no_shadows")
-					mc._flags |= MF_CASTNOSHADOWS;
-				else if (token == "alpha_shadows")
-					mc._flags|=MF_ALPHASHADOWS;
-				else if (token == "reflection")
-					mc._reflectivity=stof(sf.getToken());
+	debris = ResourceDB::getSingletonRef().getGeometryDB().getData(
+		node["debris"].as<string>("")
+	);
 
-				token = sf.getToken();
+    YAML::Node r = node["renderer"];
+	if(r)
+	{
+        YAML::Node tex(r["textures"]);
+		if(tex)
+		{
+			for(YAML::const_iterator t=tex.begin(); t!=tex.end(); ++t)
+			{
+				TextureSlot stage = getTextureSlot(t->first.as<string>());
+				mc._textures[stage] = t->second.as<string>();
 			}
 		}
 
-		token = sf.getToken();
+        YAML::Node blend(r["blending"]);
+		if(blend)
+		{
+			mc._srcBlend = getBlendMode(blend["src"].as<string>(""));
+			mc._destBlend = getBlendMode(blend["dest"].as<string>(""));
+		}
+
+        YAML::Node anim = r["animation"];
+		if(anim)
+			parseMaterialAnimation(mc, anim);
+
+		if(r["cull"])
+			mc._cull = getCullMode(r["cull"].as<string>());
+
+        YAML::Node uv(r["uv"]);
+		if(uv)
+		{
+			mc._uvOffset = uv["offset"].as<Vector2>(mc._uvOffset);
+			mc._uvScale = uv["scale"].as<Vector2>(mc._uvScale);
+			mc._uvRot = uv["rotation"].as<float>(mc._uvRot);
+		}
+
+		mc._ambient = r["ambient_color"].as<Color>(mc._ambient);
+		mc._diffuse = r["diffuse_color"].as<Color>(mc._diffuse);
+		mc._specular = r["specular_color"].as<Color>(mc._specular);
+		mc._shininess = r["shininess"].as<float>(mc._shininess);
+		mc._specularIntensity = r["specular_intensity"].as<float>(mc._specularIntensity);
+		mc._reflectivity = r["reflectivity"].as<float>(mc._reflectivity);
+
+		if(r["alpha"].as<bool>(false))
+			mc._flags |= MF_ALPHA;
+		if(r["cast_no_shadows"].as<bool>(false))
+			mc._flags |= MF_CASTNOSHADOWS;
+		if(r["alpha_shadows"].as<bool>(false))
+			mc._flags |= MF_ALPHASHADOWS;
 	}
-
-	if (matName)
-		*matName = name;
-
 	return new GameMaterial(new Material(mc, Renderer::getSingletonRef().getVideoDevice()), debris);
 }
 
-TemplateMesh* TextParser::parseMesh(ScriptFile& sf, string* meshName, const string* geoDir)
+TemplateMesh* TextParser::parseMesh(const YAML::Node& node, const string& name, const string* geoDir)
 {
-	string name(sf.getToken());
-	string t(sf.getToken());
-	GameMaterial* gmat = 0;
-	Geometry *geo = 0;
+	GameMaterial* gmat = ResourceDB::getSingletonRef().getMaterialDB().getData(node["material"].as<string>());
+	Geometry *geo = ResourceDB::getSingletonRef().getGeometryDB().getData(node["geometry"].as<string>());
 	unsigned int flags = 0;
+
+	if(node["no_collision"].as<bool>(false))
+		flags = OF_NOCOLLISION;
+
 	PhysicShape shape = PSHAPE_BOX;
-	TemplateMesh* mesh = 0;
-
-    while (sf.good() && t != "end_mesh")
-	{
-		if (t == "geometry")
-			geo = ResourceDB::getSingletonRef().getGeometryDB().getData(sf.getToken());
-		else if (t == "material")
-			gmat = ResourceDB::getSingletonRef().getMaterialDB().getData(sf.getToken());
-		else if (t == "no_collision")
-			flags |= OF_NOCOLLISION;
-		else if (t == "physic_shape")
-		{
-			t = sf.getToken();
-			for (int i = 0; i < PSHAPE_COUNT; ++i)
-			if (t == g_PhysicShapes[i])
-				shape = (PhysicShape)i;
-		}
-
-		t = sf.getToken();
-	}
+	const string& s(node["physic_shape"].as<string>(""));
+	for (int i = 0; i < PSHAPE_COUNT; ++i)
+		if (s == g_PhysicShapes[i])
+			shape = (PhysicShape)i;
 
     assert(geo);
-	mesh=new TemplateMesh(geo,gmat,flags,shape,false);
-
-	if (meshName)
-		*meshName = name;
-
-	return mesh;
+	return new TemplateMesh(geo,gmat,flags,shape,false);
 }
 
-TemplateParticleSystem* TextParser::parseParticles(ScriptFile& sf, string* particleName)
+TemplateParticleSystem* TextParser::parseParticles(const YAML::Node& node, const string& name)
 {
-	string name(sf.getToken());
-	ParticleSystemTemplate *t = new ParticleSystemTemplate(sf);
-	TemplateParticleSystem *tps = new TemplateParticleSystem(t);
-
-	if (particleName)
-		*particleName = name;
-
-	return tps;
+	ParticleSystemTemplate *t = new ParticleSystemTemplate(node);
+	return new TemplateParticleSystem(t);
 }
 
-void TextParser::parseLight(ScriptFile& sf, LightCreate_t& lc, Light::LightType& type)
+void TextParser::parseLight(const YAML::Node& node, LightCreate_t& lc, Light::LightType& type)
 {
-	string t(sf.getToken());
-
+	const string& t(node["type"].as<string>(""));
 	for (int i = 0; i<Light::LT_COUNT; ++i)
-	if (t == g_LightTypes[i])
-		type = (Light::LightType)i;
+		if (t == g_LightTypes[i])
+			type = (Light::LightType)i;
 
 	lc._world.createIdentity();
-	lc._color = Color::White;
-	lc._range = 2;
-	lc._direction = -Vector3::YAxisVector;
-	lc._nearAngle = 45;
-	lc._farAngle = 60;
-	lc._areaWidth = 2;
-	lc._areaHeight = 1;
-	lc._nearZ = 0.1f;
-	lc._castShadows = true;
-	lc._shadowMapSize = 256;
-	lc._shadowMapFilter = 4;
-
-	t = sf.getToken();
-	while (sf.good() && t != "end_light")
-	{
-		if (t == "color")					sf.parseColor(lc._color);
-		else if (t == "range")				lc._range = stof(sf.getToken());
-        else if (t == "position")
-        {
-            Vector3 p;
-            sf.parseVector(p);
-            lc._world=p;
-        }
-		else if (t == "direction")			sf.parseVector(lc._direction);
-		else if (t == "near_angle")			lc._nearAngle = stof(sf.getToken());
-		else if (t == "far_angle")			lc._farAngle = stof(sf.getToken());
-		else if (t == "area_width")			lc._areaWidth = stof(sf.getToken());
-		else if (t == "area_height")		lc._areaHeight = stof(sf.getToken());
-		else if (t == "near_z")				lc._nearZ = stof(sf.getToken());
-		else if (t == "cast_no_shadows")	lc._castShadows = false;
-		else if (t == "shadowmap_size")		lc._shadowMapSize = stoi(sf.getToken());
-		else if (t == "shadowmap_filter")	lc._shadowMapFilter = stoi(sf.getToken());
-
-		t = sf.getToken();
-	}
+	lc._world = node["position"].as<Vector3>(Vector3::NullVector);
+	lc._color = node["color"].as<Color>(Color::White);
+	lc._range = node["range"].as<float>(2.f);
+	lc._direction = node["direction"].as<Vector3>(-Vector3::YAxisVector);
+	lc._nearAngle = node["near_angle"].as<float>(45.f);
+	lc._farAngle = node["far_angle"].as<float>(60.f);
+	lc._areaWidth = node["area_width"].as<float>(2.f);
+	lc._areaHeight = node["area_height"].as<float>(1.f);
+	lc._nearZ = node["near_z"].as<float>(.1f);
+	lc._castShadows = node["cast_no_shadows"].as<bool>(false);
+	lc._shadowMapSize = node["shadowmap_size"].as<int>(256);
+	lc._shadowMapFilter = node["shadowmap_filter"].as<int>(4);
 
 	Light::computeMatrix(lc._direction, lc._world);
 }

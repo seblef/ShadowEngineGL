@@ -18,7 +18,7 @@ protected:
 public:
 
 	ParticleMaterial(const ParticleMaterial& m);
-	ParticleMaterial(ScriptFile& sf);
+	ParticleMaterial(const YAML::Node& node);
 	ParticleMaterial(const string& texFile, bool fileIsDir,
 		BlendMode srcBlend=BLEND_SRCALPHA,
 		BlendMode destBlend=BLEND_INVSRCALPHA);
