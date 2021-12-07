@@ -1,10 +1,9 @@
 
 #pragma once
 
-#include "Effect.h"
-#include "../Core.h"
+#include <string>
 
-using namespace Core;
+class Effect;
 
 namespace YAML
 {
@@ -17,5 +16,5 @@ public:
 
 	EffectFactory()			{}
 
-	static Effect*					createEffect(const string& effectName, const YAML::Node& node);
+	static Effect*					createEffect(const std::string& effectName, const YAML::Node& node);
 };

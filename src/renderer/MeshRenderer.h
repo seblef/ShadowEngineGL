@@ -2,8 +2,10 @@
 
 #include "TRenderer.h"
 #include "MeshInstance.h"
+#include "../core/TSingleton.h"
 
-class MeshRenderer : public TRenderer<MeshInstance>, public TSingleton<MeshRenderer>
+
+class MeshRenderer : public TRenderer<MeshInstance>, public Core::TSingleton<MeshRenderer>
 {
 protected:
 

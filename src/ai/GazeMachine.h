@@ -12,13 +12,5 @@ public:
 	~GazeMachine()				{}
 
 	const char*					getMachineName() const		{ return "gaze"; }
-	unsigned int				getStateID(const string& name)
-	{
-		if (name == "idle")
-			return GAZE_IDLE_STATE_ID;
-		else if (name == "track")
-			return GAZE_TRACK_STATE_ID;
-		else
-			return 0xffffffff;
-	}
+	unsigned int				getStateID(const string& name);
 };

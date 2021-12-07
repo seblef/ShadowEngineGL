@@ -1,8 +1,13 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IShader.h"
 #include <algorithm>
 #include "Material.h"
+
+namespace Core
+{
+    class ViewFrustum;
+}
 
 template<typename T>
 class TRenderer

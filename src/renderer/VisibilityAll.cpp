@@ -1,9 +1,19 @@
 
 #include "VisibilityAll.h"
+#include "Renderable.h"
 
-void VisibilityAll::visibility(const ViewFrustum& vf, const SRect& bounds)
+void VisibilityAll::visibility(const Core::ViewFrustum& vf, const Core::SRect& bounds)
 {
-	RenderableSet::const_iterator r(_renderables.begin());
-	for(;r!=_renderables.end();++r)
-		(*r)->enqueue();
+    for(auto const& r : _renderables)
+		r->enqueue();
+}
+
+void VisibilityAll::addRenderable(Renderable* r)
+{
+    _renderables.insert(r);
+}
+
+void VisibilityAll::remRenderable(Renderable* r)
+{
+    _renderables.erase(r);
 }

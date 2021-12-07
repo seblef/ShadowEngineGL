@@ -8,5 +8,5 @@ public:
 
 	R2D_StdFontLoader()				{}
 
-	R2D_Font*						loadFont(const string& fontFile, IVideoDevice* device);
+	R2D_Font*						loadFont(const std::string& fontFile, IVideoDevice* device);
 };

@@ -1,5 +1,7 @@
 
 #include "ParticleRenderer.h"
+#include "../mediacommon/IVertexBuffer.h"
+
 
 ParticleRenderer::~ParticleRenderer()
 {

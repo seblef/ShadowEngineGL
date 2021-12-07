@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <string>
-#include <algorithm>
 
 using namespace std;
 
@@ -24,20 +23,14 @@ class IFileList
 		IFileList() {}
 		virtual ~IFileList() {}
 
-		int						getFileCount() const				{ return _files.size(); }
-		int						getDirCount() const					{ return _dirs.size(); }
+		int						getFileCount() const;
+		int						getDirCount() const;
 
-		const string&			getFile(int n) const				{ return _files[n]; }
-		const string&			getDir(int n) const					{ return _dirs[n]; }
+		const string&			getFile(int n) const;
+		const string&			getDir(int n) const;
 
-		void					sortFiles()
-		{
-			sort(_files.begin(), _files.end());
-		}
-		void					sortDirs()
-		{
-			sort(_dirs.begin(), _dirs.end());
-		}
+		void					sortFiles();
+		void					sortDirs();
 
 		virtual void			reset(const StringVector& filter, bool noDirs=false)=0;
 		virtual void			reset(const char** filters, int filterCount, bool noDirs = false) = 0;

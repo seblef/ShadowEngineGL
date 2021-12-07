@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GBuffer.h"
+#include "../core/TSingleton.h"
 
 
 #define HDAO_MAX_KERNEL_SIZE			64
@@ -9,6 +10,13 @@ namespace YAML
 {
 	class Node;
 }
+
+namespace Core
+{
+    class Camera;
+}
+
+using namespace Core;
 
 
 class HDAO : public TSingleton<HDAO>

@@ -1,6 +1,11 @@
 
 #include "MeshRenderer.h"
 #include "Renderer.h"
+#include "Mesh.h"
+#include "GeometryData.h"
+#include "Material.h"
+#include "../core/ViewFrustum.h"
+#include "../mediacommon/IIndexBuffer.h"
 
 
 void MeshRenderer::render(bool addPass)

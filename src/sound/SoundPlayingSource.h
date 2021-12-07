@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../MediaCommon.h"
-
+class ISoundSource;
 class SoundVirtualSource;
 
 class SoundPlayingSource

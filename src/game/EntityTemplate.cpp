@@ -1,7 +1,11 @@
 
 #include "EntityTemplate.h"
+#include "GameMaterial.h"
 #include "GeometryLoader.h"
 #include "../core/YAMLCore.h"
+#include "../physic/Physic.h"
+#include "../physic/PhysicGeometry.h"
+#include "../renderer/Mesh.h"
 
 
 const char* const g_PhysicShapes[PSHAPE_COUNT] =

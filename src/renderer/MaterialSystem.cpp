@@ -1,5 +1,7 @@
 
 #include "MaterialSystem.h"
+#include "../mediacommon/IConstantBuffer.h"
+#include "../mediacommon/ITexture.h"
 
 
 

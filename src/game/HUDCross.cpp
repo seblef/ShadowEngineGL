@@ -4,7 +4,13 @@
 #include "GamePlayer.h"
 #include "GameCamera.h"
 #include "SystemValues.h"
-#include "../PhysicLib.h"
+#include "Weapon.h"
+#include "WeaponInstance.h"
+#include "../physic/Physic.h"
+#include "../physic/RayCastInfos.h"
+#include "../renderer/MeshInstance.h"
+#include "../renderer2d/R2D_Image.h"
+#include "../renderer2d/Renderer2D.h"
 
 
 HUDCross::HUDCross(R2D_Layer* hudLayer)

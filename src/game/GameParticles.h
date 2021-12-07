@@ -1,9 +1,10 @@
 
 #pragma once
 
-#include "TemplateParticleSystem.h"
 #include "GameObject.h"
-#include "../StdRenderer.h"
+
+class Particles;
+class TemplateParticleSystem;
 
 class GameParticles : public GameObject
 {

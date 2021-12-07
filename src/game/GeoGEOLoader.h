@@ -10,5 +10,5 @@ public:
 	GeoGEOLoader()					{}
 	~GeoGEOLoader()					{}
 
-	Geometry*						loadGeometry(const string& geoFile);
+	Geometry*						loadGeometry(const std::string& geoFile);
 };

@@ -2,8 +2,8 @@
 #pragma once
 
 #include "Weapon.h"
-#include "WeaponGunInstance.h"
-#include "TraceTemplate.h"
+
+class TraceTemplate;
 
 class WeaponGun : public Weapon
 {
@@ -18,5 +18,5 @@ public:
 
 	TraceTemplate*			getTrace() const					{ return _trace; }
 
-	WeaponInstance*			createInstance(GameCharacter* c)	{ return new WeaponGunInstance(this,c); }
+	WeaponInstance*			createInstance(GameCharacter* c);
 };

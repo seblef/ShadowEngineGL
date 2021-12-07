@@ -1,7 +1,9 @@
 #pragma once
 
 #include "IVideoDevice.h"
-#include "IView.h"
+
+class IView;
+
 
 class IMultiVideoDevice : public IVideoDevice
 {

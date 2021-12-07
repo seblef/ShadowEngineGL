@@ -1,6 +1,15 @@
 #pragma once
 
-#include "../Core.h"
+#include "../core/Matrix4.h"
+#include "../core/Vector4.h"
+#include "../core/Vector2.h"
+
+namespace Core
+{
+    class Camera;
+}
+
+using namespace Core;
 
 class SceneInfosBuffer
 {
@@ -22,16 +31,6 @@ public:
 		_proj(Matrix4::Identity), _view(Matrix4::Identity), _eyePos(Vector4::NullVector),
 		_invScreenSize(Vector2::UnitVector), _time(0), _pack(0)																	{}
 
-	void				setCamera(const Camera& c)
-	{
-		_viewProj=c.getViewProjMatrix();
-		_proj=c.getProjectionMatrix();
-		_viewProj.inverse(_invViewProj);
-		_view = c.getViewMatrix();
-		_proj.inverse(_invProj);
-		_eyePos=c.getPosition();
-		_invScreenSize=Vector2(0.5f / c.getCenter().x,0.5f / c.getCenter().y);
-	}
-
+	void				setCamera(const Camera& c);
 	void				setTime(float time)						{ _time=time; }
 };

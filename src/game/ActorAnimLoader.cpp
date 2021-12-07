@@ -1,6 +1,9 @@
 
 #include "ActorAnimLoader.h"
 #include "ActorFileFormat.h"
+#include "../core/FileSystemFactory.h"
+
+using namespace Core;
 
 AnimPRSMultiTrack* ActorAnimLoader::loadActorAnimation(const string& animFile)
 {

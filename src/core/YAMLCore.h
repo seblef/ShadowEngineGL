@@ -3,6 +3,7 @@
 
 #include "Vector2.h"
 #include "Vector3.h"
+#include "Color.h"
 #include <yaml-cpp/yaml.h>
 
 namespace YAML
@@ -10,7 +11,7 @@ namespace YAML
 
 // Vector2 encoder/decoder
 template<>
-struct convert<Vector2> {
+struct convert<Core::Vector2> {
     static Node encode(const Core::Vector2& v)
     {
         Node node;
@@ -67,7 +68,7 @@ struct convert<Core::Color> {
         return node;
     }
 
-    static bool decode(const Node& node, Color& c)
+    static bool decode(const Node& node, Core::Color& c)
     {
         if(!node.IsSequence() || node.size() != 4)
             return false;

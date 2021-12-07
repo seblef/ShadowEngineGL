@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IConstantBuffer.h"
 #include "GLDefs.h"
 #include <GL/glew.h>
-#include "GL/gl.h"
+
 
 class GLConstantBuffer : public IConstantBuffer
 {

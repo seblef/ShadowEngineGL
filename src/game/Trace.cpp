@@ -2,6 +2,10 @@
 #include "Trace.h"
 #include "TraceTemplate.h"
 #include "GameCamera.h"
+#include "../particles/ParticleSystem.h"
+#include "../particles/ParticleLinearEmitter.h"
+#include "../renderer/Renderer.h"
+#include "../renderer/Particles.h"
 
 
 Trace::Trace(const TraceTemplate& t, const Vector3& p1, const Vector3& p2) : Action("Trace")

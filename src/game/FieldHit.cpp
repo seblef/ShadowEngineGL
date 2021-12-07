@@ -2,8 +2,11 @@
 #include "FieldHit.h"
 #include "GameCharacter.h"
 #include "GameEntityDynamic.h"
+#include "Hit.h"
+#include "../core/CoreCommon.h"
+#include "../physic/PhysicQuery.h"
+#include "../physic/Physic.h"
 #include "../loguru.hpp"
-#include "../PhysicLib.h"
 
 
 void FieldHit::hitField(const Vector3& center, float innerRadius,

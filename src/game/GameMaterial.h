@@ -1,7 +1,11 @@
 
 #pragma once
 
-#include "Geometry.h"
+#include <string>
+
+class Geometry;
+class Material;
+class Mesh;
 
 class GameMaterial
 {
@@ -18,5 +22,5 @@ public:
 	Mesh*						getDebrisMesh() const						{ return _rDebris; }
 	Material*					getRMaterial() const						{ return _rMat; }
 
-	static GameMaterial*		loadMaterial(const string& matFile);
+	static GameMaterial*		loadMaterial(const std::string& matFile);
 };

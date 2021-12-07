@@ -7,7 +7,7 @@ class TriggerWeapon : public Trigger
 {
 protected:
 
-	string				_weapon;
+	std::string			_weapon;
 	bool				_noRebirth;
 
 public:

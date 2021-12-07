@@ -19,3 +19,9 @@ void GameObjectSet::addObject(GameObject* o, bool temp)
 
 	o->onAddToScene();
 }
+
+void GameObjectSet::remObject(GameObject *o)
+{
+    o->onRemFromScene();
+    _tempObjects.getSet().erase(o);
+}

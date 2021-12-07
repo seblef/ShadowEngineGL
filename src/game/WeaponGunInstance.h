@@ -7,7 +7,7 @@ class WeaponGunInstance : public WeaponInstance
 {
 protected:
 
-	void					damageTarget(Hit& hit, const Vector3& origin) const;
+	void					damageTarget(Hit& hit, const Core::Vector3& origin) const;
 
 public:
 

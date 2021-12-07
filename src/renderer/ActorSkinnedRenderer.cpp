@@ -1,7 +1,9 @@
-
+#include "Actor.h"
 #include "ActorSkinnedRenderer.h"
 #include "Renderer.h"
-
+#include "../core/ViewFrustum.h"
+#include "../mediacommon/IIndexBuffer.h"
+#include "../mediacommon/IVertexBuffer.h"
 
 
 ActorSkinnedRenderer::ActorSkinnedRenderer(IVideoDevice* device) : TRenderer<ActorInstance>(

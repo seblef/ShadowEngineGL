@@ -2,13 +2,13 @@
 #pragma once
 
 #include "Ammo.h"
-#include "../StdRenderer.h"
-#include "../PhysicLib.h"
-#include "../ParticleLib.h"
-#include "../SoundLib.h"
+#include "../sound/SoundVirtualSource.h"
 
 class WeaponRocket;
 class GameCharacter;
+class MeshInstance;
+class Light;
+class Particles;
 
 class Rocket : public Ammo
 {

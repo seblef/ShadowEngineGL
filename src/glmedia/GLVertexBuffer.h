@@ -1,8 +1,7 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IVertexBuffer.h"
 #include <GL/glew.h>
-#include <GL/gl.h>
 
 class GLVertexBuffer : public IVertexBuffer
 {

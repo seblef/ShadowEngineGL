@@ -2,8 +2,9 @@
 #pragma once
 
 #include "EntityTemplate.h"
+#include "../core/TDataBase.h"
 
-class EntityDB : public TDataBase<EntityTemplate>
+class EntityDB : public Core::TDataBase<EntityTemplate>
 {
 public:
 

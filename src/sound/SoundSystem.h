@@ -1,6 +1,12 @@
 #pragma once
 
 #include "SoundVirtualSource.h"
+#include "../core/TDataBase.h"
+#include "../core/TSingleton.h"
+#include <vector>
+#include <set>
+
+using namespace std;
 
 
 class SoundSystem : public TSingleton<SoundSystem>

@@ -1,8 +1,10 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IFrameBuffer.h"
 #include <GL/glew.h>
-#include <GL/gl.h>
+
+class IDepthTexture;
+class ITexture;
 
 class GLFrameBuffer : public IFrameBuffer
 {

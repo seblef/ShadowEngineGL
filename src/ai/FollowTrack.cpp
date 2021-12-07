@@ -3,8 +3,8 @@
 #include "AIAgent.h"
 #include "Ids.h"
 #include "AISystem.h"
+#include "../navigation/Navigation.h"
 #include "../loguru.hpp"
-#include "../NavigationLib.h"
 
 
 #define FOLLOW_MIN_DIST				1.0f

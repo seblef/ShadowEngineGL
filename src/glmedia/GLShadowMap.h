@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IShadowMap.h"
 #include <GL/glew.h>
-#include <GL/gl.h>
+
 
 class GLShadowMap : public IShadowMap
 {

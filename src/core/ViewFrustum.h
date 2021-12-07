@@ -33,112 +33,39 @@ class ViewFrustum
 
 	public:
 
-		ViewFrustum() : _builtFromMatrix(false), _planeCount(0), _viewProj(Matrix4::Identity) {}
-		ViewFrustum(const Matrix4& mat)						{ createFromViewProjMatrix(mat); }
-		ViewFrustum(const ViewFrustum& vf)					{ *this=vf; }
+		ViewFrustum();
+		ViewFrustum(const Matrix4& mat);
+		ViewFrustum(const ViewFrustum& vf);
 
-		ViewFrustum&		operator=(const ViewFrustum& vf)
-		{
-			_planeCount=vf._planeCount;
-			_position=vf._position;
-			_builtFromMatrix=vf._builtFromMatrix;
-			_viewProj=vf._viewProj;
+		ViewFrustum&		operator=(const ViewFrustum& vf);
 
-			for(int p=0;p<_planeCount;++p)
-				_planes[p]=vf._planes[p];
+		void				reinit();
 
-			return *this;
-		}
+		void				setPosition(const Vector3& vPos);
+		const Vector3&		getPosition() const;
 
-		void				reinit()
-		{
-			_planeCount=0;
-			_builtFromMatrix=false;
-			_position=Vector3::NullVector;
-			_viewProj.createIdentity();
-		}
-
-		void				setPosition(const Vector3& vPos)		{ _position=vPos; };
-		const Vector3&		getPosition() const						{ return _position; };
-
-		void				transform(const Matrix4& mat)
-		{
-			for(int p=0;p<_planeCount;++p)
-				_planes[p]*=mat;
-			_position*=mat;
-		}
-		const Matrix4&		getViewProjMatrix() const				{ return _viewProj; }
+		void				transform(const Matrix4& mat);
+		const Matrix4&		getViewProjMatrix() const;
 
 		void				createFromViewProjMatrix(const Matrix4& mat, bool bNearAndFar=true);
 
-		void				addPlane(const Plane& p)
-		{
-			assert(_planeCount < FRUSTRUM_MAX_PLANES);
-			_planes[_planeCount]=p;
-			++_planeCount;
-			_builtFromMatrix=false;
-		}
-		void				addPlane(const Vector3& v1, const Vector3& v2)		{ addPlane(Plane(_position,v1,v2)); }
+		void				addPlane(const Plane& p);
+		void				addPlane(const Vector3& v1, const Vector3& v2);
 
-		int					getPlaneCount() const					{ return _planeCount; }
-		const Plane&		getPlane(int n) const					{ return _planes[n]; }
+		int					getPlaneCount() const;
+		const Plane&		getPlane(int n) const;
 
-		bool				isPointInside(const Vector3& v) const
-		{
-			for(int p=0;p<_planeCount;++p)
-				if(_planes[p].classifyPoint(v)==PLANE_FRONT)
-					return false;
+		bool				isPointInside(const Vector3& v) const;
+		bool				isLineInside(const Vector3& start, const Vector3& end) const;
+		bool				isBoxInside(const BBox3& v) const;
+		bool				isSphereInside(const BSphere& s) const;
 
-			return true;
-		}
-		bool				isLineInside(const Vector3& start, const Vector3& end) const
-		{
-			for(int p=0;p<_planeCount;++p)
-				if(_planes[p].classifyPoint(start)==PLANE_FRONT &&
-				   _planes[p].classifyPoint(end)==PLANE_FRONT)
-				   return false;
+		bool				isMatrixCreated() const;
 
-			return true;
-		}
-		bool				isBoxInside(const BBox3& v) const
-		{
-			for(int p=0;p<_planeCount;++p)
-				if(_planes[p].classifyBox(v)==PLANE_FRONT)
-					return false;
-
-			return true;
-		}
-		bool				isSphereInside(const BSphere& s) const
-		{
-			for(int p=0;p<_planeCount;++p)
-				if(_planes[p].classifySphere(s)==PLANE_FRONT)
-					return false;
-
-			return true;
-		}
-
-		bool				isMatrixCreated() const					{ return _builtFromMatrix; }
-
-		Vector3				getFarLeftUp() const
-		{
-			Vector3 p;	_planes[VFP_FAR].intersectWithPlanes(_planes[VFP_TOP],_planes[VFP_LEFT],p); return p;
-		}
-
-		Vector3				getFarLeftDown() const
-		{
-			Vector3 p;	_planes[VFP_FAR].intersectWithPlanes(_planes[VFP_BOTTOM],_planes[VFP_LEFT],p); return p;
-		}
-
-		Vector3				getFarRightUp() const
-		{
-			Vector3 p;	_planes[VFP_FAR].intersectWithPlanes(_planes[VFP_TOP],_planes[VFP_RIGHT],p); return p;
-		}
-
-		Vector3				getFarRightDown() const
-		{
-			Vector3 p;	_planes[VFP_FAR].intersectWithPlanes(_planes[VFP_BOTTOM],_planes[VFP_RIGHT],p); return p;
-		}
-
+		Vector3				getFarLeftUp() const;
+		Vector3				getFarLeftDown() const;
+		Vector3				getFarRightUp() const;
+		Vector3				getFarRightDown() const;
 };
 
 }

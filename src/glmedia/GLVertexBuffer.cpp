@@ -1,7 +1,7 @@
 
 #include "GLVertexBuffer.h"
 #include "GLDefs.h"
-#include <iostream>
+#include <assert.h>
 #include "../loguru.hpp"
 
 

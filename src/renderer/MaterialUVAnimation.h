@@ -23,13 +23,7 @@ public:
 
 	const char*	getAnimationName() const				{ return "uv"; }
 
-	void				set(float time)
-	{
-		_material->getStdBuffer().setOffset(_offsetPerSec * time);
-		Matrix2 m;
-		m.rotation(_rotPerSec * time * (float)M_PI / 180.0f);
-		_material->getStdBuffer().setRotation(m);
-	}
+	void				set(float time);
 
 	const Vector2&		getOffset() const				{ return _offsetPerSec; }
 	float				getRotation() const				{ return _rotPerSec; }

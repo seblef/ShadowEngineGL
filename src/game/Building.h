@@ -1,10 +1,14 @@
 
 #pragma once
 
-#include "GameObject.h"
-#include "BuildingTemplate.h"
-
+class BuildingTemplate;
+class GameObject;
 class Map;
+
+namespace Core
+{
+    class Matrix4;
+}
 
 class Building
 {
@@ -16,7 +20,7 @@ protected:
 
 public:
 
-	Building(const BuildingTemplate& t, const Matrix4& world, Map& m);
+	Building(const BuildingTemplate& t, const Core::Matrix4& world, Map& m);
 	~Building();
 
 	void							onAddToMap();

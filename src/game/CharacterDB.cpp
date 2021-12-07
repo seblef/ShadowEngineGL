@@ -2,6 +2,7 @@
 #include "CharacterDB.h"
 #include "../loguru.hpp"
 #include <yaml-cpp/yaml.h>
+#include <assert.h>
 
 
 CharacterDB::CharacterDB(const string& playersFile)

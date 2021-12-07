@@ -1,6 +1,9 @@
 
 #include "Debris.h"
 #include "SystemValues.h"
+#include "../core/Random.h"
+#include "../renderer/Renderer.h"
+#include "../renderer/MeshInstance.h"
 
 
 Debris::Debris(Mesh* mesh, int count, const Vector3& pos, const Vector3& normal, float maxAngle,

@@ -53,24 +53,8 @@ public:
 	Vector3			operator*(float f) const				{ return Vector3(x*f, y*f, z*f); }
 	Vector3&		operator*=(const float f)				{ x*=f; y*=f; z*=f; return *this; }
 	Vector3&		operator*=(const Vector3& v)			{ x*=v.x; y*=v.y; z*=v.z; return *this; }
-	Vector3			operator*(const Matrix4& m) const
-	{
-		return Vector3(x*m(0,0) + y*m(1,0) + z*m(2,0) + m(3,0),
-					   x*m(0,1) + y*m(1,1) + z*m(2,1) + m(3,1),
-					   x*m(0,2) + y*m(1,2) + z*m(2,2) + m(3,2));
-	}
-	Vector3&		operator*=(const Matrix4& m)
-	{
-		float tx=x;
-		float ty=y;
-		float tz=z;
-
-		x=tx*m(0,0) + ty*m(1,0) + tz*m(2,0) + m(3,0);
-		y=tx*m(0,1) + ty*m(1,1) + tz*m(2,1) + m(3,1);
-		z=tx*m(0,2) + ty*m(1,2) + tz*m(2,2) + m(3,2);
-
-		return *this;
-	}
+	Vector3			operator*(const Matrix4& m) const;
+	Vector3&		operator*=(const Matrix4& m);
 
 	Vector3			operator/(float f) const				{ return Vector3(x/f, y/f, z/f); }
 	Vector3&		operator/=(float f)						{ x/=f; y/=f; z/=f; return *this; }
@@ -104,22 +88,9 @@ public:
 		return sqrtf(getDistanceFromSqr(v));
 	}
 
-	bool			isBetween(const Vector3& v1, const Vector3& v2) const
-	{
-		float f=(v2-v1).getSquareLength();
-		return (getDistanceFromSqr(v1) < f && getDistanceFromSqr(v2) < f);
-	}
+	bool			isBetween(const Vector3& v1, const Vector3& v2) const;
 
-	void			transformNoTranslation(const Matrix4& m)
-	{
-		float tx=x;
-		float ty=y;
-		float tz=z;
-
-		x=tx*m(0,0) + ty*m(1,0) + tz*m(2,0);
-		y=tx*m(0,1) + ty*m(1,1) + tz*m(2,1);
-		z=tx*m(0,2) + ty*m(1,2) + tz*m(2,2);
-	}
+	void			transformNoTranslation(const Matrix4& m);
 
 	void			scaleFrom(const Vector3& v, const Vector3& vScale)			{ x=v.x*vScale.x; y=v.y*vScale.y; z=v.z*vScale.z; }
 	void			invScale(const Vector3& vScale)							{ x/=vScale.x; y/=vScale.y; z/=vScale.z; }

@@ -2,6 +2,9 @@
 
 #include "ParticleEmitter.h"
 #include "ParticleSystemTemplate.h"
+#include "../core/BBox3.h"
+
+using namespace Core;
 
 class ParticleSystem
 {

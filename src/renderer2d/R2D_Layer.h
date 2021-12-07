@@ -1,5 +1,7 @@
 #pragma once
 
 #include "R2D_Object.h"
+#include "../core/TSet.h"
 
-typedef TSet<R2D_Object>			R2D_Layer;
+
+typedef Core::TSet<R2D_Object>			R2D_Layer;

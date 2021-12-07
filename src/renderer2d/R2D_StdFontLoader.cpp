@@ -1,6 +1,10 @@
 
 #include "R2D_StdFontLoader.h"
+#include "R2D_Font.h"
 #include "FontFileFormat.h"
+#include "../core/FileSystemFactory.h"
+#include "../mediacommon/IVideoDevice.h"
+#include <assert.h>
 
 
 R2D_Font* R2D_StdFontLoader::loadFont(const string& fontFile, IVideoDevice* device)

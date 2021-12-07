@@ -19,14 +19,7 @@ protected:
 	void						makeMesh(const PhysicGeometryCreate_t& c, PxPhysics* p, PxCooking *cook);
 	void						makeConvexHull(const PhysicGeometryCreate_t& c, PxPhysics* p, PxCooking *cook);
 
-	void						makeOffsetPreTransform(const Vector3& center)
-	{
-		if(center!=Vector3::NullVector)
-		{
-			_needPreTransform=true;
-			_preTransform.createTranslate(center.x,center.y,center.z);
-		}
-	}
+	void						makeOffsetPreTransform(const Vector3& center);
 
 public:
 

@@ -1,9 +1,17 @@
 #pragma once
 
-#include "../Core.h"
-#include "Light.h"
-#include "GlobalLight.h"
 #include "ShadowMapsBase.h"
+#include "../core/TSingleton.h"
+#include "../mediacommon/IVideoDevice.h"
+#include <vector>
+
+class Light;
+class LightGlobal;
+
+namespace Core
+{
+    class Camera;
+}
 
 using namespace Core;
 
@@ -11,7 +19,7 @@ class ShadowSystem : public TSingleton<ShadowSystem>
 {
 protected:
 
-	typedef vector<Light*>		LightVector;
+	typedef std::vector<Light*>		LightVector;
 
 	IVideoDevice*				_device;
 	ShadowMapsBase				_base;
@@ -35,13 +43,13 @@ public:
 	void						setGlobalLight(LightGlobal* g)	{ _global=g; }
 	LightGlobal*				getGlobalLight() const { return _global; }
 
-	void						enqueueLight(Light *l)			{ _lights.push_back(l); }
+	void						enqueueLight(Light *l);
 	void						renderShadowMaps();
 	void						endRender();
 
-	unsigned int 				getNumLights() const											{ return _lights.size(); }
-	Light*						getLight(int n)													{ return _lights[n]; }
-	IShadowMap*					getShadowMap(ShadowMapsBase::MapSize size, int num) const		{ return _base.getShadowMap(size,num); }
+	unsigned int 				getNumLights() const;
+	Light*						getLight(int n);
+	IShadowMap*					getShadowMap(ShadowMapsBase::MapSize size, int num) const;
 
     void						getGlobalLightCamera(Camera& c) const;
 };

@@ -1,6 +1,8 @@
 
 #include "ParticleEngine.h"
 #include "ParticleRenderer.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/IVideoDevice.h"
 #include <algorithm>
 
 
@@ -37,9 +39,8 @@ static inline bool ParticleSortDistance(Particle *o1, Particle *o2)
 void ParticleEngine::draw(const Camera& c)
 {
 	_particlesOnScreen=0;
-	PSVector::iterator s(_queue.begin());
-	for(;s!=_queue.end();++s)
-		(*s)->collectParticles(_particles,_particlesOnScreen,_maxParticles);
+    for(auto const& s : _queue)
+		s->collectParticles(_particles,_particlesOnScreen,_maxParticles);
 
 	_queue.clear();
 

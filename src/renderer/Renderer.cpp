@@ -1,4 +1,6 @@
 
+#include "Actor.h"
+#include "Mesh.h"
 #include "Renderer.h"
 #include "RendererStats.h"
 #include "GroundRenderer.h"
@@ -13,13 +15,31 @@
 #include "HDAO.h"
 #include "HDR.h"
 #include "../loguru.hpp"
-#include "../ParticleLib.h"
+#include "../core/CoreCommon.h"
+#include "../core/Camera.h"
+#include "../core/ViewFrustum.h"
 #include "../core/YAMLCore.h"
+#include "../particles/ParticleEngine.h"
 
 // #define RENDERER_DEBUG
 
 
 extern Light*   g_ShadowLight;
+
+
+
+void SceneInfosBuffer::setCamera(const Camera& c)
+{
+    _viewProj=c.getViewProjMatrix();
+    _proj=c.getProjectionMatrix();
+    _viewProj.inverse(_invViewProj);
+    _view = c.getViewMatrix();
+    _proj.inverse(_invProj);
+    _eyePos=c.getPosition();
+    _invScreenSize=Vector2(0.5f / c.getCenter().x,0.5f / c.getCenter().y);
+}
+
+
 
 Renderer::Renderer(IVideoDevice *device, const YAML::Node& cfg) :
 	_device(device),

@@ -1,11 +1,12 @@
 
 #pragma once
 
-#include "Geometry.h"
-#include "../StdRenderer.h"
-#include "../PhysicLib.h"
+#include "../physic/PhysicDefs.h"
 
 class GameMaterial;
+class Geometry;
+class PhysicGeometry;
+class Mesh;
 
 class TemplateMesh
 {

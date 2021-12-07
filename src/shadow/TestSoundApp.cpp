@@ -1,10 +1,21 @@
 
 #include "TestSoundApp.h"
-#include "../GLMedia.h"
-#include "../SoundLib.h"
+#include "../core/FileSystemFactory.h"
+#include "../core/Vector3.h"
+#include "../core/Color.h"
+#include "../glmedia/Media.h"
+#include "../mediacommon/EventPump.h"
+#include "../mediacommon/KeyboardKeys.h"
+#include "../mediacommon/ISoundDevice.h"
+#include "../mediacommon/ISoundVirtualSource.h"
+#include "../mediacommon/ISoundSource.h"
+#include "../mediacommon/IVideoDevice.h"
 #include <time.h>
 #include <sstream>
 
+using namespace Core;
+
+void initShadowCore();
 
 
 void TestSoundApp::run(const string& dataFolder)

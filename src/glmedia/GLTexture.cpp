@@ -2,6 +2,7 @@
 #include "GLTexture.h"
 #include "GLDefs.h"
 #include "SOIL.h"
+#include <string.h>
 #include "../loguru.hpp"
 
 
@@ -402,9 +403,8 @@ GLTexture* GLTexture::getTextureFromDB(const string& name)
 
 void GLTexture::clearDB()
 {
-    TextureDB::iterator t(_db.begin());
-    for (; t != _db.end(); ++t)
-        delete t->second;
+    for(auto const& t : _db)
+        delete t.second;
 
     _db.clear();
 }

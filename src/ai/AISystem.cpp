@@ -16,13 +16,11 @@ AISystem::AISystem() : _currentAgentID(0), _currentMachineID(0), _now(0)
 
 AISystem::~AISystem()
 {
-	AgentMap::iterator a(_agents.begin());
-	for (; a != _agents.end(); ++a)
-		delete a->second;
+    for(const auto& a : _agents)
+		delete a.second;
 
-	MachineMap::iterator m(_machines.begin());
-	for (; m != _machines.end(); ++m)
-		delete m->second;
+    for(const auto& m : _machines)
+		delete m.second;
 }
 
 AIMachine* AISystem::getMachine(unsigned int machineID) const
@@ -33,11 +31,9 @@ AIMachine* AISystem::getMachine(unsigned int machineID) const
 
 unsigned int AISystem::getMachineID(const string& name) const
 {
-	MachineMap::const_iterator m(_machines.begin());
-	for (; m != _machines.end();++m)
-		if (name == m->second->getMachineName())
-			return m->first;
-
+    for(const auto& m : _machines)
+		if (name == m.second->getMachineName())
+			return m.first;
 	return 0;
 }
 
@@ -74,10 +70,9 @@ void AISystem::updateAI(const Vector3& playerPos, const Vector3& playerDir, floa
 	processEvents();
 
 	AIAgent *agent;
-	AgentMap::const_iterator a(_agents.begin());
-	for (; a != _agents.end(); ++a)
+    for(const auto& a : _agents)
 	{
-		agent = a->second;
+		agent = a.second;
 		if (agent->getCanDelete())
 			_destroyedAgents.push_back(agent->getID());
 	}
@@ -89,9 +84,9 @@ void AISystem::deleteDestroyedAgents()
 {
 	AgentMap::iterator ait;
 	UIntVector::const_iterator aid(_destroyedAgents.begin());
-	for (; aid != _destroyedAgents.end(); ++aid)
+    for(const auto& aid : _destroyedAgents)
 	{
-		ait = _agents.find(*aid);
+		ait = _agents.find(aid);
 		if (ait != _agents.end())
 		{
 			delete ait->second;
@@ -103,20 +98,17 @@ void AISystem::deleteDestroyedAgents()
 void AISystem::processEvents()
 {
 	//		[TODO] Adding delayed messages and removing them is not very efficient
-	EventVector::const_iterator e(_delayedEvents.begin());
-	for (; e != _delayedEvents.end(); ++e)
-		_events.push_back(*e);
-
+    for(const auto& e : _delayedEvents)
+		_events.push_back(e);
 	_delayedEvents.clear();
 
-	for (e = _events.begin(); e != _events.end(); ++e)
+    for(const auto& e : _events)
 	{
-		if (e->getDeliveryTime() <= _now)
-			processSingleEvent(*e);
+		if (e.getDeliveryTime() <= _now)
+			processSingleEvent(e);
 		else
-			_delayedEvents.push_back(*e);
+			_delayedEvents.push_back(e);
 	}
-
 	_events.clear();
 }
 
@@ -139,4 +131,10 @@ void AISystem::processSingleEvent(const AIEvent& e)
 		tempe.setType(AIEVT_ENTER);
 		agent->getCurrentState()->onEvent(agent,tempe);
 	}
+}
+
+AIAgent* AISystem::getAgent(unsigned int agentID) const
+{
+    const auto& a(_agents.find(agentID));
+    return a == _agents.end() ? 0 : a->second;
 }

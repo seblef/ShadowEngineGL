@@ -1,5 +1,9 @@
 
 #include "GroundRenderer.h"
+#include "../mediacommon/IVertexBuffer.h"
+#include "../mediacommon/IShader.h"
+#include <memory.h>
+#include <algorithm>
 
 
 #define GROUND_TRI_PER_DRAW				1024

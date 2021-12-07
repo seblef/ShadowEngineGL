@@ -2,9 +2,10 @@
 #pragma once
 
 #include "Weapon.h"
-#include "TemplateMesh.h"
-#include "ExplosionTemplate.h"
-#include "../ParticleLib.h"
+
+class TemplateMesh;
+class ExplosionTemplate;
+class ParticleSystemTemplate;
 
 class WeaponRocket : public Weapon
 {

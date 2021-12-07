@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../MediaCommon.h"
 #include "GBuffer.h"
+#include "../core/TSingleton.h"
 
 
 namespace YAML

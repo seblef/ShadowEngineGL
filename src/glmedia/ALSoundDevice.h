@@ -4,7 +4,7 @@
 #include "ALSoundSource.h"
 #include "ALSoundVirtualSource.h"
 #include "ALSound.h"
-
+#include "../mediacommon/ISoundDevice.h"
 
 
 class ALSoundDevice : public ISoundDevice

@@ -2,8 +2,10 @@
 
 #include "TRenderer.h"
 #include "ActorInstance.h"
+#include "../core/TSingleton.h"
 
-class ActorSkinnedRenderer : public TRenderer<ActorInstance>, public TSingleton<ActorSkinnedRenderer>
+
+class ActorSkinnedRenderer : public TRenderer<ActorInstance>, public Core::TSingleton<ActorSkinnedRenderer>
 {
 protected:
 

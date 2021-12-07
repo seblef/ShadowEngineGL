@@ -2,8 +2,9 @@
 #pragma once
 
 #include "GameEntity.h"
-#include "EntityDynamic.h"
-#include "Hit.h"
+
+class EntityDynamic;
+class Hit;
 
 class GameEntityDynamic : public GameEntity
 {

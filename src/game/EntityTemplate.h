@@ -1,17 +1,21 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
-#include "../PhysicLib.h"
-#include "Geometry.h"
-#include "GameMaterial.h"
+#include "../physic/PhysicDefs.h"
+#include <string>
 
 class GameEntity;
+class Geometry;
+class Mesh;
+class GameMaterial;
+class PhysicGeometry;
 
 namespace YAML
 {
 	class Node;
 }
+
+using namespace std;
 
 class EntityTemplate
 {

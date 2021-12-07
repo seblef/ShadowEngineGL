@@ -1,6 +1,8 @@
 
 #include "PhysicKinematicScene.h"
 #include "PhysicUtils.h"
+#include <assert.h>
+
 
 PhysicKinematicScene::PhysicKinematicScene(const PhysicGeometry& geo,
 	const Matrix4& world, PhysicMaterial *m,

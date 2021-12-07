@@ -1,5 +1,8 @@
 
 #include "Building.h"
+#include "BuildingTemplate.h"
+#include "BuildingMesh.h"
+#include "BuildingLight.h"
 #include "GameLight.h"
 #include "GameMesh.h"
 #include "Map.h"

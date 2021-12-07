@@ -1,6 +1,13 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../core/Matrix4.h"
+#include "../core/Vector2.h"
+
+class IConstantBuffer;
+class IShadowMap;
+class IVideoDevice;
+
+using namespace Core;
 
 class ShadowMapBuffer
 {
@@ -15,24 +22,9 @@ protected:
 
 public:
 
-	ShadowMapBuffer(IVideoDevice* device)
-	{
-		_cBuffer=device->createConstantBuffer(5,3);
-	}
+	ShadowMapBuffer(IVideoDevice* device);
+	~ShadowMapBuffer();
 
-	~ShadowMapBuffer()
-	{
-		delete _cBuffer;
-	}
-
-    void					set()					{ _cBuffer->set(); }
-	void					setupLight(IShadowMap *m, int filter, const Matrix4& viewProj)
-	{
-		int f=(int)filter;
-		_viewProj=viewProj;
-		_invShadowMapSize=Vector2(1.0f / m->getWidth(),1.0f / m->getHeight());
-        _shadowFilter=(float)f;
-		_invShadowFilter=1.0f / filter;
-		_cBuffer->fill(this);
-	}
+    void					set();
+	void					setupLight(IShadowMap *m, int filter, const Matrix4& viewProj);
 };

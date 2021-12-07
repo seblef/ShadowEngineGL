@@ -1,4 +1,11 @@
 #include "BufferView.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/IVideoDevice.h"
+#include "../mediacommon/IConstantBuffer.h"
+#include "../mediacommon/IGeometryBuffer.h"
+#include "../mediacommon/IDepthTexture.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IShadowMap.h"
 
 
 BufferView::BufferView(IVideoDevice* device, int numCols) :

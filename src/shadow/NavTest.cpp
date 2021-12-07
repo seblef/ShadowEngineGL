@@ -1,16 +1,32 @@
 
 #include "NavTest.h"
-#include "../GameLib.h"
-#include "../NavigationLib.h"
-#include "../R2D.h"
-#include "../GLMedia.h"
 #include "../game/GamePlayer.h"
 #include "../game/GameCamera.h"
+#include "../core/FileSystemFactory.h"
 #include "../core/YAMLCore.h"
+#include "../game/EffectDB.h"
+#include "../game/EntityDB.h"
+#include "../game/CharacterDB.h"
+#include "../game/WeaponDB.h"
+#include "../game/GameSystem.h"
+#include "../mediacommon/EventPump.h"
+#include "../mediacommon/KeyboardKeys.h"
+#include "../glmedia/Media.h"
+#include "../navigation/Navigation.h"
+#include "../navigation/NavPath.h"
+#include "../navigation/NavRenderer.h"
+#include "../physic/Physic.h"
+#include "../renderer/Renderer.h"
+#include "../renderer2d/Renderer2D.h"
+#include "../renderer2d/R2D_Frame.h"
+#include "../renderer2d/R2D_Layer.h"
+#include "../renderer2d/R2D_Rect.h"
 #include "../loguru.hpp"
 #include <time.h>
 #include <sstream>
 
+
+void initShadowCore();
 
 void NavTest::run(const string& dataFolder)
 {

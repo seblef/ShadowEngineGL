@@ -1,13 +1,14 @@
 
 #include "GameEntityExplosive.h"
+#include "EntityExplosive.h"
 #include "ActionServer.h"
 #include "Explosion.h"
+#include "Hit.h"
 #include "../loguru.hpp"
 
 GameEntityExplosive::GameEntityExplosive(EntityExplosive& e, const Matrix4& world) : GameEntityDynamic(e, world), _damage(0),
 	_hasExploded(false)
 {
-
 }
 
 void GameEntityExplosive::onHit(const Hit& h)

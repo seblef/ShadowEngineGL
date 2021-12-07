@@ -1,19 +1,28 @@
 #pragma once
 
-#include "../MediaCommon.h"
-#include "GroundData.h"
+#include "../mediacommon/IConstantBuffer.h"
 #include "SceneInfosBuffer.h"
 #include "GBuffer.h"
-#include "IVisibilitySystem.h"
 #include "BufferView.h"
+#include "../core/Rect.h"
+#include "../core/TSingleton.h"
 
+
+class GroundData;
+class IVisibilitySystem;
+class Renderable;
+
+namespace Core
+{
+    class ViewFrustum;
+}
 
 namespace YAML
 {
 	class Node;
 }
 
-class Renderer : public TSingleton<Renderer>
+class Renderer : public Core::TSingleton<Renderer>
 {
 protected:
 

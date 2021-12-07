@@ -1,6 +1,17 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../core/BBox3.h"
+
+class IVideoDevice;
+class IVertexBuffer;
+class IIndexBuffer;
+
+namespace Core
+{
+    class Vx3D;
+}
+
+using namespace Core;
 
 class GeometryData
 {
@@ -19,5 +30,5 @@ public:
 	IIndexBuffer*				getIndexBuffer() const			{ return _iBuffer; }
 	const BBox3&				getBBox() const					{ return _bBox; }
 
-	void						set()							{ _vBuffer->set(); _iBuffer->set(); }
+	void						set();
 };

@@ -1,5 +1,11 @@
 
 #include "GamePlayer.h"
+#include "Character.h"
+#include "../core/CoreCommon.h"
+#include "../mediacommon/KeyboardKeys.h"
+#include "../physic/PhysicActorController.h"
+#include "../renderer/Actor.h"
+#include "../renderer/ActorInstance.h"
 #include "../loguru.hpp"
 
 //#define HDAO_TUNING

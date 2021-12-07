@@ -2,15 +2,21 @@
 #pragma once
 
 #include "Effect.h"
-#include "TemplateMesh.h"
-#include "../ParticleLib.h"
+#include "../core/Color.h"
+#include <string>
 
-using namespace Core;
+
+class ParticleSystemTemplate;
+class TemplateMesh;
+class ISound;
 
 namespace YAML
 {
 	class Node;
 }
+
+using namespace Core;
+using namespace std;
 
 class ExplosionTemplate : public Effect
 {

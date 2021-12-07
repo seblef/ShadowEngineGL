@@ -6,9 +6,13 @@
 #include "GameSystem.h"
 #include "GameMesh.h"
 #include "GameCharacter.h"
+#include "TemplateMesh.h"
 #include "Map.h"
-#include "../PhysicLib.h"
-#include "../SoundLib.h"
+#include "Hit.h"
+#include "../physic/IPhysicObject.h"
+#include "../physic/Physic.h"
+#include "../physic/RayCastInfos.h"
+#include "../renderer/MeshInstance.h"
 
 
 

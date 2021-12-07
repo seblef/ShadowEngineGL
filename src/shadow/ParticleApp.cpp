@@ -1,7 +1,16 @@
 
 #include "ParticleApp.h"
-#include "../ParticleLib.h"
-#include "../GLMedia.h"
+#include "../glmedia/Media.h"
+#include "../mediacommon/EventPump.h"
+#include "../mediacommon/KeyboardKeys.h"
+#include "../mediacommon/IConstantBuffer.h"
+#include "../mediacommon/IVideoDevice.h"
+#include "../particles/ParticleMaterial.h"
+#include "../particles/ParticleRenderer.h"
+#include "../particles/ParticleSystem.h"
+#include "../particles/ParticleLinearEmitter.h"
+#include "../particles/ParticleEmitterFactory.h"
+#include "../particles/ParticleEngine.h"
 #include <time.h>
 #include <sstream>
 

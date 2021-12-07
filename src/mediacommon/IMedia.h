@@ -1,8 +1,13 @@
 #pragma once
 
-#include "IVideoDevice.h"
-#include "ISoundDevice.h"
-#include "EventPump.h"
+
+#define SINPUT_NONE				0
+#define SINPUT_MOUSE			1
+#define SINPUT_KEYBOARD			2
+
+
+class IVideoDevice;
+class ISoundDevice;
 
 class IMedia
 {
@@ -13,17 +18,8 @@ protected:
 
 public:
 
-	IMedia() : _video(0), _audio(0)
-	{
-		new EventPump;
-	}
-
-	virtual ~IMedia()
-	{
-		EventPump::deleteSingleton();
-		delete _video;
-		delete _audio;
-	}
+	IMedia();
+	virtual ~IMedia();
 
 	IVideoDevice*			getVideo() const				{ return _video; }
 	ISoundDevice*			getAudio() const				{ return _audio; }

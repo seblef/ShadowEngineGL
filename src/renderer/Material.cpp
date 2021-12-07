@@ -5,6 +5,8 @@
 #include "MaterialTextureAnimation.h"
 #include "MaterialFadeAnimation.h"
 #include "MaterialUVAnimation.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IConstantBuffer.h"
 
 
 
@@ -131,4 +133,24 @@ void Material::setTexture(TextureSlot s, const string& texFile)
 void Material::updateStdBuffer()
 {
 	MaterialSystem::getSingletonRef().getBaseConstantBuffer()->fill((const void*)&_buffer);
+}
+
+bool Material::isAnimated() const
+{
+    return !_anims.getVector().empty();
+}
+
+int Material::getAnimationCount() const
+{
+    return _anims.getVector().size();
+}
+
+MaterialAnimation* Material::getAnimation(int n) const
+{
+    return _anims.getVector()[n];
+}
+
+void Material::addAnimation(MaterialAnimation* a)
+{
+    _anims.getVector().push_back(a);
 }

@@ -2,7 +2,14 @@
 #pragma once
 
 #include "Action.h"
-#include "ExplosionTemplate.h"
+#include "../core/Vector3.h"
+
+
+class ExplosionTemplate;
+class ParticlePointEmitter;
+class Particles;
+
+using namespace Core;
 
 class Explosion : public Action
 {

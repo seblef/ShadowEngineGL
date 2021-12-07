@@ -3,6 +3,20 @@
 #include "GameSystem.h"
 #include "Map.h"
 
+AddRemObject::AddRemObject(GameObject* o, bool rem, bool del) :
+    Action("AddRemObject"),
+    _object(o),
+    _remove(rem),
+    _delete(del)
+{
+}
+
+AddRemObject::~AddRemObject()
+{
+    if (_object)
+        delete _object;
+}
+
 void AddRemObject::update(float time)
 {
 	if (_object)

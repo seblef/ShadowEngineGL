@@ -1,8 +1,16 @@
 #pragma once
 
-#include "../MediaCommon.h"
 
+class IVideoDevice;
+class IVertexBuffer;
 class Particle;
+
+namespace Core
+{
+    class Camera;
+}
+
+using namespace Core;
 
 class ParticleRenderer
 {

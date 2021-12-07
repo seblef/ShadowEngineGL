@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../Core.h"
+#include "../core/BBox3.h"
+#include "../core/Matrix4.h"
 
 using namespace Core;
 

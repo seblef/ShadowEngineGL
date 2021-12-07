@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../Core.h"
+#include "../core/MatrixTab.h"
+#include "../core/AnimTracks.h"
 
 using namespace Core;
 

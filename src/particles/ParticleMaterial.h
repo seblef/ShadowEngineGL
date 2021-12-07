@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ParticleTextureSet.h"
+#include "../mediacommon/IVideoDevice.h"
+
 
 class ParticleMaterial
 {

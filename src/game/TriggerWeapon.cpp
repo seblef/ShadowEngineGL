@@ -1,10 +1,12 @@
 
 #include "TriggerWeapon.h"
+#include "GameCharacter.h"
 #include "GameSystem.h"
 #include "GameEntityTrigger.h"
 #include "Map.h"
 #include "ActionServer.h"
 #include "AddRemObject.h"
+#include "WeaponDB.h"
 #include "../core/YAMLCore.h"
 
 

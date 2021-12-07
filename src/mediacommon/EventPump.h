@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Event.h"
-#include "../Core.h"
+#include "../core/TSingleton.h"
 #include <list>
 
 using namespace std;
@@ -18,18 +18,6 @@ public:
 	EventPump()				{}
 	~EventPump()			{}
 
-	void					postEvent(const Event& e)				{ _events.push_back(e); }
-	int						getEvent(Event& e)
-	{
-		if(_events.size() > 0)
-		{
-			e=_events.front();
-			_events.pop_front();
-			return _events.size()+1;
-		}
-		else
-			e._type=ET_COUNT;
-
-		return _events.size();
-	}
+	void					postEvent(const Event& e);
+	int						getEvent(Event& e);
 };

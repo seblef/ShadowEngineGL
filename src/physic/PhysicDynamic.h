@@ -1,7 +1,9 @@
 #pragma once
 
 #include "PhysicObject.h"
-#include "PhysicGeometry.h"
+
+class PhysicGeometry;
+
 
 class PhysicDynamic : public PhysicObject
 {

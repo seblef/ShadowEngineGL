@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../MediaCommon.h"
+class IShadowMap;
+class IVideoDevice;
 
 class ShadowMapsBase
 {
@@ -26,28 +27,14 @@ protected:
 	int						_leftMaps[MP_COUNT];
 	IShadowMap**			_maps[MP_COUNT];
 
-	MapSize					getBestSize(int size) const
-	{
-		MapSize ms=MP_1024;
-		for(int i=0;i<MP_COUNT;++i)
-			if(size <= _mapSizes[i])
-			{
-				ms=(MapSize)i;
-				break;
-			}
-		return ms;
-	}
+	MapSize					getBestSize(int size) const;
 
 public:
 
 	ShadowMapsBase(IVideoDevice *device);
 	~ShadowMapsBase();
 
-	void					clear()
-	{
-		for(int i=0;i<MP_COUNT;++i)
-			_leftMaps[i]=_mapCounts[i];
-	}
+	void					clear();
 
 	IShadowMap*				getShadowMap(int size);
 	IShadowMap*				getShadowMap(MapSize size, int n) const				{ return _maps[size][n]; }

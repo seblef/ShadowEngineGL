@@ -1,8 +1,12 @@
 
 #include "GameMesh.h"
-#include "GameSystem.h"
+#include "Geometry.h"
 #include "BBoxToRect.h"
-#include "../StdRenderer.h"
+#include "TemplateMesh.h"
+#include "../physic/Physic.h"
+#include "../physic/IPhysicObject.h"
+#include "../renderer/MeshInstance.h"
+#include "../renderer/Renderer.h"
 
 
 GameMesh::GameMesh(const TemplateMesh& t, const Matrix4& world, bool alwaysVisible) : GameObject(MESH,world,t.getGeometry().getBBox(),t.getFlags()),

@@ -2,8 +2,9 @@
 #pragma once
 
 #include "Weapon.h"
+#include "../core/TDataBase.h"
 
-class WeaponDB : public TDataBase<Weapon>
+class WeaponDB : public Core::TDataBase<Weapon>
 {
 public:
 

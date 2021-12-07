@@ -1,7 +1,11 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
+#include <string>
+
+class Actor;
+class Material;
+class IVideoDevice;
 
 class IActorLoader
 {
@@ -10,5 +14,5 @@ public:
 	IActorLoader()				{}
 	virtual ~IActorLoader()		{}
 
-	virtual Actor*				loadActor(const string& actorFile, Material* mat, IVideoDevice *device)=0;
+	virtual Actor*				loadActor(const std::string& actorFile, Material* mat, IVideoDevice *device)=0;
 };

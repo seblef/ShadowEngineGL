@@ -1,8 +1,7 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IDepthTexture.h"
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
 
 class GLDepthTexture : public IDepthTexture
 {

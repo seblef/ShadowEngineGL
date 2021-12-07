@@ -1,15 +1,18 @@
 
 #pragma once
 
-#include "Character.h"
-#include "GameMesh.h"
-#include "WeaponInstance.h"
+#include "GameObject.h"
 #include "Navigator.h"
-#include "Hit.h"
-#include "../PhysicLib.h"
-#include "../AILib.h"
+#include "../ai/IAICallback.h"
 
+class ActorInstance;
+class Character;
+class Hit;
 class HUDActor;
+class PhysicActorController;
+class Weapon;
+class WeaponInstance;
+class IPhysicObject;
 
 #define CM_BACKWARD					(1 << 0)
 #define CM_FORWARD					(1 << 1)
@@ -73,7 +76,7 @@ public:
 	const Navigator&	getNavigator() const					{ return _navigator; }
 
 	ActorInstance*		getActorInstance() const				{ return _inst; }
-	IPhysicObject*		getPhysicObject() const					{ return _controller; }
+	IPhysicObject*		getPhysicObject() const;
 
 	void				setWeapon(Weapon *w);
 
@@ -99,12 +102,6 @@ public:
 	void				orientTo(const Vector3& dir);
 	void				goHome();
 	void				fire();
-	bool				canFire()
-	{
-		return _weapon->canFire();
-	}
-	float				getFireRange()
-	{
-		return _weapon->getTemplate()->getRange();
-	}
+	bool				canFire();
+	float				getFireRange();
 };

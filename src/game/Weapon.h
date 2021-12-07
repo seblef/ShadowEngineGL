@@ -1,13 +1,21 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
-#include "../PhysicLib.h"
-#include "GameMaterial.h"
+#include "../core/Color.h"
+#include "../core/Vector3.h"
+#include <string>
+
+using namespace Core;
+using namespace std;
+
+class ISound;
 
 class GameCharacter;
 class GameObject;
 class WeaponInstance;
+class Mesh;
+class GameMaterial;
+class Geometry;
 
 namespace YAML
 {

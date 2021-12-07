@@ -15,5 +15,5 @@ public:
 	Geo3DSLoader()					{}
 	~Geo3DSLoader()					{}
 
-	Geometry*						loadGeometry(const string& geoFileName);
+	Geometry*						loadGeometry(const std::string& geoFileName);
 };

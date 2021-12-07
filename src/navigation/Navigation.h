@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Core.h"
 #include "NavMap.h"
+#include "../core/TSingleton.h"
 
 using namespace Core;
 

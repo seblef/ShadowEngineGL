@@ -1,8 +1,10 @@
 
 #pragma once
 
-#include "Ground.h"
-#include "Map.h"
+#include <string>
+
+class Ground;
+class Map;
 
 class GroundBinLoader
 {
@@ -10,5 +12,5 @@ public:
 
 	GroundBinLoader()				{}
 
-	void							loadGround(Ground& g, const string& groundFile, Map& mp) const;
+	void							loadGround(Ground& g, const std::string& groundFile, Map& mp) const;
 };

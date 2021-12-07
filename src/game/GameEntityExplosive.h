@@ -2,7 +2,9 @@
 #pragma once
 
 #include "GameEntityDynamic.h"
-#include "EntityExplosive.h"
+
+
+class EntityExplosive;
 
 class GameEntityExplosive : public GameEntityDynamic
 {

@@ -4,7 +4,6 @@
 #include "Ids.h"
 #include "AISystem.h"
 #include "../loguru.hpp"
-#include "../NavigationLib.h"
 
 
 bool AttackSearch::onEvent(AIAgent* a, const AIEvent& e)

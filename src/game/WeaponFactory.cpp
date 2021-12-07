@@ -4,7 +4,7 @@
 #include "WeaponRocket.h"
 
 
-Weapon* WeaponFactory::loadWeapon(const string& className, const YAML::Node& node)
+Weapon* WeaponFactory::loadWeapon(const std::string& className, const YAML::Node& node)
 {
 	Weapon* w=0;
 	if (className == "gun")

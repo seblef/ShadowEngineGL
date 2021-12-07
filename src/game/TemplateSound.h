@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include "../SoundLib.h"
+
+class ISound;
 
 class TemplateSound
 {

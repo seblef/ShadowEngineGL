@@ -12,75 +12,38 @@ namespace Core
 class AnimBoolEvaluator
 {
 public:
-
-	static void		evaluate(bool prev, bool next, float time, bool& val)
-	{
-		val= time <= 0.5f ? prev : next;
-	}
+	static void		evaluate(bool prev, bool next, float time, bool& val);
 };
 
 class AnimIntEvaluator
 {
 public:
-
-	static void		evaluate(int prev, int next, float time, int& val)
-	{
-		float fprev=(float)prev;
-		float fnext=(float)next;
-		val=(int)(fprev + (fnext-fprev)*time);
-	}
+	static void		evaluate(int prev, int next, float time, int& val);
 };
 
 class AnimFloatEvaluator
 {
 public:
-
-	static void		evaluate(float prev, float next, float time, int& val)
-	{
-		val=prev + (next-prev)*time;
-	}
+	static void		evaluate(float prev, float next, float time, int& val);
 };
 
 class AnimVector3Evaluator
 {
 public:
 
-	static void		evaluate(const Vector3& prev, const Vector3& next, float time, Vector3& val)
-	{
-		val=(next-prev);
-		val*=time;
-		val+=prev;
-	}
+	static void		evaluate(const Vector3& prev, const Vector3& next, float time, Vector3& val);
 };
 
 class AnimVector4Evaluator
 {
 public:
-
-	static void		evaluate(const Vector4& prev, const Vector4& next, float time, Vector4& val)
-	{
-		val=(next-prev);
-		val*=time;
-		val+=prev;
-	}
+	static void		evaluate(const Vector4& prev, const Vector4& next, float time, Vector4& val);
 };
 
 class AnimPRSEvaluator
 {
 public:
-
-	static void		evaluate(const AnimPRSKeyVal& prev, const AnimPRSKeyVal& next, float time, AnimPRSKeyVal& val)
-	{
-		Vector3 pos;
-		AnimVector3Evaluator::evaluate(prev.getPosition(),next.getPosition(),time,pos);
-		val.setPosition(pos);
-
-		Matrix3 rs(next.getRotationScale());
-		rs-=prev.getRotationScale();
-		rs*=time;
-		rs+=prev.getRotationScale();
-		val.setRotationScale(rs);
-	}
+	static void		evaluate(const AnimPRSKeyVal& prev, const AnimPRSKeyVal& next, float time, AnimPRSKeyVal& val);
 };
 
 typedef TAnimKey<bool>									AnimBoolKey;

@@ -1,9 +1,14 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../core/Vector3.h"
 
-
+class ISound;
+class ISoundSource;
+class ISoundVirtualSource;
+class ISoundDevice;
 class SoundPlayingSource;
+
+using namespace Core;
 
 class SoundVirtualSource
 {
@@ -35,10 +40,7 @@ class SoundVirtualSource
 			float inAngle, float outAngle,
 			bool managed=false
 		);
-		~SoundVirtualSource()
-		{
-			delete _source;
-		}
+		~SoundVirtualSource();
 
 		bool					isPlaying() const				{ return _source != 0; }
 		bool					isManaged() const				{ return _managed; }
@@ -53,8 +55,5 @@ class SoundVirtualSource
 		void					setStopped()									{ _stopped = true; }
 		void					setPlayingSource(ISoundSource *source)			{ _playingSource=source; }
 		void					setSound(ISound* snd)							{ _sound = snd;  }
-		void					updateDistance(const Vector3& listener)
-		{
-			_distance = (_source->getPosition() - listener).getSquareLength();
-		}
+		void					updateDistance(const Vector3& listener);
 };

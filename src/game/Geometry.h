@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
+#include "../core/Vertex.h"
+#include "../renderer/GeometryData.h"
 
 using namespace Core;
 

@@ -1,6 +1,12 @@
 
 #include "VisibilityQuad.h"
+#include "QuadTreeNode.h"
+#include "Renderable.h"
+#include "../core/CoreCommon.h"
+#include "../core/BBox3.h"
+#include "../core/Rect.h"
 
+using namespace Core;
 
 
 VisibilityQuad::VisibilityQuad(int min_size) : _width(65536), _height(65535)
@@ -11,9 +17,8 @@ VisibilityQuad::VisibilityQuad(int min_size) : _width(65536), _height(65535)
 
 void VisibilityQuad::clearNodes()
 {
-	NodeVector::iterator n(_nodes.begin());
-	for(;n!=_nodes.end();++n)
-		delete *n;
+    for(auto const& n : _nodes)
+		delete n;
 
 	_nodes.clear();
 }
@@ -31,20 +36,18 @@ void VisibilityQuad::create(int width, int height)
 void VisibilityQuad::onResize(int w, int h)
 {
 	set<Renderable*> renderables;
-	set<Renderable*>::const_iterator r;
     for(unsigned int i=0;i<_nodes.size();++i)
 	{
-		r=_nodes[i]->getRenderables().begin();
-		for(;r!=_nodes[i]->getRenderables().end();++r)
-			renderables.insert(*r);
+        for(auto const& r : _nodes[i]->getRenderables())
+			renderables.insert(r);
 	}
 
 	create(w,h);
 
-	for(r=renderables.begin();r!=renderables.end();++r)
+    for(auto const &r : renderables)
 	{
-		(*r)->setVisibilityID(-1);
-		addRenderable(*r);
+		r->setVisibilityID(-1);
+		addRenderable(r);
 	}
 }
 
@@ -125,4 +128,28 @@ int VisibilityQuad::findBestNode(const SRect& r) const
 	}
 
 	return current;
+}
+
+int VisibilityQuad::getNearestPowerOfTwo(int n) const
+{
+    int r=1;
+    while(n > (1 << r))
+        ++r;
+
+    return 1 << r;
+}
+
+void VisibilityQuad::getRenderableBounds(const Renderable* r, Core::SRect& rect) const
+{
+    const BBox3& b(r->getWorldBBox());
+    rect.x1=(int)(b.getMin().x);
+    rect.x2=(int)(b.getMax().x);
+    rect.y1=(int)(b.getMin().z);
+    rect.y2=(int)(b.getMax().z);
+}
+
+bool VisibilityQuad::isIn(const QuadTreeNode* n,const SRect& r) const
+{
+    return (r.x1 >= n->getX() && r.x2 <= n->getX() + n->getSize() &&
+            r.y1 >= n->getY() && r.y2 <= n->getY() + n->getSize());
 }

@@ -1,7 +1,12 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include <vector>
+#include <string>
 
+using namespace std;
+
+class ITexture;
+class IVideoDevice;
 
 namespace YAML
 {
@@ -12,7 +17,7 @@ class ParticleTextureSet
 {
 	protected:
 
-		typedef vector<ITexture*>		TexVector;
+		typedef std::vector<ITexture*>		TexVector;
 		TexVector						_textures;
 		IVideoDevice*					_device;
 
@@ -25,7 +30,7 @@ class ParticleTextureSet
 		~ParticleTextureSet();
 
 		void							addTexture(const string& texFile);
-		int								getTextureCount() const					{ return _textures.size(); }
-		ITexture*						getTexture(const int n) const			{ return _textures[n]; }
-		ITexture*						operator[](size_t n) const				{ return getTexture((int)n); }
+		int								getTextureCount() const;
+		ITexture*						getTexture(const int n) const;
+		ITexture*						operator[](size_t n) const;
 };

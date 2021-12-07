@@ -1,5 +1,7 @@
 
 #include "ActorAnimInstance.h"
+#include "../core/Quaternion.h"
+
 
 ActorAnimInstance::ActorAnimInstance(int count) : _time(0), _pose(count), _track(0), _loop(false), _reverse(false),
 	_transitionTrack((int)(AANIM_TRANSITIONFRAMERATE * AANIM_TRANSITIONTIME) + 1,count), _state(STATE_NOANIM)

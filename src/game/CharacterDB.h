@@ -2,8 +2,9 @@
 #pragma once
 
 #include "Character.h"
+#include "../core/TDataBase.h"
 
-class CharacterDB : public TDataBase<Character>
+class CharacterDB : public Core::TDataBase<Character>
 {
 public:
 

@@ -2,6 +2,8 @@
 
 #include "R2D_Font.h"
 
+class IVideoDevice;
+
 class IR2D_FontLoader
 {
 public:

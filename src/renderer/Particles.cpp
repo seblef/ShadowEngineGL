@@ -1,6 +1,9 @@
 
 #include "Particles.h"
+#include "IVisibilitySystem.h"
 #include "Renderer.h"
+#include "../particles/ParticleEngine.h"
+#include "../particles/ParticleSystem.h"
 
 Particles::Particles(ParticleSystem* sys, const Matrix4& world, bool alwaysVisible) :
 	Renderable(sys->getWorldBBox(), world, alwaysVisible), _system(sys)

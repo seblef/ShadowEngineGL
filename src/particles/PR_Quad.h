@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ParticleRenderer.h"
+#include "../mediacommon/IVideoDevice.h"
+
 
 class PR_Quad : public ParticleRenderer
 {

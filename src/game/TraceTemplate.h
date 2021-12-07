@@ -1,8 +1,7 @@
 
 #pragma once
 
-#include "../ParticleLib.h"
-
+class ParticleSystemTemplate;
 
 namespace YAML
 {

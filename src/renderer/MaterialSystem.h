@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Material.h"
+#include "../core/TSingleton.h"
 
 class MaterialSystem : public TSingleton<MaterialSystem>
 {

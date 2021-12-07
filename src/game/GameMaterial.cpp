@@ -1,7 +1,9 @@
 
 #include "GameMaterial.h"
+#include "Geometry.h"
 #include "TextParser.h"
 #include "../core/YAMLCore.h"
+#include "../renderer/Mesh.h"
 #include "../loguru.hpp"
 
 

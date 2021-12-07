@@ -1,5 +1,8 @@
 
 #include "ShadowMapsBase.h"
+#include "../mediacommon/IShadowMap.h"
+#include "../mediacommon/IVideoDevice.h"
+
 
 const int ShadowMapsBase::_mapSizes[ShadowMapsBase::MP_COUNT]={
 	64,128,256,512,1024
@@ -42,4 +45,22 @@ IShadowMap *ShadowMapsBase::getShadowMap(int size)
 		m=_maps[ms][_leftMaps[ms]];
 	}
 	return m;
+}
+
+ShadowMapsBase::MapSize ShadowMapsBase::getBestSize(int size) const
+{
+    MapSize ms=MP_1024;
+    for(int i=0;i<MP_COUNT;++i)
+        if(size <= _mapSizes[i])
+        {
+            ms=(MapSize)i;
+            break;
+        }
+    return ms;
+}
+
+void ShadowMapsBase::clear()
+{
+    for(int i=0;i<MP_COUNT;++i)
+        _leftMaps[i]=_mapCounts[i];
 }

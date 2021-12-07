@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../core/Vector3.h"
+#include "../mediacommon/ISoundListener.h"
+
+using namespace Core;
 
 class ALSoundListener : public ISoundListener
 {

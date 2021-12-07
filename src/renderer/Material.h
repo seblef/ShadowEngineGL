@@ -2,6 +2,7 @@
 
 #include "MaterialCreate.h"
 #include "MaterialStdBuffer.h"
+#include "../core/TVector.h"
 
 class MaterialAnimation;
 
@@ -37,11 +38,11 @@ public:
 	MaterialStdBuffer&			getStdBuffer()								{ return _buffer; }
 	const MaterialStdBuffer&	getStdBuffer() const						{ return _buffer; }
 
-	bool						isAnimated() const							{ return !_anims.getVector().empty(); }
-	int							getAnimationCount() const					{ return _anims.getVector().size(); }
-	MaterialAnimation*			getAnimation(int n)	const					{ return _anims.getVector()[n]; }
+	bool						isAnimated() const;
+	int							getAnimationCount() const;
+	MaterialAnimation*			getAnimation(int n)	const;
 	void						createAnimation(const string& animName);
-	void						addAnimation(MaterialAnimation* a)			{ _anims.getVector().push_back(a); }
+	void						addAnimation(MaterialAnimation* a);
 	void						deleteAnimation(int n);
 
 	bool						isDefaultTexture(TextureSlot s) const		{ return _defaultTex[s]; }

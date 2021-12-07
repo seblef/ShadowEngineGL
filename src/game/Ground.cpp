@@ -1,6 +1,11 @@
 
 #include "Ground.h"
-#include "../NavigationLib.h"
+#include "GameMaterial.h"
+#include "../renderer/GroundData.h"
+#include "../renderer/Renderer.h"
+#include "../navigation/Navigation.h"
+#include <memory.h>
+
 
 
 Ground::Ground(int w, int h) : _width(w), _height(h)

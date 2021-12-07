@@ -3,6 +3,10 @@
 #include "R2D_Frame.h"
 #include "R2D_Renderer.h"
 #include "R2D_Font.h"
+#include "../core/TDataBase.h"
+#include "../core/TSingleton.h"
+#include "../mediacommon/IVideoDevice.h"
+
 
 class Renderer2D : public TSingleton<Renderer2D>
 {

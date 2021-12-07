@@ -1,5 +1,9 @@
 
 #include "GameSound.h"
+#include "TemplateSound.h"
+#include "../mediacommon/ISoundVirtualSource.h"
+#include "../sound/SoundSystem.h"
+#include "../sound/SoundVirtualSource.h"
 
 
 GameSound::GameSound(

@@ -1,7 +1,9 @@
 
 #include "ParticleEmitter.h"
 #include "ParticleEngine.h"
-
+#include "../core/CoreCommon.h"
+#include "../core/Camera.h"
+#include "../core/Random.h"
 
 
 ParticleEmitter::ParticleEmitter(ParticleRenderer* r, ParticleMaterial* m,

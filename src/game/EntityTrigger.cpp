@@ -1,6 +1,7 @@
 
 #include "EntityTrigger.h"
 #include "GameEntityTrigger.h"
+#include "Trigger.h"
 #include "../core/YAMLCore.h"
 
 

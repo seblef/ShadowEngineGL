@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../core/Color.h"
+#include "../core/Vector2.h"
+
+using namespace Core;
 
 class R2D_Object
 {

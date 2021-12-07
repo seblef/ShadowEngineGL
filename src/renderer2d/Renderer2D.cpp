@@ -5,6 +5,8 @@
 #include "R2D_LineRenderer.h"
 #include "R2D_RectRenderer.h"
 #include "R2D_TextRenderer.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/ITexture.h"
 
 
 
@@ -60,9 +62,8 @@ void Renderer2D::render()
 
 void Renderer2D::renderLayer(const R2D_Layer& l) const
 {
-	set<R2D_Object*>::const_iterator o(l.getSet().begin());
-	for(;o!=l.getSet().end();++o)
-		_renderers[(*o)->getType()]->addObject(*o);
+    for(auto const& o : l.getSet())
+		_renderers[o->getType()]->addObject(o);
 
 	for(int i=0;i<R2D_Object::R2D_COUNT;++i)
         _renderers[i]->execute();

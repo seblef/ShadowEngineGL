@@ -4,6 +4,16 @@
 #include "GameCharacter.h"
 #include "ActionServer.h"
 #include "Explosion.h"
+#include "TemplateMesh.h"
+#include "../mediacommon/ISoundVirtualSource.h"
+#include "../particles/ParticleSystem.h"
+#include "../physic/IPhysicObject.h"
+#include "../physic/Physic.h"
+#include "../renderer/Light.h"
+#include "../renderer/MeshInstance.h"
+#include "../renderer/Particles.h"
+#include "../renderer/Renderer.h"
+#include "../sound/SoundSystem.h"
 #include "../loguru.hpp"
 
 

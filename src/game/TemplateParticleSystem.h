@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "../ParticleLib.h"
+#include "../particles/ParticleSystemTemplate.h"
 
 class TemplateParticleSystem
 {

@@ -1,8 +1,11 @@
 
 #pragma once
 
-#include "../Core.h"
+#include "../core/Vector3.h"
+#include "../core/TSingleton.h"
+#include <string>
 
+using namespace std;
 using namespace Core;
 
 namespace YAML
@@ -10,7 +13,7 @@ namespace YAML
 	class Node;
 }
 
-class SystemValues : public TSingleton<SystemValues>
+class SystemValues : public Core::TSingleton<SystemValues>
 {
 protected:
 

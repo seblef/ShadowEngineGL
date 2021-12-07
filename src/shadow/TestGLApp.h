@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include <string>
+
+class IVideoDevice;
+
 
 class TestGLApp
 {
@@ -12,5 +15,5 @@ public:
 
     TestGLApp()     {}
 
-    void            run(const string& dataFolder);
+    void            run(const std::string& dataFolder);
 };

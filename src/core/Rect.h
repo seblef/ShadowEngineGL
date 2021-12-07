@@ -27,7 +27,7 @@ public:
 	bool			operator!=(const SRect& r) const				{ return !(r==*this); }
 };
 
-inline ostream& operator << (ostream& os, const SRect& b)
+inline std::ostream& operator << (std::ostream& os, const SRect& b)
 {
 	os << "( " << b.x1 << "," << b.y1 << " )-( " << b.x2 << "," << b.y2 << " )";
 	return os;

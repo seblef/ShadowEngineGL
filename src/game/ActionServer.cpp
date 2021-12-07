@@ -1,4 +1,5 @@
 #include "ActionServer.h"
+#include "Action.h"
 #include "../loguru.hpp"
 
 ActionServer::~ActionServer()
@@ -8,9 +9,8 @@ ActionServer::~ActionServer()
 
 void ActionServer::reset()
 {
-	ActionSet::iterator a(_activeActions.begin());
-	for (; a != _activeActions.end(); ++a)
-		delete *a;
+    for(auto const& a : _activeActions)
+		delete a;
 
 	_activeActions.clear();
 }
@@ -37,44 +37,40 @@ void ActionServer::update(float time)
 {
 	Action *action;
 
-	ActionSet::iterator a(_delayedActions.begin());
-	for (; a != _delayedActions.end(); ++a)
+    for(auto const& a : _delayedActions)
 	{
-		action = *a;
-		action->getDelayTime() -= time;
-		if (action->getDelayTime() < 0.0f)
+		a->getDelayTime() -= time;
+		if (a->getDelayTime() < 0.0f)
 		{
 #ifdef _DEBUG
-			LOG_S(1) << "Running delayed action " << action->getName();
+			LOG_S(1) << "Running delayed action " << a->getName();
 #endif
-			_activeActions.insert(action);
-			_deadActions.push_back(action);
+			_activeActions.insert(a);
+			_deadActions.push_back(a);
 		}
 	}
 
-	ActionVector::iterator da(_deadActions.begin());
-	for (; da != _deadActions.end(); ++da)
-		_delayedActions.erase(*da);
+    for(auto const& da : _deadActions)
+		_delayedActions.erase(da);
 
 	_deadActions.clear();
 
-	for (a=_activeActions.begin(); a != _activeActions.end(); ++a)
+	for(auto const& a : _activeActions)
 	{
-		action = *a;
-		action->update(time);
-		if (action->isDead())
+		a->update(time);
+		if (a->isDead())
 		{
 #ifdef _DEBUG
-			LOG_S(1) << "Action " << action->getName() << " is finished, deleting it";
+			LOG_S(1) << "Action " << a->getName() << " is finished, deleting it";
 #endif
-			_deadActions.push_back(action);
+			_deadActions.push_back(a);
 		}
 	}
 
-	for (da=_deadActions.begin(); da != _deadActions.end(); ++da)
+    for(auto const& da : _deadActions)
 	{
-		_activeActions.erase(*da);
-		delete *da;
+		_activeActions.erase(da);
+		delete da;
 	}
 
 	_deadActions.clear();

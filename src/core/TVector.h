@@ -27,9 +27,8 @@ public:
 	{
 		if(_autoDelete)
 		{
-            typename TVec::iterator i(_data.begin());
-			for(;i!=_data.end();++i)
-				delete *i;
+            for(auto const& i : _data)
+                delete i;
 		}
 
 		_data.clear();

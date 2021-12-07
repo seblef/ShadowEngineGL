@@ -1,15 +1,21 @@
 #pragma once
 
+#include "../core/Vertex.h"
+#include "../core/Color.h"
 #include "VideoDefs.h"
-#include "IConstantBuffer.h"
-#include "IIndexBuffer.h"
-#include "IShader.h"
-#include "IShadowMap.h"
-#include "ITexture.h"
-#include "IVertexBuffer.h"
-#include "IFrameBuffer.h"
-#include "IDepthTexture.h"
-#include "IGeometryBuffer.h"
+
+using namespace Core;
+
+class IVertexBuffer;
+class IIndexBuffer;
+class IGeometryBuffer;
+class IShader;
+class ITexture;
+class IDepthTexture;
+class IFrameBuffer;
+class IConstantBuffer;
+class IShadowMap;
+
 
 typedef void* BlendState;
 typedef void* DepthStencilState;

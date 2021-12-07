@@ -1,5 +1,7 @@
 
 #include "Physic.h"
+#include "PhysicDynamic.h"
+#include "PhysicGeometry.h"
 #include "PhysicGround.h"
 #include "PhysicStaticScene.h"
 #include "PhysicKinematicScene.h"
@@ -7,6 +9,9 @@
 #include "PhysicTrigger.h"
 #include "PhysicAmmo.h"
 #include "PhysicUtils.h"
+#include "PhysicQuery.h"
+#include "PhysicEvent.h"
+#include "RayCastInfos.h"
 #include "../loguru.hpp"
 
 
@@ -84,7 +89,6 @@ Physic::~Physic()
 	delete _defaultMat;
 
 	_scene->release();
-	_ctrlMgr->release();
 	_cooking->release();
 	_physic->release();
 
@@ -94,6 +98,11 @@ Physic::~Physic()
 	PxCloseExtensions();
 
 	_foundation->release();
+}
+
+PhysicGeometry* Physic::createGeometry(const PhysicGeometryCreate_t& c) const
+{
+    return new PhysicGeometry(c,_physic,_cooking);
 }
 
 void Physic::update(float time)
@@ -112,15 +121,24 @@ void Physic::update(float time)
 		_scene->fetchResults(true);
 	}
 
-	DynamicSet::iterator d(_activeDynamics.begin());
-	for (; d != _activeDynamics.end(); ++d)
-		(*d)->updateWorldMatrix();
+    for(auto const& d : _activeDynamics)
+		d->updateWorldMatrix();
 }
 
 const PhysicEvent* Physic::getEvents(int& count) const
 {
 	count = _events.getCount();
 	return _events.getBuffer();
+}
+
+void Physic::clearEvents()
+{
+    _events.clear();
+}
+
+void Physic::postEvent(const PhysicEvent& e)
+{
+    _events.add(e);
 }
 
 bool Physic::testRay(const RayCastInfos& rc) const
@@ -187,21 +205,6 @@ void Physic::query(PhysicQuery& q)
 
 IPhysicObject* Physic::rayCast(RayCastInfos& rc) const
 {
-/*	PxRaycastHit hit;
-	PxSceneQueryFilterData filterData;
-	filterData.data.word0 = rc._flags;
-
-    PxVec3 d(rc._dir.x,rc._dir.y,rc._dir.z);
-    d.normalize();
-
-    if (_scene->raycastSingle(PXVEC_C(rc._origin), d,
-		rc._range, PxSceneQueryFlag::eIMPACT, hit, filterData))
-	{
-        return (IPhysicObject*)hit.shape->getActor()->userData;
-	}
-	else
-        return 0;*/
-
     PxVec3 d(rc._dir.x,rc._dir.y,rc._dir.z);
     d.normalize();
     PxQueryFilterData filterData;

@@ -2,7 +2,7 @@
 #pragma once
 
 #include "Action.h"
-#include "../Core.h"
+#include "../core/Vector2.h"
 
 using namespace Core;
 

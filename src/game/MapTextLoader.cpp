@@ -1,5 +1,6 @@
 
 #include "MapTextLoader.h"
+#include "Map.h"
 #include "TextParser.h"
 #include "ResourceDB.h"
 #include "GeometryLoader.h"
@@ -12,7 +13,14 @@
 #include "GameSystem.h"
 #include "GroundBinLoader.h"
 #include "Building.h"
+#include "BuildingLight.h"
+#include "BuildingMesh.h"
+#include "CharacterDB.h"
+#include "EntityDB.h"
+#include "EntityTemplate.h"
 #include "../core/YAMLCore.h"
+#include "../renderer/LightSystem.h"
+#include "../sound/SoundSystem.h"
 #include "../loguru.hpp"
 
 
@@ -331,4 +339,19 @@ void MapTextLoader::parseBuildingObject(const YAML::Node& node, Map& m)
 	Matrix4 world;
 	buildMatrix(rot, pos.x, pos.y, height, world);
 	m.addBuilding(new Building(*bt, world, m));
+}
+
+void MapTextLoader::buildMatrix(const Core::Vector3& rot, float x, float y, float height, Core::Matrix4& world) const
+{
+    Matrix4 rot_x, rot_y, rot_z;
+    rot_x.createRotateX(rot.x * (float)M_PI / 180.0f);
+    rot_y.createRotateY(rot.y * (float)M_PI / 180.0f);
+    rot_z.createRotateZ(rot.z * (float)M_PI / 180.0f);
+
+    world = rot_z*rot_y;
+    world *= rot_x;
+
+    world(3, 0) = x;
+    world(3, 1) = height;
+    world(3, 2) = y;
 }

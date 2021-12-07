@@ -1,5 +1,9 @@
 
 #include "R2D_Font.h"
+#include "../core/CoreCommon.h"
+#include "../mediacommon/ITexture.h"
+#include <assert.h>
+
 
 R2D_Font::R2D_Font(R2D_FontCharArea* table, ITexture* tex) : _table(table), _texture(tex), _maxHeight(0), _wrongChar(0)
 {

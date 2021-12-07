@@ -3,7 +3,7 @@
 #include "GLTexture.h"
 #include "GLDefs.h"
 #include "../loguru.hpp"
-#include <iostream>
+#include <assert.h>
 
 
 GLFrameBuffer::GLFrameBuffer(int w, int h, int fcount, ITexture **f, IDepthTexture *d) : IFrameBuffer(w,h,d), _frameCount(fcount)

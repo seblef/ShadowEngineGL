@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core.h"
+#include "../core/BBox2.h"
 
 using namespace Core;
 

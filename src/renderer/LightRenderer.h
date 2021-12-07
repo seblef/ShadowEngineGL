@@ -2,6 +2,13 @@
 
 #include "Light.h"
 #include "ShadowMapBuffer.h"
+#include "../mediacommon/IVideoDevice.h"
+#include <vector>
+
+namespace Core
+{
+    class Camera;
+}
 
 struct LightRendererCreate_t
 {
@@ -31,7 +38,7 @@ protected:
 		Matrix4			_areaViewProj;
 	};
 
-	typedef vector<Light*>			LightVector;
+	typedef std::vector<Light*>			LightVector;
 	LightVector						_lights;
 
 	IVideoDevice*					_device;
@@ -61,6 +68,6 @@ public:
 	LightRenderer(const LightRendererCreate_t& c, const string& noShadowShader, const string& shadowShader);
 	virtual ~LightRenderer();
 
-	void							enqueueLight(Light *l)					{ _lights.push_back(l); }
+	void							enqueueLight(Light *l);
 	void							applyLights(const Camera& eyePos);
 };

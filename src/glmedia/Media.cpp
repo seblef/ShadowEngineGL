@@ -4,9 +4,11 @@
 #include "ALSoundDevice.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "../mediacommon/EventPump.h"
+#include "../mediacommon/KeyboardKeys.h"
 #include "../loguru.hpp"
-#include <iostream>
 #include <assert.h>
+#include <memory.h>
 
 
 static const int        g_Keys[]={

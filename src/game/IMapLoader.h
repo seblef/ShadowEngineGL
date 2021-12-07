@@ -1,8 +1,9 @@
 
 #pragma once
 
-#include "Map.h"
 #include <string>
+
+class Map;
 
 
 class IMapLoader
@@ -12,5 +13,5 @@ public:
 	IMapLoader()				{}
 	virtual ~IMapLoader()		{}
 
-	virtual Map*				loadMap(const string& mapName)=0;
+	virtual Map*				loadMap(const std::string& mapName)=0;
 };

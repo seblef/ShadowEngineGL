@@ -1,7 +1,14 @@
 
 #pragma once
 
-#include "EntityTemplate.h"
+#include <string>
+
+class EntityTemplate;
+
+namespace YAML
+{
+    class Node;
+}
 
 class EntityFactory
 {
@@ -9,5 +16,5 @@ public:
 
 	EntityFactory()				{}
 
-	static EntityTemplate*		loadEntity(const string& className, const YAML::Node& node);
+	static EntityTemplate*		loadEntity(const std::string& className, const YAML::Node& node);
 };

@@ -1,4 +1,3 @@
-
 #include "GameSystem.h"
 #include "GamePlayer.h"
 #include "GameActorUpdater.h"
@@ -8,10 +7,23 @@
 #include "ActionServer.h"
 #include "AddRemObject.h"
 #include "ActionCreateRandomCharacter.h"
+#include "Hit.h"
 #include "HUD.h"
 #include "HUDActor.h"
+#include "Weapon.h"
+#include "WeaponInstance.h"
+#include "Character.h"
+#include "WeaponDB.h"
+#include "../ai/AISystem.h"
+#include "../ai/AIMachine.h"
+#include "../core/CoreCommon.h"
+#include "../physic/RayCastInfos.h"
+#include "../physic/Physic.h"
+#include "../physic/PhysicActorController.h"
+#include "../renderer/Actor.h"
+#include "../renderer/ActorInstance.h"
+#include "../renderer/Renderer.h"
 #include "../loguru.hpp"
-#include "../AILib.h"
 
 #define AI_REFRESH_TIME			0.1f
 
@@ -361,4 +373,18 @@ void GameCharacter::dies()
 
 	if (SystemValues::getSingletonRef().getDemoMode())
 		ActionServer::getSingletonRef().addDelayedAction(new ActionCreateRandomCharacter, 5.0f);
+}
+
+bool GameCharacter::canFire()
+{
+    return _weapon->canFire();
+}
+float GameCharacter::getFireRange()
+{
+    return _weapon->getTemplate()->getRange();
+}
+
+IPhysicObject* GameCharacter::getPhysicObject() const
+{
+    return _controller;
 }

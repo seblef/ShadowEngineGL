@@ -1,8 +1,13 @@
 
 #include "ExplosionTemplate.h"
 #include "ObjectFlags.h"
-#include "../SoundLib.h"
+#include "TemplateMesh.h"
 #include "../core/YAMLCore.h"
+#include "../particles/ParticlePointEmitterTemplate.h"
+#include "../particles/ParticleMaterial.h"
+#include "../particles/ParticleSystemTemplate.h"
+#include "../sound/SoundSystem.h"
+
 
 
 const float ExplosionMinMass = 0.2f;

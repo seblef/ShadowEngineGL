@@ -1,8 +1,11 @@
 
 #pragma once
 
-#include "Action.h"
-#include "../Core.h"
+#include "../core/TSingleton.h"
+#include <set>
+#include <vector>
+
+class Action;
 
 using namespace Core;
 using namespace std;

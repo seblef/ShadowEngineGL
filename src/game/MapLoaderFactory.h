@@ -9,5 +9,5 @@ public:
 
 	MapLoaderFactory()				{}
 
-	static IMapLoader*				createMapLoader(const string& loaderName);
+	static IMapLoader*				createMapLoader(const std::string& loaderName);
 };

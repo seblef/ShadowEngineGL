@@ -1,7 +1,11 @@
 
 #pragma once
 
-#include "GameCharacter.h"
+#include "../core/Camera.h"
+
+class GameCharacter;
+
+using namespace Core;
 
 class GameCamera
 {

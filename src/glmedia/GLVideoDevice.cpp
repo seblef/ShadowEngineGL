@@ -11,10 +11,6 @@
 #include "GLGeometryBuffer.h"
 #include "GLDefs.h"
 #include "../loguru.hpp"
-#include <GL/gl.h>
-//#include <IL/il.h>
-#include <iostream>
-
 
 
 const GLenum    GLPrimitiveConvers[PT_COUNT]={
@@ -56,21 +52,17 @@ GLVideoDevice::~GLVideoDevice()
 {
     delete _FSGeo;
 
-    BlendMap::iterator b(_blendStates.begin());
-    for(;b!=_blendStates.end();++b)
-        delete b->second;
+    for(auto const& b : _blendStates)
+        delete b.second;
 
-    DepthMap::iterator d(_depthStates.begin());
-    for(;d!=_depthStates.end();++d)
-        delete d->second;
+    for(auto const& d : _depthStates)
+        delete d.second;
 
-    RenderMap::iterator r(_renderStates.begin());
-    for(;r!=_renderStates.end();++r)
-        delete r->second;
+    for(auto const& r : _renderStates)
+        delete r.second;
 
-    SamplerMap::iterator s(_samplerStates.begin());
-    for(;s!=_samplerStates.end();++s)
-        glDeleteSamplers(1,&s->second);
+    for(auto const& s : _samplerStates)
+        glDeleteSamplers(1,&s.second);
 }
 
 IVertexBuffer*		GLVideoDevice::createVertexBuffer(int vxCount, VertexType vxType, BufferUsage bu, const void* data) const

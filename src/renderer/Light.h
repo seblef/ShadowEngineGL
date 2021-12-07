@@ -1,7 +1,9 @@
 #pragma once
 
-#include "../MediaCommon.h"
 #include "Renderable.h"
+#include "../core/Color.h"
+
+class IShadowMap;
 
 struct LightCreate_t
 {
@@ -45,33 +47,14 @@ protected:
 	IShadowMap*				_shadowMap;
 	Matrix4					_shadowViewProj;
 
-	void					updateWorldMatrix()
-	{
-		Matrix4 w(_worldMatrix);
-		computeMatrix(_direction,w);
-		setWorldMatrix(w);
-	}
+	void					updateWorldMatrix();
 
 public:
 
-    static void				computeMatrix(const Vector3& d, Matrix4& m)
-	{
-		Vector3 pos(m);
+    static void				computeMatrix(const Vector3& d, Matrix4& m);
 
-		Quaternion qRot;
-		qRot.buildRotationArc(d,Vector3::ZAxisVector);
-		qRot.getMatrix(m);
-		m=pos;
-	}
-
-	Light(LightType type, const LightCreate_t& c) : 
-		Renderable(BBox3(-c._range,-c._range,-c._range,c._range,c._range,c._range),c._world,false),
-        _type(type), _color(c._color), _range(c._range), _castShadows(c._castShadows), _shadowMapSize(c._shadowMapSize),
-        _shadowMapFilter(c._shadowMapFilter), _direction(c._direction),	_shadowMap(0)	{}
-
-	Light(const Light *l) : Renderable(l), _type(l->_type), _color(l->_color), _range(l->_range),
-        _castShadows(l->_castShadows), _shadowMapSize(l->_shadowMapSize),
-        _shadowMapFilter(l->_shadowMapFilter), _direction(l->_direction), _shadowMap(0)	{}
+	Light(LightType type, const LightCreate_t& c);
+	Light(const Light *l);
 	virtual ~Light()																						{}
 
 	LightType				getLightType() const						{ return _type; }
@@ -83,12 +66,12 @@ public:
 	int						getShadowMapFilter() const					{ return _shadowMapFilter; }
 	const Vector3&			getDirection() const						{ return _direction; }
 
-	void					setRange(float r)							{ _range=r; _localBBox.setMin(Vector3(-r,-r,-r)); _localBBox.setMax(Vector3(r,r,r)); updateWorldMatrix(); }
+	void					setRange(float r);
 	void					setColor(const Color& c)					{ _color=c; }
 	void					setCastShadows(bool castShadows)			{ _castShadows=castShadows; }
 	void					setShadowMapSize(int size)					{ _shadowMapSize=size; }
 	void					setShadowMapFilter(int f)					{ _shadowMapFilter=f; }
-	void					setDirection(const Vector3& dir)			{ _direction=dir; updateWorldMatrix(); }
+	void					setDirection(const Vector3& dir);
 
 	void					enqueue();
 
