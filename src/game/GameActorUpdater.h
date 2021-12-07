@@ -1,13 +1,16 @@
 
 #pragma once
 
-#include "GameCharacter.h"
+#include "../core/TSingleton.h"
+#include <set>
 
-class GameActorUpdater : public TSingleton<GameActorUpdater>
+class GameCharacter;
+
+class GameActorUpdater : public Core::TSingleton<GameActorUpdater>
 {
 protected:
 
-	typedef set<GameCharacter*>		ActorSet;
+	typedef std::set<GameCharacter*>		ActorSet;
 	ActorSet						_actors;
 
 public:
@@ -15,13 +18,8 @@ public:
 	GameActorUpdater()				{}
 	~GameActorUpdater()				{}
 
-	void							addActor(GameCharacter* c)			{ _actors.insert(c); }
-	void							remActor(GameCharacter* c)			{ _actors.erase(c); }
+	void							addActor(GameCharacter* c);
+	void							remActor(GameCharacter* c);
 
-	void							updateActors(float time) const
-	{
-		ActorSet::const_iterator a(_actors.begin());
-		for (; a != _actors.end(); ++a)
-			(*a)->update(time);
-	}
+	void							updateActors(float time) const;
 };

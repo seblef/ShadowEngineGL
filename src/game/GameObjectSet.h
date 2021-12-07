@@ -2,6 +2,8 @@
 #pragma once
 
 #include "GameObject.h"
+#include "../core/TSet.h"
+#include "../core/TVector.h"
 
 class GameObjectSet
 {
@@ -19,6 +21,6 @@ public:
 	virtual ~GameObjectSet();
 
 	void				addObject(GameObject* o, bool temp);
-	void				remObject(GameObject *o)		{ o->onRemFromScene(); _tempObjects.getSet().erase(o); }
+	void				remObject(GameObject *o);
 
 };

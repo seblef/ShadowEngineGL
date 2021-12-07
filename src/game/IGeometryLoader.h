@@ -1,8 +1,9 @@
 
 #pragma once
 
-#include "Geometry.h"
 #include <string>
+
+class Geometry;
 
 class IGeometryLoader
 {
@@ -11,5 +12,5 @@ public:
 	IGeometryLoader()						{}
 	virtual ~IGeometryLoader()				{}
 
-	virtual Geometry*						loadGeometry(const string& geoFileName)=0;
+	virtual Geometry*						loadGeometry(const std::string& geoFileName)=0;
 };

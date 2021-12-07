@@ -4,8 +4,10 @@
 #include "Light.h"
 #include "LightRenderer.h"
 #include "GBuffer.h"
+#include "../core/TSingleton.h"
 
-class LightSystem : public TSingleton<LightSystem>
+
+class LightSystem : public Core::TSingleton<LightSystem>
 {
 protected:
 

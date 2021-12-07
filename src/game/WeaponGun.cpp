@@ -1,5 +1,7 @@
 
 #include "WeaponGun.h"
+#include "TraceTemplate.h"
+#include "WeaponGunInstance.h"
 #include "../core/YAMLCore.h"
 
 
@@ -14,4 +16,9 @@ WeaponGun::~WeaponGun()
 {
 	if (_trace)
 		delete _trace;
+}
+
+WeaponInstance* WeaponGun::createInstance(GameCharacter* c)
+{
+    return new WeaponGunInstance(this,c);
 }

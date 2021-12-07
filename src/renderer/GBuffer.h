@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IVideoDevice.h"
 
 class GBuffer
 {

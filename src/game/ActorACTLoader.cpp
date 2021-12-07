@@ -1,6 +1,13 @@
 
 #include "ActorACTLoader.h"
 #include "ActorFileFormat.h"
+#include "../core/FileSystemFactory.h"
+#include "../core/Vertex.h"
+#include "../renderer/Actor.h"
+#include "../renderer/ActorNullNode.h"
+#include "../renderer/ActorSub.h"
+
+using namespace Core;
 
 #define OLD_ACT
 

@@ -1,9 +1,7 @@
 
 #pragma once
 
-#include "../Core.h"
-
-using namespace Core;
+#include "../core/Vector3.h"
 
 class FieldHit
 {
@@ -11,6 +9,6 @@ public:
 
 	FieldHit()			{}
 
-	static void			hitField(const Vector3& center, float innerRadius,
+	static void			hitField(const Core::Vector3& center, float innerRadius,
 		float outerRadius, float innerDamage);
 };

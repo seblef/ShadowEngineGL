@@ -2,6 +2,10 @@
 #include "Character.h"
 #include "ActorLoader.h"
 #include "ActorAnimLoader.h"
+#include "GameMaterial.h"
+#include "../renderer/Actor.h"
+#include "../renderer/Renderer.h"
+
 
 Character::Character(
 	const string& name,

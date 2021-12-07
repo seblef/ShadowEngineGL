@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../ParticleLib.h"
 #include "Renderable.h"
 #include "IUpdatable.h"
+
+class ParticleSystem;
 
 class Particles : public Renderable, public IUpdatable
 {

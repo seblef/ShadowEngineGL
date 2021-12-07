@@ -1,6 +1,11 @@
 #pragma once
 
 #include "PhysicObject.h"
+#include <PxPhysicsAPI.h>
+
+
+using namespace physx;
+using namespace Core;
 
 
 class PhysicActorController : public PhysicObject, public PxUserControllerHitReport

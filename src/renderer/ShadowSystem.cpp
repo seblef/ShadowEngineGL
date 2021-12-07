@@ -5,7 +5,11 @@
 #include "ActorSkinnedRenderer.h"
 #include "LightSpot.h"
 #include "LightArea.h"
+#include "GlobalLight.h"
 #include "Renderer.h"
+#include "../core/Camera.h"
+#include "../core/ViewFrustum.h"
+#include "../mediacommon/IShadowMap.h"
 
 
 
@@ -21,6 +25,21 @@ ShadowSystem::~ShadowSystem()
 	_device->destroyDepthStencilState(_dsState);
 	_device->destroyBlendState(_blendState);
 	_device->destroyRenderState(_renderState);
+}
+
+void ShadowSystem::enqueueLight(Light *l)
+{
+    _lights.push_back(l);
+}
+
+unsigned int ShadowSystem::getNumLights() const
+{
+    return _lights.size();
+}
+
+Light* ShadowSystem::getLight(int n)
+{
+    return _lights[n];
 }
 
 void ShadowSystem::renderShadowMaps()
@@ -44,22 +63,21 @@ void ShadowSystem::renderShadowMaps()
 		render(m,cam);
 	}
 
-	LightVector::iterator l(_lights.begin());
-	for(;l!=_lights.end();++l)
+    for(auto const& l : _lights)
 	{
-		if((*l)->getLightType()==Light::LT_SPOT)
-			getSpotLightCamera(*l,cam);
-		else if((*l)->getLightType()==Light::LT_AREA)
-			getAreaLightCamera(*l,cam);
+		if(l->getLightType()==Light::LT_SPOT)
+			getSpotLightCamera(l,cam);
+		else if(l->getLightType()==Light::LT_AREA)
+			getAreaLightCamera(l,cam);
 		else
 			continue;
 
-		m=_base.getShadowMap((*l)->getShadowMapSize());
+		m=_base.getShadowMap(l->getShadowMapSize());
 		if(m)
 		{
 			cam.buildMatrices();
-			(*l)->setShadowMap(m);
-			(*l)->setShadowViewProjMatrix(cam.getViewProjMatrix());
+			l->setShadowMap(m);
+			l->setShadowViewProjMatrix(cam.getViewProjMatrix());
 			render(m,cam);
 		}
 	}
@@ -165,9 +183,8 @@ void ShadowSystem::getAreaLightCamera(Light* l, Camera& c) const
 
 void ShadowSystem::endRender()
 {
-	LightVector::iterator l(_lights.begin());
-	for(;l!=_lights.end();++l)
-		(*l)->setShadowMap(0);
+    for(auto const& l : _lights)
+		l->setShadowMap(0);
 
 	_base.clear();
 	_lights.clear();

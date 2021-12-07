@@ -1,5 +1,6 @@
 
 #include "LightAreaRenderer.h"
+#include "../core/Camera.h"
 
 LightAreaRenderer::LightAreaRenderer(const LightRendererCreate_t& c) :
     LightRenderer(c, "Lights/Area", "Lights/AreaShadows")

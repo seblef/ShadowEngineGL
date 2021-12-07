@@ -1,5 +1,9 @@
 
 #include "R2D_RectRenderer.h"
+#include "../mediacommon/IVertexBuffer.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IVideoDevice.h"
+
 
 void R2D_RectRenderer::renderObjects()
 {

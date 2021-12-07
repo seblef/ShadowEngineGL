@@ -1,8 +1,20 @@
 #pragma once
 
-#include "ActorSub.h"
-#include "ActorNullNode.h"
-#include "Material.h"
+#include "../core/BBox3.h"
+#include "../core/AnimTracks.h"
+#include "../core/MatrixHierarchy.h"
+#include "../core/MatrixTab.h"
+#include <map>
+
+class Material;
+class ActorNullNode;
+class ActorSub;
+
+class IVertexBuffer;
+class IIndexBuffer;
+class IVideoDevice;
+
+using namespace Core;
 
 #define MAX_ACTOR_BONES					64
 
@@ -72,8 +84,8 @@ public:
 
 	int						getSubCount() const					{ return _subCount; }
 
-	const ActorSub*			getSubs() const						{ return _subs; }
-	const ActorSub&			getSub(int n) const					{ return _subs[n]; }
+	const ActorSub*			getSubs() const;
+	const ActorSub&			getSub(int n) const;
 
 	const ActorBonesNames_t&	getBonesNames() const			{ return _bonesNames; }
 	int						getBoneIndex(const string& name) const;
@@ -84,24 +96,11 @@ public:
 	const MatrixHierarchy&	getInitialPose() const				{ return _initialPose; }
 
 	int						getNullNodeCount() const			{ return _nullNodeCount; }
-	const ActorNullNode*	getNullNodes() const				{ return _nullNodes; }
-	const ActorNullNode&	getNullNode(int n) const			{ return _nullNodes[n]; }
+	const ActorNullNode*	getNullNodes() const;
+	const ActorNullNode&	getNullNode(int n) const;
 
-	int						getNullNodeIndex(const string& name) const
-	{
-		for(int i=0;i<_nullNodeCount;++i)
-			if(_nullNodes[i].getName()==name)
-				return i;
-		return -1;
-	}
-
-	int						getSubIndex(const string& name) const
-	{
-		for(int i=0;i<_subCount;++i)
-			if(_subs[i].getName()==name)
-				return i;
-		return -1;
-	}
+	int						getNullNodeIndex(const string& name) const;
+	int						getSubIndex(const string& name) const;
 
 	void						addAnimation(const string& animName, AnimPRSMultiTrack* anim)			{ _animations[animName]=anim; }
 	const AnimPRSMultiTrack*	getAnimation(const string& animName)									{ return _animations[animName]; }

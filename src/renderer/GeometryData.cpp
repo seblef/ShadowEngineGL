@@ -1,5 +1,9 @@
 
 #include "GeometryData.h"
+#include "../mediacommon/IVideoDevice.h"
+#include "../mediacommon/IVertexBuffer.h"
+#include "../mediacommon/IIndexBuffer.h"
+
 
 GeometryData::GeometryData(int vxCount, const Vx3D* vx, int triCount, const unsigned short *tri, IVideoDevice* d)
 {
@@ -14,4 +18,10 @@ GeometryData::~GeometryData()
 {
 	delete _iBuffer;
 	delete _vBuffer;
+}
+
+void GeometryData::set()
+{
+    _vBuffer->set();
+    _iBuffer->set();
 }

@@ -1,6 +1,8 @@
 
 #include "ParticleMaterial.h"
 #include "ParticleEngine.h"
+#include "../core/CoreCommon.h"
+#include "../mediacommon/ITexture.h"
 #include <yaml-cpp/yaml.h>
 
 const char * const g_ParticleBlendNames[]=
@@ -105,7 +107,8 @@ ParticleMaterial::ParticleMaterial(const vector<string>& texSet,
 
 	if(_textureSet->getTextureCount()==0)
 	{
-		delete _textureSet;		_textureSet=0;
+		delete _textureSet;
+        _textureSet=0;
 //		_texture=ParticleTextureStore::getSingletonRef().getTexture("Textures/Default/Diffuse.bmp");
 	}
 }

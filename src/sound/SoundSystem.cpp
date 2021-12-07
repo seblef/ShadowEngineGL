@@ -2,6 +2,11 @@
 #include "SoundSystem.h"
 #include "SoundPlayingSource.h"
 #include "SoundVirtualSource.h"
+#include "../core/CoreCommon.h"
+#include "../mediacommon/ISound.h"
+#include "../mediacommon/ISoundSource.h"
+#include "../mediacommon/ISoundListener.h"
+#include "../mediacommon/ISoundDevice.h"
 #include "../loguru.hpp"
 #include <algorithm>
 

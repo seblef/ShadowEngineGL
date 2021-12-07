@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../MediaCommon.h"
 #include "R2D_FontCharArea.h"
+
+class ITexture;
 
 class R2D_Font
 {

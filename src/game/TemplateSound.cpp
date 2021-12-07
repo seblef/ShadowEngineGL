@@ -1,6 +1,6 @@
 
 #include "TemplateSound.h"
-#include "GameSystem.h"
+#include "../sound/SoundSystem.h"
 
 TemplateSound::TemplateSound(
 	ISound *snd,

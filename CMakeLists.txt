@@ -56,16 +56,23 @@ include_directories(
 set(CORE_SOURCES
     src/loguru.cpp
 
+    src/core/AnimPRSKeyVal.cpp
+    src/core/AnimTracks.cpp
     src/core/BBox.cpp
+    src/core/BSphere.cpp
     src/core/Camera.cpp
     src/core/CharUtil.cpp
     src/core/core.cpp
     src/core/FileSystemFactory.cpp
+    src/core/IFileList.cpp
     src/core/IFileSystem.cpp
     src/core/Matrix.cpp
+    src/core/MatrixHierarchy.cpp
+    src/core/Plane.cpp
     src/core/Quaternion.cpp
     src/core/StdFile.cpp
     src/core/StdFileList.cpp
+    src/core/StdFileSystem.cpp
     src/core/Vector.cpp
     src/core/ViewFrustum.cpp
 )
@@ -95,7 +102,9 @@ set(NAVIGATION_SOURCES
 )
 
 set(MEDIA_SOURCES
+    src/mediacommon/EventPump.cpp
     src/mediacommon/MediaCommon.cpp
+    src/mediacommon/IMedia.cpp
 )
 
 set(OPENGL_SOURCES
@@ -151,14 +160,17 @@ set(RENDERER_SOURCES
     src/renderer/MaterialAnimationFactory.cpp
     src/renderer/MaterialStdBuffer.cpp
     src/renderer/MaterialSystem.cpp
-    src/renderer/MaterialTextureAnimation.cpp
+    src/renderer/MaterialAnimation.cpp
     src/renderer/MeshInstance.cpp
     src/renderer/MeshRenderer.cpp
     src/renderer/Particles.cpp
+    src/renderer/QuadTreeNode.cpp
     src/renderer/Renderable.cpp
     src/renderer/Renderer.cpp
     src/renderer/ShadowMapsBase.cpp
+    src/renderer/ShadowMapBuffer.cpp
     src/renderer/ShadowSystem.cpp
+    src/renderer/UpdateSystem.cpp
     src/renderer/VisibilityAll.cpp
     src/renderer/VisibilityFactory.cpp
     src/renderer/VisibilityQuad.cpp
@@ -173,7 +185,6 @@ set(PARTICLES_SOURCES
     src/particles/ParticleExplosionEmitter.cpp
     src/particles/ParticleLinearEmitter.cpp
     src/particles/ParticleMaterial.cpp
-    src/particles/ParticlePointEmitter.cpp
     src/particles/ParticleRenderer.cpp
     src/particles/ParticleSystem.cpp
     src/particles/ParticleSystemTemplate.cpp
@@ -186,6 +197,7 @@ set(RENDERER2D_SOURCES
     src/renderer2d/R2D_Font.cpp
     src/renderer2d/R2D_FontLoader.cpp
     src/renderer2d/R2D_FrameLoader.cpp
+    src/renderer2d/R2D_Image.cpp
     src/renderer2d/R2D_ImageRenderer.cpp
     src/renderer2d/R2D_LineRenderer.cpp
     src/renderer2d/R2D_RectRenderer.cpp
@@ -216,6 +228,7 @@ set(GAME_SOURCES
     src/game/ActorAnimLoader.cpp
     src/game/ActorLoader.cpp
     src/game/AddRemObject.cpp
+    src/game/BBoxToRect.cpp
     src/game/Building.cpp
     src/game/BuildingTemplate.cpp
     src/game/Character.cpp
@@ -235,12 +248,14 @@ set(GAME_SOURCES
     src/game/FieldHit.cpp
     src/game/Flash.cpp
     src/game/FPSCounter.cpp
+    src/game/GameActorUpdater.cpp
     src/game/GameCamera.cpp
     src/game/GameCharacter.cpp
     src/game/GameEntity.cpp
     src/game/GameEntityDynamic.cpp
     src/game/GameEntityExplosive.cpp
     src/game/GameEntityTrigger.cpp
+    src/game/GameLight.cpp
     src/game/GameMaterial.cpp
     src/game/GameMesh.cpp
     src/game/GameObjectSet.cpp

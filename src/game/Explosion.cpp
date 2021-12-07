@@ -1,10 +1,19 @@
 
 #include "Explosion.h"
+#include "ExplosionTemplate.h"
 #include "Debris.h"
 #include "ActionServer.h"
 #include "FieldHit.h"
 #include "Flash.h"
-#include "../SoundLib.h"
+#include "TemplateMesh.h"
+#include "../mediacommon/ISoundVirtualSource.h"
+#include "../particles/ParticlePointEmitter.h"
+#include "../particles/ParticleSystem.h"
+#include "../particles/ParticleExplosionEmitter.h"
+#include "../renderer/Renderer.h"
+#include "../renderer/Particles.h"
+#include "../sound/SoundSystem.h"
+
 
 const float ExplosionFlashAscend = 0.1f;
 const float ExplosionFlashStable = 0.1f;

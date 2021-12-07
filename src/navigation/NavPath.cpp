@@ -1,5 +1,28 @@
 
 #include "NavPath.h"
+#include <fstream>
+#include <math.h>
+
+void NavPath::clearAllocated()
+{
+    _path.clear();
+}
+
+void NavPath::addCase(const NavCase& c)
+{
+    _path.push_back(c);
+}
+
+int NavPath::getPathLength() const
+{
+    return _path.size();
+}
+
+const NavCase& NavPath::getPathStep(int n) const
+{
+    return _path[n];
+}
+
 
 float NavPath::getOrientation(int n) const
 {

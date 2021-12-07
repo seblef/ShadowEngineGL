@@ -1,5 +1,8 @@
 
 #include "Flash.h"
+#include "../core/AnimTracks.h"
+#include "../renderer/Renderer.h"
+#include "../renderer/Light.h"
 
 Flash::Flash(const Color& c, float ascend, float stable, float descend,
 	float range, const Vector3& pos) :

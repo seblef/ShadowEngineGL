@@ -5,7 +5,12 @@
 #include "GameEntityDynamic.h"
 #include "ActionServer.h"
 #include "Flash.h"
-#include "../SoundLib.h"
+#include "Weapon.h"
+#include "Hit.h"
+#include "../renderer/ActorInstance.h"
+#include "../renderer/MeshInstance.h"
+#include "../sound/SoundSystem.h"
+#include "../sound/SoundVirtualSource.h"
 
 
 const float WeaponFlashAscend = 0.02f;

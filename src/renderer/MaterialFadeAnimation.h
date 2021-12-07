@@ -19,15 +19,7 @@ public:
 
 	const char*	getAnimationName() const				{ return "fade"; }
 
-	void		set(float time)
-	{
-		Color c(_material->getStdBuffer().getDiffuse());
-		c.a=0;
-		if(time <= _start)				c.a=1;
-		else if(time < _end)			c.a=(time - _start) / (_end - _start);
-
-		_material->getStdBuffer().setDiffuse(c);
-	}
+	void		set(float time);
 
 	float		getStartTime() const					{ return _start; }
 	float		getEndTime() const						{ return _end; }

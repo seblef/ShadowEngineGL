@@ -1,8 +1,14 @@
 #pragma once
 
-#include "ISoundSource.h"
-#include "ISoundVirtualSource.h"
-#include "ISoundListener.h"
+class ISoundSource;
+class ISoundVirtualSource;
+class ISoundListener;
+class ISound;
+
+namespace Core
+{
+    class Vector3;
+}
 
 class ISoundDevice
 {
@@ -22,9 +28,9 @@ public:
 
 	virtual ISoundVirtualSource*		createVirtualSource() const = 0;
 	virtual ISoundVirtualSource*		createVirtualSource(
-		const Vector3& pos,
-		const Vector3& vel,
-		const Vector3& dir,
+		const Core::Vector3& pos,
+		const Core::Vector3& vel,
+		const Core::Vector3& dir,
 		float refDist, float maxDist,
 		float rollOff,
 		float inAngle, float outAngle

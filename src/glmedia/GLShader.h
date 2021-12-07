@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IShader.h"
+#include <map>
 #include <GL/glew.h>
-#include <GL/gl.h>
+
 
 class GLShader : public IShader
 {

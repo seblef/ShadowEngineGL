@@ -2,7 +2,10 @@
 #pragma once
 
 #include "GameObject.h"
-#include "EntityTemplate.h"
+
+class EntityTemplate;
+class MeshInstance;
+class IPhysicObject;
 
 class GameEntity : public GameObject
 {

@@ -1,7 +1,12 @@
 
 #include "ParticleTextureSet.h"
+#include "../core/FileSystemFactory.h"
+#include "../mediacommon/IVideoDevice.h"
+#include "../mediacommon/ITexture.h"
 #include <yaml-cpp/yaml.h>
-#include <algorithm>
+
+
+using namespace Core;
 
 
 ParticleTextureSet::ParticleTextureSet(const YAML::Node& node, IVideoDevice* d)
@@ -52,4 +57,19 @@ void ParticleTextureSet::addTexture(const string& texFile)
 	ITexture *t=_device->createTexture(texFile);
 	if(t)
 		_textures.push_back(t);
+}
+
+int ParticleTextureSet::getTextureCount() const
+{
+    return _textures.size();
+}
+
+ITexture* ParticleTextureSet::getTexture(const int n) const
+{
+    return _textures[n];
+}
+
+ITexture* ParticleTextureSet::operator[](size_t n) const
+{
+    return getTexture((int)n);
 }

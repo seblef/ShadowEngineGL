@@ -1,6 +1,9 @@
 
 #include "GeoGEOLoader.h"
 #include "GeoFileFormat.h"
+#include "Geometry.h"
+#include "../core/FileSystemFactory.h"
+
 
 
 Geometry* GeoGEOLoader::loadGeometry(const string& geoFile)

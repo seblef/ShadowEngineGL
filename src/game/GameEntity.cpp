@@ -1,6 +1,11 @@
 
 #include "GameEntity.h"
 #include "EntityUpdater.h"
+#include "EntityTemplate.h"
+#include "../physic/IPhysicObject.h"
+#include "../renderer/MeshInstance.h"
+#include "../renderer/Renderer.h"
+
 
 GameEntity::GameEntity(EntityTemplate& t, const Matrix4& world, bool needUpdate, EntityType type) : GameObject(ENTITY,world,BBox3::NullBox,0),
 	_needUpdate(needUpdate), _entityType(type), _template(&t), _rMesh(0), _physic(0)

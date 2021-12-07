@@ -7,6 +7,7 @@
 #include "R2D_Text.h"
 #include "Renderer2D.h"
 #include "../core/YAMLCore.h"
+#include "../mediacommon/ITexture.h"
 #include "../loguru.hpp"
 
 

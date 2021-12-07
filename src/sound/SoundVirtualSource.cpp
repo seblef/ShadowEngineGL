@@ -1,6 +1,8 @@
 
 #include "SoundVirtualSource.h"
 #include "SoundPlayingSource.h"
+#include "../mediacommon/ISoundVirtualSource.h"
+#include "../mediacommon/ISoundDevice.h"
 
 
 SoundVirtualSource::SoundVirtualSource(
@@ -35,3 +37,12 @@ SoundVirtualSource::SoundVirtualSource(
 	_source->setGain(gain);
 }
 
+SoundVirtualSource::~SoundVirtualSource()
+{
+    delete _source;
+}
+
+void SoundVirtualSource::updateDistance(const Vector3& listener)
+{
+    _distance = (_source->getPosition() - listener).getSquareLength();
+}

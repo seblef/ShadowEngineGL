@@ -5,6 +5,9 @@
 #include "GeometryLoader.h"
 #include "TextParser.h"
 #include "ResourceDB.h"
+#include "../physic/Physic.h"
+#include "../physic/PhysicGeometry.h"
+#include "../renderer/Mesh.h"
 
 
 TemplateMesh::TemplateMesh(Geometry* geo, GameMaterial *gmat, unsigned int flags,

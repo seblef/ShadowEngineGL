@@ -2,7 +2,9 @@
 #pragma once
 
 #include "GameEntity.h"
-#include "EntityTrigger.h"
+
+class GameCharacter;
+class EntityTrigger;
 
 class GameEntityTrigger : public GameEntity
 {

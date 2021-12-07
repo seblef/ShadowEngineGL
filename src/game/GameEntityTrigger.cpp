@@ -1,5 +1,11 @@
 
 #include "GameEntityTrigger.h"
+#include "EntityTrigger.h"
+#include "Trigger.h"
+#include "../physic/Physic.h"
+#include "../physic/IPhysicObject.h"
+#include "../renderer/MeshInstance.h"
+
 
 const float EntityRotationSpeed = 90.0f;
 

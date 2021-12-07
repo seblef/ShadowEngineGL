@@ -1,5 +1,10 @@
 
 #include "Navigator.h"
+#include "../navigation/Navigation.h"
+#include "../navigation/NavRenderer.h"
+#include "../navigation/NavPath.h"
+#include "../physic/PhysicActorController.h"
+#include "../core/CoreCommon.h"
 
 #define NAV_CONVERT_POS(x)			(int)x
 #define NAV_ORIENTATION_EPSILON		2.0f

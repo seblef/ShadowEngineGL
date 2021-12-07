@@ -1,6 +1,12 @@
 #pragma once
 
-#include "Renderable.h"
+class Renderable;
+
+namespace Core
+{
+    class ViewFrustum;
+    class SRect;
+}
 
 class IVisibilitySystem
 {
@@ -17,5 +23,5 @@ public:
 
 	virtual void				onRenderableMoved(Renderable* r)=0;
 
-	virtual void				visibility(const ViewFrustum& vf, const SRect& bounds)=0;
+	virtual void				visibility(const Core::ViewFrustum& vf, const Core::SRect& bounds)=0;
 };

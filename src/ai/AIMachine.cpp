@@ -2,13 +2,13 @@
 #include "AIMachine.h"
 #include "AIAgent.h"
 #include "../loguru.hpp"
+#include <assert.h>
 
 
 AIMachine::~AIMachine()
 {
-	StateMap::iterator s(_states.begin());
-	for (; s != _states.end(); ++s)
-		delete s->second;
+    for(auto const& s : _states)
+		delete s.second;
 }
 
 AIMachineState* AIMachine::getState(unsigned int stateID) const

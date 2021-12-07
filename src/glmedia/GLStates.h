@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IVideoDevice.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdint.h>

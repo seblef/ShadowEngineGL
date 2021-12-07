@@ -6,6 +6,10 @@
 #include "ShadowSystem.h"
 #include "HDAO.h"
 #include "HDR.h"
+#include "../mediacommon/IFrameBuffer.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IConstantBuffer.h"
+
 
 LightSystem::LightSystem(IVideoDevice* device) : _device(device), _global(device,&_shadowBuffer), _shadowBuffer(device)
 {

@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
+#include "../renderer/Light.h"
+#include <memory.h>
 
 #define BLIGHT_INTERIOR				(1 << 0)
 

@@ -1,6 +1,12 @@
 
 #include "HDAO.h"
 #include "../core/YAMLCore.h"
+#include "../core/CoreCommon.h"
+#include "../core/Camera.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/IConstantBuffer.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IFrameBuffer.h"
 #include <random>
 #include <memory>
 

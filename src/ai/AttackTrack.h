@@ -2,7 +2,7 @@
 #pragma once
 
 #include "AIMachineState.h"
-#include "../Core.h"
+#include "../core/Vector3.h"
 
 using namespace Core;
 

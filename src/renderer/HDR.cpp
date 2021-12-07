@@ -1,6 +1,11 @@
 
 #include "HDR.h"
 #include "../core/YAMLCore.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/IConstantBuffer.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IFrameBuffer.h"
+#include "../mediacommon/IDepthTexture.h"
 #include "../loguru.hpp"
 
 

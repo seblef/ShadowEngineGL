@@ -1,6 +1,9 @@
 
 #include "PR_Point.h"
 #include "Particle.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IVertexBuffer.h"
+
 
 #define PRPOINT_PARTICLE_COUNT					1024
 

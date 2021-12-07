@@ -1,8 +1,14 @@
 
 #pragma once
 
-#include "../NavigationLib.h"
-#include "../PhysicLib.h"
+#include "../core/Vector2.h"
+#include "../core/Vector3.h"
+
+using namespace Core;
+
+class NavPath;
+class PhysicActorController;
+
 
 class Navigator
 {

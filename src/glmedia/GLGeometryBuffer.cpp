@@ -2,7 +2,6 @@
 #include "GLGeometryBuffer.h"
 #include "GLDefs.h"
 #include "../loguru.hpp"
-#include <iostream>
 
 
 const size_t g_IndexSize[IDX_COUNT]={

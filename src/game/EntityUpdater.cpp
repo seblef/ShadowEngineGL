@@ -1,9 +1,24 @@
 
 #include "EntityUpdater.h"
+#include "GameEntity.h"
 
 void EntityUpdater::updateEntities(float time) const
 {
-	EntitySet::const_iterator e(_entities.begin());
-	for (; e != _entities.end(); ++e)
-		(*e)->update(time);
+    for(auto const& e : _entities)
+		e->update(time);
+}
+
+void EntityUpdater::addEntity(GameEntity* e)
+{
+    _entities.insert(e);
+}
+
+void EntityUpdater::remEntity(GameEntity* e)
+{
+    _entities.erase(e);
+}
+
+void EntityUpdater::clear()
+{
+    _entities.clear();
 }

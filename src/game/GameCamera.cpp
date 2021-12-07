@@ -1,6 +1,11 @@
 
 #include "GameCamera.h"
-#include "../SoundLib.h"
+#include "GameCharacter.h"
+#include "../core/Quaternion.h"
+#include "../mediacommon/ISoundListener.h"
+#include "../mediacommon/ISoundDevice.h"
+#include "../sound/SoundSystem.h"
+
 
 GameCamera::GameCamera(GameCharacter* target, float dist, Vector2 rot, float screen_width, float screen_height) :
 	_cam(Vector3::NullVector, Vector3::NullVector, 1.0f, 50.0f, Vector2(screen_width*0.5f, screen_height*0.5f), 90.0f),

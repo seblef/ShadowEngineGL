@@ -1,8 +1,19 @@
 
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../core/TDynamicTab.h"
+#include "../mediacommon/IVideoDevice.h"
+#include <set>
 
+namespace Core
+{
+    class Camera;
+}
+
+using namespace Core;
+
+class IShader;
+class IVertexBuffer;
 class HUDActor;
 
 class HUDActorView

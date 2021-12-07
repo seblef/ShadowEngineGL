@@ -1,8 +1,10 @@
 
 #pragma once
 
-#include "TemplateSound.h"
 #include "GameObject.h"
+
+class SoundVirtualSource;
+class TemplateSound;
 
 class GameSound : public GameObject
 {

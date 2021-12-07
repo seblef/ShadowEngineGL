@@ -1,9 +1,7 @@
 
 #pragma once
 
-#include "../Core.h"
-
-using namespace Core;
+#include <string>
 
 class GameEntityTrigger;
 class GameCharacter;
@@ -34,5 +32,5 @@ public:
 
 	TriggerFactory()			{}
 
-	static Trigger*				createTrigger(const string& className, const YAML::Node& node);
+	static Trigger*				createTrigger(const std::string& className, const YAML::Node& node);
 };

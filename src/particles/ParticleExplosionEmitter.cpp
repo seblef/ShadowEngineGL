@@ -1,5 +1,6 @@
 
 #include "ParticleExplosionEmitter.h"
+#include "../core/Random.h"
 
 const float ParticleExplosionVelocityFactor = 2.5f;
 

@@ -7,6 +7,10 @@
 #include "BuildingTemplate.h"
 #include "TemplateSound.h"
 #include "TemplateParticleSystem.h"
+#include "../core/TDataBase.h"
+#include "../core/TSingleton.h"
+
+using namespace Core;
 
 class ResourceDB : public TSingleton<ResourceDB>
 {

@@ -1,5 +1,9 @@
 
 #include "R2D_Renderer.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IVertexBuffer.h"
+#include "../mediacommon/IIndexBuffer.h"
+#include "../mediacommon/IVideoDevice.h"
 
 
 R2D_Renderer::R2D_Renderer(
@@ -73,4 +77,47 @@ void R2D_Renderer::execute()
 	renderObjects();
 
 	_objects.clear();
+}
+
+void R2D_Renderer::makeRectVertices(const Vector2& p, const Vector2& s, const Color& c, Vx2D *v) const
+{
+    scaleVertex(p.x,p.y,v[0]);
+    scaleVertex(p.x+s.x,p.y,v[1]);
+    scaleVertex(p.x+s.x,p.y+s.y,v[2]);
+    scaleVertex(p.x,p.y + s.y,v[3]);
+
+    for(int i=0;i<4;++i)
+        v[i].color=c;
+}
+
+void R2D_Renderer::makeRectVertices(const Vector2& p, const Vector2& s, const Vector2& uvStart, const Vector2& uvEnd, const Color& c, Vx2D *v) const
+{
+    makeRectVertices(p,s,c,v);
+    v[0].uv.x=uvStart.x;					v[0].uv.y=uvStart.y;
+    v[1].uv.x=uvEnd.x;						v[1].uv.y=uvStart.y;
+    v[2].uv.x=uvEnd.x;						v[2].uv.y=uvEnd.y;
+    v[3].uv.x=uvStart.x;					v[3].uv.y=uvEnd.y;
+}
+
+void R2D_Renderer::makeRectVertices(const R2D_Object& o, Vx2D* v) const
+{
+    makeRectVertices(o.getPosition(),o.getSize(),o.getColor(),v);
+}
+
+void R2D_Renderer::makeRectVertices(const R2D_Object& o, const Vector2& uvStart, const Vector2& uvEnd, Vx2D* v) const
+{
+    makeRectVertices(o.getPosition(),o.getSize(),uvStart,uvEnd,o.getColor(),v);
+}
+
+void R2D_Renderer::makeLineVertices(const R2D_Object& o, Vx2D *v) const
+{
+    scaleVertex(o.getPosition(),v[0]);
+    scaleVertex(o.getPosition() + o.getSize(),v[1]);
+    v[0].color=o.getColor();
+    v[1].color=o.getColor();
+}
+
+void R2D_Renderer::addObject(const R2D_Object* obj)
+{
+    _objects.push_back(obj);
 }

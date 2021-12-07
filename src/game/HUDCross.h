@@ -1,7 +1,9 @@
 
 #pragma once
 
-#include "../R2D.h"
+#include "../renderer2d/R2D_Layer.h"
+
+class R2D_Image;
 
 class HUDCross
 {

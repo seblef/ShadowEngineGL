@@ -1,7 +1,7 @@
 
 #include "PhysicObject.h"
 #include "PhysicUtils.h"
-
+#include <assert.h>
 
 
 PhysicObject::PhysicObject(PhysicObjectType type, PxScene* scene, PhysicMaterial* mat,

@@ -1,23 +1,26 @@
 
 #pragma once
 
-#include "GameEntity.h"
+#include "../core/TSingleton.h"
+#include <set>
 
-class EntityUpdater : public TSingleton<EntityUpdater>
+class GameEntity;
+
+class EntityUpdater : public Core::TSingleton<EntityUpdater>
 {
 protected:
 
-	typedef set<GameEntity*>	EntitySet;
+	typedef std::set<GameEntity*>	EntitySet;
 	EntitySet					_entities;
 
 public:
 
 	EntityUpdater()				{}
 
-	void						addEntity(GameEntity* e)			{ _entities.insert(e); }
-	void						remEntity(GameEntity* e)			{ _entities.erase(e); }
+	void						addEntity(GameEntity* e);
+	void						remEntity(GameEntity* e);
 
 	void						updateEntities(float time) const;
 
-	void						clear()								{ _entities.clear(); }
+	void						clear();
 };

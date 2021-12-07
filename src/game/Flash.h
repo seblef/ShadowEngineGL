@@ -2,7 +2,12 @@
 #pragma once
 
 #include "Action.h"
-#include "../StdRenderer.h"
+#include "../core/Color.h"
+#include "../core/Vector3.h"
+
+class Light;
+
+using namespace Core;
 
 #define FLASH_ASCENDING				0
 #define FLASH_STABLE				1

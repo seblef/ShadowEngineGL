@@ -1,6 +1,8 @@
 
 #include "NavMap.h"
 #include "AS_PathFinder.h"
+#include <math.h>
+#include <memory.h>
 
 #define BESTPLACE_MAX_ITER				5
 

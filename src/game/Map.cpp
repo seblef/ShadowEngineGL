@@ -3,6 +3,10 @@
 #include "Building.h"
 #include "BBoxToRect.h"
 #include "ResourceDB.h"
+#include "../physic/Physic.h"
+#include "../physic/IPhysicObject.h"
+#include "../renderer/Renderer.h"
+#include "../renderer/IVisibilitySystem.h"
 #include "../loguru.hpp"
 
 

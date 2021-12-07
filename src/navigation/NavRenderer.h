@@ -1,7 +1,10 @@
 #pragma once
 
-#include "../MediaCommon.h"
 #include "NavPath.h"
+#include "../core/TDynamicTab.h"
+#include "../core/TSingleton.h"
+#include "../mediacommon/IVideoDevice.h"
+
 
 class NavRenderer : public TSingleton<NavRenderer>
 {

@@ -1,7 +1,7 @@
 
 #include "GLShader.h"
 #include "GLDefs.h"
-#include <iostream>
+#include <fstream>
 #include "../loguru.hpp"
 
 
@@ -208,9 +208,8 @@ bool GLShader::preprocessLine(const string& line, string& code)
 
 void GLShader::clearDB()
 {
-    ShaderDB::iterator s(_db.begin());
-    for (; s != _db.end(); ++s)
-        delete s->second;
+    for(auto const& s : _db)
+        delete s.second;
 
     _db.clear();
 }

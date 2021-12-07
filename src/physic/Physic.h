@@ -1,11 +1,25 @@
 #pragma once
 
-#include "PhysicObject.h"
-#include "PhysicDynamic.h"
-#include "RayCastInfos.h"
-#include "PhysicEvent.h"
-#include "PhysicQuery.h"
+#include "../core/Matrix4.h"
+#include "../core/TSingleton.h"
+#include "../core/TDynamicTab.h"
+#include <PxPhysicsAPI.h>
+#include <set>
 
+class IPhysicObject;
+class PhysicGeometry;
+class PhysicMaterial;
+class PhysicDynamic;
+class PhysicEvent;
+class PhysicQuery;
+class RayCastInfos;
+
+struct PhysicGeometryCreate_t;
+struct PhysicActorCtrlCreate_t;
+
+using namespace Core;
+using namespace physx;
+using namespace std;
 
 class Physic : public TSingleton<Physic>, public PxSimulationEventCallback
 {
@@ -36,10 +50,7 @@ public:
 	Physic(float updateTime, const Vector3& gravity, bool debugMode=false);
 	~Physic();
 
-	PhysicGeometry*					createGeometry(const PhysicGeometryCreate_t& c) const
-	{
-		return new PhysicGeometry(c,_physic,_cooking);
-	}
+	PhysicGeometry*					createGeometry(const PhysicGeometryCreate_t& c) const;
 
 	IPhysicObject*					createGround(int width, int height, PhysicMaterial* mat=0) const;
 	IPhysicObject*					createStaticScene(const PhysicGeometry& geo, const Matrix4& world, PhysicMaterial* mat=0) const;
@@ -51,7 +62,7 @@ public:
 
 	void							update(float time);
 	const PhysicEvent*				getEvents(int& count) const;
-	void							clearEvents()									{ _events.clear(); }
+	void							clearEvents();
 
 	IPhysicObject*					rayCast(RayCastInfos& rc) const;
 	IPhysicObject*					rayCastImpact(RayCastInfos& rc) const;
@@ -69,6 +80,6 @@ public:
 
 	//			Internal functions
 	void							remDynamicFromActiveList(PhysicDynamic* d);
-	void							postEvent(const PhysicEvent& e)					{ _events.add(e); }
+	void							postEvent(const PhysicEvent& e);
 
 };

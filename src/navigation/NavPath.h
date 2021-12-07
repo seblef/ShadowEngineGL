@@ -1,7 +1,8 @@
 #pragma once
 
 #include "NavCase.h"
-#include "../Core.h"
+#include "../core/TAllocated.h"
+#include <iostream>
 
 using namespace Core;
 
@@ -17,12 +18,12 @@ public:
 
 	NavPath()					{}
 
-	void						clearAllocated()			{ _path.clear(); }
+	void						clearAllocated();
 
-	void						addCase(const NavCase& c)	{ _path.push_back(c); }
+	void						addCase(const NavCase& c);
 
-	int							getPathLength() const		{ return _path.size(); }
-	const NavCase&				getPathStep(int n) const	{ return _path[n]; }
+	int							getPathLength() const;
+	const NavCase&				getPathStep(int n) const;
 
 	float						getOrientation(int n) const;
 

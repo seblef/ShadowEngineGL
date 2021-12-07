@@ -1,8 +1,13 @@
 
 #pragma once
 
-#include "TemplateMesh.h"
 #include "GameObject.h"
+
+
+class TemplateMesh;
+class IPhysicObject;
+class MeshInstance;
+
 
 class GameMesh : public GameObject
 {

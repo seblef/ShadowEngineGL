@@ -1,5 +1,6 @@
 
 #include "ParticleLinearEmitter.h"
+#include "../core/Random.h"
 
 void ParticleLinearEmitter::emit(ParticleEmitter& e,
 	const Vector3& p1, const Vector3& p2, unsigned int count)

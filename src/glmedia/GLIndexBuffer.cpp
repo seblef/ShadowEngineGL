@@ -1,6 +1,7 @@
 
 #include "GLIndexBuffer.h"
 #include "GLDefs.h"
+#include <assert.h>
 #include "../loguru.hpp"
 
 

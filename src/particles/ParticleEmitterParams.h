@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../Core.h"
+#include "../core/Color.h"
+#include "../core/Vector3.h"
 
 using namespace Core;
 

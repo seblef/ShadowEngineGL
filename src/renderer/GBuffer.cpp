@@ -1,5 +1,11 @@
 
 #include "GBuffer.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IDepthTexture.h"
+#include "../mediacommon/IFrameBuffer.h"
+#include "../mediacommon/IConstantBuffer.h"
+#include "../mediacommon/IShadowMap.h"
 
 
 

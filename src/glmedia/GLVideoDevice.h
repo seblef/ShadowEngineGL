@@ -1,6 +1,9 @@
 #pragma once
 
 #include "GLStates.h"
+#include <map>
+
+using namespace std;
 
 class GLVideoDevice : public IVideoDevice
 {

@@ -2,10 +2,13 @@
 #include "ActionCreateRandomCharacter.h"
 #include "GameSystem.h"
 #include "GameCharacter.h"
+#include "CharacterDB.h"
 #include "Map.h"
 #include "Ground.h"
-#include "../NavigationLib.h"
-#include "../PhysicLib.h"
+#include "../navigation/Navigation.h"
+#include "../physic/RayCastInfos.h"
+#include "../physic/Physic.h"
+#include <map>
 
 void ActionCreateRandomCharacter::update(float time)
 {

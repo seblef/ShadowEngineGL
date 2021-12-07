@@ -1,11 +1,11 @@
 
 #pragma once
 
-#include "../Core.h"
 #include "AIAgent.h"
 #include "AIMachine.h"
+#include "../core/TSingleton.h"
+#include <vector>
 
-using namespace Core;
 
 class AISystem : public TSingleton<AISystem>
 {
@@ -31,11 +31,7 @@ protected:
 	Vector3					_playerPos;
 	Vector3					_playerDir;
 
-	AIAgent*				getAgent(unsigned int agentID) const
-	{
-		AgentMap::const_iterator a(_agents.find(agentID));
-		return a == _agents.end() ? 0 : a->second;
-	}
+	AIAgent*				getAgent(unsigned int agentID) const;
 
 	void					deleteDestroyedAgents();
 	void					processEvents();

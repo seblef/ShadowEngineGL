@@ -1,21 +1,27 @@
 
 #pragma once
 
-#include "CharacterDB.h"
-#include "WeaponDB.h"
-#include "EntityDB.h"
-#include "EffectDB.h"
+#include "../core/TSingleton.h"
+#include <string>
+
+class IMedia;
 
 class GamePlayer;
 class Map;
 class GameCamera;
+class CharacterDB;
+class WeaponDB;
+class EntityDB;
+class EffectDB;
 
 namespace YAML
 {
 	class Node;
 }
 
-class GameSystem : public TSingleton<GameSystem>
+using namespace std;
+
+class GameSystem : public Core::TSingleton<GameSystem>
 {
 protected:
 

@@ -1,7 +1,9 @@
 
 #pragma once
 
-#include "../Core.h"
+#include "../core/BBox3.h"
+
+using namespace Core;
 
 namespace File
 {

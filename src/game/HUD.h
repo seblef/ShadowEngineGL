@@ -1,16 +1,19 @@
 
 #pragma once
 
-#include "../R2D.h"
+#include "../core/TSingleton.h"
+#include "../renderer2d/R2D_Layer.h"
+#include "../renderer2d/R2D_Frame.h"
 
 class HUDActor;
 class HUDActorView;
 class HUDCross;
 class GameCamera;
 class FPSCounter;
+class R2D_Font;
 
 
-class HUD : public TSingleton<HUD>
+class HUD : public Core::TSingleton<HUD>
 {
 protected:
 

@@ -2,8 +2,14 @@
 #pragma once
 
 #include "Action.h"
-#include "TraceTemplate.h"
-#include "../StdRenderer.h"
+
+class Particles;
+class TraceTemplate;
+
+namespace Core
+{
+    class Vector3;
+}
 
 
 class Trace : public Action
@@ -14,7 +20,7 @@ protected:
 
 public:
 
-	Trace(const TraceTemplate& t, const Vector3& from, const Vector3& to);
+	Trace(const TraceTemplate& t, const Core::Vector3& from, const Core::Vector3& to);
 	~Trace();
 
 	void					update(float time);

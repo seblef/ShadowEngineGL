@@ -7,6 +7,9 @@
 #include "FPSCounter.h"
 #include "SystemValues.h"
 #include "GameSystem.h"
+#include "../renderer2d/R2D_Font.h"
+#include "../renderer2d/R2D_FontLoader.h"
+#include "../renderer2d/Renderer2D.h"
 
 
 HUD::HUD()
@@ -47,9 +50,8 @@ HUD::~HUD()
 	delete _actorView;
 	delete _cross;
 
-	ActorSet::iterator a(_actors.begin());
-	for (; a != _actors.end(); ++a)
-		delete *a;
+    for(auto const& a : _actors)
+		delete a;
 }
 
 HUDActor* HUD::createHUDActor(float maxLife, float actorHeight) const

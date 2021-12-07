@@ -1,6 +1,8 @@
 
 #include "NavRenderer.h"
 #include "Navigation.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/IVertexBuffer.h"
 
 
 

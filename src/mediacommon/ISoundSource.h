@@ -1,7 +1,8 @@
 #pragma once
 
-#include "ISoundVirtualSource.h"
-#include "ISound.h"
+
+class ISoundVirtualSource;
+class ISound;
 
 class ISoundSource
 {

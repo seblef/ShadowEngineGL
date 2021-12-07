@@ -1,6 +1,12 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../core/Vector2.h"
+#include "../mediacommon/IVideoDevice.h"
+#include "../mediacommon/ITexture.h"
+#include <string>
+
+using namespace Core;
+using namespace std;
 
 enum TextureSlot
 {

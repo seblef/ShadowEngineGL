@@ -1,9 +1,12 @@
 #pragma once
 
-#include "../MediaCommon.h"
 #include "ParticleSystem.h"
 #include "PR_Point.h"
 #include "PR_Quad.h"
+#include "../core/TSingleton.h"
+
+class IVideoDevice;
+class IShader;
 
 class ParticleEngine : public TSingleton<ParticleEngine>
 {

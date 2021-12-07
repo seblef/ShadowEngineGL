@@ -1,8 +1,14 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
-#include "GameMaterial.h"
+#include <map>
+#include <string>
+
+class Actor;
+class GameMaterial;
+
+using namespace std;
+
 
 class Character
 {

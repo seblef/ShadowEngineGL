@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IVideoDevice.h"
+#include <vector>
+
 
 class BufferView
 {

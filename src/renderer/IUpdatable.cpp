@@ -1,5 +1,6 @@
 
 #include "UpdateSystem.h"
+#include "IUpdatable.h"
 
 void IUpdatable::wakeUp()
 {

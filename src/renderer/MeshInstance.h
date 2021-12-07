@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Mesh.h"
 #include "Renderable.h"
 #include "IUpdatable.h"
+
+class Mesh;
 
 class MeshInstance : public Renderable, public IUpdatable
 {
@@ -12,15 +13,8 @@ protected:
 
 public:
 
-	MeshInstance(const Mesh *model, const Matrix4& world, bool alwaysVisible) : Renderable(model->getGeometry()->getBBox(),world,alwaysVisible),
-		_model(model)
-	{
-		if(model->getMaterial()->isAnimated())		wakeUp();
-	}
-	~MeshInstance()
-	{
-		if(_model->getMaterial()->isAnimated())		sleep();
-	}
+	MeshInstance(const Mesh *model, const Matrix4& world, bool alwaysVisible);
+	~MeshInstance();
 
 	const Mesh*		getModel() const					{ return _model; }
 

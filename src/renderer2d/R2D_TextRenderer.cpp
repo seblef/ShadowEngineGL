@@ -1,6 +1,31 @@
 
 #include "R2D_TextRenderer.h"
+#include "R2D_Text.h"
 #include "R2D_Font.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IVertexBuffer.h"
+#include "../mediacommon/IVideoDevice.h"
+#include <algorithm>
+
+
+R2D_TextRenderer::R2D_TextRenderer(bool relativePos, ITexture* white, IVideoDevice* dev) : R2D_Renderer(R2D_Object::R2D_TEXT,relativePos,white,dev)
+{
+    _screenSize.x=(float)dev->getResWidth();
+    _screenSize.y=(float)dev->getResHeight();
+
+    _scale.x=2.0f / _screenSize.x;
+    _scale.y=2.0f / _screenSize.y;
+}
+
+bool R2D_TextRenderer::txtSort(const R2D_Object* o1, const R2D_Object* o2)
+{
+    return ((const R2D_Text*)o1)->getFont() < ((const R2D_Text*)o2)->getFont();
+}
+
+void R2D_TextRenderer::sortObjects()
+{
+    sort(_objects.begin(),_objects.end(),txtSort);
+}
 
 void R2D_TextRenderer::renderObjects()
 {

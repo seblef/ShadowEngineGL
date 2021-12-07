@@ -2,9 +2,10 @@
 
 #ifdef _OUTPUTSTATS
 
-#include <Core.h>
+#include "../core/TSingleton.h"
+#include <iostream>
 
-class RendererStats : public TSingleton<RendererStats>
+class RendererStats : public Core::TSingleton<RendererStats>
 {
 protected:
 

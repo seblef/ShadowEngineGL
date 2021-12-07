@@ -2,8 +2,12 @@
 #include "WeaponRocket.h"
 #include "WeaponRocketInstance.h"
 #include "GameSystem.h"
-#include "../SoundLib.h"
+#include "EffectDB.h"
+#include "TemplateMesh.h"
+#include "ExplosionTemplate.h"
 #include "../core/YAMLCore.h"
+#include "../particles/ParticleSystemTemplate.h"
+#include "../sound/SoundSystem.h"
 
 
 WeaponRocket::WeaponRocket(const YAML::Node& node) :

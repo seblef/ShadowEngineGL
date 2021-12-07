@@ -1,6 +1,10 @@
 
 #include "LightRenderer.h"
 #include "Renderer.h"
+#include "../core/ViewFrustum.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/IGeometryBuffer.h"
+#include "../mediacommon/IShadowMap.h"
 #include <algorithm>
 
 
@@ -19,6 +23,11 @@ LightRenderer::~LightRenderer()
     delete _geo;
 	_noShadowShader->remRef();
 	_shadowShader->remRef();
+}
+
+void LightRenderer::enqueueLight(Light *l)
+{
+    _lights.push_back(l);
 }
 
 void LightRenderer::applyLights(const Camera& camera)

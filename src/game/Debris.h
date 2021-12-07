@@ -2,8 +2,12 @@
 #pragma once
 
 #include "Action.h"
-#include "TemplateMesh.h"
-#include "../StdRenderer.h"
+#include "../core/Vector3.h"
+
+class Mesh;
+class MeshInstance;
+
+using namespace Core;
 
 class Debris : public Action
 {

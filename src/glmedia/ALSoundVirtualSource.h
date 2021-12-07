@@ -1,6 +1,10 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/ISoundVirtualSource.h"
+#include "../core/Vector3.h"
+
+using namespace Core;
+
 
 class ALSoundVirtualSource : public ISoundVirtualSource
 {

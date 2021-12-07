@@ -1,6 +1,7 @@
 
 #include "PhysicTrigger.h"
 #include "PhysicUtils.h"
+#include <assert.h>
 
 PhysicTrigger::PhysicTrigger(const PhysicGeometry& geo,
 	const Matrix4& world, PhysicMaterial *m,

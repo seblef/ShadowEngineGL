@@ -3,7 +3,7 @@
 #include "VisibilityAll.h"
 #include "VisibilityQuad.h"
 
-IVisibilitySystem* VisibilityFactory::createVisibilitySystem(const string& name)
+IVisibilitySystem* VisibilityFactory::createVisibilitySystem(const std::string& name)
 {
 	if(name=="quad")
 		return new VisibilityQuad(8);

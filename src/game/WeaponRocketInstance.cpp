@@ -4,6 +4,7 @@
 #include "Rocket.h"
 #include "ActionServer.h"
 #include "GameSystem.h"
+#include "../renderer/MeshInstance.h"
 
 WeaponRocketInstance::WeaponRocketInstance(Weapon* w, GameCharacter* owner) : WeaponInstance(w,owner)
 {

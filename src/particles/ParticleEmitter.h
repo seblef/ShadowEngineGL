@@ -3,7 +3,9 @@
 #include "ParticleEmitterTemplate.h"
 #include "ParticleRenderer.h"
 #include "Particle.h"
+#include "../core/BBox3.h"
 
+using namespace Core;
 
 
 class ParticleEmitter

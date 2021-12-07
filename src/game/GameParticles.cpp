@@ -1,5 +1,10 @@
 
 #include "GameParticles.h"
+#include "TemplateParticleSystem.h"
+#include "../particles/ParticleSystem.h"
+#include "../renderer/Particles.h"
+#include "../renderer/Renderer.h"
+
 
 GameParticles::GameParticles(const TemplateParticleSystem& t, const Matrix4& world, bool alwaysVisible) : GameObject(PARTICLES,world,
 	BBox3::NullBox, 0)

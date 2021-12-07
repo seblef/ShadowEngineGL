@@ -1,6 +1,10 @@
 
 #include "GlobalLight.h"
 #include "ShadowSystem.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/IConstantBuffer.h"
+#include "../mediacommon/IShadowMap.h"
+
 
 LightGlobal::LightGlobal(IVideoDevice *device, ShadowMapBuffer* shadowBuffer) : _enable(false), _device(device),  _shadowBuffer(shadowBuffer)
 {

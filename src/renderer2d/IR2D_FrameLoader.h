@@ -2,6 +2,9 @@
 
 #include "R2D_Frame.h"
 
+class IVideoDevice;
+
+
 class IR2D_FrameLoader
 {
 public:

@@ -1,10 +1,12 @@
 #pragma once
 
-#include "Actor.h"
+#include "ActorAnimInstance.h"
 #include "Renderable.h"
 #include "IUpdatable.h"
-#include "ActorAnimInstance.h"
-#include "MeshInstance.h"
+#include "../core/MatrixHierarchy.h"
+
+class Actor;
+class MeshInstance;
 
 class ActorInstance : public Renderable, public IUpdatable
 {
@@ -20,10 +22,7 @@ protected:
 public:
 
 	ActorInstance(Actor* model, const Matrix4& world, bool alwaysVisible);
-	~ActorInstance()
-	{
-		if(_boneMatrices)			delete _boneMatrices;
-	}
+	~ActorInstance();
 
 	const Actor*			getModel() const					{ return _model; }
 
@@ -36,28 +35,13 @@ public:
 	void					enqueue();
 	void					update(float time);
 
-	void					playAnimation(const string& animName,
-		bool loop=true, bool reverse=false)							{ _animation.play(_model->getAnimation(animName),_pose,loop,reverse); }
-	void					stopAnimation()							{ _animation.stop(); }
-	void					applyOriginalPose()						{ _pose=_model->getInitialPose(); }
+	void					playAnimation(const string& animName, bool loop=true, bool reverse=false);
+	void					stopAnimation();
+	void					applyOriginalPose();
 
-	void					attachMeshToNullNode(MeshInstance *m, int nn)
-	{
-		assert(nn >= 0 && nn < _model->getNullNodeCount());
-		_nullNodesMeshes[nn]=m;
-	}
-	void					detachMeshToNullNode(int nn)
-	{
-		assert(nn >= 0 && nn < _model->getNullNodeCount());
-		_nullNodesMeshes[nn]=0;
-	}
+	void					attachMeshToNullNode(MeshInstance *m, int nn);
+	void					detachMeshToNullNode(int nn);
 
-	void					attachMeshToNullNode(MeshInstance* m, const string& nullNodeName)
-	{
-		attachMeshToNullNode(m,_model->getNullNodeIndex(nullNodeName));
-	}
-	void					detachMeshToNullNode(const string& nullNodeName)
-	{
-		detachMeshToNullNode(_model->getNullNodeIndex(nullNodeName));
-	}
+	void					attachMeshToNullNode(MeshInstance* m, const string& nullNodeName);
+	void					detachMeshToNullNode(const string& nullNodeName);
 };

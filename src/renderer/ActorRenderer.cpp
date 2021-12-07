@@ -1,6 +1,10 @@
-
+#include "Actor.h"
+#include "ActorSub.h"
 #include "ActorRenderer.h"
 #include "Renderer.h"
+#include "../core/ViewFrustum.h"
+#include "../mediacommon/IVertexBuffer.h"
+#include "../mediacommon/IIndexBuffer.h"
 
 void ActorRenderer::render(bool addPass)
 {

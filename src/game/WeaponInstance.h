@@ -1,10 +1,16 @@
 
 #pragma once
 
-#include "Weapon.h"
-#include "Hit.h"
 
 class GameCharacter;
+class Weapon;
+class MeshInstance;
+class Hit;
+
+namespace Core
+{
+    class Vector3;
+}
 
 class WeaponInstance
 {
@@ -17,7 +23,7 @@ protected:
 	double					_lastFire;
 
 	void					hit(const Hit& hit) const;
-	void					fire(const Vector3& origin) const;
+	void					fire(const Core::Vector3& origin) const;
 
 public:
 

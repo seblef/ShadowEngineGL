@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IMedia.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -17,7 +17,7 @@ protected:
     int                 _mouseLastY;
     float               _mouseLastZ;
 
-    typedef map<int,int>    IntMap;
+    typedef std::map<int,int>    IntMap;
     IntMap              _keyMap;
 
     void                initKeyMap();
@@ -30,3 +30,5 @@ public:
     void                update();
 
 };
+
+IMedia*			createGLMedia(int width, int height, bool windowed, bool multithread, unsigned int input_flags);

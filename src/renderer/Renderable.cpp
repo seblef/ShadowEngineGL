@@ -1,6 +1,7 @@
 
 #include "Renderable.h"
 #include "Renderer.h"
+#include "IVisibilitySystem.h"
 
 void Renderable::setWorldMatrix(const Matrix4& world)
 {

@@ -1,9 +1,18 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
-#include "TemplateMesh.h"
-#include "TemplateParticleSystem.h"
+#include "../mediacommon/IVideoDevice.h"
+#include "../renderer/Light.h"
+#include "../renderer/MaterialCreate.h"
+
+class GameMaterial;
+class TemplateMesh;
+class TemplateParticleSystem;
+
+namespace YAML
+{
+    class Node;
+}
 
 class TextParser
 {

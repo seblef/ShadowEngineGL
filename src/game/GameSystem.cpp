@@ -2,6 +2,7 @@
 #include "GameSystem.h"
 #include "GamePlayer.h"
 #include "GameCamera.h"
+#include "Map.h"
 #include "MapLoaderFactory.h"
 #include "ActionServer.h"
 #include "SystemValues.h"
@@ -10,11 +11,24 @@
 #include "PhysicEventProcessor.h"
 #include "HUD.h"
 #include "ResourceDB.h"
+#include "SystemValues.h"
+#include "CharacterDB.h"
+#include "WeaponDB.h"
+#include "EntityDB.h"
+#include "EffectDB.h"
+#include "../ai/AISystem.h"
+#include "../mediacommon/IMedia.h"
+#include "../mediacommon/EventPump.h"
+#include "../mediacommon/KeyboardKeys.h"
+#include "../navigation/Navigation.h"
+#include "../navigation/NavRenderer.h"
+#include "../physic/Physic.h"
+#include "../renderer/Renderer.h"
+#include "../renderer2d/Renderer2D.h"
+#include "../sound/SoundSystem.h"
 #include "../loguru.hpp"
-#include "../PhysicLib.h"
-#include "../NavigationLib.h"
-#include "../AILib.h"
 #include <ctime>
+
 
 
 GameSystem::GameSystem(
@@ -91,11 +105,11 @@ GameSystem::~GameSystem()
 	EntityUpdater::deleteSingleton();
 	GameActorUpdater::deleteSingleton();
 	AISystem::deleteSingleton();
-	Physic::deleteSingleton();
 	Navigation::deleteSingleton();
 	ActionServer::deleteSingleton();
 	SystemValues::deleteSingleton();
 	ResourceDB::deleteSingleton();
+	Physic::deleteSingleton();
 }
 
 bool GameSystem::update()

@@ -2,7 +2,6 @@
 #include "GLShadowMap.h"
 #include "GLDefs.h"
 #include "../loguru.hpp"
-#include <iostream>
 
 
 GLShadowMap::GLShadowMap(int w, int h) : IShadowMap(w,h)

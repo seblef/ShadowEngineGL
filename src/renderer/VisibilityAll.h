@@ -7,7 +7,7 @@ class VisibilityAll : public IVisibilitySystem
 {
 protected:
 
-	typedef set<Renderable*>		RenderableSet;
+	typedef std::set<Renderable*>		RenderableSet;
 	RenderableSet					_renderables;
 
 public:
@@ -18,10 +18,10 @@ public:
 	void							create(int width, int height)				{}
 	void							onResize(int w, int h)						{}
 
-	void							addRenderable(Renderable* r)				{ _renderables.insert(r); }
-	void							remRenderable(Renderable* r)				{ _renderables.erase(r); }
+	void							addRenderable(Renderable* r);
+	void							remRenderable(Renderable* r);
 
 	void							onRenderableMoved(Renderable *r)			{}
 
-	void							visibility(const ViewFrustum& vf, const SRect& bounds);
+	void							visibility(const Core::ViewFrustum& vf, const Core::SRect& bounds);
 };

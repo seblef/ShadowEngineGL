@@ -1,7 +1,9 @@
 #pragma once
 
-#include "../Core.h"
 #include "ParticleMaterial.h"
+#include "../core/Vector3.h"
+#include "../core/Color.h"
+
 
 using namespace Core;
 

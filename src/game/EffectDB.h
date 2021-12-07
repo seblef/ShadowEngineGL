@@ -2,11 +2,11 @@
 #pragma once
 
 #include "Effect.h"
-#include "../Core.h"
+#include "../core/TDataBase.h"
 
 using namespace Core;
 
-class EffectDB : public TDataBase<Effect>
+class EffectDB : public Core::TDataBase<Effect>
 {
 public:
 

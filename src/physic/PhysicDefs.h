@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../Core.h"
+#include "../core/Vertex.h"
+#include "../core/BBox3.h"
+#include "../core/Matrix4.h"
 
 class PhysicMaterial;
 

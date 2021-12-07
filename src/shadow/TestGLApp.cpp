@@ -1,14 +1,25 @@
 
 #include "TestGLApp.h"
-#include "../GameLib.h"
-#include "../SoundLib.h"
-#include "../GLMedia.h"
-#include "../R2D.h"
-#include "../StdRenderer.h"
+#include "../game/GameMaterial.h"
 #include "../game/GeometryLoader.h"
 #include "../game/ActorLoader.h"
 #include "../game/ActorAnimLoader.h"
+#include "../glmedia/Media.h"
+#include "../mediacommon/EventPump.h"
+#include "../mediacommon/KeyboardKeys.h"
+#include "../renderer/Actor.h"
+#include "../renderer/ActorInstance.h"
+#include "../renderer/Mesh.h"
 #include "../renderer/ShadowSystem.h"
+#include "../renderer/LightSpot.h"
+#include "../renderer/LightSystem.h"
+#include "../renderer/MeshInstance.h"
+#include "../renderer/Renderer.h"
+#include "../renderer2d/Renderer2D.h"
+#include "../sound/SoundSystem.h"
+#include "../core/Camera.h"
+#include "../core/FileSystemFactory.h"
+#include "../core/Quaternion.h"
 #include "../core/YAMLCore.h"
 #include "../loguru.hpp"
 #include <time.h>
@@ -19,6 +30,9 @@
 #ifdef HDAO_TUNING
 #include "../Renderer/HDAO.h"
 #endif
+
+
+void initShadowCore();
 
 
 void TestGLApp::createPlane(IVideoDevice *d)

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Renderable.h"
 #include <set>
+
+class Renderable;
 
 using namespace std;
 
@@ -34,14 +35,9 @@ public:
 	
 	void				addChild(int c)				{ _children[_childrenCount++]=c; }
 	
-	void				addRenderable(Renderable*r)	{ _renderables.insert(r); r->setVisibilityID(_id); }
-	void				remRenderable(Renderable*r)	{ _renderables.erase(r); }
-	void				enqueueRenderables()
-	{
-		RenderableSet::iterator r(_renderables.begin());
-		for(;r!=_renderables.end();++r)
-			(*r)->enqueue();
-	}
+	void				addRenderable(Renderable*r);
+	void				remRenderable(Renderable*r);
+	void				enqueueRenderables();
 
 	const set<Renderable*>&	getRenderables() const	{ return _renderables; }
 };

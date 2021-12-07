@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../MediaCommon.h"
+#include "../mediacommon/IIndexBuffer.h"
 #include <GL/glew.h>
-#include <GL/gl.h>
+
 
 class GLIndexBuffer : public IIndexBuffer
 {

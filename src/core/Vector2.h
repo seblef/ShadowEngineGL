@@ -40,21 +40,8 @@ public:
 	Vector2			operator*(float f) const						{ return Vector2(x*f, y*f); }
 	Vector2&		operator*=(float f)								{ x*=f; y*=f; return *this; }
 	Vector2&		operator*=(const Vector2& v)					{ x*=v.x; y*=v.y; return *this; }
-	Vector2			operator*(const Matrix2& m) const
-	{
-		return Vector2(x*m(0,0) + y*m(1,0),
-					   x*m(0,1) + y*m(1,1));
-	}
-	Vector2&		operator*=(const Matrix2& m)
-	{
-		float tx=x;
-		float ty=y;
-
-		x=tx*m(0,0) + ty*m(1,0);
-		y=tx*m(0,1) + ty*m(1,1);
-
-		return *this;
-	}
+	Vector2			operator*(const Matrix2& m) const;
+	Vector2&		operator*=(const Matrix2& m);
 
 	Vector2			operator/(float f) const						{ return Vector2(x/f, y/f); }
 	Vector2&		operator/=(float f)								{ x/=f; y/=f; return *this; }

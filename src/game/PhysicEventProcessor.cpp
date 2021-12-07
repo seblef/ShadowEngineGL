@@ -3,7 +3,8 @@
 #include "GameEntityDynamic.h"
 #include "GameEntityTrigger.h"
 #include "Ammo.h"
-#include "../PhysicLib.h"
+#include "../physic/Physic.h"
+#include "../physic/PhysicEvent.h"
 
 
 

@@ -1,7 +1,13 @@
 
 #include "HUDActorView.h"
 #include "HUDActor.h"
-#include "../StdRenderer.h"
+#include "../core/AnimTracks.h"
+#include "../core/CoreCommon.h"
+#include "../core/Camera.h"
+#include "../mediacommon/IShader.h"
+#include "../mediacommon/IVertexBuffer.h"
+#include "../renderer/Renderer.h"
+
 
 #define HUDACTORVIEW_MAX_VERTICES				384
 

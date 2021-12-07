@@ -1,7 +1,8 @@
 
 #include "Geo3DSLoader.h"
+#include <assert.h>
 
-Geometry* Geo3DSLoader::loadGeometry(const string& geoFileName)
+Geometry* Geo3DSLoader::loadGeometry(const std::string& geoFileName)
 {
     assert(0 && "No 3ds loader");
     return 0;

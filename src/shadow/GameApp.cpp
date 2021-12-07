@@ -1,10 +1,16 @@
 
 #include "GameApp.h"
-#include "../GameLib.h"
-#include "../SoundLib.h"
-#include "../GLMedia.h"
-#include "../R2D.h"
+#include "../core/FileSystemFactory.h"
 #include "../core/YAMLCore.h"
+#include "../game/EffectDB.h"
+#include "../game/EntityDB.h"
+#include "../game/CharacterDB.h"
+#include "../game/WeaponDB.h"
+#include "../game/GameSystem.h"
+#include "../glmedia/Media.h"
+#include "../renderer/Renderer.h"
+#include "../renderer2d/Renderer2D.h"
+#include "../sound/SoundSystem.h"
 #include "../loguru.hpp"
 #include <time.h>
 #include <sstream>
@@ -15,6 +21,7 @@
 #include "../Renderer/HDAO.h"
 #endif
 
+void initShadowCore();
 
 
 void GameApp::run(const string& dataFolder)

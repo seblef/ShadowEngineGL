@@ -1,11 +1,13 @@
 
 #include "Weapon.h"
+#include "GameMaterial.h"
 #include "GeometryLoader.h"
 #include "Debris.h"
 #include "ActionServer.h"
 #include "SystemValues.h"
-#include "../SoundLib.h"
 #include "../core/YAMLCore.h"
+#include "../renderer/Mesh.h"
+#include "../sound/SoundSystem.h"
 
 
 

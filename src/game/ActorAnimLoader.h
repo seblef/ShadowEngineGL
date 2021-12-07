@@ -1,11 +1,12 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
+#include "../core/AnimTracks.h"
+
 
 class ActorAnimLoader
 {
 public:
 
-	static AnimPRSMultiTrack*			loadActorAnimation(const string& animFile);
+	static Core::AnimPRSMultiTrack*			loadActorAnimation(const std::string& animFile);
 };

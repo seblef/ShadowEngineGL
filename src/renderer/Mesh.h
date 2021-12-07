@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Material.h"
-#include "GeometryData.h"
+class Material;
+class GeometryData;
 
 class Mesh
 {

@@ -1,5 +1,7 @@
 
 #include "PhysicGeometry.h"
+#include "../core/CoreCommon.h"
+#include <assert.h>
 
 PhysicGeometry::PhysicGeometry(const PhysicGeometryCreate_t& c, PxPhysics *p, PxCooking* cook) : _geo(0), _needPreTransform(false), _preTransform(Matrix4::Identity)
 {
@@ -115,4 +117,13 @@ void PhysicGeometry::makeConvexHull(const PhysicGeometryCreate_t& c, PxPhysics *
 
 	_geo=new PxConvexMeshGeometry(convex);
 //	convex->release();
+}
+
+void PhysicGeometry::makeOffsetPreTransform(const Vector3& center)
+{
+    if(center!=Vector3::NullVector)
+    {
+        _needPreTransform=true;
+        _preTransform.createTranslate(center.x,center.y,center.z);
+    }
 }

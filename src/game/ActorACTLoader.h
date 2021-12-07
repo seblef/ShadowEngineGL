@@ -10,5 +10,5 @@ public:
 	ActorACTLoader()			{}
 	~ActorACTLoader()			{}
 
-	Actor*						loadActor(const string& actorFile, Material* mat, IVideoDevice* device);
+	Actor*						loadActor(const std::string& actorFile, Material* mat, IVideoDevice* device);
 };

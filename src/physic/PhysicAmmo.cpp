@@ -1,6 +1,7 @@
 
 #include "PhysicAmmo.h"
 #include "PhysicUtils.h"
+#include <assert.h>
 
 PhysicAmmo::PhysicAmmo(const PhysicGeometry& geo,
 	const Matrix4& world, PhysicMaterial *m,

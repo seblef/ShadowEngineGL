@@ -1,7 +1,9 @@
 #pragma once
 
 #include "GroundData.h"
-#include "../MediaCommon.h"
+#include "../core/Rect.h"
+#include "../core/TSingleton.h"
+#include "../mediacommon/IVideoDevice.h"
 
 
 class GroundRenderer : public TSingleton<GroundRenderer>

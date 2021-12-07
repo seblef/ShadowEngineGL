@@ -1,6 +1,7 @@
 
 #include "FPSCounter.h"
 #include "GameSystem.h"
+#include "../renderer2d/R2D_Text.h"
 #include "../loguru.hpp"
 
 FPSCounter::FPSCounter(const string& counterName, bool showCounter, R2D_Font* fpsFont) :

@@ -3,8 +3,10 @@
 
 #include "Ground.h"
 #include "GameObjectSet.h"
-#include "GameCharacter.h"
 #include "Building.h"
+#include "../core/Vector2.h"
+
+class IPhysicObject;
 
 class Map : public GameObjectSet
 {

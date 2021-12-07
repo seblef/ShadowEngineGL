@@ -4,7 +4,8 @@
 #include "GeometryLoader.h"
 #include "ResourceDB.h"
 #include "../core/YAMLCore.h"
-
+#include "../renderer/Material.h"
+#include "../renderer/Renderer.h"
 
 
 const char* const g_PhysicShapes[PSHAPE_COUNT] =

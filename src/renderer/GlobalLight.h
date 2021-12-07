@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ShadowMapBuffer.h"
+#include "../mediacommon/IVideoDevice.h"
+
+class IShader;
 
 class LightGlobal
 {

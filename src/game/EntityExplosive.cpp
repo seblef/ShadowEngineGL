@@ -1,5 +1,6 @@
 
 #include "EntityExplosive.h"
+#include "EffectDB.h"
 #include "ExplosionTemplate.h"
 #include "GameEntityExplosive.h"
 #include "GameSystem.h"

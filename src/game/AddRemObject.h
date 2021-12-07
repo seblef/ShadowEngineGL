@@ -2,7 +2,9 @@
 #pragma once
 
 #include "Action.h"
-#include "GameObject.h"
+
+
+class GameObject;
 
 class AddRemObject : public Action
 {
@@ -14,12 +16,8 @@ protected:
 
 public:
 
-	AddRemObject(GameObject* o, bool rem = false, bool del = false) : Action("AddRemObject"), _object(o), _remove(rem), _delete(del)		{}
-	~AddRemObject()
-	{
-		if (_object)
-			delete _object;
-	}
+	AddRemObject(GameObject* o, bool rem = false, bool del = false);
+	~AddRemObject();
 
 	void				update(float time);
 };

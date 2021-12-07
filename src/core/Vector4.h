@@ -60,28 +60,8 @@ public:
 	Vector4				operator*(const float f) const				{ return Vector4(x*f, y*f, z*f, w*f); }
 	Vector4&			operator*=(const float f)					{ x*=f; y*=f; z*=f; w*=f; return *this; }
 	
-	Vector4				operator*(const Matrix4& m) const
-	{
-		return Vector4(x*m(0,0) + y*m(1,0) + z*m(2,0) + w*m(3,0),
-					   x*m(0,1) + y*m(1,1) + z*m(2,1) + w*m(3,1),
-					   x*m(0,2) + y*m(1,2) + z*m(2,2) + w*m(3,2),
-					   x*m(0,3) + y*m(1,3) + z*m(2,3) + w*m(3,3));
-	}
-
-	Vector4&			operator*=(const Matrix4& m)
-	{
-		float tx=x;
-		float ty=y;
-		float tz=z;
-		float tw=w;
-
-		x=tx*m(0,0) + ty*m(1,0) + tz*m(2,0) + tw*m(3,0);
-		y=tx*m(0,1) + ty*m(1,1) + tz*m(2,1) + tw*m(3,1);
-		z=tx*m(0,2) + ty*m(1,2) + tz*m(2,2) + tw*m(3,2);
-		w=tx*m(0,3) + ty*m(1,3) + tz*m(2,3) + tw*m(3,3);
-
-		return *this;
-	}
+	Vector4				operator*(const Matrix4& m) const;
+	Vector4&			operator*=(const Matrix4& m);
 
 	Vector4				operator/(const float f) const				{ float inv=1.0f / f; return Vector4(x*inv, y*inv, z*inv, w*inv); }
 	Vector4&			operator/=(const float f)					{ float inv=1.0f / f; x*=inv; y*=inv; z*=inv; w*=inv; return *this; }

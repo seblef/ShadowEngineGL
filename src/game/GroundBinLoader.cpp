@@ -1,8 +1,12 @@
 
 #include "GroundBinLoader.h"
 #include "GroundFileFormat.h"
+#include "Ground.h"
 #include "GameSystem.h"
 #include "ResourceDB.h"
+#include "../core/FileSystemFactory.h"
+#include <assert.h>
+
 
 void GroundBinLoader::loadGround(Ground& g, const string& groundFile, Map& mp) const
 {

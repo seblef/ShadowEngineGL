@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include "../Core.h"
 #include "ObjectFlags.h"
+#include "../core/BBox3.h"
 
 using namespace Core;
 

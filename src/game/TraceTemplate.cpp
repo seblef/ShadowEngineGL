@@ -1,6 +1,9 @@
 
 #include "TraceTemplate.h"
+#include "../core/Vector2.h"
+#include "../core/Color.h"
 #include "../core/YAMLCore.h"
+#include "../particles/ParticleSystemTemplate.h"
 
 
 TraceTemplate::TraceTemplate(const YAML::Node& node)

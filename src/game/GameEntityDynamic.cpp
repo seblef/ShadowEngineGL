@@ -1,6 +1,10 @@
 
 #include "GameEntityDynamic.h"
+#include "EntityDynamic.h"
+#include "Hit.h"
 #include "SystemValues.h"
+#include "../physic/Physic.h"
+#include "../physic/PhysicDynamic.h"
 #include "../loguru.hpp"
 
 

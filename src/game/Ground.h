@@ -1,12 +1,17 @@
 
 #pragma once
 
-#include "../StdRenderer.h"
-#include "GameMaterial.h"
+#include "../core/Rect.h"
+#include <vector>
 
 #define GFLAG_WAKABLE				(1 << 16)
 #define GMATERIAL_MASK				0xff
 #define GGAMEMATERIAL_MASK			0x00ff
+
+class GameMaterial;
+
+
+using namespace Core;
 
 class Ground
 {
@@ -15,7 +20,7 @@ protected:
 	int				_width, _height;
 	unsigned int*	_ground;
 	
-	typedef vector<GameMaterial*>	GameMaterialVector;
+	typedef std::vector<GameMaterial*>	GameMaterialVector;
 	GameMaterialVector	_gameMaterials;
 
 	unsigned int	getMaterialID(GameMaterial* m);
