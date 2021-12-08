@@ -397,3 +397,8 @@ void Media::initKeyMap()
     for(int i=0;i<3;++i)
         _lastMouseButtons[i]=false;
 }
+
+void* Media::getWindow()
+{
+    return (void*)_win;
+}

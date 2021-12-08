@@ -1,5 +1,6 @@
 
 #include "NavTest.h"
+#include "EditorApp.h"
 #include "GameApp.h"
 #include "ParticleApp.h"
 #include "TestSoundApp.h"
@@ -21,8 +22,13 @@ class Options
 public:
     string dataFolder;
     int verbosityLevel;
+    bool editor;
 
-    Options() : dataFolder("./"), verbosityLevel(defaultVerbosityLevel) {}
+    Options() :
+        dataFolder("./"),
+        verbosityLevel(defaultVerbosityLevel),
+        editor(false)    
+    {}
 };
 
 
@@ -31,13 +37,16 @@ void parseCommandLine(int argc, char *argv[], Options& opt)
     TCLAP::CmdLine cmdLine("ShadowEngine", ' ', VERSION);
     TCLAP::ValueArg<string> dataFolder("d", "data", "Path to data folder, can be relative or absolute.", false, "./", "string");
     TCLAP::ValueArg<int> verbosity("v", "verbosity", "Verbosity level, can be from -3 to 9.", false, defaultVerbosityLevel, "int");
+    TCLAP::SwitchArg editor("e", "editor", "Run engine in editor mode");
 
     cmdLine.add(dataFolder);
     cmdLine.add(verbosity);
+    cmdLine.add(editor);
     cmdLine.parse(argc, argv);
 
     opt.dataFolder = dataFolder.getValue();
     opt.verbosityLevel = verbosity.getValue();
+    opt.editor = editor.getValue();
 }
 
 
@@ -55,12 +64,19 @@ int main(int argc, char* argv[])
     LOG_S(INFO) << "Data folder: " << opt.dataFolder;
 
 //	NavTest app;
-    GameApp app;
-//    ParticleApp app;
-	// TestSoundApp app;
-//    TestGLApp app;
-
-    app.run(opt.dataFolder);
+    if(opt.editor)
+    {
+        EditorApp app;
+        app.run(opt.dataFolder);
+    }
+    else
+    {
+        GameApp app;
+    //    ParticleApp app;
+        // TestSoundApp app;
+    //    TestGLApp app;
+        app.run(opt.dataFolder);
+    }
 
     return 1;
 }

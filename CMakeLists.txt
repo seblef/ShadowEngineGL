@@ -10,7 +10,7 @@ add_subdirectory (external)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_definitions(
@@ -296,8 +296,23 @@ set(GAME_SOURCES
     src/game/WeaponRocketInstance.cpp
 )
 
+set(EDITOR_SOURCES
+    src/editor/imgui/imgui.cpp
+    src/editor/imgui/imgui_demo.cpp
+    src/editor/imgui/imgui_draw.cpp
+    src/editor/imgui/imgui_tables.cpp
+    src/editor/imgui/imgui_widgets.cpp
+    src/editor/imgui/backends/imgui_impl_glfw.cpp
+    src/editor/imgui/backends/imgui_impl_opengl3.cpp
+    src/editor/filedialog/ImFileDialog.cpp
+    src/editor/EdCamera.cpp
+    src/editor/EditorSystem.cpp
+    src/editor/MainMenu.cpp
+)
+
 set(SHADOW_SOURCES
     src/shadow/main.cpp
+    src/shadow/EditorApp.cpp
     src/shadow/GameApp.cpp
     src/shadow/NavTest.cpp
     src/shadow/ParticleApp.cpp
@@ -317,6 +332,7 @@ add_executable(ShadowEngine
     ${RENDERER2D_SOURCES}
     ${PHYSIC_SOURCES}
     ${GAME_SOURCES}
+    ${EDITOR_SOURCES}
     ${SHADOW_SOURCES}
 )
 

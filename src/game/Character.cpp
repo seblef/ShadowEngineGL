@@ -36,7 +36,9 @@ Character::Character(
 	_fov(fov * (float)M_PI / 180.0f),
 	_visDistance(visDistance),
 	_lifePoints(life),
-	_animations(anims)
+	_animations(anims),
+    _rActor(0),
+    _rMat(0)
 {
 }
 
