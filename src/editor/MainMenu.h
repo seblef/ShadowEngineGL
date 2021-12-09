@@ -12,6 +12,7 @@ protected:
     void updateFileDialogs();
 
     bool loadMap(const std::string& mapFilename);
+    bool loadMaterial(const std::string& matFilename);
 
 public:
 

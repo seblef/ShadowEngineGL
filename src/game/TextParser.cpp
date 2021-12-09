@@ -54,7 +54,7 @@ const char* const g_LightTypes[Light::LT_COUNT] =
 };
 
 
-TextureSlot TextParser::getTextureSlot(const string& b)
+TextureSlot getTextureSlot(const string& b)
 {
 	TextureSlot t = TS_DIFFUSE;
 	for (int i = 0; i<TS_COUNT; ++i)
@@ -66,7 +66,7 @@ TextureSlot TextParser::getTextureSlot(const string& b)
 	return t;
 }
 
-BlendMode TextParser::getBlendMode(const string& b)
+BlendMode getBlendMode(const string& b)
 {
 	BlendMode m = BLEND_ZERO;
 	for (int i = 0; i<BLEND_COUNT; ++i)
@@ -78,7 +78,7 @@ BlendMode TextParser::getBlendMode(const string& b)
 	return m;
 }
 
-CullMode TextParser::getCullMode(const string& c)
+CullMode getCullMode(const string& c)
 {
 	CullMode cm = CULL_BACK;
 	if (c =="none")			cm = CULL_NONE;
@@ -87,7 +87,7 @@ CullMode TextParser::getCullMode(const string& c)
 	return cm;
 }
 
-void TextParser::parseMaterialAnimation(MaterialCreate& mc, const YAML::Node& node)
+void parseMaterialAnimation(MaterialCreate& mc, const YAML::Node& node)
 {
     YAML::Node uv = node["uv"];
 	if(uv)
@@ -114,10 +114,62 @@ void TextParser::parseMaterialAnimation(MaterialCreate& mc, const YAML::Node& no
 	}
 }
 
-GameMaterial* TextParser::parseMaterial(const YAML::Node& node, const string& name)
+Material* parseRendererMaterial(const YAML::Node& node)
 {
 	MaterialCreate mc;
+    YAML::Node tex(node["textures"]);
+    if(tex)
+    {
+        for(YAML::const_iterator t=tex.begin(); t!=tex.end(); ++t)
+        {
+            TextureSlot stage = getTextureSlot(t->first.as<string>());
+            mc._textures[stage] = t->second.as<string>();
+        }
+    }
+
+    YAML::Node blend(node["blending"]);
+    if(blend)
+    {
+        mc._srcBlend = getBlendMode(blend["src"].as<string>(""));
+        mc._destBlend = getBlendMode(blend["dest"].as<string>(""));
+    }
+
+    YAML::Node anim = node["animation"];
+    if(anim)
+        parseMaterialAnimation(mc, anim);
+
+    if(node["cull"])
+        mc._cull = getCullMode(node["cull"].as<string>());
+
+    YAML::Node uv(node["uv"]);
+    if(uv)
+    {
+        mc._uvOffset = uv["offset"].as<Vector2>(mc._uvOffset);
+        mc._uvScale = uv["scale"].as<Vector2>(mc._uvScale);
+        mc._uvRot = uv["rotation"].as<float>(mc._uvRot);
+    }
+
+    mc._ambient = node["ambient_color"].as<Color>(mc._ambient);
+    mc._diffuse = node["diffuse_color"].as<Color>(mc._diffuse);
+    mc._specular = node["specular_color"].as<Color>(mc._specular);
+    mc._shininess = node["shininess"].as<float>(mc._shininess);
+    mc._specularIntensity = node["specular_intensity"].as<float>(mc._specularIntensity);
+    mc._reflectivity = node["reflectivity"].as<float>(mc._reflectivity);
+
+    if(node["alpha"].as<bool>(false))
+        mc._flags |= MF_ALPHA;
+    if(node["cast_no_shadows"].as<bool>(false))
+        mc._flags |= MF_CASTNOSHADOWS;
+    if(node["alpha_shadows"].as<bool>(false))
+        mc._flags |= MF_ALPHASHADOWS;
+
+    return new Material(mc, Renderer::getSingletonRef().getVideoDevice());
+}
+
+GameMaterial* TextParser::parseMaterial(const YAML::Node& node, const string& name)
+{
 	Geometry *debris = 0;
+    Material *mat = 0;
 
 	debris = ResourceDB::getSingletonRef().getGeometryDB().getData(
 		node["debris"].as<string>("")
@@ -125,54 +177,10 @@ GameMaterial* TextParser::parseMaterial(const YAML::Node& node, const string& na
 
     YAML::Node r = node["renderer"];
 	if(r)
-	{
-        YAML::Node tex(r["textures"]);
-		if(tex)
-		{
-			for(YAML::const_iterator t=tex.begin(); t!=tex.end(); ++t)
-			{
-				TextureSlot stage = getTextureSlot(t->first.as<string>());
-				mc._textures[stage] = t->second.as<string>();
-			}
-		}
-
-        YAML::Node blend(r["blending"]);
-		if(blend)
-		{
-			mc._srcBlend = getBlendMode(blend["src"].as<string>(""));
-			mc._destBlend = getBlendMode(blend["dest"].as<string>(""));
-		}
-
-        YAML::Node anim = r["animation"];
-		if(anim)
-			parseMaterialAnimation(mc, anim);
-
-		if(r["cull"])
-			mc._cull = getCullMode(r["cull"].as<string>());
-
-        YAML::Node uv(r["uv"]);
-		if(uv)
-		{
-			mc._uvOffset = uv["offset"].as<Vector2>(mc._uvOffset);
-			mc._uvScale = uv["scale"].as<Vector2>(mc._uvScale);
-			mc._uvRot = uv["rotation"].as<float>(mc._uvRot);
-		}
-
-		mc._ambient = r["ambient_color"].as<Color>(mc._ambient);
-		mc._diffuse = r["diffuse_color"].as<Color>(mc._diffuse);
-		mc._specular = r["specular_color"].as<Color>(mc._specular);
-		mc._shininess = r["shininess"].as<float>(mc._shininess);
-		mc._specularIntensity = r["specular_intensity"].as<float>(mc._specularIntensity);
-		mc._reflectivity = r["reflectivity"].as<float>(mc._reflectivity);
-
-		if(r["alpha"].as<bool>(false))
-			mc._flags |= MF_ALPHA;
-		if(r["cast_no_shadows"].as<bool>(false))
-			mc._flags |= MF_CASTNOSHADOWS;
-		if(r["alpha_shadows"].as<bool>(false))
-			mc._flags |= MF_ALPHASHADOWS;
-	}
-	return new GameMaterial(new Material(mc, Renderer::getSingletonRef().getVideoDevice()), debris);
+        mat = parseRendererMaterial(r);
+    else
+        mat = new Material(Renderer::getSingletonRef().getVideoDevice());
+	return new GameMaterial(mat, debris);
 }
 
 TemplateMesh* TextParser::parseMesh(const YAML::Node& node, const string& name, const string* geoDir)

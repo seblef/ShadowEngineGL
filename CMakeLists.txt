@@ -306,8 +306,11 @@ set(EDITOR_SOURCES
     src/editor/imgui/backends/imgui_impl_opengl3.cpp
     src/editor/filedialog/ImFileDialog.cpp
     src/editor/EdCamera.cpp
+    src/editor/EdMaterial.cpp
     src/editor/EditorSystem.cpp
+    src/editor/Helpers.cpp
     src/editor/MainMenu.cpp
+    src/editor/Resources.cpp
 )
 
 set(SHADOW_SOURCES

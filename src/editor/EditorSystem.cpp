@@ -1,10 +1,10 @@
 #include "EditorSystem.h"
 #include "EdCamera.h"
+#include "Resources.h"
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_glfw.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
 #include "filedialog/ImFileDialog.h"
-#include "../game/ResourceDB.h"
 #include "../mediacommon/IMedia.h"
 #include "../mediacommon/IVideoDevice.h"
 #include <GL/glew.h>
@@ -19,13 +19,14 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     _media(media),
     _camera(0)
 {
-    new ResourceDB;
+    new Resources;
     initUI();
 }
 
 EditorSystem::~EditorSystem()
 {
     shutdownUI();
+    Resources::deleteSingleton();
 }
 
 void EditorSystem::initUI()
