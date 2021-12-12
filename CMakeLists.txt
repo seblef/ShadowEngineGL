@@ -309,7 +309,13 @@ set(EDITOR_SOURCES
     src/editor/EdMaterial.cpp
     src/editor/EditorSystem.cpp
     src/editor/Helpers.cpp
+    src/editor/IWindow.cpp
     src/editor/MainMenu.cpp
+    src/editor/MaterialWindow.cpp
+    src/editor/NavigationPanel.cpp
+    src/editor/PreviewCamera.cpp
+    src/editor/PreviewMesh.cpp
+    src/editor/PreviewResources.cpp
     src/editor/Resources.cpp
 )
 

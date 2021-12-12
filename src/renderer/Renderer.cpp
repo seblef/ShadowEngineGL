@@ -43,6 +43,7 @@ void SceneInfosBuffer::setCamera(const Camera& c)
 
 Renderer::Renderer(IVideoDevice *device, const YAML::Node& cfg) :
 	_device(device),
+    _g_data(0),
 	_GBuffer(device),
 	_bufferView(device, 6),
 	_currentCamera(0),

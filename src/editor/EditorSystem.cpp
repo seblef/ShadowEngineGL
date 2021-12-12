@@ -1,5 +1,7 @@
 #include "EditorSystem.h"
 #include "EdCamera.h"
+#include "IWindow.h"
+#include "PreviewResources.h"
 #include "Resources.h"
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_glfw.h"
@@ -9,6 +11,7 @@
 #include "../mediacommon/IVideoDevice.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <vector>
 
 
 namespace Editor
@@ -19,6 +22,7 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     _media(media),
     _camera(0)
 {
+    _previewRes = new PreviewResources(media->getVideo());
     new Resources;
     initUI();
 }
@@ -27,6 +31,7 @@ EditorSystem::~EditorSystem()
 {
     shutdownUI();
     Resources::deleteSingleton();
+    delete _previewRes;
 }
 
 void EditorSystem::initUI()
@@ -36,6 +41,7 @@ void EditorSystem::initUI()
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
+    io.ConfigWindowsMoveFromTitleBarOnly = true;
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
     ImGui::StyleColorsDark();
@@ -82,6 +88,9 @@ bool EditorSystem::update()
     ImGui::NewFrame();
 
     _mainMenu.draw();
+    _navPanel.draw();
+    drawWindows();
+
 
     bool open;
     ImGui::ShowDemoWindow(&open);
@@ -95,6 +104,28 @@ bool EditorSystem::update()
 void EditorSystem::quit()
 {
     _canQuit = true;
+}
+
+void EditorSystem::openWindow(IWindow* win)
+{
+    _openWindows.push_back(win);
+}
+
+void EditorSystem::drawWindows()
+{
+    std::vector<IWindow*> closedWindows;
+    for(auto& win : _openWindows)
+    {
+        win->draw();
+        if(!win->isOpen())
+            closedWindows.push_back(win);
+    }
+
+    for(auto const& win : closedWindows)
+    {
+        delete win;
+        _openWindows.remove(win);
+    }
 }
 
 }

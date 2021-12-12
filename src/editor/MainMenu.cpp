@@ -2,6 +2,7 @@
 #include "EdMaterial.h"
 #include "Helpers.h"
 #include "MainMenu.h"
+#include "MaterialWindow.h"
 #include "Resources.h"
 #include "imgui/imgui.h"
 #include "filedialog/ImFileDialog.h"
@@ -30,6 +31,14 @@ void MainMenu::draw()
             }
             if(ImGui::MenuItem("Quit"))
                 EditorSystem::getSingletonRef().quit();
+            ImGui::EndMenu();
+        }
+        if(ImGui::BeginMenu("View"))
+        {
+            NavigationPanel& panel = EditorSystem::getSingletonRef().getNavigation();
+            bool open_nav = panel.isOpen();
+            ImGui::MenuItem("Navigation panel", 0, &open_nav);
+            panel.setOpen(open_nav);
             ImGui::EndMenu();
         }
         ImGui::EndMainMenuBar();
@@ -85,6 +94,7 @@ bool MainMenu::loadMaterial(const std::string& matFileName)
     if(material->isValid())
     {
         Resources::getSingletonRef().add(RES_MATERIAL, material, matName);
+        new MaterialWindow(material);
         return true;
     }
     else

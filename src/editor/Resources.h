@@ -25,6 +25,8 @@ public:
     IResource *get(ResourceType type, const std::string& name) const;
     void add(ResourceType type, IResource* res, const std::string& name);
     void drop(ResourceType type, const std::string& name);
+
+    const std::map<std::string, IResource*> getAll(ResourceType type) const { return _resources[type]; }
 };
 
 }
