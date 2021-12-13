@@ -18,7 +18,8 @@ namespace Editor
 EdMaterial::EdMaterial() : 
     IResource(RES_MATERIAL, "Materials/Material"),
     _material(new Material(Renderer::getSingletonRef().getVideoDevice())),
-    _valid(true)
+    _valid(true),
+    _edited(false)
 {
 }
 

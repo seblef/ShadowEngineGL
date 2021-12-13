@@ -1,4 +1,6 @@
 #include "NavigationPanel.h"
+#include "EdMaterial.h"
+#include "MaterialWindow.h"
 #include "Resources.h"
 #include "imgui/imgui.h"
 
@@ -9,6 +11,8 @@ namespace Editor
 NavigationPanel::NavigationPanel() :
     _open(true)
 {
+    for(int i=0;i<RES_COUNT;++i)
+        _selected[i] = 0;
 }
 
 NavigationPanel::~NavigationPanel()
@@ -34,18 +38,21 @@ void NavigationPanel::draw()
 
 void NavigationPanel::drawResourceType(unsigned int type)
 {
-    ImGuiTreeNodeFlags leaf_flags =
-        ImGuiTreeNodeFlags_Leaf |
-        ImGuiTreeNodeFlags_NoTreePushOnOpen |
-        ImGuiTreeNodeFlags_OpenOnArrow |
-        ImGuiTreeNodeFlags_OpenOnDoubleClick |
-        ImGuiTreeNodeFlags_SpanAvailWidth |
-        ImGuiTreeNodeFlags_Bullet;
     const auto& resources = Resources::getSingletonRef().getAll((ResourceType)type);
     if(ImGui::TreeNode(g_ResourceNames[type]))
     {
         for(auto const& r : resources)
-            ImGui::TreeNodeEx(r.second->getName().c_str(), leaf_flags);
+        {
+            bool selected = (_selected[type] == r.second);
+            if(ImGui::Selectable(r.second->getName().c_str(), &selected, ImGuiSelectableFlags_AllowDoubleClick))
+                if(ImGui::IsMouseDoubleClicked(0))
+                {
+                    _selected[type] = r.second;
+                    EdMaterial* mat = (EdMaterial*)r.second;
+                    if(!mat->isEdited())
+                        new MaterialWindow((EdMaterial*)r.second);
+                }
+        }
         ImGui::TreePop();
     }
 }

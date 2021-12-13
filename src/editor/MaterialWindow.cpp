@@ -31,10 +31,12 @@ MaterialWindow::MaterialWindow(EdMaterial* material) :
         EditorSystem::getSingletonRef().getPreviewResources(),
         128, 128
     );
+    material->startEdit();
 }
 
 MaterialWindow::~MaterialWindow()
 {
+    _material->stopEdit();
     delete _save;
     if(_preview)
         delete _preview;

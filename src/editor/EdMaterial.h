@@ -20,6 +20,7 @@ protected:
     std::string _debrisMesh;
     Material *_material;
     bool _valid;
+    bool _edited;
 
     void parse(const YAML::Node& node);
 
@@ -35,6 +36,9 @@ public:
     Material* getMaterial() const { return _material; }
 
     bool isValid() const { return _valid; }
+    bool isEdited() const { return _edited; }
+    void startEdit() { _edited = true; }
+    void stopEdit() { _edited = false; }
 
     bool save(const std::string& filename) const;
     YAML::Node buildYAMLNode() const;
