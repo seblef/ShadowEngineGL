@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IResource.h"
+#include "../renderer/Material.h"
 #include <string>
 
 class Material;
@@ -34,6 +35,25 @@ public:
     Material* getMaterial() const { return _material; }
 
     bool isValid() const { return _valid; }
+};
+
+class EdMaterialSave
+{
+protected:
+    Material* _material;
+    MaterialStdBuffer _buffer;
+    std::string _textures[TS_COUNT];
+    unsigned int _flags;
+    bool _blendEnable;
+    BlendMode _srcBlend;
+    BlendMode _destBlend;
+    CullMode _cull;
+    TVector<MaterialAnimation> _animations;
+
+public:
+    EdMaterialSave(Material* material);
+
+    void restore();
 };
 
 }

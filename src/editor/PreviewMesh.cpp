@@ -94,9 +94,9 @@ PreviewMesh::~PreviewMesh()
         delete _geoBuffer;
 }
 
-void PreviewMesh::draw()
+void PreviewMesh::draw(float time)
 {
-    render();
+    render(time);
 
     ImVec2 uv_min(0.f, 0.f);
     ImVec2 uv_max(1.f, 1.f);
@@ -115,7 +115,7 @@ void PreviewMesh::draw()
     processMouse();
 }
 
-void PreviewMesh::render()
+void PreviewMesh::render(float time)
 {
     _frameBuffer->set();
 
@@ -155,7 +155,7 @@ void PreviewMesh::render()
 
 	cbuffer->fill(&buffer);
 
-	_material->setBase(0.f);
+	_material->setBase(time);
 
 	_device->renderIndexed(_geoBuffer->getIndexCount());
 

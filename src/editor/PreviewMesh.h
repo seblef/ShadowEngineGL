@@ -39,7 +39,7 @@ protected:
     Core::Vector2 _dragDelta;
     float _wheel;
 
-    void render();
+    void render(float time);
     void processMouse();
 
 public:
@@ -54,6 +54,6 @@ public:
     );
     ~PreviewMesh();
 
-    void draw();
+    void draw(float time);
 };
 }
