@@ -35,6 +35,9 @@ public:
     Material* getMaterial() const { return _material; }
 
     bool isValid() const { return _valid; }
+
+    bool save(const std::string& filename) const;
+    YAML::Node buildYAMLNode() const;
 };
 
 class EdMaterialSave

@@ -3,6 +3,7 @@
 #include "EdMaterial.h"
 #include "Helpers.h"
 #include "PreviewMesh.h"
+#include "Resources.h"
 #include "imgui/imgui.h"
 #include "filedialog/ImFileDialog.h"
 #include "../renderer/Material.h"
@@ -58,8 +59,11 @@ void MaterialWindow::draw()
 
         drawColors();
         drawTextures();
+        drawUV();
         drawBlendAndCull();
         drawAnimations();
+        drawGame();
+        drawButtons();
     }
 
     ImGui::End();
@@ -72,9 +76,17 @@ void MaterialWindow::drawColors()
         Color ambient(_material->getMaterial()->getStdBuffer().getAmbient());
         Color diffuse(_material->getMaterial()->getStdBuffer().getDiffuse());
         Color specular(_material->getMaterial()->getStdBuffer().getSpecular());
+        float shininess = _material->getMaterial()->getStdBuffer().getShininess();
+        float specIntensity = _material->getMaterial()->getStdBuffer().getSpecIntensity();
+        float reflectivity = _material->getMaterial()->getStdBuffer().getReflection();
+
         ImGui::ColorEdit4("Ambient", (float*)&ambient);
         ImGui::ColorEdit4("Diffuse", (float*)&diffuse);
         ImGui::ColorEdit4("Specular", (float*)&specular);
+        ImGui::Separator();
+        ImGui::InputFloat("Shininess", &shininess, .1f);
+        ImGui::InputFloat("Specular intensity", &specIntensity, 1.f);
+        ImGui::InputFloat("Reflectivity", &reflectivity, .1f);
 
         if(ambient!=_material->getMaterial()->getStdBuffer().getAmbient())
         {
@@ -89,6 +101,21 @@ void MaterialWindow::drawColors()
         if(specular!=_material->getMaterial()->getStdBuffer().getSpecular())
         {
             _material->getMaterial()->getStdBuffer().setSpecular(specular);
+            _changed = true;
+        }
+        if(shininess!=_material->getMaterial()->getStdBuffer().getShininess())
+        {
+            _material->getMaterial()->getStdBuffer().setShininess(shininess);
+            _changed = true;
+        }
+        if(specIntensity!=_material->getMaterial()->getStdBuffer().getSpecIntensity())
+        {
+            _material->getMaterial()->getStdBuffer().setSpecIntensity(specIntensity);
+            _changed = true;
+        }
+        if(reflectivity!=_material->getMaterial()->getStdBuffer().getReflection())
+        {
+            _material->getMaterial()->getStdBuffer().setReflection(reflectivity);
             _changed = true;
         }
     }
@@ -138,6 +165,29 @@ void MaterialWindow::drawTextures()
                 }
                 ifd::FileDialog::Instance().Close();
             }
+        }
+    }
+}
+
+void MaterialWindow::drawUV()
+{
+    if(ImGui::CollapsingHeader("UV Transform"))
+    {
+        Vector2 offset(_material->getMaterial()->getStdBuffer().getOffset());
+        Vector2 scale(_material->getMaterial()->getStdBuffer().getScale());
+
+        ImGui::SliderFloat2("Offset", (float*)&offset, 0.f, 1.f);
+        ImGui::InputFloat2("Scale", (float*)&scale);
+
+        if(offset!=_material->getMaterial()->getStdBuffer().getOffset())
+        {
+            _material->getMaterial()->getStdBuffer().setOffset(offset);
+            _changed = true;
+        }
+        if(scale!=_material->getMaterial()->getStdBuffer().getScale())
+        {
+            _material->getMaterial()->getStdBuffer().setScale(scale);
+            _changed = true;
         }
     }
 }
@@ -416,6 +466,74 @@ void MaterialWindow::drawAnimations()
             _changed = true;
         }
     }
+}
+
+void MaterialWindow::drawGame()
+{
+    if(ImGui::CollapsingHeader("Game"))
+    {
+        std::string debris(_material->getDebrisMesh());
+        ImGui::Text("Debris");
+        ImGui::SameLine();
+        if(ImGui::Button(debris.empty() ? "< >" : debris.c_str()))
+        {
+            ifd::FileDialog::Instance().Open(
+                "debris_mesh",
+                "Select a geometry",
+                "Geometry file (*.geo; *.GEO){.geo,.GEO}",
+                false
+            );
+        }
+
+        if(ifd::FileDialog::Instance().IsDone("debris_mesh"))
+        {
+            if(ifd::FileDialog::Instance().HasResult())
+            {
+                std::string newDebris(ifd::FileDialog::Instance().GetResult());
+                newDebris = getRelativePath(newDebris);
+
+                if(debris != newDebris)
+                {
+                    _material->setDebrisMesh(newDebris);
+                    _changed = true;
+                }
+            }
+            ifd::FileDialog::Instance().Close();
+        }    
+    }
+}
+
+void MaterialWindow::drawButtons()
+{
+    ImGui::Separator();
+    if(ImGui::Button("OK"))
+        _open = false;
+    ImGui::SameLine();
+    if(ImGui::Button("Restore"))
+    {
+        _save->restore();
+        _changed = false;
+    }
+    ImGui::SameLine();
+    if(ImGui::Button("Export"))
+    {
+        ifd::FileDialog::Instance().Save(
+            "material_export",
+            "Material export",
+            "Material file (*.yaml){.yaml}"
+        );
+    }
+
+    if(ifd::FileDialog::Instance().IsDone("material_export"))
+    {
+        if(ifd::FileDialog::Instance().HasResult())
+        {
+            std::string matFile(ifd::FileDialog::Instance().GetResult());
+            _material->save(matFile);
+            _changed = false;
+        }
+        ifd::FileDialog::Instance().Close();
+    }    
 }
 
 }

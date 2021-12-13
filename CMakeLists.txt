@@ -246,6 +246,7 @@ set(GAME_SOURCES
     src/game/Explosion.cpp
     src/game/ExplosionTemplate.cpp
     src/game/FieldHit.cpp
+    src/game/FilesStrings.cpp
     src/game/Flash.cpp
     src/game/FPSCounter.cpp
     src/game/GameActorUpdater.cpp

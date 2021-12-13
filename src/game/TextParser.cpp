@@ -1,91 +1,13 @@
 
 #include "TextParser.h"
 #include "ObjectFlags.h"
+#include "FilesStrings.h"
 #include "GeometryLoader.h"
 #include "ResourceDB.h"
 #include "../core/YAMLCore.h"
 #include "../renderer/Material.h"
 #include "../renderer/Renderer.h"
 
-
-const char* const g_PhysicShapes[PSHAPE_COUNT] =
-{
-	"box",
-	"sphere",
-	"capsule",
-	"mesh",
-	"chull"
-};
-
-const char * const g_MaterialTexNames[TS_COUNT] = {
-	"diffuse",
-	"normal",
-	"specular",
-	"emissive",
-	"environment"
-};
-
-const char * const g_MaterialBlendNames[] =
-{
-	"zero",
-	"one",
-	"src_color",
-	"inv_src_color",
-	"src_alpha",
-	"inv_src_alpha",
-	"dest_alpha",
-	"inv_dest_alpha",
-	"dest_color",
-	"inv_dest_color",
-	"src_alpha_sat",
-	"both_src_alpha",
-	"both_inv_src_alpha",
-	"blend_factor",
-	"inv_blend_factor",
-	"src_color2",
-	"inv_src_color2"
-};
-
-const char* const g_LightTypes[Light::LT_COUNT] =
-{
-	"omni",
-	"spot",
-	"area"
-};
-
-
-TextureSlot getTextureSlot(const string& b)
-{
-	TextureSlot t = TS_DIFFUSE;
-	for (int i = 0; i<TS_COUNT; ++i)
-	{
-		if (b == g_MaterialTexNames[i])
-			t = (TextureSlot)i;
-	}
-
-	return t;
-}
-
-BlendMode getBlendMode(const string& b)
-{
-	BlendMode m = BLEND_ZERO;
-	for (int i = 0; i<BLEND_COUNT; ++i)
-	{
-		if (b == g_MaterialBlendNames[i])
-			m = (BlendMode)i;
-	}
-
-	return m;
-}
-
-CullMode getCullMode(const string& c)
-{
-	CullMode cm = CULL_BACK;
-	if (c =="none")			cm = CULL_NONE;
-	else if (c == "front")		cm = CULL_FRONT;
-
-	return cm;
-}
 
 void parseMaterialAnimation(MaterialCreate& mc, const YAML::Node& node)
 {
@@ -122,7 +44,7 @@ Material* parseRendererMaterial(const YAML::Node& node)
     {
         for(YAML::const_iterator t=tex.begin(); t!=tex.end(); ++t)
         {
-            TextureSlot stage = getTextureSlot(t->first.as<string>());
+            TextureSlot stage = (TextureSlot)getTextureSlotFromKey(t->first.as<string>());
             mc._textures[stage] = t->second.as<string>();
         }
     }
@@ -130,8 +52,8 @@ Material* parseRendererMaterial(const YAML::Node& node)
     YAML::Node blend(node["blending"]);
     if(blend)
     {
-        mc._srcBlend = getBlendMode(blend["src"].as<string>(""));
-        mc._destBlend = getBlendMode(blend["dest"].as<string>(""));
+        mc._srcBlend = (BlendMode)getBlendModeFromKey(blend["src"].as<string>(""));
+        mc._destBlend = (BlendMode)getBlendModeFromKey(blend["dest"].as<string>(""));
     }
 
     YAML::Node anim = node["animation"];
@@ -139,7 +61,7 @@ Material* parseRendererMaterial(const YAML::Node& node)
         parseMaterialAnimation(mc, anim);
 
     if(node["cull"])
-        mc._cull = getCullMode(node["cull"].as<string>());
+        mc._cull = (CullMode)getCullModeFromKey(node["cull"].as<string>());
 
     YAML::Node uv(node["uv"]);
     if(uv)
@@ -194,9 +116,7 @@ TemplateMesh* TextParser::parseMesh(const YAML::Node& node, const string& name, 
 
 	PhysicShape shape = PSHAPE_BOX;
 	const string& s(node["physic_shape"].as<string>(""));
-	for (int i = 0; i < PSHAPE_COUNT; ++i)
-		if (s == g_PhysicShapes[i])
-			shape = (PhysicShape)i;
+    shape = (PhysicShape)getPhysicShapeFromKey(s);
 
     assert(geo);
 	return new TemplateMesh(geo,gmat,flags,shape,false);
@@ -211,9 +131,7 @@ TemplateParticleSystem* TextParser::parseParticles(const YAML::Node& node, const
 void TextParser::parseLight(const YAML::Node& node, LightCreate_t& lc, Light::LightType& type)
 {
 	const string& t(node["type"].as<string>(""));
-	for (int i = 0; i<Light::LT_COUNT; ++i)
-		if (t == g_LightTypes[i])
-			type = (Light::LightType)i;
+    type = (Light::LightType)getLightTypeFromKey(t);
 
 	lc._world.createIdentity();
 	lc._world = node["position"].as<Vector3>(Vector3::NullVector);

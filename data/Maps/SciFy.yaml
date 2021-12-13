@@ -128,27 +128,27 @@ resources:
     Desk:
       geometry: Geometry/Desk.GEO
       material: Desk
-      physic_shape: Box
+      physic_shape: box
     Wall2_2:
       geometry: Geometry/Wall2.GEO
       material: Wall2_2
-      physic_shape: Box
+      physic_shape: box
     Wall3_1:
       geometry: Geometry/Wall3.GEO
       material: Wall3_1
-      physic_shape: Box
+      physic_shape: box
     Wall1_1:
       geometry: Geometry/Wall_Corner.GEO
       material: Wall1_1
-      physic_shape: Box
+      physic_shape: box
     Wall2_1:
       geometry: Geometry/Wall2.GEO
       material: Wall2_1
-      physic_shape: Box
+      physic_shape: box
     Wall3_2:
       geometry: Geometry/Wall3.GEO
       material: Wall3_2
-      physic_shape: Box
+      physic_shape: box
 
 objects:
   - class: light
