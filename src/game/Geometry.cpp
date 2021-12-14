@@ -4,24 +4,34 @@
 #include "../loguru.hpp"
 
 
+Geometry::Geometry(int vxCount, int triCount) :
+    _vxCount(vxCount),
+    _triCount(triCount),
+    _vertices(new Core::Vx3D[vxCount]),
+    _indices(new unsigned short[triCount*3]),
+    _bBox(Core::BBox3::BoundBox)
+{
+}
+
 void Geometry::computeBBox()
 {
-	_bBox=BBox3::InitBox;
+	_bBox = Core::BBox3::InitBox;
 	for(int v=0;v<_vxCount;++v)
 		_bBox << _vertices[v].pos;
 }
 
 void Geometry::computeNormals()
 {
-	Vector3 n;
-	unsigned short *t=_indices;
+	Core::Vector3 n;
+	unsigned short *t = _indices.get();
+    Core::Vx3D *verts = _vertices.get();
 	for(int i=0;i<_triCount;++i)
 	{
-		n=(_vertices[t[1]].pos-_vertices[t[0]].pos) ^ (_vertices[t[2]].pos - _vertices[t[0]].pos);
+		n=(verts[t[1]].pos-verts[t[0]].pos) ^ (verts[t[2]].pos - verts[t[0]].pos);
 		n.normalize();
 
 		for(int v=0;v<3;++v)
-			_vertices[t[v]].norm=n;
+			verts[t[v]].norm=n;
 
 		t+=3;
 	}
@@ -29,16 +39,16 @@ void Geometry::computeNormals()
 
 void Geometry::computeBinormalAndTangent()
 {
-	Vector3 sdir,tdir;
-	Vector3 vDeltaPos1,vDeltaPos2;
-	Vector2 vDeltaUV1,vDeltaUV2;
+	Core::Vector3 sdir,tdir;
+	Core::Vector3 vDeltaPos1,vDeltaPos2;
+	Core::Vector2 vDeltaUV1,vDeltaUV2;
 
-	const unsigned short *tri=_indices;
+	const unsigned short *tri = _indices.get();
 	for(int i=0;i<_triCount;++i,tri+=3)
 	{
-		Vx3D& v0=_vertices[tri[0]];
-		Vx3D& v1=_vertices[tri[1]];
-		Vx3D& v2=_vertices[tri[2]];
+		Core::Vx3D& v0=_vertices[tri[0]];
+		Core::Vx3D& v1=_vertices[tri[1]];
+		Core::Vx3D& v2=_vertices[tri[2]];
 
 		vDeltaPos1=v1.pos - v0.pos;
 		vDeltaPos2=v2.pos - v0.pos;
@@ -87,7 +97,13 @@ void Geometry::computeBinormalAndTangent()
 
 void Geometry::buildRGeometry()
 {
-	_rGeo = new GeometryData(_vxCount, _vertices, _triCount, _indices, Renderer::getSingletonRef().getVideoDevice());
+	_rGeo = std::unique_ptr<GeometryData>(
+        new GeometryData(
+            _vxCount, _vertices.get(),
+            _triCount, _indices.get(),
+            Renderer::getSingletonRef().getVideoDevice()
+        )
+    );
 }
 
 void Geometry::outputVertices() const

@@ -12,7 +12,7 @@ Geometry* GeoGEOLoader::loadGeometry(const string& geoFile)
 {
 	Geometry* geo=0;
 
-	std::unique_ptr<IFile> fl(FileSystemFactory::getFileSystem()->openFile(geoFile,FA_READ));
+	std::unique_ptr<Core::IFile> fl(Core::FileSystemFactory::getFileSystem()->openFile(geoFile,FA_READ));
 	if(fl->good())
 	{
 		File::GeoFileHeader h;
@@ -21,7 +21,7 @@ Geometry* GeoGEOLoader::loadGeometry(const string& geoFile)
 		if(h._header==GEO_HEADER)
 		{
 			geo=new Geometry(h._vxCount,h._triCount);
-			fl->read(geo->getVertices(),sizeof(Vx3D)*h._vxCount);
+			fl->read(geo->getVertices(),sizeof(Core::Vx3D)*h._vxCount);
 			fl->read(geo->getTriangles(),sizeof(unsigned short)*3*h._triCount);
 		}
 		else

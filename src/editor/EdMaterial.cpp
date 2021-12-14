@@ -25,7 +25,6 @@ EdMaterial::EdMaterial() :
 
 EdMaterial::EdMaterial(const std::string& filename) :
     IResource(RES_MATERIAL, filename),
-    _material(0),
     _valid(false)
 {
     YAML::Node root;
@@ -44,7 +43,6 @@ EdMaterial::EdMaterial(const std::string& filename) :
 
 EdMaterial::EdMaterial(const std::string& name, const YAML::Node& node) :
     IResource(RES_MATERIAL, name),
-    _material(0),
     _valid(false)
 {
     try
@@ -58,12 +56,6 @@ EdMaterial::EdMaterial(const std::string& name, const YAML::Node& node) :
     
 }
 
-EdMaterial::~EdMaterial()
-{
-    if(_material)
-        delete _material;
-}
-
 void EdMaterial::parse(const YAML::Node& node)
 {
     _debrisMesh = node["debris"].as<string>("");
@@ -71,13 +63,13 @@ void EdMaterial::parse(const YAML::Node& node)
     YAML::Node r = node["renderer"];
 	if(r)
     {
-        _material = parseRendererMaterial(r);
+        _material = std::unique_ptr<Material>(parseRendererMaterial(r));
         _valid = true;
     }
     else
     {
         LOG_S(WARNING) << "No renderer section in material " << _name;
-        _material = new Material(Renderer::getSingletonRef().getVideoDevice());
+        _material = std::unique_ptr<Material>(new Material(Renderer::getSingletonRef().getVideoDevice()));
     }
 }
 

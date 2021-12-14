@@ -16,6 +16,7 @@ public:
 	virtual ~Mesh()										{}
 
 	void				setMaterial(Material* m)		{ _material=m; }
+    void                setGeometry(GeometryData* g)    { _geometry=g; }
 
 	Material*			getMaterial() const				{ return _material; }
 	GeometryData*		getGeometry() const				{ return _geometry; }

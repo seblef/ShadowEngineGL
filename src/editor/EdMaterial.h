@@ -2,6 +2,7 @@
 
 #include "IResource.h"
 #include "../renderer/Material.h"
+#include <memory>
 #include <string>
 
 class Material;
@@ -18,7 +19,7 @@ class EdMaterial : public IResource
 {
 protected:
     std::string _debrisMesh;
-    Material *_material;
+    std::unique_ptr<Material> _material;
     bool _valid;
     bool _edited;
 
@@ -28,12 +29,11 @@ public:
     EdMaterial();
     EdMaterial(const std::string& filename);
     EdMaterial(const std::string& name, const YAML::Node& node);
-    ~EdMaterial();
 
     const std::string& getDebrisMesh() const { return _debrisMesh; }
     void setDebrisMesh(const std::string& debrisMesh) { _debrisMesh = debrisMesh; }
 
-    Material* getMaterial() const { return _material; }
+    Material* getMaterial() const { return _material.get(); }
 
     bool isValid() const { return _valid; }
     bool isEdited() const { return _edited; }

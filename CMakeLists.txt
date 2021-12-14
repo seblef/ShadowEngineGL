@@ -307,7 +307,10 @@ set(EDITOR_SOURCES
     src/editor/imgui/backends/imgui_impl_opengl3.cpp
     src/editor/filedialog/ImFileDialog.cpp
     src/editor/EdCamera.cpp
+    src/editor/EdEntityTemplate.cpp
+    src/editor/EdGeometry.cpp
     src/editor/EdMaterial.cpp
+    src/editor/EdSolidTemplate.cpp
     src/editor/EditorSystem.cpp
     src/editor/Helpers.cpp
     src/editor/IWindow.cpp

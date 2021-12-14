@@ -87,21 +87,15 @@ bool MainMenu::loadMaterial(const std::string& matFileName)
     LOG_S(INFO) << "Load material " << matFileName;
     std::string matName = removeExtension(getRelativePath(matFileName));
 
-    if(Resources::getSingletonRef().exists(RES_MATERIAL, matName))
-        return true;
-
-    EdMaterial *material = new EdMaterial(matName);
-    if(material->isValid())
+    EdMaterial* material = (EdMaterial*)Resources::getSingletonRef().load(RES_MATERIAL, matName);
+    if(material)
     {
-        Resources::getSingletonRef().add(RES_MATERIAL, material, matName);
-        new MaterialWindow(material);
+        if(!material->isEdited())
+            new MaterialWindow(material);
         return true;
     }
     else
-    {
-        delete material;
         return false;
-    }
 }
 
 }

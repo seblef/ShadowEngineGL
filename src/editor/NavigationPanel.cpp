@@ -43,14 +43,14 @@ void NavigationPanel::drawResourceType(unsigned int type)
     {
         for(auto const& r : resources)
         {
-            bool selected = (_selected[type] == r.second);
+            bool selected = (_selected[type] == r.second.get());
             if(ImGui::Selectable(r.second->getName().c_str(), &selected, ImGuiSelectableFlags_AllowDoubleClick))
                 if(ImGui::IsMouseDoubleClicked(0))
                 {
-                    _selected[type] = r.second;
-                    EdMaterial* mat = (EdMaterial*)r.second;
+                    _selected[type] = r.second.get();
+                    EdMaterial* mat = (EdMaterial*)r.second.get();
                     if(!mat->isEdited())
-                        new MaterialWindow((EdMaterial*)r.second);
+                        new MaterialWindow((EdMaterial*)r.second.get());
                 }
         }
         ImGui::TreePop();
