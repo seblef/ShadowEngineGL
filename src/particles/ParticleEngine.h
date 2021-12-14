@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ParticleSystem.h"
-#include "PR_Point.h"
-#include "PR_Quad.h"
+#include "RendererPoint.h"
+#include "RendererQuad.h"
 #include "../core/TSingleton.h"
 
 class IVideoDevice;
@@ -18,8 +18,8 @@ class ParticleEngine : public TSingleton<ParticleEngine>
 		RenderState					_rsState;
 		SamplerState				_samplerState;
 
-		PR_Point					_pointRenderer;
-		PR_Quad						_quadRenderer;
+		RendererPoint					_pointRenderer;
+		RendererQuad						_quadRenderer;
 		
 		Particle**					_particles;
 
@@ -41,8 +41,8 @@ class ParticleEngine : public TSingleton<ParticleEngine>
 
 		void						draw(const Camera& c);
 
-		PR_Point*					getPointRenderer()					{ return &_pointRenderer; }
-		PR_Quad*					getQuadRenderer()					{ return &_quadRenderer; }
+		RendererPoint*					getPointRenderer()					{ return &_pointRenderer; }
+		RendererQuad*					getQuadRenderer()					{ return &_quadRenderer; }
 		ParticleRenderer*			getRenderer(const string& r);
 
 		IVideoDevice*				getVideoDevice() const				{ return _device; }

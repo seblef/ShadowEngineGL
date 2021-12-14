@@ -185,12 +185,11 @@ set(PARTICLES_SOURCES
     src/particles/ParticleExplosionEmitter.cpp
     src/particles/ParticleLinearEmitter.cpp
     src/particles/Material.cpp
-    src/particles/ParticleRenderer.cpp
     src/particles/ParticleSystem.cpp
     src/particles/ParticleSystemTemplate.cpp
+    src/particles/RendererPoint.cpp
+    src/particles/RendererQuad.cpp
     src/particles/TextureSet.cpp
-    src/particles/PR_Point.cpp
-    src/particles/PR_Quad.cpp
 )
 
 set(RENDERER2D_SOURCES

@@ -1,32 +1,37 @@
 #pragma once
 
+#include "../mediacommon/IVertexBuffer.h"
+#include <memory>
 
 class IVideoDevice;
-class IVertexBuffer;
-class Particle;
 
 namespace Core
 {
     class Camera;
 }
 
-using namespace Core;
+namespace Particles
+{
+
+class Particle;
 
 class ParticleRenderer
 {
 	protected:
 
-		IVideoDevice*			_device;
-		IVertexBuffer*			_vBuffer;
-		int						_particleCount;
+		IVideoDevice* _device;
+		std::unique_ptr<IVertexBuffer>  _vBuffer;
+		int _particleCount;
 
 	public:
 
-		ParticleRenderer(IVideoDevice *dev) : _device(dev), _particleCount(0)			{}
-		virtual ~ParticleRenderer();
+		ParticleRenderer(IVideoDevice *dev) : _device(dev), _particleCount(0) {}
+		virtual ~ParticleRenderer() {}
 
-		virtual const char*		getRendererName() const									{ return "null"; }
+		virtual const char* getRendererName() const { return "null"; }
 
-		virtual void			addParticle(Particle& p, const Camera& c)=0;
-		virtual void			renderParticles()=0;
+		virtual void addParticle(Particle& p, const Core::Camera& c)=0;
+		virtual void renderParticles()=0;
 };
+
+}

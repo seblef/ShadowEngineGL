@@ -6,6 +6,7 @@
 #include "../core/BBox3.h"
 
 using namespace Core;
+using namespace Particles;
 
 
 class ParticleEmitter
@@ -74,6 +75,6 @@ public:
 	void								setRenderer(ParticleRenderer* r);
 	void								setMaterial(Particles::Material* m);
 
-	Particle*							getNextParticle();
+	Particles::Particle*							getNextParticle();
 	void								initParticle(Particle& p) const;
 };
