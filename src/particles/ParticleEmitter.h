@@ -13,7 +13,7 @@ class ParticleEmitter
 protected:
 
 	ParticleRenderer*					_renderer;
-	ParticleMaterial*					_material;
+	Particles::Material*					_material;
 
 	ParticleEmitterParams				_params1, _params2;
 
@@ -36,7 +36,7 @@ protected:
 
 public:
 
-	ParticleEmitter(ParticleRenderer *r, ParticleMaterial* m,
+	ParticleEmitter(ParticleRenderer *r, Particles::Material* m,
 		unsigned int maxParticles, const Vector3& grav,
 		const ParticleEmitterParams& p1,
 		const ParticleEmitterParams& p2,
@@ -65,14 +65,14 @@ public:
 	Vector3&							getGravity()									{ return _gravity; }
 
 	ParticleRenderer*					getRenderer() const								{ return _renderer; }
-	ParticleMaterial*					getMaterial() const								{ return _material; }
+	Particles::Material*					getMaterial() const								{ return _material; }
 
 	void								setMaxParticles(unsigned int mp);
 	void								setEmissionRate(float rate)						{ _emissionRate = rate; }
 	void								setGravity(const Vector3& g)					{ _gravity = g; }
 
 	void								setRenderer(ParticleRenderer* r);
-	void								setMaterial(ParticleMaterial* m);
+	void								setMaterial(Particles::Material* m);
 
 	Particle*							getNextParticle();
 	void								initParticle(Particle& p) const;

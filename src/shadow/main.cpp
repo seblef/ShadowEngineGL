@@ -2,7 +2,6 @@
 #include "NavTest.h"
 #include "EditorApp.h"
 #include "GameApp.h"
-#include "ParticleApp.h"
 #include "TestSoundApp.h"
 #include "TestGLApp.h"
 #include "../loguru.hpp"
@@ -20,7 +19,7 @@ const int defaultVerbosityLevel = 0;
 class Options
 {
 public:
-    string dataFolder;
+    std::string dataFolder;
     int verbosityLevel;
     bool editor;
 
@@ -35,7 +34,7 @@ public:
 void parseCommandLine(int argc, char *argv[], Options& opt)
 {
     TCLAP::CmdLine cmdLine("ShadowEngine", ' ', VERSION);
-    TCLAP::ValueArg<string> dataFolder("d", "data", "Path to data folder, can be relative or absolute.", false, "./", "string");
+    TCLAP::ValueArg<std::string> dataFolder("d", "data", "Path to data folder, can be relative or absolute.", false, "./", "string");
     TCLAP::ValueArg<int> verbosity("v", "verbosity", "Verbosity level, can be from -3 to 9.", false, defaultVerbosityLevel, "int");
     TCLAP::SwitchArg editor("e", "editor", "Run engine in editor mode");
 
@@ -72,7 +71,6 @@ int main(int argc, char* argv[])
     else
     {
         GameApp app;
-    //    ParticleApp app;
         // TestSoundApp app;
     //    TestGLApp app;
         app.run(opt.dataFolder);

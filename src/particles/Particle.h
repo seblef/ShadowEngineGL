@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ParticleMaterial.h"
+#include "Material.h"
 #include "../core/Vector3.h"
 #include "../core/Color.h"
 
@@ -25,6 +25,6 @@ class Particle
 
 		float				_distFromCam;
 
-		ParticleMaterial*	_material;
+		Particles::Material*	_material;
 		ParticleRenderer*	_renderer;
 };

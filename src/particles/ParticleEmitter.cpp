@@ -6,7 +6,7 @@
 #include "../core/Random.h"
 
 
-ParticleEmitter::ParticleEmitter(ParticleRenderer* r, ParticleMaterial* m,
+ParticleEmitter::ParticleEmitter(ParticleRenderer* r, Particles::Material* m,
 								 unsigned int maxParticles, const Vector3& grav,
 								 const ParticleEmitterParams& p1, const ParticleEmitterParams& p2,
 								 float emissionStep) : 
@@ -190,7 +190,7 @@ void ParticleEmitter::setRenderer(ParticleRenderer *r)
 		_particles[i]._renderer = r;
 }
 
-void ParticleEmitter::setMaterial(ParticleMaterial* m)
+void ParticleEmitter::setMaterial(Particles::Material* m)
 {
 	if (_material)
 		delete _material;

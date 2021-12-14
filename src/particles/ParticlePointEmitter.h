@@ -15,7 +15,7 @@ protected:
 
 public:
 
-	ParticlePointEmitter(ParticleRenderer *r, ParticleMaterial* m,
+	ParticlePointEmitter(ParticleRenderer *r, Particles::Material* m,
 		unsigned int maxParticles, const Vector3& grav,
 		const ParticleEmitterParams& p1,
 		const ParticleEmitterParams& p2,

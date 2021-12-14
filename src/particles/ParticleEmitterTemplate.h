@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ParticleEmitterParams.h"
-#include "ParticleMaterial.h"
+#include "Material.h"
 
 class ParticleEmitterTemplate
 {
@@ -10,7 +10,7 @@ protected:
 	string								_emitterName;
 
 	string								_renderer;
-	ParticleMaterial*					_material;
+	Particles::Material*					_material;
 
 	ParticleEmitterParams				_params1, _params2;
 
@@ -23,7 +23,7 @@ public:
 
     ParticleEmitterTemplate(const char *emitterName, const YAML::Node& node);
 	ParticleEmitterTemplate(const char *emitterName, const string& renderer,
-		ParticleMaterial* mat,
+		Particles::Material* mat,
 		const ParticleEmitterParams& p1,
 		const ParticleEmitterParams& p2,
 		unsigned int maxParticles,
@@ -36,7 +36,7 @@ public:
 	const string&						getEmitterName() const			{ return _emitterName; }
 
 	const string&						getRenderer() const				{ return _renderer; }
-	ParticleMaterial*					getMaterial() const				{ return _material; }
+	Particles::Material*					getMaterial() const				{ return _material; }
 
 	const ParticleEmitterParams&		getParameters1() const			{ return _params1; }
 	const ParticleEmitterParams&		getParameters2() const			{ return _params2; }

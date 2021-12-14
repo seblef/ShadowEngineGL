@@ -8,7 +8,7 @@ public:
 
 	ParticlePointEmitterTemplate(const YAML::Node& node) : ParticleEmitterTemplate("point", node) {}
 	ParticlePointEmitterTemplate(const string& renderer,
-		ParticleMaterial* mat,
+		Particles::Material* mat,
 		const ParticleEmitterParams& p1,
 		const ParticleEmitterParams& p2,
 		unsigned int maxParticles,

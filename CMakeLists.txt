@@ -184,7 +184,7 @@ set(PARTICLES_SOURCES
     src/particles/ParticleEngine.cpp
     src/particles/ParticleExplosionEmitter.cpp
     src/particles/ParticleLinearEmitter.cpp
-    src/particles/ParticleMaterial.cpp
+    src/particles/Material.cpp
     src/particles/ParticleRenderer.cpp
     src/particles/ParticleSystem.cpp
     src/particles/ParticleSystemTemplate.cpp
@@ -328,7 +328,6 @@ set(SHADOW_SOURCES
     src/shadow/EditorApp.cpp
     src/shadow/GameApp.cpp
     src/shadow/NavTest.cpp
-    src/shadow/ParticleApp.cpp
     src/shadow/TestGLApp.cpp
     src/shadow/TestSoundApp.cpp
 )

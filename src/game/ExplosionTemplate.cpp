@@ -4,7 +4,7 @@
 #include "TemplateMesh.h"
 #include "../core/YAMLCore.h"
 #include "../particles/ParticlePointEmitterTemplate.h"
-#include "../particles/ParticleMaterial.h"
+#include "../particles/Material.h"
 #include "../particles/ParticleSystemTemplate.h"
 #include "../sound/SoundSystem.h"
 
@@ -110,7 +110,7 @@ void ExplosionTemplate::load()
 			dest = BLEND_INVSRCCOLOR;
 		}
 
-		ParticleMaterial *m = new ParticleMaterial(_explosionTextureDir,true,src,dest);
+		Particles::Material *m = new Particles::Material(_explosionTextureDir,true,src,dest);
 		ParticleEmitterParams minp(_life * 0.5f, ExplosionMinMass, ExplosionMinFriction,
 			_color, _color,
 			Vector3::NullVector,
@@ -138,7 +138,7 @@ void ExplosionTemplate::load()
 			dest = BLEND_INVSRCCOLOR;
 		}
 
-		ParticleMaterial* m = new ParticleMaterial(_smokeTexture,false,src, dest);
+		Particles::Material* m = new Particles::Material(_smokeTexture,false,src, dest);
 		ParticleEmitterParams minp(ExplosionSmokeMinLife,
 			ExplosionSmokeMinMass,
 			ExplosionSmokeMinFriction,

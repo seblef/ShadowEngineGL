@@ -61,7 +61,7 @@ ParticleEmitterTemplate::ParticleEmitterTemplate(const char* emitterName, const 
 	{
 		if(_material)
 			delete _material;
-		_material = new ParticleMaterial(material);
+		_material = new Particles::Material(material);
 	}
 
 	_renderer = node["renderer"].as<string>();
