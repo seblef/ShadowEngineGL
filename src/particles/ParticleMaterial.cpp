@@ -29,7 +29,7 @@ const char * const g_ParticleBlendNames[]=
 ParticleMaterial::ParticleMaterial(const ParticleMaterial& m) : _device(m._device), _texture(0), _textureSet(0)
 {
 	if (m._textureSet)
-		_textureSet = new ParticleTextureSet(*m._textureSet);
+		_textureSet = new Particles::TextureSet(*m._textureSet);
 	else if (m._texture)
 	{
 		_texture = m._texture;
@@ -55,10 +55,10 @@ ParticleMaterial::ParticleMaterial(const YAML::Node& node) :
 	else if(node["texture_set"])
     {
         YAML::Node tex_set = node["texture_set"];
-		_textureSet = new ParticleTextureSet(tex_set, _device);
+		_textureSet = new Particles::TextureSet(tex_set, _device);
     }
 	else if(node["texture_dir"])
-		_textureSet = new ParticleTextureSet(node["texture_dir"].as<string>(), _device);
+		_textureSet = new Particles::TextureSet(node["texture_dir"].as<string>(), _device);
 
     YAML::Node blend = node["blend"];
 	if(blend)
@@ -80,7 +80,7 @@ ParticleMaterial::ParticleMaterial(const string& texFile, bool fileIsDir,
 	if (texFile.length() > 0)
 	{
 		if (fileIsDir)		//  Texture set
-			_textureSet = new ParticleTextureSet(texFile, _device);
+			_textureSet = new Particles::TextureSet(texFile, _device);
 		else
 			_texture = _device->createTexture(texFile);
 	}
@@ -98,7 +98,7 @@ ParticleMaterial::ParticleMaterial(const vector<string>& texSet,
 {
 	_device = ParticleEngine::getSingletonRef().getVideoDevice();
 
-	_textureSet = new ParticleTextureSet(_device);
+	_textureSet = new Particles::TextureSet(_device);
 	vector<string>::const_iterator t(texSet.begin());
 	for(;t!=texSet.end();++t)
 		_textureSet->addTexture(*t);

@@ -7,7 +7,7 @@
 
 class ExplosionTemplate;
 class ParticlePointEmitter;
-class Particles;
+class RParticles;
 
 using namespace Core;
 
@@ -19,7 +19,7 @@ protected:
 	Vector3						_position;
 	bool						_exploded;
 
-	Particles*					_rParticles;
+	RParticles*					_rParticles;
 
 	ParticlePointEmitter*		_explosionEmitter;
 	ParticlePointEmitter*		_smokeEmitter;

@@ -188,7 +188,7 @@ set(PARTICLES_SOURCES
     src/particles/ParticleRenderer.cpp
     src/particles/ParticleSystem.cpp
     src/particles/ParticleSystemTemplate.cpp
-    src/particles/ParticleTextureSet.cpp
+    src/particles/TextureSet.cpp
     src/particles/PR_Point.cpp
     src/particles/PR_Quad.cpp
 )

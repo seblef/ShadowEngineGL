@@ -3,14 +3,14 @@
 
 #include "GameObject.h"
 
-class Particles;
+class RParticles;
 class TemplateParticleSystem;
 
 class GameParticles : public GameObject
 {
 protected:
 
-	Particles*				_system;
+	RParticles*				_system;
 
 public:
 

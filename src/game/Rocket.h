@@ -8,7 +8,7 @@ class WeaponRocket;
 class GameCharacter;
 class MeshInstance;
 class Light;
-class Particles;
+class RParticles;
 
 class Rocket : public Ammo
 {
@@ -26,7 +26,7 @@ protected:
 	MeshInstance*			_rocketMesh;
 	Light*					_rocketLight;
 	IPhysicObject*			_rocketPhysic;
-	Particles*				_rocketSmoke;
+	RParticles*				_rocketSmoke;
 
 	SoundVirtualSource		_rocketSource;
 

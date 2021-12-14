@@ -72,7 +72,7 @@ Rocket::Rocket(
 		ParticleSystem *ps = new ParticleSystem(*weapon->getRocketSmoke());
 		ps->setWorldMatrix(_smokeWorld);
 
-		_rocketSmoke = new Particles(ps, _smokeWorld, false);
+		_rocketSmoke = new RParticles(ps, _smokeWorld, false);
 		_rocketSmoke->wakeUp();
 		Renderer::getSingletonRef().addRenderable(_rocketSmoke);
     }

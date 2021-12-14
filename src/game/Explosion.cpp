@@ -59,7 +59,7 @@ void Explosion::explode()
 	{
 		ParticleSystem* ps = new ParticleSystem(*_template->getParticles());
 		ps->setWorldMatrix(world);
-		_rParticles = new Particles(ps, world, true);
+		_rParticles = new RParticles(ps, world, true);
 
 		if (_template->getExplosionEmitter() != -1)
 		{

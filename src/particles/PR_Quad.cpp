@@ -1,7 +1,6 @@
 
 #include "PR_Quad.h"
 #include "Particle.h"
-#include "ParticleTextureSet.h"
 #include "../core/Camera.h"
 #include "../mediacommon/IVertexBuffer.h"
 #include "../mediacommon/IIndexBuffer.h"

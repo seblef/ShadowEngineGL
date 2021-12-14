@@ -11,7 +11,7 @@ GameParticles::GameParticles(const TemplateParticleSystem& t, const Matrix4& wor
 {
 	ParticleSystem *ps = new ParticleSystem(*t.getTemplate());
 	ps->setWorldMatrix(world);
-	_system = new Particles(ps, world, alwaysVisible);
+	_system = new RParticles(ps, world, alwaysVisible);
 }
 
 GameParticles::~GameParticles()

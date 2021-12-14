@@ -5,7 +5,7 @@
 
 class ParticleSystem;
 
-class Particles : public Renderable, public IUpdatable
+class RParticles : public Renderable, public IUpdatable
 {
 protected:
 
@@ -13,8 +13,8 @@ protected:
 
 public:
 
-	Particles(ParticleSystem *system, const Matrix4& world, bool alwaysVisible=false);
-	~Particles();
+	RParticles(ParticleSystem *system, const Matrix4& world, bool alwaysVisible=false);
+	~RParticles();
 
 	void						setWorldMatrix(const Matrix4& world);
 	void						enqueue();

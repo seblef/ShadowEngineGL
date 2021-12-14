@@ -3,7 +3,7 @@
 
 #include "Action.h"
 
-class Particles;
+class RParticles;
 class TraceTemplate;
 
 namespace Core
@@ -16,7 +16,7 @@ class Trace : public Action
 {
 protected:
 
-	Particles*				_particleSystem;
+	RParticles*				_particleSystem;
 
 public:
 

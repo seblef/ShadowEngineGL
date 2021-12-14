@@ -24,7 +24,7 @@ Trace::Trace(const TraceTemplate& t, const Vector3& p1, const Vector3& p2) : Act
 
 	ps->countParticles();
 
-	_particleSystem = new Particles(ps, world, true);
+	_particleSystem = new RParticles(ps, world, true);
 	_particleSystem->wakeUp();
 	Renderer::getSingletonRef().addRenderable(_particleSystem);
 }

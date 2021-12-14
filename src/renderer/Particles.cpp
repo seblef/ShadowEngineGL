@@ -5,29 +5,29 @@
 #include "../particles/ParticleEngine.h"
 #include "../particles/ParticleSystem.h"
 
-Particles::Particles(ParticleSystem* sys, const Matrix4& world, bool alwaysVisible) :
+RParticles::RParticles(ParticleSystem* sys, const Matrix4& world, bool alwaysVisible) :
 	Renderable(sys->getWorldBBox(), world, alwaysVisible), _system(sys)
 {
 	sys->setWorldMatrix(world);
 }
 
-Particles::~Particles()
+RParticles::~RParticles()
 {
 	delete _system;
 }
 
-void Particles::setWorldMatrix(const Matrix4& world)
+void RParticles::setWorldMatrix(const Matrix4& world)
 {
 	_worldMatrix = world;
 	_system->setWorldMatrix(world);
 }
 
-void Particles::enqueue()
+void RParticles::enqueue()
 {
 	ParticleEngine::getSingletonRef().enqueueSystem(_system);
 }
 
-void Particles::update(float time)
+void RParticles::update(float time)
 {
 	_system->update(time, *Renderer::getSingletonRef().getCurrentCamera());
 	_worldBBox = _system->getWorldBBox();
