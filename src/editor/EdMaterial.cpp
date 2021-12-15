@@ -17,15 +17,12 @@ namespace Editor
 
 EdMaterial::EdMaterial() : 
     IResource(RES_MATERIAL, "Materials/Material"),
-    _material(new Material(Renderer::getSingletonRef().getVideoDevice())),
-    _valid(true),
-    _edited(false)
+    _material(new Material(Renderer::getSingletonRef().getVideoDevice()))
 {
 }
 
 EdMaterial::EdMaterial(const std::string& filename) :
-    IResource(RES_MATERIAL, filename),
-    _valid(false)
+    IResource(RES_MATERIAL, filename)
 {
     YAML::Node root;
     try
@@ -42,8 +39,7 @@ EdMaterial::EdMaterial(const std::string& filename) :
 }
 
 EdMaterial::EdMaterial(const std::string& name, const YAML::Node& node) :
-    IResource(RES_MATERIAL, name),
-    _valid(false)
+    IResource(RES_MATERIAL, name)
 {
     try
     {

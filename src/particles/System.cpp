@@ -27,6 +27,16 @@ SystemTemplate::SystemTemplate(const std::string& filename)
 	parse(node);
 }
 
+SystemTemplate::SystemTemplate(const SystemTemplate& t)
+{
+    for(auto const& sub : t._subSystems)
+        _subSystems.push_back(
+            std::unique_ptr<SubSystemTemplate>(
+                new SubSystemTemplate(*sub)
+            )
+        );
+}
+
 SystemTemplate::~SystemTemplate()
 {
 }

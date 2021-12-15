@@ -29,6 +29,7 @@ public:
     SystemTemplate() {}
     SystemTemplate(const YAML::Node& node);
     SystemTemplate(const std::string& filename);
+    SystemTemplate(const SystemTemplate& t);
     ~SystemTemplate();
 
     unsigned int getSubCount() const { return _subSystems.size(); }

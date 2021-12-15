@@ -1,5 +1,6 @@
 #include "Resources.h"
 #include "EdMaterial.h"
+#include "EdParticles.h"
 
 namespace Editor
 {
@@ -44,6 +45,14 @@ IResource* Resources::load(ResourceType type, const std::string& name)
             return 0;
         res = mat.get();
         _resources[RES_MATERIAL][name] = std::move(mat);
+    }
+    else if(type == RES_PARTICLES)
+    {
+        std::unique_ptr<EdParticles> particles(new EdParticles(name));
+        if(!particles->isValid())
+            return 0;
+            res = particles.get();
+        _resources[RES_PARTICLES][name] = std::move(particles);
     }
     return res;
 }

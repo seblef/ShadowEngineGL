@@ -6,6 +6,7 @@
 #include "../core/Camera.h"
 #include "../core/Random.h"
 #include "../core/YAMLCore.h"
+#include "../loguru.hpp"
 
 
 namespace Particles
@@ -94,6 +95,20 @@ SubSystemTemplate::SubSystemTemplate(
     _gravity(gravity),
     _emissionRate(emissionRate),
     _lifeTime(lifeTime)
+{
+}
+
+SubSystemTemplate::SubSystemTemplate(const SubSystemTemplate& t) :
+    _name(t._name),
+    _renderer(t._renderer),
+    _emitter(t._emitter),
+    _material(t._material.get()),
+    _minParams(t._minParams),
+    _maxParams(t._maxParams),
+    _maxParticles(t._maxParticles),
+    _gravity(t._gravity),
+    _emissionRate(t._emissionRate),
+    _lifeTime(t._lifeTime)
 {
 }
 
@@ -263,7 +278,7 @@ void SubSystem::collectParticles(
 {
 	unsigned int c = std::min(_particlesCount, maxCount - count);
 	for(unsigned int i=0;i<c;++i, ++count)
-		particles[count]=_usedParticles[i];
+		particles[count] = _usedParticles[i];
 }
 
 void SubSystem::initialize()

@@ -304,6 +304,7 @@ set(EDITOR_SOURCES
     src/editor/EdEntityTemplate.cpp
     src/editor/EdGeometry.cpp
     src/editor/EdMaterial.cpp
+    src/editor/EdParticles.cpp
     src/editor/EdSolidTemplate.cpp
     src/editor/EditorSystem.cpp
     src/editor/Helpers.cpp
@@ -311,8 +312,11 @@ set(EDITOR_SOURCES
     src/editor/MainMenu.cpp
     src/editor/MaterialWindow.cpp
     src/editor/NavigationPanel.cpp
+    src/editor/ParticlesWindow.cpp
     src/editor/PreviewCamera.cpp
+    src/editor/PreviewFrame.cpp
     src/editor/PreviewMesh.cpp
+    src/editor/PreviewParticles.cpp
     src/editor/PreviewResources.cpp
     src/editor/Resources.cpp
 )

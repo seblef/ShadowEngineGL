@@ -22,6 +22,8 @@ PreviewResources::PreviewResources(IVideoDevice* device) :
 {
     _backgroundShader = device->createShader("Editor/Background");
     _meshShader = device->createShader("Editor/Material");
+    _particlesShader = device->createShader("Base/Particles");
+
     _backgroundTexture = device->createTexture("Textures/Editor/MaterialBack.dds");
     _cBuffer = device->createConstantBuffer(7, 0);
     _backgroundBlendState = device->createBlendState(false, BLEND_ONE, BLEND_ZERO);
@@ -54,6 +56,8 @@ PreviewResources::~PreviewResources()
         delete _backgroundTexture;
     if(_sphereGeometry)
         delete _sphereGeometry;
+    if(_cBuffer)
+        delete _cBuffer;
 
 	_device->destroyBlendState(_backgroundBlendState);
 	_device->destroyDepthStencilState(_backgroundDepthState);

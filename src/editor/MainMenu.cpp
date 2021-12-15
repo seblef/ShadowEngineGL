@@ -1,8 +1,10 @@
 #include "EditorSystem.h"
 #include "EdMaterial.h"
+#include "EdParticles.h"
 #include "Helpers.h"
 #include "MainMenu.h"
 #include "MaterialWindow.h"
+#include "ParticlesWindow.h"
 #include "Resources.h"
 #include "imgui/imgui.h"
 #include "filedialog/ImFileDialog.h"
@@ -70,7 +72,14 @@ void MainMenu::updateFileDialogs()
     }
 
     if(ifd::FileDialog::Instance().IsDone("PSFileDialog"))
+    {
+        if(ifd::FileDialog::Instance().HasResult())
+        {
+            std::string filename = ifd::FileDialog::Instance().GetResult();
+            loadParticles(filename);
+        }
         ifd::FileDialog::Instance().Close();
+    }
 
     if(ifd::FileDialog::Instance().IsDone("ActorsFileDialog"))
         ifd::FileDialog::Instance().Close();
@@ -84,7 +93,7 @@ bool MainMenu::loadMap(const std::string& mapFilename)
 
 bool MainMenu::loadMaterial(const std::string& matFileName)
 {
-    LOG_S(INFO) << "Load material " << matFileName;
+    LOG_S(INFO) << "Loading material " << matFileName;
     std::string matName = removeExtension(getRelativePath(matFileName));
 
     EdMaterial* material = (EdMaterial*)Resources::getSingletonRef().load(RES_MATERIAL, matName);
@@ -92,6 +101,22 @@ bool MainMenu::loadMaterial(const std::string& matFileName)
     {
         if(!material->isEdited())
             new MaterialWindow(material);
+        return true;
+    }
+    else
+        return false;
+}
+
+bool MainMenu::loadParticles(const std::string& filename)
+{
+    LOG_S(INFO) << "Loading particles system " << filename;
+    std::string particlesName = removeExtension(getRelativePath(filename));
+
+    EdParticles* particles = (EdParticles*)Resources::getSingletonRef().load(RES_PARTICLES, particlesName);
+    if(particles)
+    {
+        if(!particles->isEdited())
+            new ParticlesWindow(particles);
         return true;
     }
     else

@@ -20,8 +20,6 @@ class EdMaterial : public IResource
 protected:
     std::string _debrisMesh;
     std::unique_ptr<Material> _material;
-    bool _valid;
-    bool _edited;
 
     void parse(const YAML::Node& node);
 
@@ -34,11 +32,6 @@ public:
     void setDebrisMesh(const std::string& debrisMesh) { _debrisMesh = debrisMesh; }
 
     Material* getMaterial() const { return _material.get(); }
-
-    bool isValid() const { return _valid; }
-    bool isEdited() const { return _edited; }
-    void startEdit() { _edited = true; }
-    void stopEdit() { _edited = false; }
 
     bool save(const std::string& filename) const;
     YAML::Node buildYAMLNode() const;

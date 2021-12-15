@@ -14,6 +14,7 @@ protected:
 
     IShader* _backgroundShader;
     IShader* _meshShader;
+    IShader* _particlesShader;
 
     IConstantBuffer* _cBuffer;
 
@@ -35,6 +36,7 @@ public:
 
     IShader* getBackgroundShader() const { return _backgroundShader; }
     IShader* getMeshShader() const { return _meshShader; }
+    IShader* getParticlesShader() const { return _particlesShader; }
 
     IConstantBuffer* getConstantBuffer() const { return _cBuffer; }
 

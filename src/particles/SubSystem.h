@@ -104,6 +104,7 @@ public:
         float emissionRate,
         float lifeTime
     );
+    SubSystemTemplate(const SubSystemTemplate& t);
 
     const std::string& getName() const { return _name; }
     const std::string& getRenderer() const { return _renderer; }
