@@ -6,7 +6,11 @@
 class Material;
 class GameMaterial;
 class TemplateMesh;
-class TemplateParticleSystem;
+
+namespace Particles
+{
+class SystemTemplate;
+}
 
 namespace YAML
 {
@@ -23,10 +27,24 @@ public:
 	TextParser()			{}
 	~TextParser()			{}
 
-	static GameMaterial*			parseMaterial(const YAML::Node& node, const string& name);
-	static TemplateMesh*			parseMesh(const YAML::Node& node, const string& name, const string* geoDir = 0);
-	static TemplateParticleSystem*	parseParticles(const YAML::Node& node, const string& name);
-	static void						parseLight(const YAML::Node& node, LightCreate_t& lc, Light::LightType& t);
+	static GameMaterial* parseMaterial(
+        const YAML::Node& node,
+        const std::string& name
+    );
+	static TemplateMesh* parseMesh(
+        const YAML::Node& node,
+        const std::string& name,
+        const std::string* geoDir = 0
+    );
+	static Particles::SystemTemplate* parseParticles(
+        const YAML::Node& node,
+        const std::string& name
+    );
+	static void parseLight(
+        const YAML::Node& node,
+        LightCreate_t& lc,
+        Light::LightType& t
+    );
 };
 
 

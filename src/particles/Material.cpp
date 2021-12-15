@@ -1,6 +1,6 @@
 
 #include "Material.h"
-#include "ParticleEngine.h"
+#include "Engine.h"
 #include "TextureSet.h"
 #include "../core/CoreCommon.h"
 #include "../mediacommon/ITexture.h"
@@ -45,15 +45,15 @@ Material::Material(const Material& m) :
 	BlendMode src, dest;
 	bool blend;
 
-	ParticleEngine::getSingletonRef().getVideoDevice()->getBlendStateDesc(m._blendState, blend, src, dest);
-	_blendState = ParticleEngine::getSingletonRef().getVideoDevice()->createBlendState(blend, src, dest);
+	Engine::getSingletonRef().getVideoDevice()->getBlendStateDesc(m._blendState, blend, src, dest);
+	_blendState = Engine::getSingletonRef().getVideoDevice()->createBlendState(blend, src, dest);
 }
 
 Material::Material(const YAML::Node& node) :
 	_texture(0),
 	_blendState(0)
 {
-	_device = ParticleEngine::getSingletonRef().getVideoDevice();
+	_device = Engine::getSingletonRef().getVideoDevice();
 
 	if(node["texture"])
 		_texture = _device->createTexture(node["texture"].as<string>());
@@ -84,7 +84,7 @@ Material::Material(
     BlendMode destBlend
 )
 {
-	_device = ParticleEngine::getSingletonRef().getVideoDevice();
+	_device = Engine::getSingletonRef().getVideoDevice();
 
 	if (texFile.length() > 0)
 	{
@@ -105,7 +105,7 @@ Material::Material(
     BlendMode destBlend
 ) : _texture(0)
 {
-	_device = ParticleEngine::getSingletonRef().getVideoDevice();
+	_device = Engine::getSingletonRef().getVideoDevice();
 
 	_textureSet = std::unique_ptr<TextureSet>(new TextureSet(_device));
     for(auto const& t : texSet)

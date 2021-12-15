@@ -122,10 +122,12 @@ TemplateMesh* TextParser::parseMesh(const YAML::Node& node, const string& name, 
 	return new TemplateMesh(geo,gmat,flags,shape,false);
 }
 
-TemplateParticleSystem* TextParser::parseParticles(const YAML::Node& node, const string& name)
+Particles::SystemTemplate* TextParser::parseParticles(
+    const YAML::Node& node,
+    const std::string& name
+)
 {
-	ParticleSystemTemplate *t = new ParticleSystemTemplate(node);
-	return new TemplateParticleSystem(t);
+	return new Particles::SystemTemplate(node);
 }
 
 void TextParser::parseLight(const YAML::Node& node, LightCreate_t& lc, Light::LightType& type)

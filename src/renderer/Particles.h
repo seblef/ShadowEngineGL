@@ -2,23 +2,32 @@
 
 #include "Renderable.h"
 #include "IUpdatable.h"
+#include <memory>
 
-class ParticleSystem;
+
+namespace Particles
+{
+class System;
+}
 
 class RParticles : public Renderable, public IUpdatable
 {
 protected:
 
-	ParticleSystem*				_system;
+	std::unique_ptr<Particles::System> _system;
 
 public:
 
-	RParticles(ParticleSystem *system, const Matrix4& world, bool alwaysVisible=false);
+	RParticles(
+        Particles::System *system,
+        const Core::Matrix4& world,
+        bool alwaysVisible=false
+    );
 	~RParticles();
 
-	void						setWorldMatrix(const Matrix4& world);
-	void						enqueue();
-	void						update(float time);
+	void setWorldMatrix(const Core::Matrix4& world);
+	void enqueue();
+	void update(float time);
 
-	ParticleSystem*				getParticleSystem() const					{ return _system; }
+	Particles::System* getParticleSystem() const { return _system.get(); }
 };

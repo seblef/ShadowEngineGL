@@ -19,7 +19,7 @@
 #include "../core/Camera.h"
 #include "../core/ViewFrustum.h"
 #include "../core/YAMLCore.h"
-#include "../particles/ParticleEngine.h"
+#include "../particles/Engine.h"
 
 // #define RENDERER_DEBUG
 
@@ -60,7 +60,7 @@ Renderer::Renderer(IVideoDevice *device, const YAML::Node& cfg) :
 	new ActorRenderer(device);
 	new ActorSkinnedRenderer(device);
 	new ShadowSystem(device);
-	new ParticleEngine(10000, device);
+	new Particles::Engine(10000, device);
 	new HDAO(device, hdao_cfg);
     new HDR(device, hdr_cfg, _GBuffer.getDepthBuffer());
 
@@ -83,7 +83,7 @@ Renderer::Renderer(IVideoDevice *device, const YAML::Node& cfg) :
 
 Renderer::~Renderer()
 {
-	ParticleEngine::deleteSingleton();
+	Particles::Engine::deleteSingleton();
 	GroundRenderer::deleteSingleton();
 	MaterialSystem::deleteSingleton();
 	LightSystem::deleteSingleton();
@@ -215,7 +215,7 @@ void Renderer::update(float time, Camera *c)
     LOG_S(2) << "- Renderer::rendering particles...";
 #endif
 
-    ParticleEngine::getSingletonRef().draw(*_currentCamera);
+    Particles::Engine::getSingletonRef().draw(*_currentCamera);
 
 #ifdef RENDERER_DEBUG
     LOG_S(2) << "- Renderer::HDR pass...";

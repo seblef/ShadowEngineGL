@@ -1,7 +1,7 @@
-
 #pragma once
 
 #include "Action.h"
+#include <memory>
 
 class RParticles;
 class TraceTemplate;
@@ -16,12 +16,12 @@ class Trace : public Action
 {
 protected:
 
-	RParticles*				_particleSystem;
+	std::unique_ptr<RParticles> _particleSystem;
 
 public:
 
 	Trace(const TraceTemplate& t, const Core::Vector3& from, const Core::Vector3& to);
 	~Trace();
 
-	void					update(float time);
+	void update(float time);
 };

@@ -3,35 +3,32 @@
 
 #include "Action.h"
 #include "../core/Vector3.h"
+#include <memory>
 
 
 class ExplosionTemplate;
-class ParticlePointEmitter;
 class RParticles;
 
-using namespace Core;
 
 class Explosion : public Action
 {
 protected:
 
-	const ExplosionTemplate*	_template;
-	Vector3						_position;
-	bool						_exploded;
+	const ExplosionTemplate* _template;
+	Core::Vector3 _position;
+	bool _exploded;
 
-	RParticles*					_rParticles;
+	std::unique_ptr<RParticles> _rParticles;
 
-	ParticlePointEmitter*		_explosionEmitter;
-	ParticlePointEmitter*		_smokeEmitter;
-
-	float						_smokeTime;
-
-	void						explode();
+	void explode();
 
 public:
 
-	Explosion(const ExplosionTemplate& e, const Vector3& pos);
+	Explosion(
+        const ExplosionTemplate& e,
+        const Core::Vector3& pos
+    );
 	~Explosion();
 
-	void						update(float time);
+	void update(float time);
 };

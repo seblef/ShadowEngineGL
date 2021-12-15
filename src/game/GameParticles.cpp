@@ -1,32 +1,34 @@
 
 #include "GameParticles.h"
-#include "TemplateParticleSystem.h"
-#include "../particles/ParticleSystem.h"
+#include "../particles/System.h"
 #include "../renderer/Particles.h"
 #include "../renderer/Renderer.h"
 
 
-GameParticles::GameParticles(const TemplateParticleSystem& t, const Matrix4& world, bool alwaysVisible) : GameObject(PARTICLES,world,
-	BBox3::NullBox, 0)
+GameParticles::GameParticles(
+    const Particles::SystemTemplate& t,
+    const Core::Matrix4& world,
+    bool alwaysVisible
+) : 
+    GameObject(PARTICLES, world, Core::BBox3::NullBox, 0)
 {
-	ParticleSystem *ps = new ParticleSystem(*t.getTemplate());
-	ps->setWorldMatrix(world);
-	_system = new RParticles(ps, world, alwaysVisible);
+    Particles::System *sys = new Particles::System(t);
+	sys->setWorldMatrix(world);
+	_system = std::unique_ptr<RParticles>(new RParticles(sys, world, alwaysVisible));
 }
 
 GameParticles::~GameParticles()
 {
-	delete _system;
 }
 
 void GameParticles::onAddToScene()
 {
-	Renderer::getSingletonRef().addRenderable(_system);
+	Renderer::getSingletonRef().addRenderable(_system.get());
 	_system->wakeUp();
 }
 
 void GameParticles::onRemFromScene()
 {
 	_system->sleep();
-	Renderer::getSingletonRef().remRenderable(_system);
+	Renderer::getSingletonRef().remRenderable(_system.get());
 }

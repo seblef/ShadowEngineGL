@@ -13,7 +13,8 @@ Gun1:
     density: 20.0
     particle_system:
       emitters:
-        - type: linear
+        trace:
+          emitter: linear
           life: [0.5, 0.6]
           mass: [0.5, 0.5]
           friction: [0.0, 0.0]
@@ -53,7 +54,8 @@ Rocket1:
     sound: Sounds/tracer.wav
     smoke:
       emitters:
-        - type: point
+        smoke:
+          emitter: point
           life: [2.4, 3]
           mass: [0.5, 0.5]
           friction: [0, 0]

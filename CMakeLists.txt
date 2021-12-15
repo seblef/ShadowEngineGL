@@ -177,18 +177,13 @@ set(RENDERER_SOURCES
 )
 
 set(PARTICLES_SOURCES
-    src/particles/ParticleEmitter.cpp
-    src/particles/ParticleEmitterFactory.cpp
-    src/particles/ParticleEmitterTemplate.cpp
-    src/particles/ParticleEmitterTemplateFactory.cpp
-    src/particles/ParticleEngine.cpp
-    src/particles/ParticleExplosionEmitter.cpp
-    src/particles/ParticleLinearEmitter.cpp
+    src/particles/Emitters.cpp
+    src/particles/Engine.cpp
     src/particles/Material.cpp
-    src/particles/ParticleSystem.cpp
-    src/particles/ParticleSystemTemplate.cpp
     src/particles/RendererPoint.cpp
     src/particles/RendererQuad.cpp
+    src/particles/SubSystem.cpp
+    src/particles/System.cpp
     src/particles/TextureSet.cpp
 )
 
