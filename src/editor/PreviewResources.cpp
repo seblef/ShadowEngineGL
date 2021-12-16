@@ -50,8 +50,8 @@ PreviewResources::~PreviewResources()
         delete _backgroundShader;
     if(_meshShader)
         delete _meshShader;
-    if(_cBuffer)
-        delete _cBuffer;
+    if(_particlesShader)
+        delete _particlesShader;
     if(_backgroundTexture)
         delete _backgroundTexture;
     if(_sphereGeometry)

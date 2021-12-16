@@ -13,6 +13,7 @@ protected:
     IResource* _selected[RES_COUNT];
 
     void drawResourceType(unsigned int type);
+    void openResourceWindow(ResourceType type, IResource* res);
 
 public:
     NavigationPanel();

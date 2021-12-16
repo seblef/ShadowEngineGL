@@ -1,6 +1,8 @@
 #include "NavigationPanel.h"
 #include "EdMaterial.h"
+#include "EdParticles.h"
 #include "MaterialWindow.h"
+#include "ParticlesWindow.h"
 #include "Resources.h"
 #include "imgui/imgui.h"
 
@@ -43,17 +45,42 @@ void NavigationPanel::drawResourceType(unsigned int type)
     {
         for(auto const& r : resources)
         {
-            bool selected = (_selected[type] == r.second.get());
+            IResource *res = r.second.get();
+            bool selected = (_selected[type] == res);
             if(ImGui::Selectable(r.second->getName().c_str(), &selected, ImGuiSelectableFlags_AllowDoubleClick))
                 if(ImGui::IsMouseDoubleClicked(0))
                 {
-                    _selected[type] = r.second.get();
-                    EdMaterial* mat = (EdMaterial*)r.second.get();
-                    if(!mat->isEdited())
-                        new MaterialWindow((EdMaterial*)r.second.get());
+                    _selected[type] = res;
+                    openResourceWindow((ResourceType)type, res);
                 }
         }
         ImGui::TreePop();
+    }
+}
+
+void NavigationPanel::openResourceWindow(ResourceType type, IResource* res)
+{
+    if(!res || res->isEdited())
+        return;
+    
+    switch (type)
+    {
+    case RES_MATERIAL:
+        {
+            EdMaterial* mat = (EdMaterial*)res;
+            new MaterialWindow(mat);
+        }
+        break;
+    
+    case RES_PARTICLES:
+        {
+            EdParticles* particles = (EdParticles*)res;
+            new ParticlesWindow(particles);
+        }
+        break;
+    
+    default:
+        break;
     }
 }
 

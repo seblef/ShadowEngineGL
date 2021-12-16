@@ -102,7 +102,7 @@ SubSystemTemplate::SubSystemTemplate(const SubSystemTemplate& t) :
     _name(t._name),
     _renderer(t._renderer),
     _emitter(t._emitter),
-    _material(t._material.get()),
+    _material(new Material(*t._material)),
     _minParams(t._minParams),
     _maxParams(t._maxParams),
     _maxParticles(t._maxParticles),
@@ -121,12 +121,13 @@ SubSystem::SubSystem(SubSystemTemplate* subTemplate) :
     _worldBBox(Core::BBox3::BoundBox),
     _emissionCounter(0.f),
     _maxParticles(subTemplate->getMaxParticles()),
+    _allocatedParticles(0),
     _isTemplated(true),
     _life(.0f)
 {
+    initialize();
     setRenderer(subTemplate->getRenderer());
     createEmitter(subTemplate->getEmitter());
-    initialize();
 }
 
 SubSystem::SubSystem(
@@ -143,6 +144,7 @@ SubSystem::SubSystem(
     _emitter(0),
     _renderer(0),
     _maxParticles(maxParticles),
+    _allocatedParticles(0),
     _isTemplated(false),
     _worldMatrix(Core::Matrix4::Identity),
     _worldBBox(Core::BBox3::BoundBox),
@@ -161,9 +163,9 @@ SubSystem::SubSystem(
         emissionRate,
         lifeTime
     );
+    initialize();
     setRenderer(renderer);
     createEmitter(emitter);
-    initialize();
 }
 
 SubSystem::~SubSystem()
@@ -190,6 +192,8 @@ void SubSystem::setEmitter(const std::string& emitterClass)
 void SubSystem::setRenderer(const std::string& renderer)
 {
 	_renderer = Engine::getSingletonRef().getRenderer(renderer);
+    for(unsigned int i=0;i<_maxParticles;++i)
+        _particles[i]._renderer = _renderer;
 }
 
 void SubSystem::setMaxParticles(unsigned int maxParticles)
@@ -200,6 +204,7 @@ void SubSystem::setMaxParticles(unsigned int maxParticles)
         return;
     }
 
+    _maxParticles = maxParticles;
     delete[] _particles;
     delete[] _usedParticles;
     delete[] _freeParticles;
@@ -296,6 +301,7 @@ void SubSystem::initialize()
 
 		_freeParticles[i] = &_particles[i];
 	}
+    _particlesCount = 0;
 }
 
 void SubSystem::initParticle(Particle& p)
@@ -384,6 +390,18 @@ void SubSystem::emitAll()
 			_emitter->emit(*p, _worldMatrix);
         }
     }
+}
+
+void SubSystem::reset()
+{
+    _life = .0f;
+    _emissionCounter = .0f;
+	for (unsigned int i = 0; i<_maxParticles; ++i)
+	{
+		_particles[i]._life = -1.0f;
+		_freeParticles[i] = &_particles[i];
+	}
+    _particlesCount = 0;
 }
 
 }

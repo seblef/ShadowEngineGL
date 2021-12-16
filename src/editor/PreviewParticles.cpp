@@ -19,19 +19,20 @@ PreviewParticles::PreviewParticles(
     int height
 ) :
     PreviewFrame(device, resources, width, height),
+    _particles(0),
     _currentBBox(Core::BBox3::NullBox),
     _prevTime(-1.f)
 {
-    _particles = std::unique_ptr<Particles::System>(
-        new Particles::System(*particles)
-    );
     _sceneBuffer = std::unique_ptr<IConstantBuffer>(
         device->createConstantBuffer(sizeof(SceneInfosBuffer) / (4*sizeof(float)),0)
     );
+    setSystem(particles);
 }
 
 PreviewParticles::~PreviewParticles()
 {
+    if(_particles)
+        delete _particles;
 }
 
 void PreviewParticles::render(float time)
@@ -44,13 +45,14 @@ void PreviewParticles::render(float time)
 
     _device->clearRenderTargets(Core::Color::Black);
     _particles->update(delta, _camera.getCamera());
+    LOG_S(INFO) << "Count: " << _particles->getParticlesCount();
     if(_particles->getParticlesCount() > 0)
     {
         const Core::BBox3& bbox(_particles->getWorldBBox());
         _currentBBox << bbox;
         _camera.center(_currentBBox);
     }
-    Particles::Engine::getSingletonRef().enqueueSystem(_particles.get());
+    Particles::Engine::getSingletonRef().enqueueSystem(_particles);
 
     _resources->getParticlesShader()->set();
 
@@ -62,6 +64,13 @@ void PreviewParticles::render(float time)
     _sceneBuffer->fill(&infoBuffer);
 
     Particles::Engine::getSingletonRef().draw(_camera.getCamera());
+}
+
+void PreviewParticles::setSystem(Particles::SystemTemplate* system)
+{
+    if(_particles)
+        delete _particles;
+    _particles = new Particles::System(*system);
 }
 
 }

@@ -19,6 +19,7 @@ class TextureSet
 	protected:
 
 		std::vector<ITexture*> _textures;
+        std::string _folder;
 		IVideoDevice* _device;
 
 	public:
@@ -33,6 +34,8 @@ class TextureSet
 		int getTextureCount() const;
 		ITexture* getTexture(const int n) const;
 		ITexture* operator[](size_t n) const;
+
+        const std::string& getFolder() const { return _folder; }
 };
 
 }

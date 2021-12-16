@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../mediacommon/IVideoDevice.h"
-#include <memory>
 #include <vector>
 
 namespace YAML
@@ -21,10 +20,12 @@ protected:
 	IVideoDevice* _device;
 
 	ITexture* _texture;
-	std::unique_ptr<TextureSet> _textureSet;
+	TextureSet* _textureSet;
 
 	BlendState _blendState;
 	BlendMode getBlendMode(const string& bm) const;
+
+    void cleanUp();
 
 public:
 
@@ -39,10 +40,15 @@ public:
 	~Material();
 
 	ITexture* getTexture() const { return _texture; }
-	TextureSet* getTextureSet() const { return _textureSet.get(); }
+    void setTexture(const std::string& texture);
+
+	TextureSet* getTextureSet() const { return _textureSet; }
+    void setTextureSet(const std::string& folder);
 
 	ITexture* getTexture(float percent) const;
+
 	BlendState getBlendState() const { return _blendState; }
+    void setBlendState(BlendState blendState) { _blendState = blendState; }
 };
 
 }

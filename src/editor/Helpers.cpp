@@ -20,4 +20,11 @@ std::string removeExtension(const std::string& filename)
         return filename.substr(0, pos);
 }
 
+std::string getPathOnly(const std::string& filename)
+{
+    std::string path;
+    Core::FileSystemFactory::getFileSystem()->extractPath(filename, path);
+    return path;
+}
+
 }

@@ -155,4 +155,10 @@ unsigned int System::countParticles()
     return _particlesCount;
 }
 
+void System::reset()
+{
+    for(auto const& sub : _subSystems)
+        sub->reset();
+}
+
 }

@@ -22,7 +22,9 @@ TextureSet::TextureSet(const TextureSet& s) : _device(s._device)
 		addTexture(s.getTexture(i)->getName());
 }
 
-TextureSet::TextureSet(const std::string& dir, IVideoDevice* d) : _device(d)
+TextureSet::TextureSet(const std::string& dir, IVideoDevice* d) :
+    _device(d),
+    _folder(dir)
 {
 	Core::IFileSystem *sys = FileSystemFactory::getFileSystem();
 	const char * textureExts[] = {

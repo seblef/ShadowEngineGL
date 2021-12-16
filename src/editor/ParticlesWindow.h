@@ -4,6 +4,13 @@
 #include <chrono>
 #include <memory>
 
+namespace Particles
+{
+class Material;
+class SubSystem;
+class SubSystemTemplate;
+}
+
 namespace Editor
 {
 
@@ -17,6 +24,20 @@ protected:
     std::unique_ptr<PreviewParticles> _preview;
     std::chrono::time_point<std::chrono::steady_clock> _startTime;
     bool _changed;
+
+    void drawControls();
+    void drawSubSystems();
+    void drawSubSystem(int i);
+    void drawMaterial(Particles::Material* mat);
+    void drawTexture(Particles::Material* mat);
+    void drawTextureSet(Particles::Material* mat);
+    void drawGlobalParams(
+        Particles::SubSystemTemplate* sub,
+        Particles::SubSystem* subInstance
+    );
+    void drawAllParticlesParams(Particles::SubSystemTemplate* sub);
+
+    bool subSystemExists(const std::string& name) const;
 
 public:
     ParticlesWindow(EdParticles* particles);

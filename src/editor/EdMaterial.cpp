@@ -239,7 +239,6 @@ bool EdMaterial::save(const std::string& filename) const
     root["material"] = buildYAMLNode();
 
     mat_out << root;
-    mat_out.close();
     LOG_S(INFO) << "Material " << _name << " has been exported in " << filename;
     return true;
 }

@@ -107,9 +107,14 @@ public:
     SubSystemTemplate(const SubSystemTemplate& t);
 
     const std::string& getName() const { return _name; }
+    void setName(const std::string& name) { _name = name; }
+
     const std::string& getRenderer() const { return _renderer; }
     const std::string& getEmitter() const { return _emitter; }
     Material* getMaterial() const { return _material.get(); }
+
+    void setRenderer(const std::string& renderer) { _renderer = renderer; }
+    void setEmitter(const std::string& emitter) { _emitter = emitter; }
 
     const SubSystemParams& getMinParams() const { return _minParams; }
     const SubSystemParams& getMaxParams() const { return _maxParams; }
@@ -118,9 +123,16 @@ public:
     SubSystemParams& getMaxParams() { return _maxParams; }
 
     unsigned int getMaxParticles() const { return _maxParticles; }
+    void setMaxParticles(unsigned int maxParticles) { _maxParticles = maxParticles; }
+
     float getEmissionRate() const { return _emissionRate; }
+    void setEmissionRate(float emissionRate) { _emissionRate = emissionRate; }
+
     float getLifeTime() const { return _lifeTime; }
+    void setLifeTime(float lifeTime) { _lifeTime = lifeTime;}
+
     const Core::Vector3& getGravity() const { return _gravity; }
+    void setGravity(const Core::Vector3& gravity) { _gravity = gravity; }
 };
 
 class SubSystem
@@ -135,6 +147,7 @@ protected:
     
     unsigned int _maxParticles;
     unsigned int _particlesCount;
+    unsigned int _allocatedParticles;
 
     float _emissionCounter;
 
@@ -186,6 +199,7 @@ public:
     unsigned int getParticlesCount() const { return _particlesCount; }
 
     void emitAll();
+    void reset();
 };
 
 }

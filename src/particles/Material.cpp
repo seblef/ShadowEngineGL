@@ -32,10 +32,11 @@ namespace Particles
 
 Material::Material(const Material& m) :
     _device(m._device),
-    _texture(0)
+    _texture(0),
+    _textureSet(0)
 {
 	if (m._textureSet)
-		_textureSet = std::unique_ptr<TextureSet>(new TextureSet(*m._textureSet));
+		_textureSet = new TextureSet(*m._textureSet);
 	else if (m._texture)
 	{
 		_texture = m._texture;
@@ -51,6 +52,7 @@ Material::Material(const Material& m) :
 
 Material::Material(const YAML::Node& node) :
 	_texture(0),
+    _textureSet(0),
 	_blendState(0)
 {
 	_device = Engine::getSingletonRef().getVideoDevice();
@@ -60,10 +62,10 @@ Material::Material(const YAML::Node& node) :
 	else if(node["texture_set"])
     {
         YAML::Node tex_set = node["texture_set"];
-		_textureSet = std::unique_ptr<TextureSet>(new TextureSet(tex_set, _device));
+		_textureSet = new TextureSet(tex_set, _device);
     }
 	else if(node["texture_dir"])
-		_textureSet = std::unique_ptr<TextureSet>(new TextureSet(node["texture_dir"].as<string>(), _device));
+		_textureSet = new TextureSet(node["texture_dir"].as<string>(), _device);
 
     YAML::Node blend = node["blend"];
 	if(blend)
@@ -82,19 +84,19 @@ Material::Material(
     bool fileIsDir,
     BlendMode srcBlend,
     BlendMode destBlend
-)
+) :
+    _texture(0),
+    _textureSet(0)
 {
 	_device = Engine::getSingletonRef().getVideoDevice();
 
 	if (texFile.length() > 0)
 	{
 		if (fileIsDir)		//  Texture set
-			_textureSet = std::unique_ptr<TextureSet>(new TextureSet(texFile, _device));
+			_textureSet = new TextureSet(texFile, _device);
 		else
 			_texture = _device->createTexture(texFile);
 	}
-	else
-		_texture=0;
 
 	_blendState = _device->createBlendState(true, srcBlend, destBlend);
 }
@@ -107,7 +109,7 @@ Material::Material(
 {
 	_device = Engine::getSingletonRef().getVideoDevice();
 
-	_textureSet = std::unique_ptr<TextureSet>(new TextureSet(_device));
+	_textureSet = new TextureSet(_device);
     for(auto const& t : texSet)
 		_textureSet->addTexture(t);
 
@@ -117,8 +119,7 @@ Material::Material(
 Material::~Material()
 {
 	_device->destroyBlendState(_blendState);
-	if(_texture)
-        _texture->remRef();
+    cleanUp();
 }
 
 BlendMode Material::getBlendMode(const string& bm) const
@@ -129,7 +130,6 @@ BlendMode Material::getBlendMode(const string& bm) const
 		if(bm==g_ParticleBlendNames[i])
 			b=(BlendMode)i;
 	}
-
 	return b;
 }
 
@@ -143,6 +143,32 @@ ITexture* Material::getTexture(float percent) const
 	}
 	else
 		return _texture;
+}
+
+void Material::cleanUp()
+{
+    if(_texture)
+    {
+        _texture->remRef();
+        _texture = 0;
+    }
+    if(_textureSet)
+    {
+        delete _textureSet;
+        _textureSet = 0;
+    }
+}
+
+void Material::setTexture(const std::string& texture)
+{
+    cleanUp();
+    _texture = _device->createTexture(texture);
+}
+
+void Material::setTextureSet(const std::string& folder)
+{
+    cleanUp();
+    _textureSet = new TextureSet(folder, _device);
 }
 
 }

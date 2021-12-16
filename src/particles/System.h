@@ -68,6 +68,8 @@ public:
     );
     unsigned int getParticlesCount() const { return _particlesCount; }
     unsigned int countParticles();
+
+    void reset();
 };
 
 }
