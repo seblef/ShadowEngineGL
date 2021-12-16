@@ -303,6 +303,8 @@ set(EDITOR_SOURCES
     src/editor/EdCamera.cpp
     src/editor/EdEntityTemplate.cpp
     src/editor/EdGeometry.cpp
+    src/editor/EdGround.cpp
+    src/editor/EdMap.cpp
     src/editor/EdMaterial.cpp
     src/editor/EdParticles.cpp
     src/editor/EdSolidTemplate.cpp

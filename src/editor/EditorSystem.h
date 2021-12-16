@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../core/TSingleton.h"
+#include "EdCamera.h"
 #include "MainMenu.h"
 #include "NavigationPanel.h"
+#include "../core/TSingleton.h"
 #include <list>
 
 class IMedia;
@@ -16,7 +17,7 @@ namespace YAML
 namespace Editor
 {
 
-class EdCamera;
+class EdMap;
 class IWindow;
 class PreviewResources;
 
@@ -30,9 +31,11 @@ protected:
     NavigationPanel _navPanel;
     std::list<IWindow*> _openWindows;
 
-    EdCamera *_camera;
+    EdCamera _camera;
 
     PreviewResources *_previewRes;
+
+    EdMap* _map;
 
     void initUI();
     void shutdownUI();
@@ -52,6 +55,8 @@ public:
     PreviewResources* getPreviewResources() const { return _previewRes; }
 
     void openWindow(IWindow* win);
+
+    void loadMap(const std::string& filename);
 };
 
 

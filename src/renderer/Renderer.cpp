@@ -19,6 +19,7 @@
 #include "../core/Camera.h"
 #include "../core/ViewFrustum.h"
 #include "../core/YAMLCore.h"
+#include "../mediacommon/IFrameBuffer.h"
 #include "../particles/Engine.h"
 
 // #define RENDERER_DEBUG
@@ -43,6 +44,7 @@ void SceneInfosBuffer::setCamera(const Camera& c)
 
 Renderer::Renderer(IVideoDevice *device, const YAML::Node& cfg) :
 	_device(device),
+    _frameBuffer(0),
     _g_data(0),
 	_GBuffer(device),
 	_bufferView(device, 6),
@@ -222,7 +224,10 @@ void Renderer::update(float time, Camera *c)
 #endif
 
     HDR::getSingletonRef().process(&_GBuffer);
-    _device->resetRenderTargets();
+    if(_frameBuffer)
+        _frameBuffer->set();
+    else
+        _device->resetRenderTargets();
 
 	renderBufferViews();
     ShadowSystem::getSingletonRef().endRender();
@@ -408,4 +413,15 @@ void Renderer::renderBufferViews()
 	}
 
 	_bufferView.render();
+}
+
+void Renderer::setFrameBuffer(IFrameBuffer* frameBuffer)
+{
+    _frameBuffer = frameBuffer;
+    if(frameBuffer)
+        onResize(frameBuffer->getWidth(), frameBuffer->getHeight());
+    else
+        onResize(_device->getResWidth(), _device->getResHeight());
+
+    HDR::getSingletonRef().setRenderingFrameBuffer(frameBuffer);
 }

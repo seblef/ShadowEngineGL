@@ -1,5 +1,6 @@
 #include "EditorSystem.h"
 #include "EdCamera.h"
+#include "EdMap.h"
 #include "IWindow.h"
 #include "PreviewResources.h"
 #include "Resources.h"
@@ -9,6 +10,8 @@
 #include "filedialog/ImFileDialog.h"
 #include "../mediacommon/IMedia.h"
 #include "../mediacommon/IVideoDevice.h"
+#include "../renderer/Renderer.h"
+#include "../loguru.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <vector>
@@ -20,7 +23,7 @@ namespace Editor
 EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     _canQuit(false),
     _media(media),
-    _camera(0)
+    _map(0)
 {
     _previewRes = new PreviewResources(media->getVideo());
     new Resources;
@@ -29,14 +32,23 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
 
 EditorSystem::~EditorSystem()
 {
+    if(_map)
+        delete _map;
     shutdownUI();
     Resources::deleteSingleton();
     delete _previewRes;
 }
 
+void windowSizeCallback(GLFWwindow* window, int width, int height)
+{
+    Renderer::getSingletonRef().onResize(width, height);
+}
+
+
 void EditorSystem::initUI()
 {
     GLFWwindow *window = (GLFWwindow*)_media->getWindow();
+    glfwSetWindowSizeCallback(window, windowSizeCallback);
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -74,18 +86,20 @@ void EditorSystem::shutdownUI()
     ImGui::DestroyContext();
 }
 
+
 bool EditorSystem::update()
 {
     GLFWwindow *window = (GLFWwindow*)_media->getWindow();
 
 	_media->getVideo()->newFrame();
-	_media->getVideo()->resetRenderTargets();
 
     glfwPollEvents();
 
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+    Renderer::getSingletonRef().update(.0f, &_camera.getCamera());
 
     _mainMenu.draw();
     _navPanel.draw();
@@ -126,6 +140,15 @@ void EditorSystem::drawWindows()
         delete win;
         _openWindows.remove(win);
     }
+}
+
+void EditorSystem::loadMap(const std::string& filename)
+{
+    if(_map)
+        delete _map;
+    LOG_S(INFO) << "Loading map " << filename;
+    _map = new EdMap(filename);
+    _camera.initialize(_map->getWidth(), _map->getHeight());
 }
 
 }

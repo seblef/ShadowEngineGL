@@ -37,6 +37,7 @@ protected:
 	};
 
 	IVideoDevice*		_device;
+    IFrameBuffer* _frameBuffer;
 	IConstantBuffer*	_sceneInfosCS;
 	IConstantBuffer*	_objectInfosCS;
 	DepthStencilState	_dsSolidWrite;
@@ -87,4 +88,6 @@ public:
 
 	IVisibilitySystem*	getVisibilitySystem() const										{ return _vis; }
 	const SRect&		getVisibilityBounds() const										{ return _visBounds; }
+
+    void setFrameBuffer(IFrameBuffer* frameBuffer);
 };

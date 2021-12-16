@@ -16,4 +16,7 @@ public:
     virtual ~IFrameBuffer()                                                                             {}
 
     virtual void    set()=0;
+
+    int getWidth() const { return _width; }
+    int getHeight() const { return _height; }
 };

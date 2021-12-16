@@ -45,7 +45,6 @@ void PreviewParticles::render(float time)
 
     _device->clearRenderTargets(Core::Color::Black);
     _particles->update(delta, _camera.getCamera());
-    LOG_S(INFO) << "Count: " << _particles->getParticlesCount();
     if(_particles->getParticlesCount() > 0)
     {
         const Core::BBox3& bbox(_particles->getWorldBBox());

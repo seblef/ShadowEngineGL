@@ -87,7 +87,7 @@ void MainMenu::updateFileDialogs()
 
 bool MainMenu::loadMap(const std::string& mapFilename)
 {
-    LOG_S(INFO) << "Loading map " << mapFilename;
+    EditorSystem::getSingletonRef().loadMap(mapFilename);
     return true;
 }
 
