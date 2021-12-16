@@ -2,32 +2,37 @@
 #include "Particles.h"
 #include "IVisibilitySystem.h"
 #include "Renderer.h"
-#include "../particles/ParticleEngine.h"
-#include "../particles/ParticleSystem.h"
+#include "../particles/Engine.h"
+#include "../particles/System.h"
 
-Particles::Particles(ParticleSystem* sys, const Matrix4& world, bool alwaysVisible) :
-	Renderable(sys->getWorldBBox(), world, alwaysVisible), _system(sys)
+
+RParticles::RParticles(
+    Particles::System* sys,
+    const Core::Matrix4& world,
+    bool alwaysVisible
+) :
+	Renderable(sys->getWorldBBox(), world, alwaysVisible),
+    _system(sys)
 {
 	sys->setWorldMatrix(world);
 }
 
-Particles::~Particles()
+RParticles::~RParticles()
 {
-	delete _system;
 }
 
-void Particles::setWorldMatrix(const Matrix4& world)
+void RParticles::setWorldMatrix(const Core::Matrix4& world)
 {
 	_worldMatrix = world;
 	_system->setWorldMatrix(world);
 }
 
-void Particles::enqueue()
+void RParticles::enqueue()
 {
-	ParticleEngine::getSingletonRef().enqueueSystem(_system);
+	Particles::Engine::getSingletonRef().enqueueSystem(_system.get());
 }
 
-void Particles::update(float time)
+void RParticles::update(float time)
 {
 	_system->update(time, *Renderer::getSingletonRef().getCurrentCamera());
 	_worldBBox = _system->getWorldBBox();

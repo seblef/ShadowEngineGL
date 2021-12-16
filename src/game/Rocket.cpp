@@ -6,7 +6,7 @@
 #include "Explosion.h"
 #include "TemplateMesh.h"
 #include "../mediacommon/ISoundVirtualSource.h"
-#include "../particles/ParticleSystem.h"
+#include "../particles/System.h"
 #include "../physic/IPhysicObject.h"
 #include "../physic/Physic.h"
 #include "../renderer/Light.h"
@@ -20,8 +20,8 @@
 Rocket::Rocket(
 	WeaponRocket* weapon,
 	GameCharacter* owner,
-	const Matrix4& originalWorld,
-	const Vector3& direction
+	const Core::Matrix4& originalWorld,
+	const Core::Vector3& direction
 ) : 
 	_weapon(weapon),
 	_owner(owner),
@@ -33,9 +33,9 @@ Rocket::Rocket(
 	_rocketSource(
 		SoundSystem::getSingletonRef().getAudio(),
 		1,1.0f,true,
-		Vector3::NullVector,
-		Vector3::NullVector,
-		Vector3::ZAxisVector,
+		Core::Vector3::NullVector,
+		Core::Vector3::NullVector,
+		Core::Vector3::ZAxisVector,
 		2.f, 20.f, 1.f, 0.f, 360.f
 	)
 {
@@ -52,7 +52,7 @@ Rocket::Rocket(
 		_rocketPhysic->addToScene();
 	}
 
-	Vector3 smokePos(weapon->getRocketSmokePoint() * originalWorld);
+	Core::Vector3 smokePos(weapon->getRocketSmokePoint() * originalWorld);
 	_smokeWorld.createTranslate(smokePos.x, smokePos.y, smokePos.z);
 
     if (weapon->isFlashEnable())
@@ -69,10 +69,10 @@ Rocket::Rocket(
 
     if (weapon->getRocketSmoke())
 	{
-		ParticleSystem *ps = new ParticleSystem(*weapon->getRocketSmoke());
+		Particles::System *ps = new Particles::System(*weapon->getRocketSmoke());
 		ps->setWorldMatrix(_smokeWorld);
 
-		_rocketSmoke = new Particles(ps, _smokeWorld, false);
+		_rocketSmoke = new RParticles(ps, _smokeWorld, false);
 		_rocketSmoke->wakeUp();
 		Renderer::getSingletonRef().addRenderable(_rocketSmoke);
     }
@@ -81,7 +81,7 @@ Rocket::Rocket(
 	{
 		_rocketSource.getSource()->setPosition(smokePos);
 		_rocketSource.getSource()->setVelocity(_velocity);
-		Vector3 dir(-_velocity);
+		Core::Vector3 dir(-_velocity);
 		dir.normalize();
 		_rocketSource.getSource()->setDirection(dir);
 		SoundSystem::getSingletonRef().play(&_rocketSource, weapon->getRocketSound());
@@ -100,7 +100,7 @@ void Rocket::update(float time)
 		explode();
 	else
 	{
-		Vector3 delta(_velocity * time);
+		Core::Vector3 delta(_velocity * time);
 		_world(3, 0) += delta.x;
 		_world(3, 1) += delta.y;
 		_world(3, 2) += delta.z;
@@ -135,7 +135,7 @@ void Rocket::explode()
 
     if (_weapon->getRocketExplosion())
 	{
-		Vector3 p;
+		Core::Vector3 p;
 		p.x = _world(3, 0);
 		p.y = _world(3, 1);
 		p.z = _world(3, 2);

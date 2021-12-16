@@ -1,5 +1,6 @@
 
 #include "EntityTemplate.h"
+#include "FilesStrings.h"
 #include "GameMaterial.h"
 #include "GeometryLoader.h"
 #include "../core/YAMLCore.h"
@@ -7,15 +8,6 @@
 #include "../physic/PhysicGeometry.h"
 #include "../renderer/Mesh.h"
 
-
-const char* const g_PhysicShapes[PSHAPE_COUNT] =
-{
-	"box",
-	"sphere",
-	"capsule",
-	"mesh",
-	"chull"
-};
 
 EntityTemplate::EntityTemplate(bool isTrigger, const YAML::Node& node) :
 	_rMaterial(0),
@@ -28,11 +20,7 @@ EntityTemplate::EntityTemplate(bool isTrigger, const YAML::Node& node) :
 	_materialName(node["material"].as<string>(""))
 {
 	const string& s(node["shape"].as<string>(""));
-	for (int i = 0; i < PSHAPE_COUNT; ++i)
-	{
-		if (s == g_PhysicShapes[i])
-			_pShape = (PhysicShape)i;
-	}
+    _pShape = (PhysicShape)getPhysicShapeFromKey(s);
 }
 
 void EntityTemplate::load()

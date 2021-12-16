@@ -10,7 +10,7 @@ add_subdirectory (external)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_definitions(
@@ -177,20 +177,14 @@ set(RENDERER_SOURCES
 )
 
 set(PARTICLES_SOURCES
-    src/particles/ParticleEmitter.cpp
-    src/particles/ParticleEmitterFactory.cpp
-    src/particles/ParticleEmitterTemplate.cpp
-    src/particles/ParticleEmitterTemplateFactory.cpp
-    src/particles/ParticleEngine.cpp
-    src/particles/ParticleExplosionEmitter.cpp
-    src/particles/ParticleLinearEmitter.cpp
-    src/particles/ParticleMaterial.cpp
-    src/particles/ParticleRenderer.cpp
-    src/particles/ParticleSystem.cpp
-    src/particles/ParticleSystemTemplate.cpp
-    src/particles/ParticleTextureSet.cpp
-    src/particles/PR_Point.cpp
-    src/particles/PR_Quad.cpp
+    src/particles/Emitters.cpp
+    src/particles/Engine.cpp
+    src/particles/Material.cpp
+    src/particles/RendererPoint.cpp
+    src/particles/RendererQuad.cpp
+    src/particles/SubSystem.cpp
+    src/particles/System.cpp
+    src/particles/TextureSet.cpp
 )
 
 set(RENDERER2D_SOURCES
@@ -246,6 +240,7 @@ set(GAME_SOURCES
     src/game/Explosion.cpp
     src/game/ExplosionTemplate.cpp
     src/game/FieldHit.cpp
+    src/game/FilesStrings.cpp
     src/game/Flash.cpp
     src/game/FPSCounter.cpp
     src/game/GameActorUpdater.cpp
@@ -296,11 +291,41 @@ set(GAME_SOURCES
     src/game/WeaponRocketInstance.cpp
 )
 
+set(EDITOR_SOURCES
+    src/editor/imgui/imgui.cpp
+    src/editor/imgui/imgui_demo.cpp
+    src/editor/imgui/imgui_draw.cpp
+    src/editor/imgui/imgui_tables.cpp
+    src/editor/imgui/imgui_widgets.cpp
+    src/editor/imgui/backends/imgui_impl_glfw.cpp
+    src/editor/imgui/backends/imgui_impl_opengl3.cpp
+    src/editor/filedialog/ImFileDialog.cpp
+    src/editor/EdCamera.cpp
+    src/editor/EdEntityTemplate.cpp
+    src/editor/EdGeometry.cpp
+    src/editor/EdMaterial.cpp
+    src/editor/EdParticles.cpp
+    src/editor/EdSolidTemplate.cpp
+    src/editor/EditorSystem.cpp
+    src/editor/Helpers.cpp
+    src/editor/IWindow.cpp
+    src/editor/MainMenu.cpp
+    src/editor/MaterialWindow.cpp
+    src/editor/NavigationPanel.cpp
+    src/editor/ParticlesWindow.cpp
+    src/editor/PreviewCamera.cpp
+    src/editor/PreviewFrame.cpp
+    src/editor/PreviewMesh.cpp
+    src/editor/PreviewParticles.cpp
+    src/editor/PreviewResources.cpp
+    src/editor/Resources.cpp
+)
+
 set(SHADOW_SOURCES
     src/shadow/main.cpp
+    src/shadow/EditorApp.cpp
     src/shadow/GameApp.cpp
     src/shadow/NavTest.cpp
-    src/shadow/ParticleApp.cpp
     src/shadow/TestGLApp.cpp
     src/shadow/TestSoundApp.cpp
 )
@@ -317,6 +342,7 @@ add_executable(ShadowEngine
     ${RENDERER2D_SOURCES}
     ${PHYSIC_SOURCES}
     ${GAME_SOURCES}
+    ${EDITOR_SOURCES}
     ${SHADOW_SOURCES}
 )
 

@@ -6,9 +6,9 @@
 #include "TemplateMesh.h"
 #include "BuildingTemplate.h"
 #include "TemplateSound.h"
-#include "TemplateParticleSystem.h"
 #include "../core/TDataBase.h"
 #include "../core/TSingleton.h"
+#include "../particles/System.h"
 
 using namespace Core;
 
@@ -20,7 +20,7 @@ public:
 	typedef TDataBase<GameMaterial>				MaterialDB;
 	typedef TDataBase<TemplateMesh>				MeshDB;
 	typedef TDataBase<TemplateSound>			SoundDB;
-	typedef TDataBase<TemplateParticleSystem>	ParticleDB;
+	typedef TDataBase<Particles::SystemTemplate>	ParticleDB;
 	typedef TDataBase<BuildingTemplate>			BuildingDB;
 
 protected:
@@ -29,7 +29,7 @@ protected:
 	TDataBase<GameMaterial>				_material;
 	TDataBase<TemplateMesh>				_mesh;
 	TDataBase<TemplateSound>			_sound;
-	TDataBase<TemplateParticleSystem>	_particles;
+	TDataBase<Particles::SystemTemplate>	_particles;
 	TDataBase<BuildingTemplate>			_building;
 
 public:

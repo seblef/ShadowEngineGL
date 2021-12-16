@@ -28,6 +28,7 @@ public:
     ~Media();
 
     void                update();
+    void*               getWindow();
 
 };
 

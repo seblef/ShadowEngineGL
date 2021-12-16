@@ -135,7 +135,7 @@ void MapTextLoader::parseParticles(const YAML::Node& node)
 	for(YAML::const_iterator p=node.begin(); p!=node.end(); ++p)
 	{
 		const string& name(p->first.as<string>());
-		TemplateParticleSystem *ps = TextParser::parseParticles(p->second, name);
+		Particles::SystemTemplate *ps = TextParser::parseParticles(p->second, name);
 		ResourceDB::getSingletonRef().getParticleDB().registerData(name, ps);
 	}
 }
@@ -277,7 +277,7 @@ void MapTextLoader::parseEntity(const YAML::Node& node, Map& m)
 void MapTextLoader::parseParticlesObject(const YAML::Node& node, Map& m)
 {
 	const string& pname(node["template"].as<string>());
-	TemplateParticleSystem* tps = ResourceDB::getSingletonRef().getParticleDB().getData(pname);
+	Particles::SystemTemplate* tps = ResourceDB::getSingletonRef().getParticleDB().getData(pname);
 	if (!tps)
 	{
 		LOG_S(WARNING) << "Failed getting particles template " << pname;

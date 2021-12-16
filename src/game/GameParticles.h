@@ -1,23 +1,31 @@
-
 #pragma once
 
 #include "GameObject.h"
+#include <memory>
 
-class Particles;
-class TemplateParticleSystem;
+class RParticles;
+
+namespace Particles
+{
+class SystemTemplate;
+}
 
 class GameParticles : public GameObject
 {
 protected:
 
-	Particles*				_system;
+	std::unique_ptr<RParticles> _system;
 
 public:
 
-	GameParticles(const TemplateParticleSystem& t, const Matrix4& world, bool alwaysVisible = false);
+	GameParticles(
+        const Particles::SystemTemplate& t,
+        const Core::Matrix4& world,
+        bool alwaysVisible = false
+    );
 	~GameParticles();
 
-	void						onAddToScene();
-	void						onRemFromScene();
-	void						onUpdateMatrix(const Matrix4& new_m)	{}
+	void onAddToScene();
+	void onRemFromScene();
+	void onUpdateMatrix(const Core::Matrix4& new_m)	{}
 };

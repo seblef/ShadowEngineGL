@@ -1,4 +1,3 @@
-
 #include "WeaponRocket.h"
 #include "WeaponRocketInstance.h"
 #include "GameSystem.h"
@@ -6,7 +5,7 @@
 #include "TemplateMesh.h"
 #include "ExplosionTemplate.h"
 #include "../core/YAMLCore.h"
-#include "../particles/ParticleSystemTemplate.h"
+#include "../particles/System.h"
 #include "../sound/SoundSystem.h"
 
 
@@ -17,7 +16,6 @@ WeaponRocket::WeaponRocket(const YAML::Node& node) :
 	_rocketSmokePoint(Vector3::NullVector),
 	_rocketMesh(0),
 	_rocketExplosion(0),
-	_rocketSmoke(0), 
 	_loaded(false),
 	_rocketSound(0)
 {
@@ -32,7 +30,7 @@ WeaponRocket::WeaponRocket(const YAML::Node& node) :
 
     YAML::Node smoke = rock["smoke"];
 	if(smoke)
-		_rocketSmoke = new ParticleSystemTemplate(smoke);
+		_rocketSmoke = std::unique_ptr<Particles::SystemTemplate>(new Particles::SystemTemplate(smoke));
 }
 
 WeaponRocket::~WeaponRocket()

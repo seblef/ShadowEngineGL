@@ -7,9 +7,8 @@
 #include "Flash.h"
 #include "TemplateMesh.h"
 #include "../mediacommon/ISoundVirtualSource.h"
-#include "../particles/ParticlePointEmitter.h"
-#include "../particles/ParticleSystem.h"
-#include "../particles/ParticleExplosionEmitter.h"
+#include "../particles/System.h"
+#include "../particles/Emitters.h"
 #include "../renderer/Renderer.h"
 #include "../renderer/Particles.h"
 #include "../sound/SoundSystem.h"
@@ -19,9 +18,14 @@ const float ExplosionFlashAscend = 0.1f;
 const float ExplosionFlashStable = 0.1f;
 const float ExplosionFlashDescend = 0.1f;
 
-Explosion::Explosion(const ExplosionTemplate& e, const Vector3& pos) : Action("Explosion"), _template(&e),
-	_explosionEmitter(0), _smokeEmitter(0), _rParticles(0), _smokeTime(0),
-	_position(pos), _exploded(false)
+Explosion::Explosion(
+    const ExplosionTemplate& e,
+    const Core::Vector3& pos
+) :
+    Action("Explosion"),
+    _template(&e),
+	_position(pos),
+    _exploded(false)
 {
 }
 
@@ -30,8 +34,7 @@ Explosion::~Explosion()
 	if (_rParticles)
 	{
 		_rParticles->sleep();
-		Renderer::getSingletonRef().remRenderable(_rParticles);
-		delete _rParticles;
+		Renderer::getSingletonRef().remRenderable(_rParticles.get());
 	}
 }
 
@@ -43,11 +46,7 @@ void Explosion::update(float time)
 		_exploded = true;
 	}
 
-	_smokeTime += time;
-	if (_smokeEmitter && _smokeTime >= _template->getSmokeLife())
-		_smokeEmitter->setEmissionRate(0);
-
-	_dead = _rParticles->getParticleSystem()->getParticleCount() <= 0;
+	_dead = _rParticles->getParticleSystem()->getParticlesCount() <= 0;
 }
 
 void Explosion::explode()
@@ -55,36 +54,41 @@ void Explosion::explode()
 	Matrix4 world;
 	world.createTranslate(_position.x, _position.y, _position.z);
 
-	if (_template->getParticles()->getEmitterCount() > 0)
+	if (_template->getParticles()->getSubCount() > 0)
 	{
-		ParticleSystem* ps = new ParticleSystem(*_template->getParticles());
-		ps->setWorldMatrix(world);
-		_rParticles = new Particles(ps, world, true);
+        Particles::System* sys = new Particles::System(*_template->getParticles());
+		sys->setWorldMatrix(world);
+		_rParticles = std::unique_ptr<RParticles>(new RParticles(sys, world, true));
 
 		if (_template->getExplosionEmitter() != -1)
 		{
-			_explosionEmitter = (ParticlePointEmitter*)ps->getEmitter(_template->getExplosionEmitter());
-			ParticleExplosionEmitter::emit(*_explosionEmitter, _template->getExplosionSize(),
-				_template->getExplosionParticleCount());
+            Particles::SubSystem *explosion = sys->getSubSystem(_template->getExplosionEmitter());
+            Particles::ExplosionEmitter* emitter = (Particles::ExplosionEmitter*)explosion->getEmitter();
+
+            emitter->setSizes(_template->getExplosionSize(), _template->getExplosionSize());
+            explosion->emitAll();
+            sys->countParticles();
 		}
 
-		if (_template->getSmokeEmitter() != -1)
-			_smokeEmitter = (ParticlePointEmitter*)ps->getEmitter(_template->getSmokeEmitter());
-
-		ps->countParticles();
 		_rParticles->wakeUp();
-
-		Renderer::getSingletonRef().addRenderable(_rParticles);
+		Renderer::getSingletonRef().addRenderable(_rParticles.get());
 	}
 
 	if (_template->getDebrisMesh() && _template->getDebrisCount() > 0)
 	{
-		ActionServer::getSingletonRef().addAction(new Debris(_template->getDebrisMesh()->getMesh(),
-			_template->getDebrisCount(), _position, Vector3::YAxisVector,
-			_template->getDebrisMaxAngle(), _template->getDebrisMinVelocity(),
-			_template->getDebrisMaxVelocity(),
-			_template->getDebrisMaxAngleSpeed(), _template->getDebrisSize()
-			));
+		ActionServer::getSingletonRef().addAction(
+            new Debris(
+                _template->getDebrisMesh()->getMesh(),
+			    _template->getDebrisCount(),
+                _position,
+                Core::Vector3::YAxisVector,
+			    _template->getDebrisMaxAngle(),
+                _template->getDebrisMinVelocity(),
+			    _template->getDebrisMaxVelocity(),
+			    _template->getDebrisMaxAngleSpeed(),
+                _template->getDebrisSize()
+			)
+        );
 	}
 
 	if (_template->getExplosionSound())

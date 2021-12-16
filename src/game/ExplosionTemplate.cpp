@@ -3,9 +3,8 @@
 #include "ObjectFlags.h"
 #include "TemplateMesh.h"
 #include "../core/YAMLCore.h"
-#include "../particles/ParticlePointEmitterTemplate.h"
-#include "../particles/ParticleMaterial.h"
-#include "../particles/ParticleSystemTemplate.h"
+#include "../particles/Material.h"
+#include "../particles/System.h"
 #include "../sound/SoundSystem.h"
 
 
@@ -96,8 +95,8 @@ void ExplosionTemplate::load()
 {
 	if (_loaded)		return;
 
-	int pcount = 0;
-	ParticleEmitterTemplate* emitters[2] = { 0, 0 };
+    _particles = new Particles::SystemTemplate;
+    int sub_id = 0;
 
     if (!_explosionTextureDir.empty())
 	{
@@ -110,21 +109,39 @@ void ExplosionTemplate::load()
 			dest = BLEND_INVSRCCOLOR;
 		}
 
-		ParticleMaterial *m = new ParticleMaterial(_explosionTextureDir,true,src,dest);
-		ParticleEmitterParams minp(_life * 0.5f, ExplosionMinMass, ExplosionMinFriction,
+		Particles::Material *material = new Particles::Material(_explosionTextureDir,true,src,dest);
+		Particles::SubSystemParams minp(
+            _life * 0.5f,
+            ExplosionMinMass,
+            ExplosionMinFriction,
 			_color, _color,
-			Vector3::NullVector,
-			Vector3(ExplosionMinSizeX, ExplosionMinSizeY, 0),
-			Vector3(_size, _size, _size));
-		ParticleEmitterParams maxp(_life, ExplosionMaxMass, ExplosionMaxFriction,
-			_color, _color, Vector3::NullVector,
-			Vector3(ExplosionMaxSizeX, ExplosionMaxSizeY, 0),
-			Vector3(_size, _size, _size));
+			Core::Vector3::NullVector,
+			Core::Vector3(ExplosionMinSizeX, ExplosionMinSizeY, 0),
+			Core::Vector3(_size, _size, _size)
+        );
+		Particles::SubSystemParams maxp(
+            _life,
+            ExplosionMaxMass,
+            ExplosionMaxFriction,
+			_color, _color,
+            Core::Vector3::NullVector,
+			Core::Vector3(ExplosionMaxSizeX, ExplosionMaxSizeY, 0),
+			Core::Vector3(_size, _size, _size)
+        );
 
-		emitters[0] = new ParticlePointEmitterTemplate("quad", m, minp, maxp, 30,
-			Vector3::NullVector, 0);
-		_explosionEmitter = 0;
-		++pcount;
+        _particles->addSubSystem(
+            new Particles::SubSystemTemplate(
+                "explosion",
+                "quad",
+                "explosion",
+                material,
+                minp, maxp,
+                30,
+                Core::Vector3::NullVector,
+                .0f, .0f
+            )
+        );
+        _explosionEmitter = sub_id++;
 	}
 
 	if (!_smokeTexture.empty())
@@ -138,38 +155,48 @@ void ExplosionTemplate::load()
 			dest = BLEND_INVSRCCOLOR;
 		}
 
-		ParticleMaterial* m = new ParticleMaterial(_smokeTexture,false,src, dest);
-		ParticleEmitterParams minp(ExplosionSmokeMinLife,
+		Particles::Material* material = new Particles::Material(_smokeTexture,false,src, dest);
+		Particles::SubSystemParams minp(
+            ExplosionSmokeMinLife,
 			ExplosionSmokeMinMass,
 			ExplosionSmokeMinFriction,
 			ExplosionSmokeMinColor,
-			Color::Black,
+			Core::Color::Black,
 			ExplosionSmokeMinVelocity,
-			Vector3(ExplosionSmokeMinStartSize, ExplosionSmokeMinStartSize, ExplosionSmokeMinStartSize),
-			Vector3(ExplosionSmokeMinEndSize, ExplosionSmokeMinEndSize, ExplosionSmokeMinEndSize));
-		ParticleEmitterParams maxp(ExplosionSmokeMaxLife,
+			Core::Vector3(ExplosionSmokeMinStartSize, ExplosionSmokeMinStartSize, ExplosionSmokeMinStartSize),
+			Core::Vector3(ExplosionSmokeMinEndSize, ExplosionSmokeMinEndSize, ExplosionSmokeMinEndSize)
+        );
+		Particles::SubSystemParams maxp(
+            ExplosionSmokeMaxLife,
 			ExplosionSmokeMaxMass,
 			ExplosionSmokeMaxFriction,
-			Color::White,
-			Color::Black,
+			Core::Color::White,
+			Core::Color::Black,
 			ExplosionSmokeMaxVelocity,
-			Vector3(ExplosionSmokeMaxStartSize, ExplosionSmokeMaxStartSize, ExplosionSmokeMaxStartSize),
-			Vector3(ExplosionSmokeMaxEndSize, ExplosionSmokeMaxEndSize, ExplosionSmokeMaxEndSize));
-
-		emitters[pcount] = new ParticlePointEmitterTemplate("quad", m, minp, maxp,
-			(unsigned int)(_smokeDensity * (float)ExplosionSmokeMaxParticles),
-			Vector3::NullVector, ExplosionSmokeEmissionRate * _smokeDensity);
-		_smokeEmitter = pcount;
-		++pcount;
+			Core::Vector3(ExplosionSmokeMaxStartSize, ExplosionSmokeMaxStartSize, ExplosionSmokeMaxStartSize),
+			Core::Vector3(ExplosionSmokeMaxEndSize, ExplosionSmokeMaxEndSize, ExplosionSmokeMaxEndSize)
+        );
+        _particles->addSubSystem(
+            new Particles::SubSystemTemplate(
+                "smoke",
+                "quad",
+                "point",
+                material,
+                minp, maxp,
+                (unsigned int)(_smokeDensity * (float)ExplosionSmokeMaxParticles),
+                Core::Vector3::NullVector,
+                ExplosionSmokeEmissionRate * _smokeDensity,
+                _smokeLife
+            )
+        );
+        _smokeEmitter = sub_id++;
 	}
-
-	_particles = new ParticleSystemTemplate(pcount, emitters);
 
     if (!_debrisMeshFile.empty() && !_debrisMaterial.empty())
 		_debrisMesh = TemplateMesh::loadTemplate(_debrisMeshFile, _debrisMaterial, OF_NOCOLLISION,PSHAPE_COUNT);
 
     if (!_explosionSoundFile.empty())
-		_explosionSound=SoundSystem::getSingletonRef().loadSound(_explosionSoundFile);
+		_explosionSound = SoundSystem::getSingletonRef().loadSound(_explosionSoundFile);
 
 	_loaded = true;
 }

@@ -1,0 +1,24 @@
+material:
+  debris: ""
+  renderer:
+    textures:
+      diffuse: Textures/Police.dds
+      normal: Textures/normal.bmp
+    ambient_color:
+      - 0
+      - 0
+      - 0
+      - 1
+    diffuse_color:
+      - 1
+      - 1
+      - 1
+      - 1
+    specular_color:
+      - 0
+      - 0
+      - 0
+      - 1
+    shininess: 200
+    specular_intensity: 0.400000006
+    reflectivity: 0
