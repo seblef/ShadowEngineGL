@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EdSolidTemplate.h"
+#include "EdSolid.h"
 
 namespace YAML
 {

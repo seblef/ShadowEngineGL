@@ -22,7 +22,11 @@ public:
     Resources() {}
 
     bool exists(ResourceType type, const std::string& name) const;
-    IResource *get(ResourceType type, const std::string& name) const;
+    IResource *get(
+        ResourceType type,
+        const std::string& name,
+        bool loadIfNotExists=true
+    );
     void add(ResourceType type, IResource* res, const std::string& name);
     IResource* load(ResourceType type, const std::string& name);
     void drop(ResourceType type, const std::string& name);

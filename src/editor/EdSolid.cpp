@@ -1,7 +1,9 @@
-#include "EdSolidTemplate.h"
+#include "EdSolid.h"
 #include "EdGeometry.h"
 #include "EdMaterial.h"
 #include "Resources.h"
+#include "../core/YAMLCore.h"
+#include "../game/FilesStrings.h"
 #include "../game/Geometry.h"
 #include "../loguru.hpp"
 
@@ -14,6 +16,19 @@ EdSolidTemplate::EdSolidTemplate() :
     _shape(PSHAPE_BOX),
     _loaded(false)
 {
+}
+
+EdSolidTemplate::EdSolidTemplate(const YAML::Node& node) :
+    _material(0),
+    _mesh(0, 0),
+    _shape(PSHAPE_BOX),
+    _loaded(false)
+{
+    _geometryName = node["geometry"].as<std::string>();
+    _materialName = node["material"].as<std::string>();
+    _shape = (PhysicShape)getPhysicShapeFromKey(
+        node["physic_shape"].as<string>()
+    );
 }
 
 EdSolidTemplate::EdSolidTemplate(

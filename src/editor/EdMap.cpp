@@ -1,6 +1,7 @@
 #include "EdMap.h"
 #include "EdGround.h"
 #include "EdMaterial.h"
+#include "EdStatic.h"
 #include "Resources.h"
 #include "../core/FileSystemFactory.h"
 #include "../core/YAMLCore.h"
@@ -82,6 +83,9 @@ void EdMap::parseResourcesNode(const YAML::Node& node)
 
     YAML::Node geometries = node["geometries"];
     parseGeometriesNode(geometries);
+
+    YAML::Node statics = node["meshes"];
+    parseStaticsNode(statics);
 }
 
 void EdMap::parseMaterialsNode(const YAML::Node& node)
@@ -102,6 +106,22 @@ void EdMap::parseGeometriesNode(const YAML::Node& node)
 {
     for(auto geo=node.begin(); geo!=node.end(); ++geo)
         Resources::getSingletonRef().load(RES_GEOMETRY, geo->as<std::string>());
+}
+
+void EdMap::parseStaticsNode(const YAML::Node& node)
+{
+    for(auto stat=node.begin(); stat!=node.end(); ++stat)
+    {
+        const std::string& name(stat->first.as<string>());
+        EdStaticTemplate* statTemplate = new EdStaticTemplate(
+            name, stat->second
+        );
+        Resources::getSingletonRef().add(
+            RES_STATIC,
+            statTemplate,
+            name
+        );
+    }
 }
 
 void EdMap::loadGround()

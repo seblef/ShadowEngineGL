@@ -12,11 +12,20 @@ bool Resources::exists(ResourceType type, const std::string& name) const
     return res != _resources[type].end();
 }
 
-IResource *Resources::get(ResourceType type, const std::string& name) const
+IResource *Resources::get(
+    ResourceType type,
+    const std::string& name,
+    bool loadIfNotExists
+)
 {
     const auto res = _resources[type].find(name);
     if(res == _resources[type].end())
-        return 0;
+    {
+        if(loadIfNotExists)
+            return load(type, name);
+        else
+            return 0;
+    }
     else
         return res->second.get();
 }
@@ -35,9 +44,9 @@ void Resources::drop(ResourceType type, const std::string& name)
 
 IResource* Resources::load(ResourceType type, const std::string& name)
 {
-    IResource* res = get(type, name);
-    if(res)
-        return res;
+    if(exists(type, name))
+        return get(type, name);
+    IResource* res = 0;
     
     if(type == RES_MATERIAL)
     {

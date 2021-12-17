@@ -8,6 +8,7 @@ namespace Editor
 enum ResourceType
 {
     RES_MATERIAL=0,
+    RES_STATIC,
     RES_PARTICLES,
     RES_GEOMETRY,
 
@@ -17,6 +18,7 @@ enum ResourceType
 const char* const g_ResourceNames[RES_COUNT] =
 {
     "Material",
+    "Static",
     "Particles",
     "Geometry"
 };

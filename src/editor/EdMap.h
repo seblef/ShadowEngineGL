@@ -31,6 +31,7 @@ protected:
     void parseResourcesNode(const YAML::Node& node);
     void parseMaterialsNode(const YAML::Node& node);
     void parseGeometriesNode(const YAML::Node& node);
+    void parseStaticsNode(const YAML::Node& node);
 
     void loadGround();
 

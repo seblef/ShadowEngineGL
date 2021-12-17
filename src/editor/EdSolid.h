@@ -7,6 +7,12 @@
 
 class Mesh;
 
+namespace YAML
+{
+class Node;
+}
+
+
 namespace Editor
 {
 
@@ -26,6 +32,7 @@ protected:
 
 public:
     EdSolidTemplate();
+    EdSolidTemplate(const YAML::Node& node);
     EdSolidTemplate(
         const std::string& name,
         const std::string& geometry,
