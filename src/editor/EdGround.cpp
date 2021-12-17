@@ -23,6 +23,7 @@ EdGround::EdGround(
 
 EdGround::~EdGround()
 {
+    Renderer::getSingletonRef().setGroundData(0);
     delete[] _materials;
     delete[] _flags;
 }
