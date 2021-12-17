@@ -79,6 +79,9 @@ void EdMap::parseResourcesNode(const YAML::Node& node)
 {
     YAML::Node materials = node["materials"];
     parseMaterialsNode(materials);
+
+    YAML::Node geometries = node["geometries"];
+    parseGeometriesNode(geometries);
 }
 
 void EdMap::parseMaterialsNode(const YAML::Node& node)
@@ -93,6 +96,12 @@ void EdMap::parseMaterialsNode(const YAML::Node& node)
         if(material->isValid())
             Resources::getSingletonRef().add(RES_MATERIAL, material, name);
     }
+}
+
+void EdMap::parseGeometriesNode(const YAML::Node& node)
+{
+    for(auto geo=node.begin(); geo!=node.end(); ++geo)
+        Resources::getSingletonRef().load(RES_GEOMETRY, geo->as<std::string>());
 }
 
 void EdMap::loadGround()

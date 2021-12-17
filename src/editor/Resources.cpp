@@ -1,4 +1,5 @@
 #include "Resources.h"
+#include "EdGeometry.h"
 #include "EdMaterial.h"
 #include "EdParticles.h"
 
@@ -51,8 +52,16 @@ IResource* Resources::load(ResourceType type, const std::string& name)
         std::unique_ptr<EdParticles> particles(new EdParticles(name));
         if(!particles->isValid())
             return 0;
-            res = particles.get();
+        res = particles.get();
         _resources[RES_PARTICLES][name] = std::move(particles);
+    }
+    else if(type == RES_GEOMETRY)
+    {
+        std::unique_ptr<EdGeometry> geometry(new EdGeometry(name));
+        if(!geometry->isValid())
+            return 0;
+        res = geometry.get();
+        _resources[RES_GEOMETRY][name] = std::move(geometry);
     }
     return res;
 }

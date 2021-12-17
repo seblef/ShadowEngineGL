@@ -5,8 +5,7 @@ namespace Editor
 {
 
 EdGeometry::EdGeometry(const std::string& filename) :
-    IResource(RES_GEOMETRY, filename),
-    _valid(false)
+    IResource(RES_GEOMETRY, filename)
 {
     Geometry* geo = GeometryLoader::loadGeometry(filename);
     if(geo)
