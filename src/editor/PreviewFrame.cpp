@@ -5,6 +5,7 @@
 #include "../mediacommon/IDepthTexture.h"
 #include "../mediacommon/IFrameBuffer.h"
 #include "../mediacommon/IVideoDevice.h"
+#include "../loguru.hpp"
 
 
 namespace Editor

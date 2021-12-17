@@ -531,6 +531,7 @@ void				GLVideoDevice::clearDepthStencil() const
     LOG_S(2) << "- [GLVideoDevice::clearDepthStencil]...";
 #endif
 
+    glDepthMask(GL_TRUE);
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 #ifdef SGL_TRACE_ALL

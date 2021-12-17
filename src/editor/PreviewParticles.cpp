@@ -2,6 +2,7 @@
 #include "PreviewResources.h"
 #include "../mediacommon/IConstantBuffer.h"
 #include "../mediacommon/IShader.h"
+#include "../mediacommon/ITexture.h"
 #include "../mediacommon/IVideoDevice.h"
 #include "../particles/Engine.h"
 #include "../particles/System.h"
@@ -42,8 +43,13 @@ void PreviewParticles::render(float time)
         delta = time - _prevTime;
     _prevTime = time;
 
+    _resources->getBackgroundShader()->set();
+    _resources->getBackgroundTexture()->set(0);
 
-    _device->clearRenderTargets(Core::Color::Black);
+	_device->setBlendState(_resources->getBakcgroundBlendState());
+	_device->setDepthStencilState(_resources->getBackgroundDepthState());
+	_device->renderFullscreenQuad();
+
     _particles->update(delta, _camera.getCamera());
     if(_particles->getParticlesCount() > 0)
     {
@@ -52,8 +58,6 @@ void PreviewParticles::render(float time)
         _camera.center(_currentBBox);
     }
     Particles::Engine::getSingletonRef().enqueueSystem(_particles);
-
-    _resources->getParticlesShader()->set();
 
     _camera.getCamera().buildMatrices();
     SceneInfosBuffer infoBuffer;

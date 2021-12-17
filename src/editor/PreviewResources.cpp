@@ -22,13 +22,12 @@ PreviewResources::PreviewResources(IVideoDevice* device) :
 {
     _backgroundShader = device->createShader("Editor/Background");
     _meshShader = device->createShader("Editor/Material");
-    _particlesShader = device->createShader("Base/Particles");
 
     _backgroundTexture = device->createTexture("Textures/Editor/MaterialBack.dds");
     _cBuffer = device->createConstantBuffer(7, 0);
     _backgroundBlendState = device->createBlendState(false, BLEND_ONE, BLEND_ZERO);
     _backgroundDepthState = device->createDepthStencilState(false, false, COMP_ALWAYS);
-    _meshDepthState = device->createDepthStencilState(false, true, COMP_LESSEQUAL);
+    _meshDepthState = device->createDepthStencilState(true, true, COMP_LESSEQUAL);
 
     std::unique_ptr<Geometry> geo(GeometryLoader::loadGeometry("Geometry/Editor/Sphere.GEO"));
 
@@ -50,8 +49,6 @@ PreviewResources::~PreviewResources()
         delete _backgroundShader;
     if(_meshShader)
         delete _meshShader;
-    if(_particlesShader)
-        delete _particlesShader;
     if(_backgroundTexture)
         delete _backgroundTexture;
     if(_sphereGeometry)
