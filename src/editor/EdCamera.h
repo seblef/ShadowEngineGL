@@ -1,20 +1,20 @@
 #pragma once
 
-#include "../core/Camera.h"
+#include "PreviewCamera.h"
 
 namespace Editor
 {
 
-class EdCamera
+class EdCamera : public PreviewCamera
 {
-protected:
-    Core::Camera _camera;
-
 public:
     EdCamera();
     ~EdCamera() {}
 
-    const Core::Camera& getCamera() const { return _camera; }
+    void initialize(int groundWidth, int groundHeight);
+    void setTargetPosition(const Core::Vector2& target);
+    void translate(const Core::Vector2& translation);
+    void scaleDistance(float f);
 };
 
 }

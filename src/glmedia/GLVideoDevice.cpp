@@ -65,6 +65,12 @@ GLVideoDevice::~GLVideoDevice()
         glDeleteSamplers(1,&s.second);
 }
 
+void GLVideoDevice::onResize(int width, int height)
+{
+    _width = width;
+    _height = height;
+}
+
 IVertexBuffer*		GLVideoDevice::createVertexBuffer(int vxCount, VertexType vxType, BufferUsage bu, const void* data) const
 {
 #ifdef SGL_TRACE_ALL
@@ -531,6 +537,7 @@ void				GLVideoDevice::clearDepthStencil() const
     LOG_S(2) << "- [GLVideoDevice::clearDepthStencil]...";
 #endif
 
+    glDepthMask(GL_TRUE);
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 #ifdef SGL_TRACE_ALL

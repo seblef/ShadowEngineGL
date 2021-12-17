@@ -7,6 +7,7 @@
 #include "../game/Geometry.h"
 #include "../renderer/Material.h"
 #include "../renderer/MaterialSystem.h"
+#include "../loguru.hpp"
 
 namespace Editor
 {

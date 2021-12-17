@@ -22,7 +22,6 @@ PreviewResources::PreviewResources(IVideoDevice* device) :
 {
     _backgroundShader = device->createShader("Editor/Background");
     _meshShader = device->createShader("Editor/Material");
-    _particlesShader = device->createShader("Base/Particles");
 
     _backgroundTexture = device->createTexture("Textures/Editor/MaterialBack.dds");
     _cBuffer = device->createConstantBuffer(7, 0);
@@ -50,8 +49,6 @@ PreviewResources::~PreviewResources()
         delete _backgroundShader;
     if(_meshShader)
         delete _meshShader;
-    if(_particlesShader)
-        delete _particlesShader;
     if(_backgroundTexture)
         delete _backgroundTexture;
     if(_sphereGeometry)

@@ -43,6 +43,8 @@ GLFrameBuffer::GLFrameBuffer(int w, int h, int fcount, ITexture **f, IDepthTextu
             LOG_S(2) << "x [GLFrameBuffer::GLFrameBuffer]: Failed creating frame buffer (" << w << "," << h << "...";
     }
 
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 #ifdef SGL_TRACE_ALL
     LOG_S(2) << "- [GLFrameBuffer::GLFrameBuffer OK (" << _fbId << ")";
 #endif

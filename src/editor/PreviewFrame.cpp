@@ -5,6 +5,7 @@
 #include "../mediacommon/IDepthTexture.h"
 #include "../mediacommon/IFrameBuffer.h"
 #include "../mediacommon/IVideoDevice.h"
+#include "../loguru.hpp"
 
 
 namespace Editor
@@ -84,7 +85,7 @@ void PreviewFrame::processMouse()
     {
         ImVec2 imdelta = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
 
-        _camera.rotate(Vector2(_dragDelta.y - imdelta.y, imdelta.x - _dragDelta.x));
+        _camera.rotate(Vector2(imdelta.y - _dragDelta.y, imdelta.x - _dragDelta.x));
 
         _dragDelta.x = imdelta.x;
         _dragDelta.y = imdelta.y;

@@ -38,6 +38,7 @@ protected:
 
 	ITexture*			_HDRBackBuffer;
     IFrameBuffer*       _HDRBackFB;
+    IFrameBuffer* _renderingFB;
 
 	ITexture*			_bloomSamples[BLOOM_NUM_MIPS];
 	IFrameBuffer*		_bloomSamplesFB[BLOOM_NUM_MIPS];
@@ -68,6 +69,7 @@ public:
     void				process(GBuffer* gbuf);
 
     void				onResize(int w, int h, IDepthTexture* depthBuffer);
+    void setRenderingFrameBuffer(IFrameBuffer* frameBuffer);
 
 	const ITexture* getBloomDownScale(unsigned int idx) const { return _bloomSamples[idx]; }
 };

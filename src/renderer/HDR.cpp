@@ -16,6 +16,7 @@ HDR::HDR(
 ) :
 	_enable(true),
 	_device(d),
+    _renderingFB(0),
 	_accumulationBuffer(0),
 	_accumulationFB(0),
     _HDRBackBuffer(0),
@@ -153,7 +154,10 @@ void HDR::process(GBuffer* gbuf)
 	_device->setSamplerState(0, _pointSampler);
     if (!_enable)
     {
-        _device->resetRenderTargets();
+        if(_renderingFB)
+            _renderingFB->set();
+        else
+            _device->resetRenderTargets();
         gbuf->copyTexture(_HDRBackBuffer);
 		return;
     }
@@ -168,7 +172,10 @@ void HDR::process(GBuffer* gbuf)
 	// Tone mapping
 	_device->setBlendState(_blendState);
 	_toneShader->set();
-	_device->resetRenderTargets();
+    if(_renderingFB)
+        _renderingFB->set();
+    else
+    	_device->resetRenderTargets();
 	_HDRBackBuffer->set(0);
 	_bloomSamples[0]->set(1);
 	_device->renderFullscreenQuad();
@@ -211,4 +218,9 @@ void HDR::bloomPass()
 		_bloomSamplesFB[i]->set();
 		_device->renderFullscreenQuad();
 	}
+}
+
+void HDR::setRenderingFrameBuffer(IFrameBuffer* frameBuffer)
+{
+    _renderingFB = frameBuffer;
 }

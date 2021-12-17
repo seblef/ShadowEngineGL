@@ -41,6 +41,7 @@ public:
 	int				getResWidth() const							{ return _width; }
 	int				getResHeight() const						{ return _height; }
 	bool			isWindowed() const							{ return _windowed; }
+    virtual void onResize(int width, int height)=0;
 
 	//			----------------------
 	//					Resources
