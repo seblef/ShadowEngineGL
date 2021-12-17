@@ -49,6 +49,7 @@ public:
 
     bool update();
 
+    void onResize(int width, int height);
     void quit();
 
     NavigationPanel& getNavigation() { return _navPanel; }

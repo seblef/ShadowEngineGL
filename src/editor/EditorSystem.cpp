@@ -41,7 +41,7 @@ EditorSystem::~EditorSystem()
 
 void windowSizeCallback(GLFWwindow* window, int width, int height)
 {
-    Renderer::getSingletonRef().onResize(width, height);
+    EditorSystem::getSingletonRef().onResize(width, height);
 }
 
 
@@ -105,7 +105,6 @@ bool EditorSystem::update()
     _navPanel.draw();
     drawWindows();
 
-
     bool open;
     ImGui::ShowDemoWindow(&open);
 
@@ -113,6 +112,13 @@ bool EditorSystem::update()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     return glfwWindowShouldClose(window) || _canQuit;
+}
+
+void EditorSystem::onResize(int width, int height)
+{
+    Renderer::getSingletonRef().getVideoDevice()->onResize(width, height);
+    Renderer::getSingletonRef().onResize(width, height);
+    _camera.onResize(width, height);
 }
 
 void EditorSystem::quit()

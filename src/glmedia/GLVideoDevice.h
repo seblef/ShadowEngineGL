@@ -38,6 +38,8 @@ public:
     GLVideoDevice(int width, int height, bool windowed, GLFWwindow* win);
     ~GLVideoDevice();
 
+    void onResize(int width, int height);
+
     //			----------------------
     //					Resources
     //			----------------------
