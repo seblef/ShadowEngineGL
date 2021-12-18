@@ -2,6 +2,7 @@
 
 #include "../core/BBox3.h"
 #include "../core/Vector2.h"
+#include <list>
 #include <string>
 
 namespace YAML
@@ -13,6 +14,8 @@ namespace Editor
 {
 
 class EdGround;
+class Object;
+
 
 class EdMap
 {
@@ -26,10 +29,22 @@ protected:
     int _width, _height;
     Core::Vector2 _startPosition;
 
+    std::list<Object*> _objects;
+
     void parseMapNode(const YAML::Node& node);
     void parseGlobalLightNode(const YAML::Node& node);
     void parseResourcesNode(const YAML::Node& node);
     void parseMaterialsNode(const YAML::Node& node);
+    void parseGeometriesNode(const YAML::Node& node);
+    void parseStaticsNode(const YAML::Node& node);
+    void parseObjectsNode(const YAML::Node& node);
+    void parseBaseObjectNode(
+        const YAML::Node& node,
+        Object& obj,
+        bool position2d=false,
+        bool rotation2d=false
+    );
+    void parseStaticObjNode(const YAML::Node& node);
 
     void loadGround();
 
@@ -41,6 +56,11 @@ public:
 
     int getWidth() const { return _width; }
     int getHeight() const { return _height; }
+
+    void addObject(Object* obj);
+    void removeObject(Object* obj);
+    void deleteObject(Object* obj);
+    const std::list<Object*>& getAllObjects() const { return _objects; }
 };
 
 }

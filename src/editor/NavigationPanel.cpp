@@ -1,8 +1,10 @@
 #include "NavigationPanel.h"
 #include "EdMaterial.h"
 #include "EdParticles.h"
+#include "EdStatic.h"
 #include "MaterialWindow.h"
 #include "ParticlesWindow.h"
+#include "StaticWindow.h"
 #include "Resources.h"
 #include "imgui/imgui.h"
 
@@ -69,6 +71,13 @@ void NavigationPanel::openResourceWindow(ResourceType type, IResource* res)
         {
             EdMaterial* mat = (EdMaterial*)res;
             new MaterialWindow(mat);
+        }
+        break;
+    
+    case RES_STATIC:
+        {
+            EdStaticTemplate* stat = (EdStaticTemplate*)res;
+            new StaticWindow(stat);
         }
         break;
     

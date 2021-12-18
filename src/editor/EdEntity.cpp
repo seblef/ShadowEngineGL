@@ -1,4 +1,4 @@
-#include "EdEntityTemplate.h"
+#include "EdEntity.h"
 #include <map>
 
 namespace Editor

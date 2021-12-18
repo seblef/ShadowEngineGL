@@ -1,4 +1,5 @@
 #include "Resources.h"
+#include "EdGeometry.h"
 #include "EdMaterial.h"
 #include "EdParticles.h"
 
@@ -11,11 +12,20 @@ bool Resources::exists(ResourceType type, const std::string& name) const
     return res != _resources[type].end();
 }
 
-IResource *Resources::get(ResourceType type, const std::string& name) const
+IResource *Resources::get(
+    ResourceType type,
+    const std::string& name,
+    bool loadIfNotExists
+)
 {
     const auto res = _resources[type].find(name);
     if(res == _resources[type].end())
-        return 0;
+    {
+        if(loadIfNotExists)
+            return load(type, name);
+        else
+            return 0;
+    }
     else
         return res->second.get();
 }
@@ -34,9 +44,9 @@ void Resources::drop(ResourceType type, const std::string& name)
 
 IResource* Resources::load(ResourceType type, const std::string& name)
 {
-    IResource* res = get(type, name);
-    if(res)
-        return res;
+    if(exists(type, name))
+        return get(type, name);
+    IResource* res = 0;
     
     if(type == RES_MATERIAL)
     {
@@ -51,8 +61,16 @@ IResource* Resources::load(ResourceType type, const std::string& name)
         std::unique_ptr<EdParticles> particles(new EdParticles(name));
         if(!particles->isValid())
             return 0;
-            res = particles.get();
+        res = particles.get();
         _resources[RES_PARTICLES][name] = std::move(particles);
+    }
+    else if(type == RES_GEOMETRY)
+    {
+        std::unique_ptr<EdGeometry> geometry(new EdGeometry(name));
+        if(!geometry->isValid())
+            return 0;
+        res = geometry.get();
+        _resources[RES_GEOMETRY][name] = std::move(geometry);
     }
     return res;
 }

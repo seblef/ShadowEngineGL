@@ -301,19 +301,21 @@ set(EDITOR_SOURCES
     src/editor/imgui/backends/imgui_impl_opengl3.cpp
     src/editor/filedialog/ImFileDialog.cpp
     src/editor/EdCamera.cpp
-    src/editor/EdEntityTemplate.cpp
+    src/editor/EdEntity.cpp
     src/editor/EdGeometry.cpp
     src/editor/EdGround.cpp
     src/editor/EdMap.cpp
     src/editor/EdMaterial.cpp
     src/editor/EdParticles.cpp
-    src/editor/EdSolidTemplate.cpp
+    src/editor/EdSolid.cpp
+    src/editor/EdStatic.cpp
     src/editor/EditorSystem.cpp
     src/editor/Helpers.cpp
     src/editor/IWindow.cpp
     src/editor/MainMenu.cpp
     src/editor/MaterialWindow.cpp
     src/editor/NavigationPanel.cpp
+    src/editor/Object.cpp
     src/editor/ParticlesWindow.cpp
     src/editor/PreviewCamera.cpp
     src/editor/PreviewFrame.cpp
@@ -321,6 +323,8 @@ set(EDITOR_SOURCES
     src/editor/PreviewParticles.cpp
     src/editor/PreviewResources.cpp
     src/editor/Resources.cpp
+    src/editor/SolidWidgets.cpp
+    src/editor/StaticWindow.cpp
 )
 
 set(SHADOW_SOURCES
