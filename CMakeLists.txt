@@ -322,6 +322,8 @@ set(EDITOR_SOURCES
     src/editor/PreviewParticles.cpp
     src/editor/PreviewResources.cpp
     src/editor/Resources.cpp
+    src/editor/SolidWidgets.cpp
+    src/editor/StaticWindow.cpp
 )
 
 set(SHADOW_SOURCES

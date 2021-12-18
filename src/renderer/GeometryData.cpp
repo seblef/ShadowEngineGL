@@ -1,11 +1,13 @@
 
 #include "GeometryData.h"
+#include "../core/BBox3.h"
 #include "../mediacommon/IVideoDevice.h"
 #include "../mediacommon/IVertexBuffer.h"
 #include "../mediacommon/IIndexBuffer.h"
 
 
-GeometryData::GeometryData(int vxCount, const Vx3D* vx, int triCount, const unsigned short *tri, IVideoDevice* d)
+GeometryData::GeometryData(int vxCount, const Vx3D* vx, int triCount, const unsigned short *tri, IVideoDevice* d) :
+    _bBox(Core::BBox3::InitBox)
 {
 	for (int i = 0; i<vxCount; ++i)
 		_bBox << vx[i].pos;

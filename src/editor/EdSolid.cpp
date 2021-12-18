@@ -14,7 +14,8 @@ EdSolidTemplate::EdSolidTemplate() :
     _material(0),
     _mesh(0, 0),
     _shape(PSHAPE_BOX),
-    _loaded(false)
+    _loaded(false),
+    _backup(0)
 {
 }
 
@@ -22,7 +23,8 @@ EdSolidTemplate::EdSolidTemplate(const YAML::Node& node) :
     _material(0),
     _mesh(0, 0),
     _shape(PSHAPE_BOX),
-    _loaded(false)
+    _loaded(false),
+    _backup(0)
 {
     _geometryName = node["geometry"].as<std::string>();
     _materialName = node["material"].as<std::string>();
@@ -32,18 +34,23 @@ EdSolidTemplate::EdSolidTemplate(const YAML::Node& node) :
 }
 
 EdSolidTemplate::EdSolidTemplate(
-    const std::string& name,
     const std::string& geometry,
     const std::string& material
 ) :
-    _name(name),
     _geometryName(geometry),
     _materialName(material),
     _material(0),
     _mesh(0, 0),
     _shape(PSHAPE_BOX),
-    _loaded(false)
+    _loaded(false),
+    _backup(0)
 {
+}
+
+EdSolidTemplate::~EdSolidTemplate()
+{
+    if(_backup)
+        delete _backup;
 }
 
 void EdSolidTemplate::setGeometry(const std::string& geometry)
@@ -63,21 +70,21 @@ void EdSolidTemplate::setMaterial(const std::string& material)
 void EdSolidTemplate::load()
 {
     EdGeometry* geo = (EdGeometry*)Resources::getSingletonRef().get(RES_GEOMETRY, _geometryName);
-    EdMaterial* mat = (EdMaterial*)Resources::getSingletonRef().get(RES_MATERIAL, _materialName);
+    _material = (EdMaterial*)Resources::getSingletonRef().get(RES_MATERIAL, _materialName);
 
     if(!geo)
     {
         LOG_S(ERROR) << "Failed loading geometry " << _geometryName;
         return;
     }
-    if(!mat)
+    if(!_material)
     {
         LOG_S(ERROR) << "Failed loading material " << _materialName;
         return;
     }
 
     _mesh.setGeometry(geo->getGeometry()->getRGeometry());
-    _mesh.setMaterial(mat->getMaterial());
+    _mesh.setMaterial(_material->getMaterial());
     _loaded = true;
 }
 
@@ -93,6 +100,27 @@ EdMaterial* EdSolidTemplate::getMaterial()
     if(!_loaded)
         load();
     return _material;
+}
+
+void EdSolidTemplate::backup()
+{
+    if(!_backup)
+        _backup = new EdSolidTemplate();
+    _backup->_geometryName = _geometryName;
+    _backup->_materialName = _materialName;
+    _backup->_shape = _shape;
+}
+
+void EdSolidTemplate::restore()
+{
+    if(!_backup)
+        return;
+    _geometryName = _backup->_geometryName;
+    _materialName = _backup->_materialName;
+    _shape = _backup->_shape;
+
+    if(_loaded)
+        load();
 }
 
 }

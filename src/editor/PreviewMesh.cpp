@@ -2,9 +2,11 @@
 #include "PreviewResources.h"
 #include "../mediacommon/IConstantBuffer.h"
 #include "../mediacommon/IGeometryBuffer.h"
+#include "../mediacommon/IIndexBuffer.h"
 #include "../mediacommon/IShader.h"
 #include "../mediacommon/IVideoDevice.h"
 #include "../game/Geometry.h"
+#include "../renderer/GeometryData.h"
 #include "../renderer/Material.h"
 #include "../renderer/MaterialSystem.h"
 #include "../loguru.hpp"
@@ -27,7 +29,8 @@ PreviewMesh::PreviewMesh(
         width, height
     ),
     _material(material),
-    _geoBuffer(0)
+    _geoBuffer(0),
+    _geoData(0)
 {
     if(geometry)
     {
@@ -49,6 +52,26 @@ PreviewMesh::PreviewMesh(
     }
 }
 
+PreviewMesh::PreviewMesh(
+    GeometryData* geometry,
+    Material* material,
+    IVideoDevice* device,
+    PreviewResources* resources,
+    int width,
+    int height
+) : 
+    PreviewFrame(
+        device,
+        resources,
+        width, height
+    ),
+    _material(material),
+    _geoBuffer(0),
+    _geoData(geometry)
+{
+    _camera.center(geometry->getBBox());
+}
+
 PreviewMesh::~PreviewMesh()
 {
     if(_geoBuffer && _geoBuffer != _resources->getSphereGeometry())
@@ -67,7 +90,6 @@ void PreviewMesh::render(float time)
 	_device->renderFullscreenQuad();
 
 	_device->setInputLayer(VX_3D);
-    _geoBuffer->set();
 
     _device->setDepthStencilState(_resources->getMeshDepthState());
     _resources->getMeshShader()->set();
@@ -94,7 +116,16 @@ void PreviewMesh::render(float time)
 
 	_material->setBase(time);
 
-	_device->renderIndexed(_geoBuffer->getIndexCount());
+    if(_geoData)
+    {
+        _geoData->set();
+    	_device->renderIndexed(_geoData->getIndexBuffer()->getIndexCount());
+    }
+    else
+    {
+        _geoBuffer->set();
+        _device->renderIndexed(_geoBuffer->getIndexCount());
+    }
 }
 
 }

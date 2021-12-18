@@ -21,7 +21,6 @@ class EdMaterial;
 class EdSolidTemplate
 {
 protected:
-    std::string _name;
     std::string _geometryName;
     std::string _materialName;
 
@@ -30,16 +29,17 @@ protected:
     PhysicShape _shape;
     bool _loaded;
 
+    EdSolidTemplate* _backup;
+
 public:
     EdSolidTemplate();
     EdSolidTemplate(const YAML::Node& node);
     EdSolidTemplate(
-        const std::string& name,
         const std::string& geometry,
         const std::string& material
     );
+    ~EdSolidTemplate();
 
-    const std::string& getName() const { return _name; }
     const std::string& getGeometryName() const { return _geometryName; }
     const std::string& getMaterialName() const { return _materialName; }
     PhysicShape getShape() const { return _shape; }
@@ -47,13 +47,15 @@ public:
     const Mesh* getMesh();
     EdMaterial* getMaterial();
 
-    void setName(const std::string& name) { _name = name; }
     void setGeometry(const std::string& geometry);
     void setMaterial(const std::string& material);
     void setShape(PhysicShape shape) { _shape = shape; }
 
     void load();
     bool isLoaded() const { return _loaded; }
+
+    virtual void backup();
+    virtual void restore();
 
 };
 }

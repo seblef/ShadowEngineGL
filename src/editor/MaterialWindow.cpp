@@ -25,7 +25,7 @@ MaterialWindow::MaterialWindow(EdMaterial* material) :
     _changed(false)
 {
     _preview = new PreviewMesh(
-        0,
+        (Geometry*)0,
         material->getMaterial(),
         Renderer::getSingletonRef().getVideoDevice(),
         EditorSystem::getSingletonRef().getPreviewResources(),
