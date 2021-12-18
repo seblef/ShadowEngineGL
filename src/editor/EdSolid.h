@@ -1,11 +1,13 @@
 #pragma once
 
+#include "Object.h"
 #include "../physic/PhysicDefs.h"
 #include "../renderer/Mesh.h"
 #include <memory>
 #include <string>
 
 class Mesh;
+class MeshInstance;
 
 namespace YAML
 {
@@ -58,4 +60,22 @@ public:
     virtual void restore();
 
 };
+
+class SolidObject : public Object
+{
+protected:
+    EdSolidTemplate *_solidTemplate;
+    MeshInstance* _meshInstance;
+
+    void updateMatrix();
+
+public:
+    SolidObject(ObjectType type, EdSolidTemplate* solid);
+    SolidObject(const SolidObject& solid);
+    virtual ~SolidObject();
+
+    void onAddToScene();
+    void onRemFromScene();
+};
+
 }

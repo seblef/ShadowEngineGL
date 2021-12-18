@@ -5,6 +5,8 @@
 #include "../core/YAMLCore.h"
 #include "../game/FilesStrings.h"
 #include "../game/Geometry.h"
+#include "../renderer/MeshInstance.h"
+#include "../renderer/Renderer.h"
 #include "../loguru.hpp"
 
 namespace Editor
@@ -121,6 +123,59 @@ void EdSolidTemplate::restore()
 
     if(_loaded)
         load();
+}
+
+
+SolidObject::SolidObject(
+    ObjectType type,
+    EdSolidTemplate* solid
+) :
+    Object(type),
+    _solidTemplate(solid),
+    _meshInstance(0)
+{
+    _localBBox = _solidTemplate->getMesh()->getGeometry()->getBBox();
+}
+
+SolidObject::SolidObject(const SolidObject& solid) :
+    Object(solid),
+    _solidTemplate(solid._solidTemplate),
+    _meshInstance(0)
+{
+}
+
+SolidObject::~SolidObject()
+{
+    if(_meshInstance)
+        delete _meshInstance;
+}
+
+void SolidObject::updateMatrix()
+{
+    Object::updateMatrix();
+    if(_meshInstance)
+        _meshInstance->setWorldMatrix(_world);
+}
+
+void SolidObject::onAddToScene()
+{
+    _meshInstance = new MeshInstance(
+        _solidTemplate->getMesh(),
+        _world,
+        false
+    );
+    Renderer::getSingletonRef().addRenderable(_meshInstance);
+    Object::onAddToScene();
+}
+
+void SolidObject::onRemFromScene()
+{
+    if(!_meshInstance)
+        return;
+    Renderer::getSingletonRef().remRenderable(_meshInstance);
+    delete _meshInstance;
+    _meshInstance = 0;
+    Object::onRemFromScene();
 }
 
 }

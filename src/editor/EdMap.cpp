@@ -46,6 +46,9 @@ EdMap::EdMap(const std::string& filename) :
     YAML::Node resources = root["resources"];
     parseResourcesNode(resources);
 
+    YAML::Node objects = root["objects"];
+    parseObjectsNode(objects);
+
     loadGround();
 }
 
@@ -53,6 +56,11 @@ EdMap::~EdMap()
 {
     if(_ground)
         delete _ground;
+    for(auto& obj : _objects)
+    {
+        obj->onRemFromScene();
+        delete obj;
+    }
 }
 
 void EdMap::parseMapNode(const YAML::Node& node)
@@ -124,6 +132,72 @@ void EdMap::parseStaticsNode(const YAML::Node& node)
     }
 }
 
+void EdMap::parseObjectsNode(const YAML::Node& node)
+{
+    for(auto obj=node.begin(); obj!=node.end(); ++obj)
+    {
+        const std::string& objClass((*obj)["class"].as<string>());
+        if(objClass == "mesh")
+            parseStaticObjNode(*obj);
+    }
+}
+
+void EdMap::parseBaseObjectNode(
+    const YAML::Node& node,
+    Object& obj,
+    bool position2d,
+    bool rotation2d
+)
+{
+    obj.setName(node["name"].as<string>(""));
+    Core::Vector3 pos3d, rot3d;
+    if(position2d)
+    {
+        Core::Vector2 pos2d = node["position"].as<Core::Vector2>();
+        float height = node["height"].as<float>(.0f);
+
+        if(height == .0f)
+        {
+            const Core::BBox3& localBBox(obj.getLocalBBox());
+            height = -localBBox.getMin().y;
+        }
+
+        pos3d = Core::Vector3(pos2d.x, height, pos2d.y);
+    }
+    else
+        pos3d = node["position"].as<Core::Vector3>();
+
+    if(rotation2d)
+    {
+        float rot = node["rotation"].as<float>(.0f);
+        rot3d = Core::Vector3(0.f, rot, 0.f);
+    }
+    else
+        rot3d = node["rotation"].as<Core::Vector3>();
+    
+    obj.setPosition(pos3d);
+    obj.setRotation(rot3d);
+}
+
+void EdMap::parseStaticObjNode(const YAML::Node& node)
+{
+    const std::string& templateName(node["template"].as<std::string>());
+    EdStaticTemplate* staticTemplate = (EdStaticTemplate*)Resources::getSingletonRef().get(
+        RES_STATIC,
+        templateName,
+        false
+    );
+    if(!staticTemplate)
+    {
+        LOG_S(WARNING) << "No static template " << templateName << " found";
+        return;
+    }
+
+    StaticObject* obj = new StaticObject(staticTemplate);
+    parseBaseObjectNode(node, *obj, true);
+    addObject(obj);
+}
+
 void EdMap::loadGround()
 {
     std::unique_ptr<Core::IFile> f(
@@ -175,6 +249,24 @@ void EdMap::loadGround()
         flags,
         matIds.get()
     );
+}
+
+void EdMap::addObject(Object* obj)
+{
+    obj->onAddToScene();
+    _objects.push_back(obj);
+}
+
+void EdMap::removeObject(Object* obj)
+{
+    obj->onRemFromScene();
+    _objects.remove(obj);
+}
+
+void EdMap::deleteObject(Object* obj)
+{
+    removeObject(obj);
+    delete obj;
 }
 
 }

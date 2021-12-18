@@ -16,4 +16,11 @@ public:
     );
 };
 
+class StaticObject : public SolidObject
+{
+public:
+    StaticObject(EdStaticTemplate* stat);
+    StaticObject(const StaticObject& stat);
+};
+
 }

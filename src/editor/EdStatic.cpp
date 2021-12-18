@@ -18,4 +18,15 @@ EdStaticTemplate::EdStaticTemplate(
     _valid = true;
 }
 
+
+StaticObject::StaticObject(EdStaticTemplate* stat) :
+    SolidObject(OBJ_STATIC, stat)
+{
+}
+
+StaticObject::StaticObject(const StaticObject& stat) :
+    SolidObject(stat)
+{
+}
+
 }
