@@ -89,5 +89,6 @@ public:
 	IVisibilitySystem*	getVisibilitySystem() const										{ return _vis; }
 	const SRect&		getVisibilityBounds() const										{ return _visBounds; }
 
-    void setFrameBuffer(IFrameBuffer* frameBuffer);
+    void setFrameBuffer(IFrameBuffer* frameBuffer, bool resize);
+    const GBuffer& getGBuffer() const { return _GBuffer; }
 };

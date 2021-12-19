@@ -9,14 +9,18 @@ class ITexture;
 class GLFrameBuffer : public IFrameBuffer
 {
 protected:
-
-    GLuint          _fbId;
-    int             _frameCount;
+    GLuint _fbId;
 
 public:
 
-    GLFrameBuffer(int w, int h, int fcount, ITexture** f, IDepthTexture* d);
+    GLFrameBuffer(
+        int width,
+        int height,
+        int targetsCount,
+        ITexture** targets,
+        IDepthTexture* depthBuffer
+    );
     ~GLFrameBuffer();
 
-    void            set();
+    void set();
 };
