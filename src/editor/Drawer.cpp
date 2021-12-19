@@ -9,6 +9,7 @@
 #include "../mediacommon/IVertexBuffer.h"
 #include "../renderer/Renderer.h"
 #include "../renderer/HDR.h"
+#include "../loguru.hpp"
 
 namespace Editor
 {
@@ -68,8 +69,14 @@ void Drawer::draw(EdCamera& camera)
     _device->resetRenderTargets();
     _device->setBlendState(_noBlendState);
     _backBuffer->set(0);
+    IFrameBuffer *accfb = HDR::getSingletonRef().getAccumulationFrameBuffer();
+    ITexture* acc = HDR::getSingletonRef().getAccumulationBuffer();
+    acc->set(0);
     _resources->getBackgroundShader()->set();
     _device->renderFullscreenQuad();
+
+    // LOG_S(INFO) << "Accumulation FB: " << accfb->getWidth() << " , " << accfb->getHeight();
+    // LOG_S(INFO) << "Accumulation: " << acc->getWidth() << " , " << acc->getHeight();
 }
 
 void Drawer::onResize(int width, int height)

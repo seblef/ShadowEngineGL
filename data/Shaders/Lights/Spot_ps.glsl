@@ -8,7 +8,7 @@ out	vec4	f_color;
 
 void main(void)
 {
-	vec2 uv = (gl_FragCoord.xy - vec2(0.5f,0.5f)) * invScreenSize;
+	vec2 uv = gl_FragCoord.xy * invScreenSize;
 	float depth = texture(tDepth, uv).r;
 
 	vec4 point = getWorldPosition(vec3(uv, depth));

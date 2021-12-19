@@ -29,6 +29,7 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     _previewRes = new PreviewResources(media->getVideo());
     new Resources;
     new Drawer(media->getVideo(), _previewRes);
+    _camera.onResize(media->getVideo()->getResWidth(), media->getVideo()->getResHeight());
     initUI();
 }
 
