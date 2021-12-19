@@ -153,6 +153,7 @@ void EditorSystem::drawWindows()
 
 void EditorSystem::loadMap(const std::string& filename)
 {
+    Drawer::getSingletonRef().onNewMap();
     if(_map)
         delete _map;
     LOG_S(INFO) << "Loading map " << filename;

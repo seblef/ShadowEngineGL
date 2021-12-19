@@ -1,4 +1,5 @@
 #include "LightObject.h"
+#include "Drawer.h"
 #include "../game/TextParser.h"
 #include "../renderer/LightArea.h"
 #include "../renderer/LightOmni.h"
@@ -99,12 +100,14 @@ void LightObject::onAddToScene()
 {
     Object::onAddToScene();
     Renderer::getSingletonRef().addRenderable(_rLight);
+    Drawer::getSingletonRef().addObject(this);
     updateMatrix();
 }
 
 void LightObject::onRemFromScene()
 {
     Object::onRemFromScene();
+    Drawer::getSingletonRef().remObject(this);
     Renderer::getSingletonRef().remRenderable(_rLight);
 }
 

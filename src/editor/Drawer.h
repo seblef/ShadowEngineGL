@@ -2,6 +2,9 @@
 
 #include "../core/TSingleton.h"
 #include "../mediacommon/IVideoDevice.h"
+#include <list>
+#include <map>
+
 
 namespace Editor
 {
@@ -9,6 +12,7 @@ namespace Editor
 #define MAX_DRAWER_LINES        256
 
 class EdCamera;
+class Object;
 class PreviewResources;
 
 class Drawer : public Core::TSingleton<Drawer>
@@ -26,17 +30,30 @@ protected:
     int _linesVertCount;
     RenderState _linesRenderState;
 
+    IShader* _solidShader;
+    IGeometryBuffer* _solidGeoBuffer;
+    DepthStencilState _solidDepthState;
+    RenderState _solidRenderState;
+    std::map<unsigned int, ITexture*> _objectsTextures;
+    std::map<unsigned int, std::list<Object*>> _objects;
+
     Core::Color _color;
-    DepthStencilState _depthState;
+    DepthStencilState _linesDepthState;
     DepthStencilState _depthOverState;
     BlendState _noBlendState;
+    SamplerState _trilinearSamplerState;
+    SamplerState _copySamplerState;
 
     void executeLines();
+    void loadData();
     void cleanUp();
+    void drawSolids();
 
 public:
     Drawer(IVideoDevice* device, PreviewResources* resources);
     ~Drawer();
+
+    void onNewMap();
 
     void draw(EdCamera& camera);
     void onResize(int width, int height);
@@ -46,6 +63,9 @@ public:
 
     void setWorldMatrix(const Core::Matrix4& world);
     void setColor(const Core::Color& color);
+
+    void addObject(Object* obj);
+    void remObject(Object* obj);
 
     void drawLine(const Core::Vector3& v1, const Core::Vector3& v2);
     void drawDot(const Core::Vector3& pos, float size);
