@@ -11,6 +11,7 @@ namespace Editor
 enum ObjectType
 {
     OBJ_STATIC=0,
+    OBJ_LIGHT,
 
     OBJ_COUNT
 };
@@ -27,6 +28,7 @@ protected:
     Core::Matrix4 _world;
     Core::BBox3 _localBBox;
     Core::BBox3 _worldBBox;
+    bool _onScene;
 
     virtual void updateMatrix();
 

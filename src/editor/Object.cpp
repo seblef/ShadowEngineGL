@@ -11,7 +11,8 @@ Object::Object(ObjectType type) :
     _rot(Core::Vector3::NullVector),
     _world(Core::Matrix4::Identity),
     _localBBox(Core::BBox3::NullBox),
-    _worldBBox(Core::BBox3::NullBox)
+    _worldBBox(Core::BBox3::NullBox),
+    _onScene(false)
 {
 }
 
@@ -22,7 +23,8 @@ Object::Object(const Object& obj) :
     _rot(obj._rot),
     _world(obj._world),
     _localBBox(obj._localBBox),
-    _worldBBox(obj._worldBBox)
+    _worldBBox(obj._worldBBox),
+    _onScene(false)
 {
 }
 
@@ -70,10 +72,12 @@ void Object::updateMatrix()
 
 void Object::onAddToScene()
 {
+    _onScene = true;
 }
 
 void Object::onRemFromScene()
 {
+    _onScene = false;
 }
 
 }

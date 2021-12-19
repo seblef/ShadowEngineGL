@@ -45,6 +45,7 @@ protected:
         bool rotation2d=false
     );
     void parseStaticObjNode(const YAML::Node& node);
+    void parseLightObjNode(const YAML::Node& node);
 
     void loadGround();
 

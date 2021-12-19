@@ -8,6 +8,7 @@
 #include "../mediacommon/ITexture.h"
 #include "../mediacommon/IVertexBuffer.h"
 #include "../renderer/Renderer.h"
+#include "../renderer/HDR.h"
 
 namespace Editor
 {
