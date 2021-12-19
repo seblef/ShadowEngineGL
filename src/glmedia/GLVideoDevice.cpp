@@ -11,6 +11,7 @@
 #include "GLGeometryBuffer.h"
 #include "GLDefs.h"
 #include "../loguru.hpp"
+#include <assert.h>
 
 
 const GLenum    GLPrimitiveConvers[PT_COUNT]={

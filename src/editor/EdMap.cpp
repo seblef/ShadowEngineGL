@@ -2,6 +2,7 @@
 #include "EdGround.h"
 #include "EdMaterial.h"
 #include "EdStatic.h"
+#include "LightObject.h"
 #include "Resources.h"
 #include "../core/FileSystemFactory.h"
 #include "../core/YAMLCore.h"
@@ -139,6 +140,8 @@ void EdMap::parseObjectsNode(const YAML::Node& node)
         const std::string& objClass((*obj)["class"].as<string>());
         if(objClass == "mesh")
             parseStaticObjNode(*obj);
+        else if(objClass == "light")
+            parseLightObjNode(*obj);
     }
 }
 
@@ -173,7 +176,7 @@ void EdMap::parseBaseObjectNode(
         rot3d = Core::Vector3(0.f, rot, 0.f);
     }
     else
-        rot3d = node["rotation"].as<Core::Vector3>();
+        rot3d = node["rotation"].as<Core::Vector3>(Core::Vector3::NullVector);
     
     obj.setPosition(pos3d);
     obj.setRotation(rot3d);
@@ -196,6 +199,13 @@ void EdMap::parseStaticObjNode(const YAML::Node& node)
     StaticObject* obj = new StaticObject(staticTemplate);
     parseBaseObjectNode(node, *obj, true);
     addObject(obj);
+}
+
+void EdMap::parseLightObjNode(const YAML::Node& node)
+{
+    LightObject *light = new LightObject(node);
+    parseBaseObjectNode(node, *light);
+    addObject(light);
 }
 
 void EdMap::loadGround()

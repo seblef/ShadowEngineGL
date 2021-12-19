@@ -1,7 +1,8 @@
 #pragma once
 
 #include "VideoDefs.h"
-#include "../Core.h"
+#include "../core/Vertex.h"
+
 
 using namespace Core;
 

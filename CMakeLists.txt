@@ -313,6 +313,7 @@ set(EDITOR_SOURCES
     src/editor/EditorSystem.cpp
     src/editor/Helpers.cpp
     src/editor/IWindow.cpp
+    src/editor/LightObject.cpp
     src/editor/MainMenu.cpp
     src/editor/MaterialWindow.cpp
     src/editor/NavigationPanel.cpp

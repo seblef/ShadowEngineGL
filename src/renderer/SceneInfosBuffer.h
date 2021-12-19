@@ -33,4 +33,6 @@ public:
 
 	void				setCamera(const Camera& c);
 	void				setTime(float time)						{ _time=time; }
+
+    const Core::Vector2 getInvScreenSize() const { return _invScreenSize; }
 };

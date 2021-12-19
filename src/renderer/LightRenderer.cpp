@@ -1,7 +1,7 @@
 
 #include "LightRenderer.h"
 #include "Renderer.h"
-#include "../core/ViewFrustum.h"
+#include "../core/Camera.h"
 #include "../mediacommon/IShader.h"
 #include "../mediacommon/IGeometryBuffer.h"
 #include "../mediacommon/IShadowMap.h"
