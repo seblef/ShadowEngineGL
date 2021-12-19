@@ -1,4 +1,5 @@
 #include "EditorSystem.h"
+#include "Drawer.h"
 #include "EdCamera.h"
 #include "EdMap.h"
 #include "IWindow.h"
@@ -27,6 +28,7 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
 {
     _previewRes = new PreviewResources(media->getVideo());
     new Resources;
+    new Drawer(media->getVideo(), _previewRes);
     initUI();
 }
 
@@ -37,6 +39,7 @@ EditorSystem::~EditorSystem()
     shutdownUI();
     Resources::deleteSingleton();
     delete _previewRes;
+    Drawer::deleteSingleton();
 }
 
 void windowSizeCallback(GLFWwindow* window, int width, int height)
@@ -99,7 +102,7 @@ bool EditorSystem::update()
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    Renderer::getSingletonRef().update(.0f, &_camera.getCamera());
+    Drawer::getSingletonRef().draw(_camera);
 
     _mainMenu.draw();
     _navPanel.draw();
@@ -116,8 +119,7 @@ bool EditorSystem::update()
 
 void EditorSystem::onResize(int width, int height)
 {
-    Renderer::getSingletonRef().getVideoDevice()->onResize(width, height);
-    Renderer::getSingletonRef().onResize(width, height);
+    Drawer::getSingletonRef().onResize(width, height);
     _camera.onResize(width, height);
 }
 

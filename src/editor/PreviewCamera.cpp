@@ -13,7 +13,7 @@ PreviewCamera::PreviewCamera(
     _camera(
         -Core::Vector3::ZAxisVector,
         Core::Vector3::NullVector,
-        0.1f,
+        .5f,
         100.f,
         Core::Vector2(10.f, 10.f),
         90.f

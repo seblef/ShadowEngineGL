@@ -415,13 +415,16 @@ void Renderer::renderBufferViews()
 	_bufferView.render();
 }
 
-void Renderer::setFrameBuffer(IFrameBuffer* frameBuffer)
+void Renderer::setFrameBuffer(IFrameBuffer* frameBuffer, bool resize)
 {
     _frameBuffer = frameBuffer;
-    if(frameBuffer)
-        onResize(frameBuffer->getWidth(), frameBuffer->getHeight());
-    else
-        onResize(_device->getResWidth(), _device->getResHeight());
+    if(resize)
+    {
+        if(frameBuffer)
+            onResize(frameBuffer->getWidth(), frameBuffer->getHeight());
+        else
+            onResize(_device->getResWidth(), _device->getResHeight());
+    }
 
     HDR::getSingletonRef().setRenderingFrameBuffer(frameBuffer);
 }

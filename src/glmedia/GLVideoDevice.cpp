@@ -626,6 +626,10 @@ void				GLVideoDevice::renderFullscreenQuad()
     setRenderState(_FSRState);
     _FSGeo->set();
 
-    glDisable(GL_DEPTH);
+    glDisable(GL_DEPTH_TEST);
+    glDepthMask(GL_FALSE);
     glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_SHORT,0);
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
 }

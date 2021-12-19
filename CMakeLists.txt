@@ -300,6 +300,7 @@ set(EDITOR_SOURCES
     src/editor/imgui/backends/imgui_impl_glfw.cpp
     src/editor/imgui/backends/imgui_impl_opengl3.cpp
     src/editor/filedialog/ImFileDialog.cpp
+    src/editor/Drawer.cpp
     src/editor/EdCamera.cpp
     src/editor/EdEntity.cpp
     src/editor/EdGeometry.cpp
