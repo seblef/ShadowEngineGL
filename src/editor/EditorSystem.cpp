@@ -1,4 +1,5 @@
 #include "EditorSystem.h"
+#include "CameraTool.h"
 #include "Drawer.h"
 #include "EdCamera.h"
 #include "EdMap.h"
@@ -24,17 +25,21 @@ namespace Editor
 EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     _canQuit(false),
     _media(media),
-    _map(0)
+    _map(0),
+    _currentTool(0)
 {
     _previewRes = new PreviewResources(media->getVideo());
     new Resources;
     new Drawer(media->getVideo(), _previewRes);
     _camera.onResize(media->getVideo()->getResWidth(), media->getVideo()->getResHeight());
     initUI();
+    setTool(TOOL_CAMERA);
 }
 
 EditorSystem::~EditorSystem()
 {
+    if(_currentTool)
+        delete _currentTool;
     if(_map)
         delete _map;
     shutdownUI();
@@ -103,6 +108,8 @@ bool EditorSystem::update()
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
+    processInput();
+
     Drawer::getSingletonRef().draw(_camera);
 
     _mainMenu.draw();
@@ -159,6 +166,58 @@ void EditorSystem::loadMap(const std::string& filename)
     LOG_S(INFO) << "Loading map " << filename;
     _map = new EdMap(filename);
     _camera.initialize(_map->getWidth(), _map->getHeight());
+}
+
+void EditorSystem::setTool(ToolType type)
+{
+    if(_currentTool)
+    {
+        delete _currentTool;
+        _currentTool = 0;
+    }
+
+    ImGuiIO& io = ImGui::GetIO();
+    int mouseX = (int)io.MousePos.x;
+    int mouseY = (int)io.MousePos.y;
+    int mouseWheel = (int)io.MouseWheel;
+
+    switch(type)
+    {
+    case TOOL_NULL:
+        _currentTool = new ITool(TOOL_NULL, mouseX, mouseY, mouseWheel);
+        break;
+    case TOOL_CAMERA:
+        _currentTool = new CameraTool(&_camera, mouseX, mouseY, mouseWheel);
+        break;
+    }
+}
+
+void EditorSystem::processInput()
+{
+    if(!_currentTool)
+        return;
+
+    ImGuiIO& io = ImGui::GetIO();
+    if(!io.WantCaptureMouse)
+    {
+        if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+            _currentTool->onMouseButtonPressed(MB_LEFT);
+        if(ImGui::IsMouseClicked(ImGuiMouseButton_Right))
+            _currentTool->onMouseButtonPressed(MB_RIGHT);
+    }
+
+    if(ImGui::IsMouseReleased(ImGuiMouseButton_Left))
+        _currentTool->onMouseButtonReleased(MB_LEFT);
+    if(ImGui::IsMouseReleased(ImGuiMouseButton_Right))
+        _currentTool->onMouseButtonReleased(MB_RIGHT);
+    
+    int deltaX = (int)io.MouseDelta.x;
+    int deltaY = (int)io.MouseDelta.y;
+    if(deltaX != 0 || deltaY !=0)
+        _currentTool->onMouseMove(deltaX, deltaY);
+    
+    int wheel = (int)io.MouseWheel;
+    _currentTool->onMouseWheel(wheel);
 }
 
 }
