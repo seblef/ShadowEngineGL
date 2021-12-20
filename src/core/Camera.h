@@ -83,7 +83,11 @@ public:
 	const Vector3&		getXAxis() const								{ return _XAxis; }
 	const Vector3&		getYAxis() const								{ return _YAxis; }
 
-	void				makeRayFrom2D(int x, int y, Vector3& vOrigin, Vector3& vDir);
+	void makeRayFrom2D(
+        int x, int y,
+        Vector3& origin,
+        Vector3& dir
+    );
 };
 
 }

@@ -5,6 +5,11 @@
 #include "../core/Vector3.h"
 #include <string>
 
+namespace physx
+{
+class PxRigidDynamic;
+}
+
 namespace Editor
 {
 
@@ -28,9 +33,11 @@ protected:
     Core::Matrix4 _world;
     Core::BBox3 _localBBox;
     Core::BBox3 _worldBBox;
+    physx::PxRigidDynamic* _selectionActor;
     bool _onScene;
 
     virtual void updateMatrix();
+    void setActorMatrix();
 
 public:
     Object(ObjectType type);

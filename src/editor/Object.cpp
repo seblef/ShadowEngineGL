@@ -1,6 +1,8 @@
 #include "Object.h"
+#include "Selection.h"
+#include "../physic/PhysicUtils.h"
+#include <PxPhysicsAPI.h>
 
-#include "Object.h"
 
 namespace Editor
 {
@@ -12,6 +14,7 @@ Object::Object(ObjectType type) :
     _world(Core::Matrix4::Identity),
     _localBBox(Core::BBox3::NullBox),
     _worldBBox(Core::BBox3::NullBox),
+    _selectionActor(0),
     _onScene(false)
 {
 }
@@ -24,6 +27,7 @@ Object::Object(const Object& obj) :
     _world(obj._world),
     _localBBox(obj._localBBox),
     _worldBBox(obj._worldBBox),
+    _selectionActor(0),
     _onScene(false)
 {
 }
@@ -68,16 +72,29 @@ void Object::updateMatrix()
 	_world = _pos;
 
     _worldBBox = _localBBox * _world;
+
+    if(_onScene)
+        setActorMatrix();
 }
 
 void Object::onAddToScene()
 {
+    _selectionActor->userData = this;
+    Selection::getSingletonRef().addActorToScene(*_selectionActor);
+    setActorMatrix();
     _onScene = true;
 }
 
 void Object::onRemFromScene()
 {
+    Selection::getSingletonRef().remActorFromScene(*_selectionActor);
     _onScene = false;
+}
+
+void Object::setActorMatrix()
+{
+    PMAKETRANSFORM(t, _world);
+    _selectionActor->setKinematicTarget(t);
 }
 
 }

@@ -1,5 +1,6 @@
 #include "LightObject.h"
 #include "Drawer.h"
+#include "Selection.h"
 #include "../game/TextParser.h"
 #include "../renderer/LightArea.h"
 #include "../renderer/LightOmni.h"
@@ -19,6 +20,8 @@ LightObject::LightObject() :
     create._range = 10.f;
     create._world = Matrix4::Identity;
     _rLight = new LightOmni(create);
+
+    _selectionActor = Selection::getSingletonRef().createSphereActor(0.25f);
 }
 
 LightObject::LightObject(const YAML::Node& node) :
@@ -42,6 +45,8 @@ LightObject::LightObject(const YAML::Node& node) :
     }
     _pos = create._world;
     _initDirection = create._direction;
+
+    _selectionActor = Selection::getSingletonRef().createSphereActor(0.25f);
 }
 
 LightObject::LightObject(const LightObject& light) :
@@ -61,6 +66,8 @@ LightObject::LightObject(const LightObject& light) :
         _rLight = new LightArea((LightArea*)light._rLight);
         break;
     }
+
+    _selectionActor = Selection::getSingletonRef().createSphereActor(0.25f);
 }
 
 LightObject::~LightObject()
