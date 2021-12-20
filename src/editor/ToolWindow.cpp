@@ -1,0 +1,97 @@
+#include "ToolWindow.h"
+#include "EditorSystem.h"
+#include "imgui/imgui.h"
+#include "../glmedia/GLTexture.h"
+#include "../mediacommon/ITexture.h"
+#include "../mediacommon/IVideoDevice.h"
+#include <map>
+
+
+namespace Editor
+{
+
+const int ButtonsPerRow = 3;
+const int ButtonSize = 24;
+const int IconPerRow = 8;
+const Core::Vector2 IconUVSize(1.f / (float)IconPerRow, 1.f / (float)IconPerRow);
+
+const std::map<ToolType,Core::Vector2> ToolsIconMapping = {
+    { TOOL_CAMERA, Core::Vector2(0.f, 0.f) },
+    { TOOL_SELECTION, Core::Vector2(1.f, .0f) }
+};
+
+const std::map<ToolType,std::string> ToolsTooltips = {
+    { TOOL_CAMERA, "Camera move" },
+    { TOOL_SELECTION, "Selection" }
+};
+
+
+ToolWindow::ToolWindow(IVideoDevice* device) :
+    _toolsTexture(0),
+    _currentTool(TOOL_NULL)
+{
+    _toolsTexture = device->createTexture("Textures/Editor/tools.png");
+}
+
+ToolWindow::~ToolWindow()
+{
+    if(_toolsTexture)
+        _toolsTexture->remRef();
+}
+
+void ToolWindow::draw()
+{
+    ImGuiWindowFlags winFlags =
+        ImGuiWindowFlags_AlwaysAutoResize;
+    bool open = true;
+    if(!ImGui::Begin("Toolbox", &open, winFlags))
+    {
+        ImGui::End();
+        return;
+    }
+
+    for(int type=TOOL_NULL + 1; type < TOOL_COUNT; ++type)
+    {
+        drawToolButton((ToolType)type);
+        if((type) % ButtonsPerRow != 0)
+            ImGui::SameLine();
+    }
+
+    ImGui::End();
+}
+
+void ToolWindow::drawToolButton(ToolType type)
+{
+    const Core::Vector2& iconMap(ToolsIconMapping.find(type)->second);
+    const Core::Vector2 uvStart(
+        iconMap.x * IconUVSize.x,
+        iconMap.y * IconUVSize.y
+    );
+    const Core::Vector2 uvEnd(
+        (iconMap.x + 1.f) * IconUVSize.x,
+        (iconMap.y + 1.f) * IconUVSize.y
+    );
+    const std::string& toolTip(ToolsTooltips.find(type)->second);
+    GLuint texID = ((GLTexture*)_toolsTexture)->getGLId();
+
+    int framePadding = 0;
+    if(type == _currentTool)
+        framePadding = 2;
+
+    ImGui::PushID(type);
+    if(ImGui::ImageButton(
+        (ImTextureID)texID,
+        ImVec2(ButtonSize, ButtonSize),
+        ImVec2(uvStart.x, uvStart.y),
+        ImVec2(uvEnd.x, uvEnd.y),
+        framePadding,
+        ImVec4(0.f, 0.f, 0.f, 1.f),
+        ImVec4(1.0f, 1.0f, 1.0f, 1.0f)
+    ))
+    {
+        EditorSystem::getSingletonRef().setTool(type);
+    }
+    ImGui::PopID();
+}
+
+}
