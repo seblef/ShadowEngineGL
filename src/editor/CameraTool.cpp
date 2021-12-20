@@ -5,6 +5,8 @@
 namespace Editor
 {
 
+const float TranslationFactor = 0.1f;
+
 CameraTool::CameraTool(
     EdCamera* camera,
     int mouseX,
@@ -27,7 +29,13 @@ void CameraTool::onMouseMove(int deltaX, int deltaY)
 
     if(_buttonPressed[MB_RIGHT])
         _camera->rotate(Core::Vector2((float)deltaY, (float)deltaX));
-    // if(_buttonPressed[MB_LEFT])
+    if(_buttonPressed[MB_LEFT])
+    {
+        Core::Vector3 trans = _camera->getCamera().getXAxis() * (float)-deltaX * TranslationFactor;
+        Core::Vector3 zAxis(_camera->getCamera().getXAxis() ^_camera->getCamera().getYAxis());
+        trans += zAxis * TranslationFactor * (float)deltaY;
+        _camera->translate(Core::Vector2(trans.x, trans.z));
+    }
 }
 
 void CameraTool::onMouseWheel(int wheel)
