@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EdCamera.h"
+#include "ITool.h"
 #include "MainMenu.h"
 #include "NavigationPanel.h"
 #include "../core/TSingleton.h"
@@ -30,6 +31,7 @@ protected:
     MainMenu _mainMenu;
     NavigationPanel _navPanel;
     std::list<IWindow*> _openWindows;
+    ITool* _currentTool;
 
     EdCamera _camera;
 
@@ -42,6 +44,8 @@ protected:
 
     void drawWindows();
 
+    void processInput();
+    
 public:
 
     EditorSystem(IMedia* media, const YAML::Node& cfg);
@@ -56,6 +60,7 @@ public:
     PreviewResources* getPreviewResources() const { return _previewRes; }
 
     void openWindow(IWindow* win);
+    void setTool(ToolType type);
 
     void loadMap(const std::string& filename);
 };

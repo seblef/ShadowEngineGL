@@ -300,6 +300,7 @@ set(EDITOR_SOURCES
     src/editor/imgui/backends/imgui_impl_glfw.cpp
     src/editor/imgui/backends/imgui_impl_opengl3.cpp
     src/editor/filedialog/ImFileDialog.cpp
+    src/editor/CameraTool.cpp
     src/editor/Drawer.cpp
     src/editor/EdCamera.cpp
     src/editor/EdEntity.cpp
@@ -312,6 +313,7 @@ set(EDITOR_SOURCES
     src/editor/EdStatic.cpp
     src/editor/EditorSystem.cpp
     src/editor/Helpers.cpp
+    src/editor/ITool.cpp
     src/editor/IWindow.cpp
     src/editor/LightObject.cpp
     src/editor/MainMenu.cpp
