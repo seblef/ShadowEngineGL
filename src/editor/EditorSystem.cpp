@@ -6,6 +6,7 @@
 #include "IWindow.h"
 #include "PreviewResources.h"
 #include "Resources.h"
+#include "SelectionTool.h"
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_glfw.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
@@ -26,7 +27,8 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     _canQuit(false),
     _media(media),
     _map(0),
-    _currentTool(0)
+    _currentTool(0),
+    _tools(media->getVideo())
 {
     _previewRes = new PreviewResources(media->getVideo());
     new Resources;
@@ -114,6 +116,7 @@ bool EditorSystem::update()
 
     _mainMenu.draw();
     _navPanel.draw();
+    _tools.draw();
     drawWindows();
 
     bool open;
@@ -189,7 +192,12 @@ void EditorSystem::setTool(ToolType type)
     case TOOL_CAMERA:
         _currentTool = new CameraTool(&_camera, mouseX, mouseY, mouseWheel);
         break;
+    case TOOL_SELECTION:
+        _currentTool = new SelectionTool(mouseX, mouseY, mouseWheel);
+        break;
     }
+
+    _tools.setCurrentTool(type);
 }
 
 void EditorSystem::processInput()

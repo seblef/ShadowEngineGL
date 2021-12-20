@@ -4,6 +4,7 @@
 #include "ITool.h"
 #include "MainMenu.h"
 #include "NavigationPanel.h"
+#include "ToolWindow.h"
 #include "../core/TSingleton.h"
 #include <list>
 
@@ -34,6 +35,7 @@ protected:
     ITool* _currentTool;
 
     EdCamera _camera;
+    ToolWindow _tools;
 
     PreviewResources *_previewRes;
 

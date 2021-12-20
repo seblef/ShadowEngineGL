@@ -6,6 +6,7 @@ namespace Editor
 enum ToolType
 {
     TOOL_NULL=0,
+    TOOL_SELECTION,
     TOOL_CAMERA,
 
     TOOL_COUNT
