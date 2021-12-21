@@ -27,6 +27,7 @@ private:
 
 protected:
     bool _buttonPressed[MB_COUNT];
+    bool _ctrlDown;
     int _lastX, _lastY;
     int _lastWheel;
 
@@ -44,5 +45,7 @@ public:
     virtual void onMouseButtonReleased(MouseButton button);
     virtual void onMouseMove(int deltaX, int deltaY);
     virtual void onMouseWheel(int wheel);
+
+    void setCtrlDown(bool down) { _ctrlDown = down; }
 };
 }

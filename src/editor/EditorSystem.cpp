@@ -230,6 +230,8 @@ void EditorSystem::processInput()
     
     int wheel = (int)io.MouseWheel;
     _currentTool->onMouseWheel(wheel);
+
+    _currentTool->setCtrlDown(io.KeyCtrl);
 }
 
 }

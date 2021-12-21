@@ -36,12 +36,12 @@ void SelectionTool::onMouseButtonPressed(MouseButton button)
     );
 
     Core::Camera& cam(EditorSystem::getSingletonRef().getCamera().getCamera());
-	bool g;
+	bool groundSelected;
     Object* obj = Selection::getSingletonRef().select(
         origin,
         dir,
-        false,
-        g
+        _ctrlDown,
+        groundSelected
     );
     ITool::onMouseButtonPressed(button);
 }
