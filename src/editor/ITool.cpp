@@ -1,7 +1,12 @@
 #include "ITool.h"
+#include "EditorSystem.h"
+#include "../core/Plane.h"
+
 
 namespace Editor
 {
+
+const Core::Plane GroundPlane(Core::Vector3(.0f, .0f, .0f), Core::Vector3(.0f, 1.f, .0f));
 
 ITool::ITool(ToolType type) :
     _type(type),
@@ -46,6 +51,29 @@ void ITool::onMouseMove(int deltaX, int deltaY)
 void ITool::onMouseWheel(int wheel)
 {
     _lastWheel = wheel;
+}
+
+bool ITool::getGroundPosition(
+    int screenX,
+    int screenY,
+    Core::Vector3& pos
+) const
+{
+    Core::Vector3 origin, dir;
+    EditorSystem::getSingletonRef().getCamera().getCamera().makeRayFrom2D(
+        screenX, screenY,
+        origin, dir
+    );
+    float t;
+    if(!GroundPlane.intersectLine(origin, dir, t))
+        return false;
+    else if(t > .0f)
+    {
+        pos = origin + dir * t;
+        return true;
+    }
+    else
+        return false;
 }
 
 }

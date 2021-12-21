@@ -1,5 +1,10 @@
 #pragma once
 
+namespace Core
+{
+class Vector3;
+}
+
 namespace Editor
 {
 
@@ -40,6 +45,8 @@ protected:
     int _lastX, _lastY;
     int _lastWheel;
     unsigned int _flags;
+
+    bool getGroundPosition(int screenX, int screenY, Core::Vector3& pos) const;
 
 public:
 

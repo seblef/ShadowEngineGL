@@ -16,6 +16,7 @@ Tools::Tools(int mouseX, int mouseY, int mouseWheel) :
 {
     _tools[TOOL_CAMERA] = new CameraTool;
     _tools[TOOL_SELECTION] = new SelectTool;
+    _tools[TOOL_TRANSLATE] = new TranslationTool;
 
     setCurrentTool(TOOL_SELECTION);
 }
