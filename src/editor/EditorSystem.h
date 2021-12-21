@@ -61,6 +61,8 @@ public:
     NavigationPanel& getNavigation() { return _navPanel; }
     PreviewResources* getPreviewResources() const { return _previewRes; }
 
+    EdCamera& getCamera() { return _camera; }
+
     void openWindow(IWindow* win);
     void setTool(ToolType type);
 

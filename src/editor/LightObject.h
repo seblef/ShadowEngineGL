@@ -3,6 +3,10 @@
 #include "Object.h"
 #include "../renderer/Light.h"
 
+class LightOmni;
+class LightSpot;
+class LightArea;
+
 namespace YAML
 {
 class Node;
@@ -19,6 +23,9 @@ protected:
     Core::Vector3 _initDirection;
 
     void updateMatrix();
+    void drawOmni(Drawer& drawer);
+    void drawSpot(Drawer& drawer);
+    void drawArea(Drawer& drawer);
 
 public:
     LightObject();
@@ -26,8 +33,15 @@ public:
     LightObject(const LightObject& light);
     ~LightObject();
 
+    const Light& getLight() const { return *_rLight; }
+    const LightOmni& getOmni() const;
+    const LightSpot& getSpot() const;
+    const LightArea& getArea() const;
+
     void onAddToScene();
     void onRemFromScene();
+
+    void drawSelected(Drawer& drawer);
 };
 
 }

@@ -6,6 +6,7 @@
 #include "IWindow.h"
 #include "PreviewResources.h"
 #include "Resources.h"
+#include "Selection.h"
 #include "SelectionTool.h"
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_glfw.h"
@@ -33,9 +34,10 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     _previewRes = new PreviewResources(media->getVideo());
     new Resources;
     new Drawer(media->getVideo(), _previewRes);
+    new Selection;
     _camera.onResize(media->getVideo()->getResWidth(), media->getVideo()->getResHeight());
     initUI();
-    setTool(TOOL_CAMERA);
+    setTool(TOOL_SELECTION);
 }
 
 EditorSystem::~EditorSystem()
@@ -48,6 +50,7 @@ EditorSystem::~EditorSystem()
     Resources::deleteSingleton();
     delete _previewRes;
     Drawer::deleteSingleton();
+    Selection::deleteSingleton();
 }
 
 void windowSizeCallback(GLFWwindow* window, int width, int height)
@@ -111,6 +114,7 @@ bool EditorSystem::update()
     ImGui::NewFrame();
 
     processInput();
+    Selection::getSingletonRef().refresh();
 
     Drawer::getSingletonRef().draw(_camera);
 
@@ -226,6 +230,8 @@ void EditorSystem::processInput()
     
     int wheel = (int)io.MouseWheel;
     _currentTool->onMouseWheel(wheel);
+
+    _currentTool->setCtrlDown(io.KeyCtrl);
 }
 
 }

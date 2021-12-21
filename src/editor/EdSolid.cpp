@@ -2,6 +2,7 @@
 #include "EdGeometry.h"
 #include "EdMaterial.h"
 #include "Resources.h"
+#include "Selection.h"
 #include "../core/YAMLCore.h"
 #include "../game/FilesStrings.h"
 #include "../game/Geometry.h"
@@ -13,6 +14,7 @@ namespace Editor
 {
 
 EdSolidTemplate::EdSolidTemplate() :
+    _geometry(0),
     _material(0),
     _mesh(0, 0),
     _shape(PSHAPE_BOX),
@@ -23,6 +25,7 @@ EdSolidTemplate::EdSolidTemplate() :
 
 EdSolidTemplate::EdSolidTemplate(const YAML::Node& node) :
     _material(0),
+    _geometry(0),
     _mesh(0, 0),
     _shape(PSHAPE_BOX),
     _loaded(false),
@@ -42,6 +45,7 @@ EdSolidTemplate::EdSolidTemplate(
     _geometryName(geometry),
     _materialName(material),
     _material(0),
+    _geometry(0),
     _mesh(0, 0),
     _shape(PSHAPE_BOX),
     _loaded(false),
@@ -71,10 +75,10 @@ void EdSolidTemplate::setMaterial(const std::string& material)
 
 void EdSolidTemplate::load()
 {
-    EdGeometry* geo = (EdGeometry*)Resources::getSingletonRef().get(RES_GEOMETRY, _geometryName);
+    _geometry = (EdGeometry*)Resources::getSingletonRef().get(RES_GEOMETRY, _geometryName);
     _material = (EdMaterial*)Resources::getSingletonRef().get(RES_MATERIAL, _materialName);
 
-    if(!geo)
+    if(!_geometry)
     {
         LOG_S(ERROR) << "Failed loading geometry " << _geometryName;
         return;
@@ -85,7 +89,7 @@ void EdSolidTemplate::load()
         return;
     }
 
-    _mesh.setGeometry(geo->getGeometry()->getRGeometry());
+    _mesh.setGeometry(_geometry->getGeometry()->getRGeometry());
     _mesh.setMaterial(_material->getMaterial());
     _loaded = true;
 }
@@ -102,6 +106,13 @@ EdMaterial* EdSolidTemplate::getMaterial()
     if(!_loaded)
         load();
     return _material;
+}
+
+EdGeometry* EdSolidTemplate::getGeometry()
+{
+    if(!_loaded)
+        load();
+    return _geometry;
 }
 
 void EdSolidTemplate::backup()
@@ -135,6 +146,9 @@ SolidObject::SolidObject(
     _meshInstance(0)
 {
     _localBBox = _solidTemplate->getMesh()->getGeometry()->getBBox();
+    _selectionActor = Selection::getSingletonRef().createMeshActor(
+        *solid->getGeometry()->getSelectionGeometry()
+    );
 }
 
 SolidObject::SolidObject(const SolidObject& solid) :
@@ -142,6 +156,9 @@ SolidObject::SolidObject(const SolidObject& solid) :
     _solidTemplate(solid._solidTemplate),
     _meshInstance(0)
 {
+    _selectionActor = Selection::getSingletonRef().createMeshActor(
+        *solid._solidTemplate->getGeometry()->getSelectionGeometry()
+    );
 }
 
 SolidObject::~SolidObject()

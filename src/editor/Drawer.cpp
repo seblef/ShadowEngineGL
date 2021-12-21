@@ -2,6 +2,7 @@
 #include "EdCamera.h"
 #include "Object.h"
 #include "PreviewResources.h"
+#include "Selection.h"
 #include "../core/Quaternion.h"
 #include "../game/GeometryLoader.h"
 #include "../mediacommon/IDepthTexture.h"
@@ -36,6 +37,7 @@ Drawer::Drawer(IVideoDevice* device, PreviewResources* resources) :
 
     _depthOverState = device->createDepthStencilState(false, false, COMP_ALWAYS);
 	_noBlendState = device->createBlendState(false, BLEND_ONE, BLEND_ZERO);
+	_addBlendState = device->createBlendState(true, BLEND_ONE, BLEND_ONE);
     _trilinearSamplerState = device->createSamplerState(FILTER_TRILINEAR);
     _copySamplerState = device->createSamplerState(FILTER_POINT, ADDRESS_CLAMP, ADDRESS_CLAMP);
 
@@ -58,6 +60,7 @@ Drawer::~Drawer()
         delete _solidGeoBuffer;
 
     _device->destroyBlendState(_noBlendState);
+    _device->destroyBlendState(_addBlendState);
     _device->destroyDepthStencilState(_depthOverState);
     _device->destroySamplerState(_trilinearSamplerState);
 
@@ -114,6 +117,8 @@ void Drawer::draw(EdCamera& camera)
     beginLines();
     drawGroundGrid();
     endLines();
+
+    drawSelection();
 
     _device->resetRenderTargets();
     _device->setBlendState(_noBlendState);
@@ -325,6 +330,14 @@ void Drawer::drawSolids()
             _device->renderIndexed(_solidGeoBuffer->getIndexCount());
         }
     }
+}
+
+void Drawer::drawSelection()
+{
+    beginLines(true);
+    for(auto const& obj : Selection::getSingletonRef().getSelection())
+        obj->drawSelected(*this);
+    endLines();
 }
 
 }

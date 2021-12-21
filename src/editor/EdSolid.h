@@ -14,10 +14,10 @@ namespace YAML
 class Node;
 }
 
-
 namespace Editor
 {
 
+class EdGeometry;
 class EdMaterial;
 
 class EdSolidTemplate
@@ -27,6 +27,7 @@ protected:
     std::string _materialName;
 
     Mesh _mesh;
+    EdGeometry* _geometry;
     EdMaterial* _material;
     PhysicShape _shape;
     bool _loaded;
@@ -48,6 +49,7 @@ public:
 
     const Mesh* getMesh();
     EdMaterial* getMaterial();
+    EdGeometry* getGeometry();
 
     void setGeometry(const std::string& geometry);
     void setMaterial(const std::string& material);

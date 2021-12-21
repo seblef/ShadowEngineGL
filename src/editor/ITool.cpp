@@ -12,7 +12,8 @@ ITool::ITool(
     _type(type),
     _lastX(mouseX),
     _lastY(mouseY),
-    _lastWheel(mouseWheel)
+    _lastWheel(mouseWheel),
+    _ctrlDown(false)
 {
     for(int i=0;i<MB_COUNT;++i)
         _buttonPressed[i] = false;

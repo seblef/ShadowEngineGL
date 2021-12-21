@@ -72,29 +72,33 @@ void Camera::buildMatrices()
 	_YAxis.normalize();
 }
 
-void Camera::makeRayFrom2D(int x, int y, Vector3 &vOrigin, Vector3 &vDir)
+void Camera::makeRayFrom2D(
+    int x, int y,
+    Vector3 &origin,
+    Vector3 &dir
+)
 {
-	if(_type==CT_PERSPECTIVE)
+	if(_type == CT_PERSPECTIVE)
 	{
-		float w=_center.x * 2.0f;
-		float h=_center.y * 2.0f;
+		float w = _center.x * 2.0f;
+		float h = _center.y * 2.0f;
 
 		Vector3 v;
-		v.x=((( 2.0f * ((float)x)) / w) - 1.0f) / _projMatrix(0,0);
-		v.y=-((( 2.0f * ((float)y)) / h)- 1.0f) / _projMatrix(1,1);
-		v.z=1.0f;
+		v.x = ((( 2.0f * ((float)x)) / w) - 1.0f) / _projMatrix(0,0);
+		v.y = -((( 2.0f * ((float)y)) / h) - 1.f) / _projMatrix(1,1);
+		v.z = 1.0f;
 
-		vDir=v;
-		vDir.transformNoTranslation(_invViewMatrix);
-		vDir.normalize();
-		vOrigin=_invViewMatrix;
+		dir = v;
+		dir.transformNoTranslation(_invViewMatrix);
+		dir.normalize();
+		origin = _invViewMatrix;
 	}
 	else
 	{
-		vDir=_target-_pos;
-		vDir.normalize();
-		vOrigin=_pos;
-		vOrigin+=_XAxis * ((float)x - _center.x) / _zoom;
-		vOrigin-=_YAxis * ((float)y - _center.y) / _zoom;
+		dir = _target-_pos;
+		dir.normalize();
+		origin = _pos;
+		origin += _XAxis * ((float)x - _center.x) / _zoom;
+		origin -= _YAxis * ((float)y - _center.y) / _zoom;
 	}
 }

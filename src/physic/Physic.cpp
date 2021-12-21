@@ -54,7 +54,6 @@ Physic::Physic(float updateTime, const Vector3& gravity, bool debugMode) : _upda
 		LOG_S(INFO) << "Running PhysX in debug mode";
 		_pvd = PxCreatePvd(*_foundation);
 		_pvdTransport = PxDefaultPvdFileTransportCreate("physx.pxd2");
-		// _pvdTransport = PxDefaultPvdSocketTransportCreate("localhost", 5425, 10);
 		assert(_pvd->connect(*_pvdTransport,PxPvdInstrumentationFlag::eALL));
 	}
 
@@ -112,13 +111,12 @@ void Physic::update(float time)
 
 	if(_time >= _updateTime)
 	{
+		_scene->fetchResults(true);
 		while(_time >= _updateTime)
 		{
 			_scene->simulate(_updateTime);
 			_time-=_updateTime;
 		}
-
-		_scene->fetchResults(true);
 	}
 
     for(auto const& d : _activeDynamics)

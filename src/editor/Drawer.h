@@ -41,6 +41,7 @@ protected:
     DepthStencilState _linesDepthState;
     DepthStencilState _depthOverState;
     BlendState _noBlendState;
+    BlendState _addBlendState;
     SamplerState _trilinearSamplerState;
     SamplerState _copySamplerState;
 
@@ -48,6 +49,7 @@ protected:
     void loadData();
     void cleanUp();
     void drawSolids();
+    void drawSelection();
 
 public:
     Drawer(IVideoDevice* device, PreviewResources* resources);
