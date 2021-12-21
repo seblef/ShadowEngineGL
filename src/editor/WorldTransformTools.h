@@ -23,23 +23,27 @@ protected:
 public:
     TranslationTool();
 
-    void begin(
-        int mouseX,
-        int mouseY,
-        int mouseWheel,
-        unsigned int flags
-    );
-
     void onMouseButtonPressed(MouseButton button);
-    void onMouseButtonReleased(MouseButton button);
     void onMouseMove(int deltaX, int deltaY);
 
     void cancel();
 };
 
-class RotationTool : public ITool
+class RotationTool : public SelectionTool
 {
+protected:
+    Core::Vector3 _rotation;
+    std::map<Object*,Core::Vector3> _savedRotations;
 
+    void snap(Object* obj) const;
+
+public:
+    RotationTool();
+    
+    void onMouseButtonPressed(MouseButton button);
+    void onMouseMove(int deltaX, int deltaY);
+
+    void cancel();
 };
 
 }

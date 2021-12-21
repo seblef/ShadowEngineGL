@@ -10,27 +10,18 @@ TranslationTool::TranslationTool() :
 {
 }
 
-void TranslationTool::begin(
-    int mouseX,
-    int mouseY,
-    int mouseWheel,
-    unsigned int flags
-)
-{
-    SelectionTool::begin(
-        mouseX,
-        mouseY,
-        mouseWheel,
-        flags
-    );
-    _savedPositions.clear();
-}
-
 void TranslationTool::onMouseButtonPressed(MouseButton button)
 {
-    SelectionTool::onMouseButtonPressed(button);
-    if(button != MB_LEFT)
+    if(button == MB_RIGHT)
+    {
+        cancel();
         return;
+    }
+
+    if(_flags & TF_CTRLDOWN || Selection::getSingletonRef().getSelection().empty())
+        SelectionTool::onMouseButtonPressed(button);
+    else
+        _buttonPressed[button] = true;
 
     _savedPositions.clear();
     for(auto const& obj : Selection::getSingletonRef().getSelection())
@@ -39,13 +30,6 @@ void TranslationTool::onMouseButtonPressed(MouseButton button)
 	if(!getGroundPosition(_lastX, _lastY, _lastPos))
 		_lastPos = Core::Vector3::NullVector;
 	_translation = Core::Vector3::NullVector;
-}
-
-void TranslationTool::onMouseButtonReleased(MouseButton button)
-{
-    if(button == MB_LEFT)
-        _savedPositions.clear();
-    SelectionTool::onMouseButtonReleased(button);
 }
 
 void TranslationTool::onMouseMove(int deltaX, int deltaY)
@@ -105,6 +89,76 @@ void TranslationTool::snap(Object* obj) const
         floorf(zmin) - zmin
     );
     obj->translate(delta);
+}
+
+
+RotationTool::RotationTool() :
+    SelectionTool(TOOL_ROTATE)
+{
+}
+
+void RotationTool::onMouseButtonPressed(MouseButton button)
+{
+    if(button == MB_RIGHT)
+    {
+        cancel();
+        return;
+    }
+
+    if(_flags & TF_CTRLDOWN || Selection::getSingletonRef().getSelection().empty())
+        SelectionTool::onMouseButtonPressed(button);
+    else
+        _buttonPressed[button] = true;
+
+    _savedRotations.clear();
+    for(auto const& obj : Selection::getSingletonRef().getSelection())
+        _savedRotations[obj] = obj->getRotation();
+	_rotation = Core::Vector3::NullVector;
+}
+
+void RotationTool::onMouseMove(int deltaX, int deltaY)
+{
+    SelectionTool::onMouseMove(deltaX, deltaY);
+    if(!_buttonPressed[MB_LEFT])
+        return;
+
+	Core::Vector3 rot((float)deltaY, (float)deltaX, .0f);
+
+    if(_flags & TF_LOCKX)
+        rot.x = .0f;
+    if(_flags & TF_LOCKY)
+        rot.y = .0f;
+    if(_flags & TF_LOCKZ)
+        rot.z = .0f;
+
+	_rotation += rot;
+
+    for(auto const& obj : Selection::getSingletonRef().getSelection())
+    {
+        obj->setRotation(_savedRotations[obj] + _rotation);
+        if(_flags & TF_SNAP)
+            snap(obj);
+    }
+}
+
+void RotationTool::cancel()
+{
+    for(auto const& obj : Selection::getSingletonRef().getSelection())
+        obj->setRotation(_savedRotations[obj]);
+}
+
+void RotationTool::snap(Object* obj) const
+{
+	int rx = (int)obj->getRotation().x;
+	int ry = (int)obj->getRotation().y;
+	int rz = (int)obj->getRotation().z;
+
+	rx = (rx / 45) * 45;
+	ry = (ry / 45) * 45;
+	rz = (rz / 45) * 45;
+
+	Core::Vector3 rot((float)rx, (float)ry, (float)rz);
+	obj->setRotation(rot);
 }
 
 }
