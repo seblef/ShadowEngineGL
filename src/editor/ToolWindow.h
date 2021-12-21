@@ -14,6 +14,7 @@ protected:
     ITexture* _toolsTexture;
 
     void drawToolButton(ToolType type);
+    void drawFlags();
 
 public:
     ToolWindow(IVideoDevice* device);

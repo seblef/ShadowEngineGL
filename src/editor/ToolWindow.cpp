@@ -29,6 +29,13 @@ const std::map<ToolType,std::string> ToolsTooltips = {
     { TOOL_ROTATE, "Rotation" }
 };
 
+const std::map<unsigned int,std::string> FlagsLabels = {
+    { TF_LOCKX, "Lock X axis" },
+    { TF_LOCKY, "Lock Y axis" },
+    { TF_LOCKZ, "Lock Z axis "},
+    { TF_SNAP, "Snap" }
+};
+
 
 ToolWindow::ToolWindow(IVideoDevice* device) :
     _toolsTexture(0)
@@ -59,6 +66,9 @@ void ToolWindow::draw()
         if((type) % ButtonsPerRow != 0)
             ImGui::SameLine();
     }
+
+    ImGui::Separator();
+    drawFlags();
 
     ImGui::End();
 }
@@ -95,6 +105,21 @@ void ToolWindow::drawToolButton(ToolType type)
         Tools::getSingletonRef().setCurrentTool(type);
     }
     ImGui::PopID();
+}
+
+void ToolWindow::drawFlags()
+{
+    const unsigned int flags = Tools::getSingletonRef().getFlags();
+    for(auto const& flag : FlagsLabels)
+    {
+        bool enabled = (bool)(flags & flag.first);
+        ImGui::Checkbox(flag.second.c_str(), &enabled);
+
+        if(enabled)
+            Tools::getSingletonRef().setFlag(flag.first);
+        else
+            Tools::getSingletonRef().unsetFlag(flag.first);
+    }
 }
 
 }
