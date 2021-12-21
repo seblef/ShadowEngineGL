@@ -13,6 +13,8 @@ class PxRigidDynamic;
 namespace Editor
 {
 
+class Drawer;
+
 enum ObjectType
 {
     OBJ_STATIC=0,
@@ -63,6 +65,8 @@ public:
 
     virtual void onAddToScene();
     virtual void onRemFromScene();
+
+    virtual void drawSelected(Drawer& drawer);
 };
 
 }

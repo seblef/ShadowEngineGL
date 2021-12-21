@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "Drawer.h"
 #include "Selection.h"
 #include "../physic/PhysicUtils.h"
 #include <PxPhysicsAPI.h>
@@ -95,6 +96,13 @@ void Object::setActorMatrix()
 {
     PMAKETRANSFORM(t, _world);
     _selectionActor->setKinematicTarget(t);
+}
+
+void Object::drawSelected(Drawer& drawer)
+{
+    drawer.setColor(Core::Color(.0f, .8f, .8f, .0f));
+    drawer.setWorldMatrix(_world);
+    drawer.drawBox(_localBBox.getMin(), _localBBox.getMax());
 }
 
 }

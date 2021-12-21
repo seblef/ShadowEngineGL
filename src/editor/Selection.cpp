@@ -226,7 +226,6 @@ Object* Selection::rayTrace(
 
     if(_scene->raycast(orig, dir, 1e6, hit, physx::PxHitFlag::ePOSITION))
     {
-        LOG_S(INFO) << "Hit found";
         if(hit.block.actor == _ground)
             ground = true;
         return (Object*)hit.block.actor->userData;

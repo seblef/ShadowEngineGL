@@ -37,7 +37,7 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     new Selection;
     _camera.onResize(media->getVideo()->getResWidth(), media->getVideo()->getResHeight());
     initUI();
-    setTool(TOOL_CAMERA);
+    setTool(TOOL_SELECTION);
 }
 
 EditorSystem::~EditorSystem()
