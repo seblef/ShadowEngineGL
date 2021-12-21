@@ -32,7 +32,6 @@ protected:
     MainMenu _mainMenu;
     NavigationPanel _navPanel;
     std::list<IWindow*> _openWindows;
-    ITool* _currentTool;
 
     EdCamera _camera;
     ToolWindow _tools;
@@ -64,7 +63,6 @@ public:
     EdCamera& getCamera() { return _camera; }
 
     void openWindow(IWindow* win);
-    void setTool(ToolType type);
 
     void loadMap(const std::string& filename);
 };

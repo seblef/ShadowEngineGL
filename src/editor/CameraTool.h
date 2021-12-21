@@ -13,13 +13,14 @@ protected:
     EdCamera* _camera;
 
 public:
-    CameraTool(
-        EdCamera* camera,
+    CameraTool();
+
+    void begin(
         int mouseX,
         int mouseY,
-        int mouseWheel
+        int wheel,
+        unsigned int flags
     );
-
     void onMouseMove(int deltaX, int deltaY);
     void onMouseWheel(int deltaWheel);
 };

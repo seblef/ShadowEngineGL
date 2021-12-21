@@ -331,7 +331,9 @@ set(EDITOR_SOURCES
     src/editor/SelectionTool.cpp
     src/editor/SolidWidgets.cpp
     src/editor/StaticWindow.cpp
+    src/editor/Tools.cpp
     src/editor/ToolWindow.cpp
+    src/editor/WorldTransformTools.cpp
 )
 
 set(SHADOW_SOURCES

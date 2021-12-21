@@ -1,5 +1,4 @@
 #include "EditorSystem.h"
-#include "CameraTool.h"
 #include "Drawer.h"
 #include "EdCamera.h"
 #include "EdMap.h"
@@ -7,7 +6,7 @@
 #include "PreviewResources.h"
 #include "Resources.h"
 #include "Selection.h"
-#include "SelectionTool.h"
+#include "Tools.h"
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_glfw.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
@@ -28,7 +27,6 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     _canQuit(false),
     _media(media),
     _map(0),
-    _currentTool(0),
     _tools(media->getVideo())
 {
     _previewRes = new PreviewResources(media->getVideo());
@@ -37,15 +35,16 @@ EditorSystem::EditorSystem(IMedia* media, const YAML::Node& cfg) :
     new Selection;
     _camera.onResize(media->getVideo()->getResWidth(), media->getVideo()->getResHeight());
     initUI();
-    setTool(TOOL_SELECTION);
+
+    ImGuiIO& io = ImGui::GetIO();
+    new Tools(io.MousePos.x, io.MousePos.y, io.MouseWheel);
 }
 
 EditorSystem::~EditorSystem()
 {
-    if(_currentTool)
-        delete _currentTool;
     if(_map)
         delete _map;
+    Tools::deleteSingleton();
     shutdownUI();
     Resources::deleteSingleton();
     delete _previewRes;
@@ -91,6 +90,9 @@ void EditorSystem::initUI()
 		GLuint texID = (GLuint)((uintptr_t)tex);
 		glDeleteTextures(1, &texID);
 	};
+
+    glfwPollEvents();
+    ImGui_ImplGlfw_NewFrame();
 }
 
 void EditorSystem::shutdownUI()
@@ -167,6 +169,7 @@ void EditorSystem::drawWindows()
 
 void EditorSystem::loadMap(const std::string& filename)
 {
+    Selection::getSingletonRef().clearSelection();
     Drawer::getSingletonRef().onNewMap();
     if(_map)
         delete _map;
@@ -175,63 +178,34 @@ void EditorSystem::loadMap(const std::string& filename)
     _camera.initialize(_map->getWidth(), _map->getHeight());
 }
 
-void EditorSystem::setTool(ToolType type)
-{
-    if(_currentTool)
-    {
-        delete _currentTool;
-        _currentTool = 0;
-    }
-
-    ImGuiIO& io = ImGui::GetIO();
-    int mouseX = (int)io.MousePos.x;
-    int mouseY = (int)io.MousePos.y;
-    int mouseWheel = (int)io.MouseWheel;
-
-    switch(type)
-    {
-    case TOOL_NULL:
-        _currentTool = new ITool(TOOL_NULL, mouseX, mouseY, mouseWheel);
-        break;
-    case TOOL_CAMERA:
-        _currentTool = new CameraTool(&_camera, mouseX, mouseY, mouseWheel);
-        break;
-    case TOOL_SELECTION:
-        _currentTool = new SelectionTool(mouseX, mouseY, mouseWheel);
-        break;
-    }
-
-    _tools.setCurrentTool(type);
-}
-
 void EditorSystem::processInput()
 {
-    if(!_currentTool)
-        return;
-
+    Tools& tools = Tools::getSingletonRef();
     ImGuiIO& io = ImGui::GetIO();
     if(!io.WantCaptureMouse)
     {
         if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
-            _currentTool->onMouseButtonPressed(MB_LEFT);
+            tools.onMouseButtonPressed(MB_LEFT);
         if(ImGui::IsMouseClicked(ImGuiMouseButton_Right))
-            _currentTool->onMouseButtonPressed(MB_RIGHT);
+            tools.onMouseButtonPressed(MB_RIGHT);
     }
 
     if(ImGui::IsMouseReleased(ImGuiMouseButton_Left))
-        _currentTool->onMouseButtonReleased(MB_LEFT);
+        tools.onMouseButtonReleased(MB_LEFT);
     if(ImGui::IsMouseReleased(ImGuiMouseButton_Right))
-        _currentTool->onMouseButtonReleased(MB_RIGHT);
+        tools.onMouseButtonReleased(MB_RIGHT);
     
     int deltaX = (int)io.MouseDelta.x;
     int deltaY = (int)io.MouseDelta.y;
     if(deltaX != 0 || deltaY !=0)
-        _currentTool->onMouseMove(deltaX, deltaY);
+        tools.onMouseMove(deltaX, deltaY);
     
-    int wheel = (int)io.MouseWheel;
-    _currentTool->onMouseWheel(wheel);
+    tools.onMouseWheel((int)io.MouseWheel);
 
-    _currentTool->setCtrlDown(io.KeyCtrl);
+    if(io.KeyCtrl)
+        tools.setFlag(TF_CTRLDOWN);
+    else
+        tools.unsetFlag(TF_CTRLDOWN);
 }
 
 }

@@ -3,20 +3,28 @@
 namespace Editor
 {
 
-ITool::ITool(
-    ToolType type,
-    int mouseX,
-    int mouseY,
-    int mouseWheel
-) :
+ITool::ITool(ToolType type) :
     _type(type),
-    _lastX(mouseX),
-    _lastY(mouseY),
-    _lastWheel(mouseWheel),
-    _ctrlDown(false)
+    _lastX(0),
+    _lastY(0),
+    _lastWheel(0),
+    _flags(0)
 {
     for(int i=0;i<MB_COUNT;++i)
         _buttonPressed[i] = false;
+}
+
+void ITool::begin(
+    int mouseX,
+    int mouseY,
+    int mouseWheel,
+    unsigned int flags
+)
+{
+    _lastX = mouseX;
+    _lastY = mouseY;
+    _lastWheel = mouseWheel;
+    _flags = flags;
 }
 
 void ITool::onMouseButtonPressed(MouseButton button)
