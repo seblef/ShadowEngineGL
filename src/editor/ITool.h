@@ -15,6 +15,7 @@ enum ToolType
     TOOL_CAMERA,
     TOOL_TRANSLATE,
     TOOL_ROTATE,
+    TOOL_ROTATEZ,
     TOOL_HEIGHT,
 
     TOOL_COUNT

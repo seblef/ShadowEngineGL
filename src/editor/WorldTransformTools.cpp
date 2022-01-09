@@ -93,8 +93,8 @@ void TranslationTool::snap(Object* obj) const
 }
 
 
-RotationTool::RotationTool() :
-    SelectionTool(TOOL_ROTATE)
+RotationTool::RotationTool(ToolType type) :
+    SelectionTool(type)
 {
 }
 
@@ -160,6 +160,29 @@ void RotationTool::snap(Object* obj) const
 
 	Core::Vector3 rot((float)rx, (float)ry, (float)rz);
 	obj->setRotation(rot);
+}
+
+
+
+RotationZTool::RotationZTool() : RotationTool(TOOL_ROTATEZ)
+{
+}
+
+void RotationZTool::onMouseMove(int deltaX, int deltaY)
+{
+    SelectionTool::onMouseMove(deltaX, deltaY);
+    if(!_buttonPressed[MB_LEFT])
+        return;
+
+	Core::Vector3 rot(.0f, .0f, (float)deltaY);
+	_rotation += rot;
+
+    for(auto const& obj : Selection::getSingletonRef().getSelection())
+    {
+        obj->setRotation(_savedRotations[obj] + _rotation);
+        if(_flags & TF_SNAP)
+            snap(obj);
+    } 
 }
 
 

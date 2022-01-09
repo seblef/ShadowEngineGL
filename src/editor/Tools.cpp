@@ -18,6 +18,7 @@ Tools::Tools(int mouseX, int mouseY, int mouseWheel) :
     _tools[TOOL_SELECTION] = new SelectTool;
     _tools[TOOL_TRANSLATE] = new TranslationTool;
     _tools[TOOL_ROTATE] = new RotationTool;
+    _tools[TOOL_ROTATEZ] = new RotationZTool;
     _tools[TOOL_HEIGHT] = new HeightTool;
 
     setCurrentTool(TOOL_SELECTION);

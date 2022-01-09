@@ -38,12 +38,21 @@ protected:
     void snap(Object* obj) const;
 
 public:
-    RotationTool();
+    RotationTool(ToolType type=TOOL_ROTATE);
     
     void onMouseButtonPressed(MouseButton button);
-    void onMouseMove(int deltaX, int deltaY);
+    virtual void onMouseMove(int deltaX, int deltaY);
 
     void cancel();
+};
+
+class RotationZTool : public RotationTool
+{
+public:
+
+    RotationZTool();
+
+    void onMouseMove(int deltaX, int deltaY);
 };
 
 class HeightTool : public SelectionTool
