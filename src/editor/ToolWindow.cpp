@@ -1,5 +1,5 @@
 #include "ToolWindow.h"
-#include "EditorSystem.h"
+#include "Tools.h"
 #include "imgui/imgui.h"
 #include "../glmedia/GLTexture.h"
 #include "../mediacommon/ITexture.h"
@@ -17,18 +17,32 @@ const Core::Vector2 IconUVSize(1.f / (float)IconPerRow, 1.f / (float)IconPerRow)
 
 const std::map<ToolType,Core::Vector2> ToolsIconMapping = {
     { TOOL_CAMERA, Core::Vector2(0.f, 0.f) },
-    { TOOL_SELECTION, Core::Vector2(1.f, .0f) }
+    { TOOL_SELECTION, Core::Vector2(1.f, .0f) },
+    { TOOL_TRANSLATE, Core::Vector2(2.f, .0f) },
+    { TOOL_ROTATE, Core::Vector2(3.f, .0f) },
+    { TOOL_ROTATEZ, Core::Vector2(5.f, .0f) },
+    { TOOL_HEIGHT, Core::Vector2(4.f, .0f) }
 };
 
 const std::map<ToolType,std::string> ToolsTooltips = {
     { TOOL_CAMERA, "Camera move" },
-    { TOOL_SELECTION, "Selection" }
+    { TOOL_SELECTION, "Selection" },
+    { TOOL_TRANSLATE, "Translation" },
+    { TOOL_ROTATE, "Rotation" },
+    { TOOL_ROTATEZ, "Rotation - Z Axis"},
+    { TOOL_HEIGHT, "Height" }
+};
+
+const std::map<unsigned int,std::string> FlagsLabels = {
+    { TF_LOCKX, "Lock X axis" },
+    { TF_LOCKY, "Lock Y axis" },
+    { TF_LOCKZ, "Lock Z axis "},
+    { TF_SNAP, "Snap" }
 };
 
 
 ToolWindow::ToolWindow(IVideoDevice* device) :
-    _toolsTexture(0),
-    _currentTool(TOOL_NULL)
+    _toolsTexture(0)
 {
     _toolsTexture = device->createTexture("Textures/Editor/tools.png");
 }
@@ -57,6 +71,9 @@ void ToolWindow::draw()
             ImGui::SameLine();
     }
 
+    ImGui::Separator();
+    drawFlags();
+
     ImGui::End();
 }
 
@@ -75,7 +92,7 @@ void ToolWindow::drawToolButton(ToolType type)
     GLuint texID = ((GLTexture*)_toolsTexture)->getGLId();
 
     int framePadding = 0;
-    if(type == _currentTool)
+    if(type == Tools::getSingletonRef().getCurrentToolType())
         framePadding = 2;
 
     ImGui::PushID(type);
@@ -89,9 +106,24 @@ void ToolWindow::drawToolButton(ToolType type)
         ImVec4(1.0f, 1.0f, 1.0f, 1.0f)
     ))
     {
-        EditorSystem::getSingletonRef().setTool(type);
+        Tools::getSingletonRef().setCurrentTool(type);
     }
     ImGui::PopID();
+}
+
+void ToolWindow::drawFlags()
+{
+    const unsigned int flags = Tools::getSingletonRef().getFlags();
+    for(auto const& flag : FlagsLabels)
+    {
+        bool enabled = (bool)(flags & flag.first);
+        ImGui::Checkbox(flag.second.c_str(), &enabled);
+
+        if(enabled)
+            Tools::getSingletonRef().setFlag(flag.first);
+        else
+            Tools::getSingletonRef().unsetFlag(flag.first);
+    }
 }
 
 }

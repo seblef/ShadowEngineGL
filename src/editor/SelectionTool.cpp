@@ -7,21 +7,7 @@
 namespace Editor
 {
 
-SelectionTool::SelectionTool(
-    int mouseX,
-    int mouseY,
-    int mouseWheel
-) :
-    ITool(
-        TOOL_SELECTION,
-        mouseX,
-        mouseY,
-        mouseWheel
-    )
-{
-}
-
-SelectionTool::~SelectionTool()
+SelectionTool::SelectionTool(ToolType type) : ITool(type)
 {
 }
 
@@ -40,25 +26,34 @@ void SelectionTool::onMouseButtonPressed(MouseButton button)
     Object* obj = Selection::getSingletonRef().select(
         origin,
         dir,
-        _ctrlDown,
+        _flags & TF_CTRLDOWN,
         groundSelected
     );
     ITool::onMouseButtonPressed(button);
 }
 
-void SelectionTool::onMouseButtonReleased(MouseButton button)
+void SelectionTool::begin(
+    int mouseX,
+    int mouseY,
+    int wheel,
+    unsigned int flags
+)
 {
-    ITool::onMouseButtonReleased(button);
+    ITool::begin(mouseX, mouseY, wheel, flags);
 }
 
-void SelectionTool::onMouseMove(int deltaX, int deltaY)
+SelectTool::SelectTool() : SelectionTool(TOOL_SELECTION)
 {
-    ITool::onMouseMove(deltaX, deltaY);
 }
 
-void SelectionTool::onMouseWheel(int wheel)
+void SelectTool::begin(
+    int mouseX,
+    int mouseY,
+    int wheel,
+    unsigned int flags
+)
 {
-    ITool::onMouseWheel(wheel);
+    SelectionTool::begin(mouseX, mouseY, wheel, flags);
 }
 
 }

@@ -1,5 +1,5 @@
 #include "CameraTool.h"
-#include "EdCamera.h"
+#include "EditorSystem.h"
 #include "../loguru.hpp"
 
 namespace Editor
@@ -7,20 +7,21 @@ namespace Editor
 
 const float TranslationFactor = 0.1f;
 
-CameraTool::CameraTool(
-    EdCamera* camera,
+CameraTool::CameraTool() :
+    ITool(TOOL_CAMERA),
+    _camera(0)
+{
+}
+
+void CameraTool::begin(
     int mouseX,
     int mouseY,
-    int mouseWheel
-) :
-    ITool(
-        TOOL_CAMERA,
-        mouseX,
-        mouseY,
-        mouseWheel
-    ),
-    _camera(camera)
+    int wheel,
+    unsigned int flags
+)
 {
+    ITool::begin(mouseX, mouseY, wheel, flags);
+    _camera = &EditorSystem::getSingletonRef().getCamera();
 }
 
 void CameraTool::onMouseMove(int deltaX, int deltaY)
