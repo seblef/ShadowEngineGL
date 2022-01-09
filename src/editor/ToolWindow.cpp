@@ -19,14 +19,16 @@ const std::map<ToolType,Core::Vector2> ToolsIconMapping = {
     { TOOL_CAMERA, Core::Vector2(0.f, 0.f) },
     { TOOL_SELECTION, Core::Vector2(1.f, .0f) },
     { TOOL_TRANSLATE, Core::Vector2(2.f, .0f) },
-    { TOOL_ROTATE, Core::Vector2(3.f, .0f) }
+    { TOOL_ROTATE, Core::Vector2(3.f, .0f) },
+    { TOOL_HEIGHT, Core::Vector2(4.f, .0f) }
 };
 
 const std::map<ToolType,std::string> ToolsTooltips = {
     { TOOL_CAMERA, "Camera move" },
     { TOOL_SELECTION, "Selection" },
     { TOOL_TRANSLATE, "Translation" },
-    { TOOL_ROTATE, "Rotation" }
+    { TOOL_ROTATE, "Rotation" },
+    { TOOL_HEIGHT, "Height" }
 };
 
 const std::map<unsigned int,std::string> FlagsLabels = {

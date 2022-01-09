@@ -180,6 +180,7 @@ void Drawer::beginLines(bool noZBuffer)
 void Drawer::endLines()
 {
     executeLines();
+    _device->setRenderState(_solidRenderState);
 }
 
 void Drawer::setWorldMatrix(const Core::Matrix4& world)

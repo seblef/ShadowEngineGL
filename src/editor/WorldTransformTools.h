@@ -2,7 +2,7 @@
 
 #include "ITool.h"
 #include "SelectionTool.h"
-#include "../core/Vector3.h"
+#include "../core/Plane.h"
 #include <map>
 
 
@@ -40,6 +40,24 @@ protected:
 public:
     RotationTool();
     
+    void onMouseButtonPressed(MouseButton button);
+    void onMouseMove(int deltaX, int deltaY);
+
+    void cancel();
+};
+
+class HeightTool : public SelectionTool
+{
+protected:
+
+    Core::Plane _plane;
+    std::map<Object*, float> _savedHeights;
+    float _lastHeight;
+    float _translation;
+
+public:
+    HeightTool();
+
     void onMouseButtonPressed(MouseButton button);
     void onMouseMove(int deltaX, int deltaY);
 

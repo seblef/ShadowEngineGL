@@ -1,4 +1,5 @@
 #include "WorldTransformTools.h"
+#include "EditorSystem.h"
 #include "Object.h"
 #include "Selection.h"
 
@@ -18,7 +19,7 @@ void TranslationTool::onMouseButtonPressed(MouseButton button)
         return;
     }
 
-    if(_flags & TF_CTRLDOWN || Selection::getSingletonRef().getSelection().empty())
+    if(_flags & TF_CTRLDOWN || Selection::getSingletonRef().getSelection().size() <= 1)
         SelectionTool::onMouseButtonPressed(button);
     else
         _buttonPressed[button] = true;
@@ -105,7 +106,7 @@ void RotationTool::onMouseButtonPressed(MouseButton button)
         return;
     }
 
-    if(_flags & TF_CTRLDOWN || Selection::getSingletonRef().getSelection().empty())
+    if(_flags & TF_CTRLDOWN || Selection::getSingletonRef().getSelection().size() <= 1)
         SelectionTool::onMouseButtonPressed(button);
     else
         _buttonPressed[button] = true;
@@ -159,6 +160,82 @@ void RotationTool::snap(Object* obj) const
 
 	Core::Vector3 rot((float)rx, (float)ry, (float)rz);
 	obj->setRotation(rot);
+}
+
+
+
+HeightTool::HeightTool() : 
+    SelectionTool(TOOL_HEIGHT)
+{
+}
+
+void HeightTool::onMouseButtonPressed(MouseButton button)
+{
+    if(button == MB_RIGHT)
+    {
+        cancel();
+        return;
+    }
+
+    if(_flags & TF_CTRLDOWN || Selection::getSingletonRef().getSelection().size() <= 1)
+        SelectionTool::onMouseButtonPressed(button);
+    else
+        _buttonPressed[button] = true;
+
+    EdCamera& cam(EditorSystem::getSingletonRef().getCamera());
+    Core::Vector3 normal(cam.getCamera().getTarget() - cam.getCamera().getPosition());
+    normal.normalize();
+
+    _savedHeights.clear();
+    for(auto const& obj : Selection::getSingletonRef().getSelection())
+    {
+        _savedHeights[obj] = obj->getPosition().y;
+        _plane.makePlane(obj->getPosition(), normal);
+    }
+
+    Core::Vector3 origin, dir, point;
+    cam.getCamera().makeRayFrom2D(_lastX, _lastY, origin, dir);
+    if(_plane.intersectLine(origin, dir, point))
+        _lastHeight = point.y;
+    else
+        _lastHeight = .0f;
+
+    _translation = .0f;
+}
+
+void HeightTool::onMouseMove(int deltaX, int deltaY)
+{
+    SelectionTool::onMouseMove(deltaX, deltaY);
+    if(!_buttonPressed[MB_LEFT])
+        return;
+
+    Core::Vector3 origin, dir, point;
+    EditorSystem::getSingletonRef().getCamera().getCamera().makeRayFrom2D(_lastX, _lastY, origin, dir);
+
+    if(_plane.intersectLine(origin, dir, point))
+    {
+        _translation = point.y - _lastHeight;
+        _lastHeight = point.y;
+
+        Core::Vector3 pos;
+        for(auto const& obj : Selection::getSingletonRef().getSelection())
+        {
+            pos = obj->getPosition();
+            pos.y += _translation;
+            obj->setPosition(pos);
+        }
+    }
+}
+
+void HeightTool::cancel()
+{
+    Core::Vector3 pos;
+    for(auto const& obj : Selection::getSingletonRef().getSelection())
+    {
+        pos = obj->getPosition();
+        pos.y = _savedHeights[obj];
+        obj->setPosition(pos);
+    }
 }
 
 }
