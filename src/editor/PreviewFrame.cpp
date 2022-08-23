@@ -59,6 +59,7 @@ void PreviewFrame::draw(float time)
 {
     _frameBuffer->set();
 	_device->clearDepthStencil();
+    _device->setPrimitiveType(PT_TRIANGLELIST);
     render(time);
     _device->resetRenderTargets();
 
